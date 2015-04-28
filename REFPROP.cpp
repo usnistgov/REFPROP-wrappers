@@ -123,6 +123,7 @@ SetupReturnStruct Setup(long *nc, const std::string &fluids, const std::string &
     strcpy(reference_state_str, reference_state.c_str());
     SETUPdll(nc, fluids_str, hmx_bnc_str, reference_state_str, &(err.ierr), herr_buffer, refpropcharlength, filepathlength, lengthofreference, errormessagelength);
     std::string buffer(herr_buffer);
+	buffer += "\0"; // Null terminate
     err.herr = rtrim(buffer) ;
     /*
     char hfij[6][8];
@@ -148,7 +149,8 @@ SetupReturnStruct Setup(const std::string &fluids)
     long nc = static_cast<long>(bar_count) + 1;
     SETUPdll(&nc, fluids_str, hmx_bnc, reference_state, &(err.ierr), herr_buffer, refpropcharlength, filepathlength, lengthofreference, errormessagelength);
     std::string buffer(herr_buffer, herr_buffer + errormessagelength);
-    err.herr = rtrim(buffer + "\0");
+	buffer += "\0"; // Null terminate
+    err.herr = rtrim(buffer);
     return err;
 }
 SaturationSplineReturnStruct BuildSaturationSpline(const std::vector<double> &z){
@@ -157,8 +159,8 @@ SaturationSplineReturnStruct BuildSaturationSpline(const std::vector<double> &z)
     // Construct the saturation spline
     SATSPLNdll(const_cast<double*>(&z[0]), &(out.ierr), herr_buffer, errormessagelength);
     std::string buffer(herr_buffer);
-    out.herr = rtrim(buffer) + "\0";
-    
+	buffer += "\0"; // Null terminate
+    out.herr = rtrim(buffer);
     strcpy(herr_buffer, "");
     
     /*
@@ -324,7 +326,8 @@ FlashReturnStruct FlashMolar(flash_input_pair pair, double value1, double value2
             out.herr = "Invalid pair to FlashMolar";
     }
     std::string buffer(herr_buffer, herr_buffer + errormessagelength);
-    out.herr = rtrim(buffer) + "\0";
+	buffer += "\0"; // Null terminate
+    out.herr = rtrim(buffer);
     return out;
 }
 
@@ -376,7 +379,8 @@ FlashReturnStruct FlashMolarWithGuesses(flash_input_pair pair, double value1, do
     }
     if (out.ierr != 0){
         std::string buffer(herr_buffer, herr_buffer + errormessagelength);
-        out.herr = rtrim(buffer) + "\0";
+		buffer += "\0"; // Null terminate
+        out.herr = rtrim(buffer);
     }
     return out;
 }
