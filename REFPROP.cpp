@@ -15,10 +15,13 @@
 #include "REFPROP_lib.h"
 #undef REFPROP_IMPLEMENTATION
 
-double F2K(double T_F)
-{
+namespace REFPROP {
+
+double F2K(double T_F){
+	// A simple function for interface testing purposes - convert from Fahrenheit to Kelvin
     return 5.0/9.0*(T_F-32.0)+273.15;
 }
+
 // Code from http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
 // trim from start
 static inline std::string &ltrim(std::string &s) {
@@ -35,63 +38,141 @@ static inline std::string &trim(std::string &s) {
     return ltrim(rtrim(s));
 }
 
+/** Utility function to convert a single input value from base-SI units to REFPROP's modified SI units
+ */
+double SI_to_RPSI(parameters para1, double val){
+	double SI_to_RPSI_conversion_factor;
+	switch (para1){
+		#define X(EnumeratedValue, String, SI_TO_RPSI, Description) case EnumeratedValue: SI_to_RPSI_conversion_factor = SI_TO_RPSI; break;
+			PARAMETERS
+		#undef X
+		default:
+			SI_to_RPSI_conversion_factor = 1e99;
+	}
+	return val*SI_to_RPSI_conversion_factor;
+}
+
+/** Utility function to convert a single input value from REFPROP's modified SI units to base-SI units
+ */
+double RPSI_to_SI(parameters para1, double val){
+	double SI_to_RPSI_conversion_factor;
+	switch (para1){
+		#define X(EnumeratedValue, String, SI_TO_RPSI, Description) case EnumeratedValue: SI_to_RPSI_conversion_factor = SI_TO_RPSI; break;
+			PARAMETERS
+		#undef X
+		default:
+			SI_to_RPSI_conversion_factor = 1e99;
+	}
+	return val/SI_to_RPSI_conversion_factor;
+}
+
+
 /** Utility function to convert a single input value from REFPROP mass-based units to REFPROP mole-based units
  */
-double RPmass_to_RPmolar(char input, double val, double molar_mass)
+double RPmass_to_RPmolar(parameters input, double val, double molar_mass)
 {
     switch (input){
-        case 'T':
-        case 'P':
+        case T_PARA:
+        case P_PARA:
             return val;
-        case 'D':
+        case Dmass_PARA:
             return val/molar_mass; // [kg/m^3 -> mol/L]
-        case 'H':
-        case 'S':
-        case 'U':
+        case Hmass_PARA:
+        case Smass_PARA:
+        case Umass_PARA:
             return val*(molar_mass/1000);// [J/kg -> J/mol]
     }
 }
-
 /** Utility function to convert a single input value from base-SI mass-based units to REFPROP mole-based units
  */
-double SImass_to_RPmolar(char input, double val, double molar_mass)
+double SImass_to_RPmolar(parameters input, double val, double molar_mass)
 {
     switch (input){
-        case 'T':
+        case T_PARA:
             return val; // [no conversion]
-        case 'P':
+        case P_PARA:
             return val/1000; // [Pa -> kPa]
-        case 'D':
+        case Dmass_PARA:
             return val/molar_mass; // [kg/m^3 -> mol/L]
-        case 'H':
-        case 'S':
-        case 'U':
+        case Hmass_PARA:
+        case Smass_PARA:
+        case Umass_PARA:
             return val*(molar_mass/1000); // [J/kg -> J/mol]
     }
 }
 
-/** Utility function to split two letter flash into two separate characters, one for each part
+/** Utility function to split flash input into two separate parameters
  */
-void split_flash_input_pair(flash_input_pair pair, char &i1, char &i2)
+void split_input_pair(input_pairs pair, parameters &para1, parameters &para2)
 {
     switch (pair){
-        case TQ_INPUTS: i1 = 'T'; i2 = 'Q'; break;
-        case PQ_INPUTS: i1 = 'P'; i2 = 'Q'; break;
-        case TP_INPUTS: i1 = 'T'; i2 = 'P'; break;
-        case PD_INPUTS: i1 = 'P'; i2 = 'D'; break;
-        case TD_INPUTS: i1 = 'T'; i2 = 'D'; break;
-        case TH_INPUTS: i1 = 'T'; i2 = 'H'; break;
-        case TU_INPUTS: i1 = 'T'; i2 = 'U'; break;
-        case TS_INPUTS: i1 = 'T'; i2 = 'S'; break;
-        case PH_INPUTS: i1 = 'P'; i2 = 'H'; break;
-        case PS_INPUTS: i1 = 'P'; i2 = 'S'; break;
-        case PU_INPUTS: i1 = 'P'; i2 = 'U'; break;
-        case HS_INPUTS: i1 = 'H'; i2 = 'S'; break;
-        case US_INPUTS: i1 = 'U'; i2 = 'S'; break;
-        case DH_INPUTS: i1 = 'D'; i2 = 'H'; break;
-        case DS_INPUTS: i1 = 'D'; i2 = 'S'; break;
-        case DU_INPUTS: i1 = 'D'; i2 = 'U'; break;
+		#define X(Enum, Para1, Para2, String) case Enum: para1 = Para1; para2 = Para2; break;
+			INPUT_PAIRS
+		#undef X
+		default:
+			std::cout << __LINE__ << ": invalid\n";
     }
+}
+
+/** Utility function to construct flash input from two separate parameters and convert 
+ *  input variables to REFPROP's modified SI system of units
+ */
+input_pairs build_input_pair_RPSI_from_SI(parameters para1, const double value1, parameters para2, const double value2, double &out1, double &out2)
+{
+	out1 = value1; out2 = value2;
+	bool swap = false;
+	input_pairs pair = INPUT_PAIR_INVALID;
+	#define X(Enum, Para1, Para2, String) \
+		if (para1 == Para1 && para2 == Para2){ swap = false; pair = Enum; } \
+		if (para1 == Para2 && para2 == Para1){ swap = true; pair = Enum; }
+
+		INPUT_PAIRS
+	#undef X
+	if (pair == INPUT_PAIR_INVALID){
+		std::cout << __LINE__ << ": invalid\n";
+	}
+	else{
+		// Convert units to RPSI system
+		if (swap){
+			std::swap(out1, out2);
+			std::swap(para1, para2);
+		}
+		out1 = SI_to_RPSI(para1, out1);
+		out2 = SI_to_RPSI(para2, out2);
+	}
+
+	return pair;
+}
+/** Utility function to construct flash input from two separate parameters 
+ *  with input variables already in REFPROP's modified SI system of units
+ */
+input_pairs build_input_pair(parameters para1, const double value1, parameters para2, const double value2, double &out1, double &out2)
+{
+	out1 = value1; out2 = value2;
+	bool swap = false;
+	input_pairs pair = INPUT_PAIR_INVALID;
+	#define X(Enum, Para1, Para2, String) \
+		if (para1 == Para1 && para2 == Para2){ swap = false; pair = Enum; } \
+		if (para1 == Para2 && para2 == Para1){ swap = true; pair = Enum; }
+
+		INPUT_PAIRS
+	#undef X
+	if (pair == INPUT_PAIR_INVALID){
+		std::cout << __LINE__ << ": invalid\n";
+	}
+	else{
+		if (swap){ std::swap(out1, out2); std::swap(para1, para2); }
+	}
+	return pair;
+}
+
+parameters name_to_parameter(const std::string &name)
+{
+	#define X(EnumeratedValue, String, SI_TO_RPSI, Description) if (String == name){ return EnumeratedValue; }
+		PARAMETERS
+	#undef X
+	std::cout << __LINE__ << ": invalid\n";
+	return INVALID_PARAMETER;
 }
 
 /** Utility function to convert from REFPROP mass-based units to REFPROP molar-based units
@@ -101,15 +182,15 @@ void split_flash_input_pair(flash_input_pair pair, char &i1, char &i2)
  * @param output1 The first input parameter in REFPROP molar units (mol/L, kPa, etc.)
  * @param output2 The second output parameter in REFPROP molar units (mol/L, kPa, etc.)
  */
-void inputs_mass_to_molar(flash_input_pair pair, double value1, double value2, double molar_mass, double &output1, double &output2)
+void mass_inputs_to_molar_inputs(input_pairs pair, double value1, double value2, double molar_mass, double &output1, double &output2)
 {
     if (molar_mass > 1000 || molar_mass < 1){
         std::cout << "molar mass is in the wrong unit system" << std::endl;
     }
-    char c1, c2;
-    split_flash_input_pair(pair, c1, c2);
-    output1 = RPmass_to_RPmolar(c1, value1, molar_mass); 
-    output2 = RPmass_to_RPmolar(c2, value2, molar_mass); 
+    parameters para1, para2;
+    split_input_pair(pair, para1, para2);
+    output1 = RPmass_to_RPmolar(para1, value1, molar_mass); 
+    output2 = RPmass_to_RPmolar(para2, value2, molar_mass); 
 }
 
 SetupReturnStruct Setup(long *nc, const std::string &fluids, const std::string &hmx_bnc, const std::string &reference_state)
@@ -206,9 +287,9 @@ SaturationSplineReturnStruct BuildSaturationSpline(const std::vector<double> &z)
     return out;
 }
 /**
-TODO: Molar fractions to mass fractions
+
 */
-FlashReturnStruct FlashMolar(flash_input_pair pair, double value1, double value2, const std::vector<double> &z, flash_input_option option)
+FlashReturnStruct FlashMolarRPSI(input_pairs pair, double value1, double value2, const std::vector<double> &z, flash_input_option option)
 {
     FlashReturnStruct out;
     char herr_buffer[errormessagelength];
@@ -220,64 +301,61 @@ FlashReturnStruct FlashMolar(flash_input_pair pair, double value1, double value2
     out.y.resize(z.size());
       
     switch(pair){
-        case TP_INPUTS:
-            out.T = value1; out.p = value2;
+        case PT_INPUTS:
+            out.p = value1; out.T = value2; 
             TPFLSHdll(&out.T,&out.p,const_cast<double*>(&z[0]),&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.h,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength); 
             break;
-        case TD_INPUTS:
-            out.T = value1; out.d = value2;
+        case DmolarT_INPUTS:
+            out.d = value1; out.T = value2; 
             TDFLSHdll(&out.T,&out.d,const_cast<double*>(&z[0]),&out.p,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.h,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength); 
             break;
-        case PD_INPUTS:
-            out.p = value1; out.d = value2;
+        case DmolarP_INPUTS:
+            out.d = value1; out.p = value2;
             PDFLSHdll(&out.p,&out.d,const_cast<double*>(&z[0]),&out.T,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.h,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;
-        case PH_INPUTS:
-            out.p = value1; out.h = value2;
+        case HmolarP_INPUTS:
+            out.h = value1; out.p = value2; 
             PHFLSHdll(&out.p,&out.h,const_cast<double*>(&z[0]),&out.T,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;
-        case PS_INPUTS:
-            out.p = value1; out.s = value2;
+        case PSmolar_INPUTS:
+            out.p = value1; out.s = value2; 
             PSFLSHdll(&out.p,&out.s,const_cast<double*>(&z[0]),&out.T,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.h,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;
-        case PU_INPUTS:
-        case PE_INPUTS:
-            out.p = value1; out.u = value2;
+        case PUmolar_INPUTS:
+            out.p = value2; out.u = value1; 
             PEFLSHdll(&out.p,&out.u,const_cast<double*>(&z[0]),&out.T,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.h,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;
-        case HS_INPUTS:
+        case HmolarSmolar_INPUTS:
             out.h = value1; out.s = value2;
             HSFLSHdll(&out.h,&out.s,const_cast<double*>(&z[0]),&out.T,&out.p,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;
-        case US_INPUTS:
-        case ES_INPUTS:
-            out.u = value1; out.s = value2;
+        case SmolarUmolar_INPUTS:
+            out.s = value1; out.u = value2; 
             ESFLSHdll(&out.u,&out.s,const_cast<double*>(&z[0]),&out.T,&out.p,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.h,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;
-        case DH_INPUTS:
+        case DmolarHmolar_INPUTS:
             out.d = value1; out.h = value2;
             DHFLSHdll(&out.d,&out.h,const_cast<double*>(&z[0]),&out.T,&out.p,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;
-        case DS_INPUTS:
+        case DmolarSmolar_INPUTS:
             out.d = value1; out.s = value2;
             DSFLSHdll(&out.d,&out.s,const_cast<double*>(&z[0]),&out.T,&out.p,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.h,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;    
-        case DU_INPUTS:
-        case DE_INPUTS:
+        case DmolarUmolar_INPUTS:
             out.d = value1; out.u = value2;
             DEFLSHdll(&out.d,&out.u,const_cast<double*>(&z[0]),&out.T,&out.p,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.h,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;    
-        case TQ_INPUTS:
-            out.T = value1; out.q = value2;
+        case QT_INPUTS:
+            out.q = value1; out.T = value2; 
             TQFLSHdll(&out.T,&out.q,const_cast<double*>(&z[0]),&MOLAR_QUALITY,&out.p,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.u,&out.h,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;    
         case PQ_INPUTS:
             out.p = value1; out.q = value2;
             PQFLSHdll(&out.p,&out.q,const_cast<double*>(&z[0]),&MOLAR_QUALITY,&out.T,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.u,&out.h,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;
-        case TH_INPUTS:
+        case HmolarT_INPUTS:
         {
-            out.T = value1; out.h = value2;
+            out.h = value1; out.T = value2; 
             long kr;
             switch(option){
                 case LOWER_DENSITY_ROOT: kr = 1; break;
@@ -290,8 +368,7 @@ FlashReturnStruct FlashMolar(flash_input_pair pair, double value1, double value2
             THFLSHdll(&out.T,&out.h,const_cast<double*>(&z[0]),&kr,&out.p,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.u,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;    
         }
-        case TU_INPUTS:
-        case TE_INPUTS:
+        case TUmolar_INPUTS:
         {
             out.T = value1; out.u = value2;
             long kr;
@@ -306,9 +383,9 @@ FlashReturnStruct FlashMolar(flash_input_pair pair, double value1, double value2
             TEFLSHdll(&out.T,&out.u,const_cast<double*>(&z[0]),&kr,&out.p,&out.d,&out.dl,&out.dv,&out.x[0],&out.y[0],&out.q,&out.h,&out.s,&out.cv,&out.cp,&out.w,&out.ierr,herr_buffer,errormessagelength);
             break;    
         }
-        case TS_INPUTS:
+        case SmolarT_INPUTS:
         {
-            out.T = value1; out.s = value2;
+            out.s = value1; out.T = value2; 
             long kr;
             switch(option){
                 case LOWER_DENSITY_ROOT: kr = 1; break;
@@ -331,7 +408,7 @@ FlashReturnStruct FlashMolar(flash_input_pair pair, double value1, double value2
     return out;
 }
 
-FlashReturnStruct FlashMolarWithGuesses(flash_input_pair pair, double value1, double value2, const std::vector<double> &z, FlashReturnStruct &guess, flash_input_option option)
+FlashReturnStruct FlashMolarWithGuesses(input_pairs pair, double value1, double value2, const std::vector<double> &z, FlashReturnStruct &guess, flash_input_option option)
 {
     FlashReturnStruct out;
     char herr_buffer[errormessagelength];
@@ -356,9 +433,9 @@ FlashReturnStruct FlashMolarWithGuesses(flash_input_pair pair, double value1, do
             std::cout << out.q;
             break;
         }
-        case TP_INPUTS:{
+        case PT_INPUTS:{
             if (option == FORCE_VAPOR){
-                out.T = value1; out.p = value2;
+                out.p = value1; out.T = value2; 
                 out.d = guess.d;
                 long kph = 2; // Vapor solution
                 long kguess = 1; // Guess provided
@@ -384,15 +461,60 @@ FlashReturnStruct FlashMolarWithGuesses(flash_input_pair pair, double value1, do
     }
     return out;
 }
-FlashReturnStruct FlashMass(flash_input_pair pair, double value1, double value2, const std::vector<double> &z, flash_input_option option)
+FlashReturnStruct FlashMass(input_pairs pair, double value1, double value2, const std::vector<double> &z, flash_input_option option)
 {
     double molar_mass = 0;
     WMOLdll(const_cast<double*>(&z[0]), &molar_mass);
-    double molar_input_1 = 999999999, molar_input_2 = 9999999;
+    
     // Convert inputs to REFPROP molar units
-    inputs_mass_to_molar(pair, value1, value2, molar_mass, molar_input_1, molar_input_2);
-    // Do the flash call
-    FlashReturnStruct molar_outputs = FlashMolar(pair, molar_input_1, molar_input_2, z, option);
-    // Convert outputs to molar units (TODO)
+    double molar_input_1 = 999999999, molar_input_2 = 9999999;
+	mass_inputs_to_molar_inputs(pair, value1, value2, molar_mass, molar_input_1, molar_input_2);
+
+    // Do the flash call with molar units
+    FlashReturnStruct molar_outputs = FlashMolarRPSI(pair, molar_input_1, molar_input_2, z, option);
+    
+	// Convert outputs to mass units (TODO)
     return molar_outputs;
 }
+double REFPROP(const std::string &output, const std::string &name1, const double value1, const std::string &name2, const double value2, const std::string &fluid_string)
+{
+	std::vector<double> z(1, 1.0);
+	SetupReturnStruct setup = Setup(fluid_string);
+
+	// Convert strings to enumerations
+	parameters para1 = name_to_parameter(name1);
+	parameters para2 = name_to_parameter(name2);
+	parameters paraoutput = name_to_parameter(output);
+
+	// Construct input pair in REFPROP's modified SI units (no unit conversion needed)
+	double in1 = 10000, in2 = 10000;
+	input_pairs input_pair = build_input_pair(para1, value1, para2, value2, in1, in2);
+	
+	// Do the flash call with REFPROP's modified molar units
+    FlashReturnStruct molar_outputs_RPSI = FlashMolarRPSI(input_pair, in1, in2, z);
+
+	// Return the desired variable (no unit conversion needed)
+	return molar_outputs_RPSI.keyed_output(paraoutput);
+}
+double REFPROPSI(const std::string &output, const std::string &name1, const double value1, const std::string &name2, const double value2, const std::string &fluid_string)
+{
+	std::vector<double> z(1,1.0);
+	SetupReturnStruct setup = Setup(fluid_string);
+
+	// Convert strings to enumerations
+	parameters para1 = name_to_parameter(name1);
+	parameters para2 = name_to_parameter(name2);
+	parameters paraoutput = name_to_parameter(output);
+	
+	// Construct input pair in REFPROP's modified SI units
+	double in1 = 10000, in2 = 10000;
+	input_pairs input_pair = build_input_pair_RPSI_from_SI(para1, value1, para2, value2, in1, in2);
+	
+	// Do the flash call with REFPROP's modified molar units
+    FlashReturnStruct molar_outputs_RPSI = FlashMolarRPSI(input_pair, in1, in2, z);
+
+	// Return the desired variable converted back to base SI units
+	return RPSI_to_SI(paraoutput, molar_outputs_RPSI.keyed_output(paraoutput));
+}
+
+} /* namespace REFPROP */
