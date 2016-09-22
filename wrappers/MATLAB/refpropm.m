@@ -390,7 +390,7 @@ switch propTyp1
        [heos dummy dummy dummy dummy tmin T Dmax P_rp ierr errTxt] = calllib(libName,'LIMITXdll', heos, 300, 0, 0, z, 0, 0, 0, 0, 0, herr, 3, 255);
        [dummy dummy dummy D_rp Dl Dv x y q e h s cv cp w ierr errTxt] = calllib(libName,'TPFLSHdll', T, P_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
     case '0'
-       [dummy dummy dummy dummy ierr errTxt] = calllib(libName,'SETUPdll',-1,10000*ones(255,1),255*ones(255,1),3*ones(255,1),0,32*ones(255,1),10000,255,3,255);
+       [~,~,~,~,ierr,~] = calllib(libName,'SETUPdll',-1,char(32*ones(1,255)),char(32*ones(1,255)),char(32*ones(1,3)),0,char(32*ones(1,255)),10000,255,3,255);
        varargout(1)={double(ierr)/10000};
        return
     otherwise
@@ -657,8 +657,8 @@ for i = 1:length(propReq)
                 tmf = 1000*cs*P_rp*sqrt(molw/8.3144621/T);
                 varargout(i) = {tmf};
             case '0'
-                [dummy dummy dummy dummy ierr errTxt] = calllib(libName,'SETUPdll',-1,10000*ones(255,1),255*ones(255,1),3*ones(255,1),0,32*ones(255,1),10000,255,3,255);
-                varargout(1)={double(ierr)/10000};
+                [~,~,~,~,ierr,~] = calllib(libName,'SETUPdll',-1,char(32*ones(1,255)),char(32*ones(1,255)),char(32*ones(1,3)),0,char(32*ones(1,255)),10000,255,3,255);
+                varargout(i)={double(ierr)/10000};
                 return
             otherwise
                 error('Unknown property type requested.');
