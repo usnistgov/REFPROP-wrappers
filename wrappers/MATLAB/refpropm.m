@@ -168,10 +168,8 @@ w = 0;
 hjt = 0;
 phaseFlag = 0;
 
-archstr = computer('arch');
 libName = 'refprop';
 dllName = 'REFPROP.dll';
-prototype = @rp_proto;
 
 % Input Sanity Checking
 nc_base = 5;
@@ -193,38 +191,48 @@ end
 % Load DLL
 RefpropLoadedState = getappdata(0, 'RefpropLoadedState');
 if ~libisloaded(libName)
+    FluidDir = 'FLUIDS/';
     switch computer
         case {'GLNXA64', 'GLNX86', 'MACI', 'MACI64', 'SOL64'}
-            BasePath = '/usr/local/REFPROP/';
-            FluidDir = 'FLUIDS/';
-        otherwise
-            BasePath = 'C:\Program Files\REFPROP\';
-            FluidDir = 'fluids\';
-
-            if ~exist(BasePath,'dir')
-                BasePath = 'C:\Program Files (x86)\REFPROP\';
+            BasePath = strcat(getenv('HOME'),'/refprop/');
+            dllName = 'librefprop.so';
+            switch computer
+                case {'MACI','MACI64'}
+                    dllName = 'librefprop.dylib';
             end
-
-            if archstr == 'win64'
-                %If you are using a 64 bit version of MatLab, please contact Eric Lemmon for the DLL listed below. (eric.lemmon@nist.gov)
-                dllName = 'REFPRP64.dll';
-                prototype = @() rp_proto64(BasePath);
+            
+        otherwise
+            if strcmp(computer, 'PCWIN64')
+                BasePath = 'C:\Program Files (x86)\REFPROP\';
+            else
+                if strcmp(computer, 'PCWIN32')
+                    BasePath = 'C:\Program Files\REFPROP\';
+                end
             end
     end
     % v=char(calllib('REFPROP','RPVersion',zeros(255,1))'); % Useful for debugging...
     RefpropLoadedState = struct('FluidType', 'none', 'BasePath', BasePath, 'FluidDir', FluidDir, 'nComp', 0, 'mixFlag', 0, 'z_mix', 0);
     setappdata(0, 'RefpropLoadedState', RefpropLoadedState);
 
-    % the following returns 0 if refprop.dll does not exist, 1 if refprop.dll is a variable name in the workspace, 2 if C:\Program Files (x86)\REFPROP\refprop.dll exist, and 3 if refprop.dll exist but is a .dll file in the MATLAB path
+    % the following returns:
+    % 0 if REFPROP shared library does not exist, 
+    % 1 if refprop.dll is a variable name in the workspace, 
+    % 2 if C:\Program Files (x86)\REFPROP\refprop.dll exist, and 3 if refprop.dll exist but is a .dll file in the MATLAB path
     if ~ismember(exist(strcat(BasePath, dllName),'file'),[2 3])
         dllName = lower(dllName);
     end
 
     if ~ismember(exist(strcat(BasePath, dllName),'file'),[2 3])
-        error(strcat(dllName,' could not be found.  Please edit the refpropm.m file and add your path to the lines above this error message.'));
+        error(strcat(dllName,' could not be found at the absolute path: ',strcat(BasePath, dllName),'.  Please edit the refpropm.m file and add your path to the lines above this error message.'));
     end
-
-    [notfound,warnings]=loadlibrary(strcat(BasePath,dllName),prototype,'alias',libName);
+    
+    REFPROP_header='REFPROP.h';
+    [~,~]=loadlibrary(strcat(BasePath,dllName),strcat(BasePath,REFPROP_header),'alias',libName);
+    
+    % Uncomment this line to see what functions were exported, along
+    % with input/output arguments
+    % ---
+    %libfunctionsview refprop
 end
 
 % Prepare REFPROP
@@ -236,13 +244,19 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
     if strfind(lower(fluidType), '.mix') ~= 0
         RefpropLoadedState.mixFlag = 1;
         fluidName = fluidType;
-        fluidFile = strcat(RefpropLoadedState.BasePath, 'mixtures\',fluidName);
-        hmxnme = [unicode2native(fluidFile) 32*ones(1,255-length(fluidFile))]';
+        
+        fluidFile = strcat(RefpropLoadedState.BasePath, 'mixtures/',fluidName);
+        hmxnme = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
+        hmxnme(1:length(fluidFile)) = fluidFile;
         mixFile = strcat(RefpropLoadedState.BasePath, ...
             RefpropLoadedState.FluidDir, 'hmx.bnc');
-        hmix = [unicode2native(mixFile) 32*ones(1,255-length(mixFile))]';
-        href = unicode2native('DEF')';
-        [hmxnme hmix href nc path z ierr errTxt] = calllib(libName,'SETMIXdll',hmxnme,hmix,href,0,32*ones(10000,1),zeros(1,20),0,32*ones(255,1),255,255,3,10e3,255);
+        hmix = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
+        hmix(1:length(mixFile)) = mixFile;
+        href = 'DEF';
+        herr = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
+        ncc = 1;
+        [~,~,~,nc,~,z,ierr,errTxt] = calllib(libName,'SETMIXdll',hmxnme,hmix,href,ncc,char(32*ones(1,10000)),zeros(1,20),ierr,herr,255,255,3,10e3,255);
+        
     else
         for i = 1:numComponents
             fluidName=char(varargin(i+5));
@@ -254,17 +268,22 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
             fluidFile = strcat(fluidFile, RefpropLoadedState.BasePath, ...
                 RefpropLoadedState.FluidDir,fluidName,'|');
         end
-        path = [unicode2native(fluidFile) 32*ones(1,10e3-length(fluidFile))]';
-        mixFile = strcat(RefpropLoadedState.BasePath, ...
-        RefpropLoadedState.FluidDir, 'hmx.bnc');
-        hmix = [unicode2native(mixFile) 32*ones(1,255-length(mixFile))]';
-        href = unicode2native('DEF')';
-        [nc path hmix href ierr errTxt] = calllib(libName,'SETUPdll',numComponents,path,hmix,href,0,32*ones(255,1),10000,255,3,255);
+        
+        path = char(32*zeros(1,10000)); % Pad out the string with spaces (32: ASCII code for space)
+        path(1:length(fluidFile)) = fluidFile;
+        mixFile = strcat(RefpropLoadedState.BasePath, RefpropLoadedState.FluidDir, 'HMX.BNC');
+        hmix = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
+        hmix(1:length(mixFile)) = mixFile;
+        href = 'DEF';
+        herr = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
+        [nc, ~,~,~,ierr,errTxt] = calllib(libName,'SETUPdll',numComponents,path,hmix,href,0,herr,10000,255,3,255);
         z = 1;
-%       [ierr errTxt] = calllib(libName,'SETAGAdll',0,32*ones(255,1),255);
+        % Uncomment the next line to enable the use of AGA EOS for all
+        % components in the mixture
+        % [ierr errTxt] = calllib(libName,'SETAGAdll',0,herr,255);
     end
     if (ierr > 0)
-        error(char(errTxt'));
+        error(errTxt);
     end
 %Use the call to PREOSdll to change the equation of state to Peng Robinson for all calculations.
 %To revert back to the normal REFPROP EOS and models, call it again with an input of 0.
@@ -273,9 +292,8 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
 %To enable better and faster calculations of saturation states, call the
 %subroutine SATSPLN.  However, this routine takes several seconds, and
 %should be disabled if changing the fluids regularly.
-%This call only works if a *.mix file is sent.
-%You may also need to uncomment the declaration of SATSPLN in the rp_proto.m file.
-%   [dummyx ierr errTxt] = calllib(libName,'SATSPLNdll', z, 0, 32*ones(255,1), 255);
+% herr = char(32*ones(1,255));
+% [dummyx ierr errTxt] = calllib(libName,'SATSPLNdll', z, 0, herr, 255);
 
 % Use the following line to calculate enthalpies and entropies on a reference state
 % based on the currently defined mixture, or to change to some other reference state.
@@ -299,7 +317,7 @@ propTyp2 = lower(char(varargin(4)));
 propVal1 = cell2mat(varargin(3));
 propVal2 = cell2mat(varargin(5));
 
-herr = 32*ones(255,1);
+herr = char(32*ones(1,255));
 
 if length(propReq)==2
     if propReq(2)=='>'
