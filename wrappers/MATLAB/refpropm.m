@@ -203,9 +203,13 @@ if ~libisloaded(libName)
         otherwise
             if strcmp(computer, 'PCWIN64')
                 BasePath = 'C:\Program Files (x86)\REFPROP\';
+                dllName = 'REFPRP64.dll';
             else
                 if strcmp(computer, 'PCWIN32')
                     BasePath = 'C:\Program Files\REFPROP\';
+                    dllName = 'REFPROP.dll';
+                else
+                    error(strcat('Architecture[',computer,'] is not understood'));
                 end
             end
     end
