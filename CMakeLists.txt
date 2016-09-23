@@ -24,6 +24,8 @@ INCLUDE_DIRECTORIES("${CMAKE_SOURCE_DIR}/externals/REFPROP-headers")
 
 if (REFPROP_EXAMPLE)
     add_executable(Main ${CMAKE_SOURCE_DIR}/test_main.cpp  "${CMAKE_SOURCE_DIR}/REFPROP.cpp")
+elseif (REFPROP_FORTRAN_SHARED_LIBRARY)
+    add_library(${NAME} SHARED ${APP_SOURCES})    
 elseif (REFPROP_SWIG_WRAPPER)
     
     # Must have SWIG
