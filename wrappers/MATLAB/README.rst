@@ -4,6 +4,13 @@ MATLAB wrapper of REFPROP
 
 Updated wrapper by Ian Bell, NIST, 2016
 
+==============
+Pre-requisites
+==============
+
+* MATLAB
+* A licensed version of NIST REFPROP
+
 ======================
 Problems with wrapper?
 ======================
@@ -18,7 +25,13 @@ Instructions on windows
 2. If you have a 64-bit MATLAB version, make sure you have a ``REFPPRP64.dll`` file in your REFPROP installation directory 
 3. Place the ``REFPROP.h`` that you can obtain from `REFPROP.h <https://raw.githubusercontent.com/usnistgov/REFPROP-wrappers/master/wrappers/MATLAB/REFPROP.h>`_ in the REFPROP installation directory
 4. Place `refpropm.m <https://raw.githubusercontent.com/usnistgov/REFPROP-wrappers/master/wrappers/MATLAB/refpropm.m>`_ somewhere on your computer.  Make sure it is on the `MATLAB path <https://www.mathworks.com/help/matlab/ref/path.html>`_
-5. Test your refpropm file
+5. Test your refpropm file with something like (the normal boiling point temperature of water at one atmosphere, or 101.325 kPa)::
+
+    >> refpropm('T','P',101.325,'Q',0,'WATER')
+
+    ans =
+
+      373.1243
 
 Potential problems
 ------------------
@@ -61,3 +74,11 @@ So in the refprop folder you should have a structure like::
     │   ├── AMARILLO.MIX
     │  …
     └── REFPROP.h
+
+6. Test your refpropm file with something like (the normal boiling point temperature of water at one atmosphere, or 101.325 kPa)::
+
+    >> refpropm('T','P',101.325,'Q',0,'WATER')
+
+    ans =
+
+      373.1243
