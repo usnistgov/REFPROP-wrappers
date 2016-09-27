@@ -18,7 +18,7 @@ namespace REFPROP{
 		X(Cvmolar_PARA, "Cvmolar", 1.0, "Mole-based constant-volume specific heat") \
 		X(Umolar_PARA, "Umolar", 1.0, "Mole-based internal energy") \
 		X(Gmolar_PARA, "Gmolar", 1.0, "Mole-based Gibbs energy") \
-		X(Dmass_PARA, "Dmass", 1.0, "Mass-based density") \
+		X(Dmass_PARA, "Dmass", 0.001, "Mass-based density") \
 		X(Hmass_PARA, "Hmass", 1.0, "Mass-based enthalpy") \
 		X(Smass_PARA, "Smass", 1.0, "Mass-based entropy") \
 		X(Cpmass_PARA, "Cpmass", 1.0, "Mass-based constant-pressure specific heat") \
