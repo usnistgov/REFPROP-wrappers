@@ -47,6 +47,8 @@
 %                           `   Throat mass flux [kg/(m^2 s)]
 %                           +   Liquid density of equilibrium phase
 %                           -   Vapor density of equilibrium phase
+%                           [   Liquid spinodal value
+%                           ]   Vapor spinodal value
 %
 %                           E   dP/dT (along the saturation line) [kPa/K]
 %                           #   dP/dT     (constant rho) [kPa/K]
@@ -231,12 +233,13 @@ if ~libisloaded(libName)
     
     REFPROP_header='REFPROP.h';
     [~,~]=loadlibrary(strcat(BasePath,dllName),strcat(BasePath,REFPROP_header),'alias',libName);
-    
-    % Uncomment this line to see what functions were exported, along
-    % with input/output arguments
-    % ---
-    %libfunctionsview refprop
+        
 end
+
+% Uncomment this line to see what functions were exported, along
+% with input/output arguments
+% ---
+%libfunctionsview refprop
 
 % Prepare REFPROP
 if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
@@ -590,6 +593,12 @@ for i = 1:length(propReq)
         [~,~,~,~,~,hl,~,~,~,~,~] = calllib(libName,'THERMdll', T, Dl, z, 0, 0, 0, 0, 0, 0, 0, 0);
         [~,~,~,~,~,hv,~,~,~,~,~] = calllib(libName,'THERMdll', T, Dv, z, 0, 0, 0, 0, 0, 0, 0, 0);
         varargout(i) = {(hv-hl)/molw};
+    case '['
+        [~,~,rho,~,~] = calllib(libName,'LIQSPNDLdll', T, z, 0, 0, herr, 255);
+        varargout(i) = {rho};
+    case ']'
+        [~,~,rho,~,~] = calllib(libName,'VAPSPNDLdll', T, z, 0, 0, herr, 255);
+        varargout(i) = {rho};
     otherwise
 
         if (q>0 && q<1)
