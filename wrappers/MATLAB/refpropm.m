@@ -47,8 +47,8 @@
 %                           `   Throat mass flux [kg/(m^2 s)]
 %                           +   Liquid density of equilibrium phase
 %                           -   Vapor density of equilibrium phase
-%                           [   Liquid spinodal value
-%                           ]   Vapor spinodal value
+%                           [   Liquid spinodal density [kg/m^3]
+%                           ]   Vapor spinodal density [kg/m^3]
 %
 %                           E   dP/dT (along the saturation line) [kPa/K]
 %                           #   dP/dT     (constant rho) [kPa/K]
@@ -350,7 +350,7 @@ elseif RefpropLoadedState.mixFlag == 1
     z = RefpropLoadedState.z_mix;
 end
 [~,molw] = calllib(libName,'WMOLdll',z,0);
-molw = molw*1e-3;
+molw = molw*1e-3; % [kg/mol]
 
 % Sanity Check Provided Property Types
 if propTyp1 == propTyp2
@@ -594,11 +594,11 @@ for i = 1:length(propReq)
         [~,~,~,~,~,hv,~,~,~,~,~] = calllib(libName,'THERMdll', T, Dv, z, 0, 0, 0, 0, 0, 0, 0, 0);
         varargout(i) = {(hv-hl)/molw};
     case '['
-        [~,~,rho,~,~] = calllib(libName,'LIQSPNDLdll', T, z, 0, 0, herr, 255);
-        varargout(i) = {rho};
+        [~,~,rho_molL,~,~] = calllib(libName,'LIQSPNDLdll', T, z, 0, 0, herr, 255);
+        varargout(i) = {rho_molL*molw*1000}; % (mol/L)*(kg/mol)*(1000 L/m^3)
     case ']'
-        [~,~,rho,~,~] = calllib(libName,'VAPSPNDLdll', T, z, 0, 0, herr, 255);
-        varargout(i) = {rho};
+        [~,~,rho_molL,~,~] = calllib(libName,'VAPSPNDLdll', T, z, 0, 0, herr, 255);
+        varargout(i) = {rho_molL*molw*1000}; % (mol/L)*(kg/mol)*(1000 L/m^3)
     otherwise
 
         if (q>0 && q<1)
