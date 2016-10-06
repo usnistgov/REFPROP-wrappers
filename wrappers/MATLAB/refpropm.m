@@ -446,7 +446,12 @@ elseif ((propTyp1 == 'p') && (propTyp2 == 't')) || ((propTyp2 == 'p') && (propTy
 elseif ((propTyp1 == 'h') && (propTyp2 == 'd')) || ((propTyp2 == 'h') && (propTyp1 == 'd'))
     [~,~,~,T,P_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = calllib(libName,'DHFLSHdll', D_rp, h, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
 elseif ((propTyp1 == 't') && (propTyp2 == 'd')) || ((propTyp2 == 't') && (propTyp1 == 'd'))
-    [~,~,~,P_rp,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TDFLSHdll', T, D_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
+    if phaseFlag==0
+        % Do a "blind" flash evaluation
+        [~,~,~,P_rp,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TDFLSHdll', T, D_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
+    else
+        % Just use the given density to calculate everything else; evaluate the EOS directly
+        [~,~,~,P_rp,e,h,s,cv,cp,w,~] = calllib(libName,'THERMdll', T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
 elseif ((propTyp1 == 't') && (propTyp2 == 'h')) || ((propTyp2 == 't') && (propTyp1 == 'h'))
     [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = calllib(libName,'THFLSHdll', T, h, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
 else
