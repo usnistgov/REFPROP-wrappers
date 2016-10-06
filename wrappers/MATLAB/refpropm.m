@@ -452,6 +452,7 @@ elseif ((propTyp1 == 't') && (propTyp2 == 'd')) || ((propTyp2 == 't') && (propTy
     else
         % Just use the given density to calculate everything else; evaluate the EOS directly
         [~,~,~,P_rp,e,h,s,cv,cp,w,~] = calllib(libName,'THERMdll', T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
+    end
 elseif ((propTyp1 == 't') && (propTyp2 == 'h')) || ((propTyp2 == 't') && (propTyp1 == 'h'))
     [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = calllib(libName,'THFLSHdll', T, h, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
 else
