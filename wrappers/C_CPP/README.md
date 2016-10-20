@@ -1,6 +1,4 @@
-*************************
-REFPROP wrapper for C/C++
-*************************
+# REFPROP wrapper for C/C++
 
 Brought to you by Ian Bell, NIST, 2016
 
