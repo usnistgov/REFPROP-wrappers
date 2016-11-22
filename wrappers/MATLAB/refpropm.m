@@ -704,6 +704,11 @@ function proto = get_header_path()
     % Systematic lookup method to find possible header file
     % Start with the BasePath, then look through unix standard places
     % and end by looking in MATLAB path.
+    %
+    % If a prototype file is needed (deployment of compiled code or usage
+    % on computers with no valid compilers for MATLAB), run the following
+    % command:
+    % >> loadlibrary('REFPRP64.dll', 'REFPROP.h', 'mfilename', 'rp_proto64.m')
     if exist('rp_proto64', 'file')
         if nargin(@rp_proto64) == 0
            proto = @rp_proto64;

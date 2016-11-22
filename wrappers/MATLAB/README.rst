@@ -50,7 +50,11 @@ Potential problems
         end
     end
 
-with the appropriate ``BasePath`` for your system
+  with the appropriate ``BasePath`` for your system
+
+* If you don't have a valid compiler for MATLAB, you will need to use a prototype file. To create it, run the following command in MATLAB on a computer with a valid compiler::
+
+    >> loadlibrary('REFPRP64.dll', 'REFPROP.h', 'mfilename', 'rp_proto64.m')
 
 =========================
 Instructions on OSX/linux
