@@ -194,14 +194,7 @@ if ~loaded || isempty(RefpropLoadedState)
     FluidDir = 'FLUIDS/';
     switch computer
         case {'GLNXA64', 'GLNX86', 'MACI', 'MACI64', 'SOL64'}
-            if ~isempty(getenv('REFPROP_BASE'))
-                BasePath = getenv('REFPROP_BASE');
-            else
-                BasePath = strcat('/usr/local/refprop/');
-                if exist(BasePath, 'dir') ~= 7
-                    BasePath = strcat('/opt/refprop/');
-                end
-            end
+            BasePath = strcat(getenv('HOME'),'/refprop/');
             dllName = 'librefprop.so';
             switch computer
                 case {'MACI','MACI64'}
@@ -214,7 +207,7 @@ if ~loaded || isempty(RefpropLoadedState)
                 BasePath = 'C:/Program Files (x86)/REFPROP/';
                 dllName = 'REFPRP64.dll';
             else
-                if strcmp(computer, 'PCWIN32') or strcmp(computer, 'PCWIN')
+                if strcmp(computer, 'PCWIN32') || strcmp(computer, 'PCWIN')
                     BasePath = 'C:/Program Files/REFPROP/';
                     dllName = 'REFPROP.dll';
                 else
