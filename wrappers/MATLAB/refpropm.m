@@ -159,6 +159,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function varargout = refpropm( varargin )
+persistent RefpropLoadedState % use persistent variable to store the state
+
 ierr = 0;
 q = 999; % Vapor quality (0: saturated liquid, 1: saturated vapor)
 e = 0; % Internal energy (J/mol)
@@ -184,14 +186,11 @@ else
     numComponents = nargin - nc_base - 1;
 end
 
-fluidType = [];
-for i = 1:numComponents
-    fluidType = [fluidType char(varargin(5+i))];
-end
+fluidType = [varargin{5+(1:numComponents)}];
 
 % Load DLL
-RefpropLoadedState = getappdata(0, 'RefpropLoadedState');
-if ~libisloaded(libName)
+loaded = libisloaded(libName);
+if ~loaded || isempty(RefpropLoadedState)
     FluidDir = 'FLUIDS/';
     switch computer
         case {'GLNXA64', 'GLNX86', 'MACI', 'MACI64', 'SOL64'}
@@ -201,13 +200,14 @@ if ~libisloaded(libName)
                 case {'MACI','MACI64'}
                     dllName = 'librefprop.dylib';
             end
-            
+            FluidDir = lower(FluidDir);
+
         otherwise
             if strcmp(computer, 'PCWIN64')
                 BasePath = 'C:/Program Files (x86)/REFPROP/';
                 dllName = 'REFPRP64.dll';
             else
-                if strcmp(computer, 'PCWIN32')
+                if strcmp(computer, 'PCWIN32') || strcmp(computer, 'PCWIN')
                     BasePath = 'C:/Program Files/REFPROP/';
                     dllName = 'REFPROP.dll';
                 else
@@ -217,29 +217,38 @@ if ~libisloaded(libName)
     end
     % v=char(calllib('REFPROP','RPVersion',zeros(255,1))'); % Useful for debugging...
     RefpropLoadedState = struct('FluidType', 'none', 'BasePath', BasePath, 'FluidDir', FluidDir, 'nComp', 0, 'mixFlag', 0, 'z_mix', 0);
-    setappdata(0, 'RefpropLoadedState', RefpropLoadedState);
 
-    % the following returns:
-    % 0 if REFPROP shared library does not exist, 
-    % 1 if refprop.dll is a variable name in the workspace, 
-    % 2 if C:\Program Files (x86)\REFPROP\refprop.dll exist, and 3 if refprop.dll exist but is a .dll file in the MATLAB path
-    if ~ismember(exist(strcat(BasePath, dllName),'file'),[2 3])
-        dllName = lower(dllName);
-    end
+    if ~loaded
+        REFPROP_header='REFPROP.h';
+        prototype = get_header_path();
 
-    if ~ismember(exist(strcat(BasePath, dllName),'file'),[2 3])
-        error(strcat(dllName,' could not be found at the absolute path: ',strcat(BasePath, dllName),'.  Please edit the refpropm.m file and add your path to the lines above this error message.'));
+        w = warning('query');
+        warning('off')
+        try
+            % Start by trying system resolution to find library
+            [~,~] = loadlibrary(dllName,prototype,'alias',libName);
+        catch ME
+            % the following returns:
+            % 0 if REFPROP shared library does not exist,
+            % 1 if refprop.dll is a variable name in the workspace,
+            % 2 if C:\Program Files (x86)\REFPROP\refprop.dll exist, and 3 if refprop.dll exist but is a .dll file in the MATLAB path
+            if ~ismember(exist(strcat(BasePath, dllName),'file'),[2 3])
+                dllName = lower(dllName);
+            end
+            if ~ismember(exist(strcat(BasePath, dllName),'file'),[2 3])
+                error(strcat(dllName,' could not be found at the absolute path: ',strcat(BasePath, dllName),'.  Please edit the refpropm.m file and add your path to the lines above this error message.'));
+            end
+            [~,~] = loadlibrary(strcat(BasePath,dllName),prototype,'alias',libName);
+        end
+        warning(w)
     end
-    
-    REFPROP_header='REFPROP.h';
-    [~,~]=loadlibrary(strcat(BasePath,dllName),strcat(BasePath,REFPROP_header),'alias',libName);
-        
 end
 
 % Uncomment this line to see what functions were exported, along
 % with input/output arguments
 % ---
 %libfunctionsview refprop
+
 
 % Prepare REFPROP
 if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
@@ -250,7 +259,7 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
     if strfind(lower(fluidType), '.mix') ~= 0
         RefpropLoadedState.mixFlag = 1;
         fluidName = fluidType;
-        
+
         fluidFile = strcat(RefpropLoadedState.BasePath, 'mixtures/',fluidName);
         hmxnme = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
         hmxnme(1:length(fluidFile)) = fluidFile;
@@ -262,19 +271,19 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
         herr = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
         ncc = 1;
         [~,~,~,nc,~,z,ierr,errTxt] = calllib(libName,'SETMIXdll',hmxnme,hmix,href,ncc,char(32*ones(1,10000)),zeros(1,20),ierr,herr,255,255,3,10e3,255);
-        
+
     else
         for i = 1:numComponents
-            fluidName=char(varargin(i+5));
+            fluidName=varargin{i+5};
             if isempty(strfind(lower(fluidName),'.fld'))
                 if isempty(strfind(lower(fluidName),'.ppf'))
                     fluidName = strcat(fluidName,'.fld');
                 end
             end
             fluidFile = strcat(fluidFile, RefpropLoadedState.BasePath, ...
-                RefpropLoadedState.FluidDir,fluidName,'|');
+                RefpropLoadedState.FluidDir,upper(fluidName),'|');
         end
-        
+
         path = char(32*zeros(1,10000)); % Pad out the string with spaces (32: ASCII code for space)
         path(1:length(fluidFile)) = fluidFile;
         mixFile = strcat(RefpropLoadedState.BasePath, RefpropLoadedState.FluidDir, 'HMX.BNC');
@@ -310,18 +319,17 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
     RefpropLoadedState.z_mix = z;
     RefpropLoadedState.nComp = nc;
     RefpropLoadedState.FluidType = lower(fluidType);
-    setappdata(0, 'RefpropLoadedState', RefpropLoadedState);
 end
 
 numComponents = RefpropLoadedState.nComp;
 
 % Extract Inputs from Varargin
-propReq = lower(char(varargin(1)));
-propTyp1 = lower(char(varargin(2)));
-propTyp2 = lower(char(varargin(4)));
+propReq = lower(varargin{1});
+propTyp1 = lower(varargin{2});
+propTyp2 = lower(varargin{4});
 
-propVal1 = cell2mat(varargin(3));
-propVal2 = cell2mat(varargin(5));
+propVal1 = varargin{3};
+propVal2 = varargin{5};
 
 herr = char(32*ones(1,255));
 
@@ -593,7 +601,7 @@ for i = 1:length(propReq)
             error('Heat of Vaporization not supported for mixtures');
         end
         [~,~,~,P_rp,Dl,Dv,x,y,ierr,errTxt] = calllib(libName, 'SATTdll', T, z, 1, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
-        if (ierr ~= 0) 
+        if (ierr ~= 0)
           error(char(errTxt'));
         end
         [~,~,~,~,~,hl,~,~,~,~,~] = calllib(libName,'THERMdll', T, Dl, z, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -688,6 +696,39 @@ for i = 1:length(propReq)
     end
     if (ierr > 0)
         error(char(errTxt'));
+    end
+end
+
+
+function proto = get_header_path()
+    % Systematic lookup method to find possible header file
+    % Start with the BasePath, then look through unix standard places
+    % and end by looking in MATLAB path.
+    %
+    % If a prototype file is needed (deployment of compiled code or usage
+    % on computers with no valid compilers for MATLAB), run the following
+    % command:
+    % >> loadlibrary('REFPRP64.dll', 'REFPROP.h', 'mfilename', 'rp_proto64.m')
+    if exist('rp_proto64', 'file')
+        if nargin(@rp_proto64) == 0
+           proto = @rp_proto64;
+        else
+            proto = @() rp_proto64(BasePath);
+        end
+    elseif ~isdeployed
+        if exist(strcat(BasePath,REFPROP_header), 'file')
+            proto = strcat(BasePath,REFPROP_header);
+        elseif exist(strcat('/usr/include/',REFPROP_header), 'file')
+            proto = strcat('/usr/include/',REFPROP_header);
+        elseif exist(strcat('/usr/local/include/',REFPROP_header), 'file')
+            proto = strcat('/usr/local/include/',REFPROP_header);
+        elseif exist(REFPROP_header, 'file')
+            proto = REFPROP_header;
+        else
+            error('Could not find header file for loading library')
+        end
+    else
+        error('Could not find header file for loading library')
     end
 end
 
