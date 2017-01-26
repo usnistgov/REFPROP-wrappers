@@ -1,4 +1,4 @@
-# Wrapper of REFPROP for C#
+# Wrapper of REFPROP for C&#35;
 
 The files in this directory demonstrate how to call REFPROP routines from a C# program. It demonstrates calling the RefProp unmanaged native C run-time methods from the managed C#/.Net run-time including marshalling data between the two environments.  This example can be used to easily and quickly create your own C# program that uses RefProp.
 
