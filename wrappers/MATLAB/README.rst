@@ -73,7 +73,7 @@ So in the refprop folder you should have a structure like::
     │   ├── ACETONE.FLD
     │   …
     ├── librefprop.so
-    ├── fluids
+    ├── mixtures
     │   ├── AIR.MIX
     │   ├── AMARILLO.MIX
     │  …
