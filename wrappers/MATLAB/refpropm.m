@@ -331,6 +331,13 @@ propTyp2 = lower(varargin{4});
 propVal1 = varargin{3};
 propVal2 = varargin{5};
 
+if length(propVal1) ~= 1
+    error('First input value must have a length of 1');
+end
+if length(propVal2) ~= 1
+    error('Second input value must have a length of 1');
+end
+
 herr = char(32*ones(1,255));
 
 if length(propReq)==2
