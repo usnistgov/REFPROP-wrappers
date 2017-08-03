@@ -32,6 +32,8 @@ class REFPROPFunctionLibrary():
         self._RMIX2dll = getattr(self.dll, 'RMIX2dll')
         self._TRNPRPdll = getattr(self.dll, 'TRNPRPdll')
         self._TPRHOdll = getattr(self.dll, 'TPRHOdll')
+        self._SURFTdll = getattr(self.dll, 'SURFTdll') 
+        self._NAMEdll = getattr(self.dll, 'NAMEdll')         
 
     def FLAGSdll(self, iFlag,jFlag):
         """ subroutine FLAGS (iFlag,jFlag,kFlag,ierr,herr) """
@@ -64,6 +66,15 @@ class REFPROPFunctionLibrary():
 
         self._SETUPdll(ct.byref(nc), hfld, hhmx, href, ct.byref(ierr), herr, 10000, 255, 3, 255)
         return ierr.value, str(herr.raw)
+
+    def NAMEdll(self, icomp):
+        """ subroutine NAMEdll (icomp,hnam,hn80,hcasn) """
+        icomp = ct.c_long(icomp)
+        hnam = ct.create_string_buffer(12)
+        hn80 = ct.create_string_buffer(80)
+        hcasn = ct.create_string_buffer(12)
+        self._NAMEdll(ct.byref(icomp), hnam, hn80, hcasn, 12, 80, 12)
+        return str(hnam.raw), str(hn80.raw), hcasn.raw
 
     def GETMODdll(self, icomp, htype):
         """
@@ -156,6 +167,20 @@ class REFPROPFunctionLibrary():
 
         self._TRNPRPdll(ct.byref(T), ct.byref(D), z, ct.byref(eta), ct.byref(tcx), ct.byref(ierr), herr, 255)
         return eta.value, tcx.value, ierr.value, str(herr.raw)
+
+    def SURFTdll(self,T,D,z):
+        """ 
+        subroutine SURFTdll (T,Dl,z,sigma,ierr,herr)
+        """ 
+        T = ct.c_double(T)
+        D = ct.c_double(D)
+        z = (len(z)*ct.c_double)(*z)
+        sigma = ct.c_double()
+        ierr = ct.c_long(0)
+        herr = ct.create_string_buffer(255)
+
+        self._SURFTdll(ct.byref(T), ct.byref(D), z, ct.byref(sigma), ct.byref(ierr), herr, 255)
+        return sigma.value, ierr.value, str(herr.raw)
 
     def CRITPdll(self, z, Tc, pc, rhoc_mol_L):
         z = (len(z)*ct.c_double)(*z)
