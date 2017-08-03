@@ -7,9 +7,10 @@ R = REFPROPFunctionLibrary(os.path.join(root, 'librefprop.dylib'))
 R.SETPATHdll(root)
 ierr,herr = R.SETUPdll(1,'WATER.FLD','HMX.BNC','DEF')
 if ierr != 0:
-	raise ValueError(str(ierr) + ':' + herr)
+    raise ValueError(str(ierr) + ':' + herr)
 z = [1.0]
-T = 300
+p = 300
 Q = 1.0
-o = R.TQFLSHdll(T,Q,z)
+o = R.pQFLSHdll(T,Q,z)
+
 print(o)

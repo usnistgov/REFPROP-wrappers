@@ -30,7 +30,8 @@ class REFPROPFunctionLibrary():
         self._REDXdll = getattr(self.dll, 'REDXdll')
         self._FLAGSdll = getattr(self.dll, 'FLAGSdll')
         self._RMIX2dll = getattr(self.dll, 'RMIX2dll')
-        
+        self._TRNPRPdll = getattr(self.dll, 'TRNPRPdll')
+        self._TPRHOdll = getattr(self.dll, 'TPRHOdll')
 
     def FLAGSdll(self, iFlag,jFlag):
         """ subroutine FLAGS (iFlag,jFlag,kFlag,ierr,herr) """
@@ -139,7 +140,22 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._CRTPNTdll(z, ct.byref(Tc), ct.byref(Pc), ct.byref(Dc), ct.byref(ierr), herr, 255)
-        return Tc.value, Pc.value, Dc.value, ierr, herr
+        return Tc.value, Pc.value, Dc.value, ierr.value, str(herr.raw)
+
+    def TRNPRPdll(self,T,D,z):
+        """ 
+        subroutine TRNPRPdll (T,D,z,eta,tcx,ierr,herr)
+        """ 
+        T = ct.c_double(T)
+        D = ct.c_double(D)
+        z = (len(z)*ct.c_double)(*z)
+        eta = ct.c_double()
+        tcx = ct.c_double()
+        ierr = ct.c_long(0)
+        herr = ct.create_string_buffer(255)
+
+        self._TRNPRPdll(ct.byref(T), ct.byref(D), z, ct.byref(eta), ct.byref(tcx), ct.byref(ierr), herr, 255)
+        return eta.value, tcx.value, ierr.value, str(herr.raw)
 
     def CRITPdll(self, z, Tc, pc, rhoc_mol_L):
         z = (len(z)*ct.c_double)(*z)
@@ -150,7 +166,7 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._CRITPdll(z, ct.byref(Tc), ct.byref(Pc), ct.byref(Dc), ct.byref(ierr), herr, 255)
-        return Tc.value, Pc.value, Dc.value, ierr, herr
+        return Tc.value, Pc.value, Dc.value, ierr.value, str(herr.raw)
 
 
     def RESIDUALdll(self, T, rho_mol_L, z):
@@ -286,4 +302,18 @@ class REFPROPFunctionLibrary():
                         ct.byref(p), ct.byref(d), ct.byref(dl), ct.byref(dv), x, y, ct.byref(e), ct.byref(h), ct.byref(s), ct.byref(Cv), ct.byref(Cp), ct.byref(w), 
                         ct.byref(ierr), herr, 255)
         return p.value, d.value, dl.value, dv.value, list(x), list(y), e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, str(herr.raw)
+
+    def TPRHOdll(self, T,P,z,kph,kguess,D = 0):
+        """ subroutine TPRHOdll (T,P,z,kph,kguess,D,ierr,herr) """
+        T = ct.c_double(T)
+        P = ct.c_double(P)
+        z = (len(z)*ct.c_double)(*z)
+        kph = ct.c_long(kph)
+        kguess = ct.c_long(kguess)
+        D = ct.c_double(D)
+        ierr = ct.c_long(0)
+        herr = ct.create_string_buffer(255)
+        self._TPRHOdll(ct.byref(T), ct.byref(P), z, ct.byref(kph), ct.byref(kguess), ct.byref(D), 
+                       ct.byref(ierr), herr, 255)
+        return D.value, ierr.value, str(herr.raw)
 
