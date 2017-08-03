@@ -1,9 +1,13 @@
 from __future__ import print_function
 import ctypes as ct
+import sys
 
 class REFPROPFunctionLibrary():
     def __init__(self, name):
-        self.dll = ct.WinDLL(name)
+        if sys.platform.startswith('win'):
+            self.dll = ct.WinDLL(name)
+        else:
+            self.dll = ct.CDLL(name)
 
         self._SETUPdll = getattr(self.dll, 'SETUPdll')
         self._SETPATHdll = getattr(self.dll, 'SETPATHdll')
@@ -46,14 +50,14 @@ class REFPROPFunctionLibrary():
         return Tr.value, rhor.value
 
     def SETPATHdll(self, hpth):
-        hpth = ct.create_string_buffer(hpth, 256)
+        hpth = ct.create_string_buffer(hpth.encode('utf-8'), 256)
         self._SETPATHdll(hpth, 255)
 
     def SETUPdll(self, nc, fld, hmx, ref):
         nc = ct.c_long(nc)
-        hfld = ct.create_string_buffer(fld, 10001)
-        hhmx = ct.create_string_buffer(hmx, 256)
-        href = ct.create_string_buffer(ref, 4)
+        hfld = ct.create_string_buffer(fld.encode('utf-8'), 10001)
+        hhmx = ct.create_string_buffer(hmx.encode('utf-8'), 256)
+        href = ct.create_string_buffer(ref.encode('utf-8'), 4)
         ierr = ct.c_long(0)
         herr = ct.create_string_buffer(255)
 
