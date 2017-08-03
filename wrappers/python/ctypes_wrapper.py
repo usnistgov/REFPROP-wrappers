@@ -6,15 +6,48 @@ class REFPROPFunctionLibrary():
         self.dll = ct.WinDLL(name)
 
         self._SETUPdll = getattr(self.dll, 'SETUPdll')
+        self._SETPATHdll = getattr(self.dll, 'SETPATHdll')
+        self._INFOdll = getattr(self.dll, 'INFOdll')
+        self._SETREFdll = getattr(self.dll, 'SETREFdll')
         self._LIMITSdll = getattr(self.dll, 'LIMITSdll')
         self._MELTTdll = getattr(self.dll, 'MELTTdll')
+        self._THERMdll = getattr(self.dll, 'THERMdll')
+        self._RESIDUALdll = getattr(self.dll, 'RESIDUALdll')
         self._TDFLSHdll = getattr(self.dll, 'TDFLSHdll')
+        self._TPFLSHdll = getattr(self.dll, 'TPFLSHdll')
         self._PEFLSHdll = getattr(self.dll, 'PEFLSHdll')
-        self._CRTPNTdll = getattr(self.dll, 'CRTPNTdll')
+        #self._CRTPNTdll = getattr(self.dll, 'CRTPNTdll')
         self._CRITPdll = getattr(self.dll, 'CRITPdll')
         self._SATTdll = getattr(self.dll, 'SATTdll')
         self._SATTPdll = getattr(self.dll, 'SATTPdll')
         self._TQFLSHdll = getattr(self.dll, 'TQFLSHdll')
+        self._WMOLdll = getattr(self.dll, 'WMOLdll')
+        self._GETMODdll = getattr(self.dll, 'GETMODdll')
+        self._REDXdll = getattr(self.dll, 'REDXdll')
+        self._FLAGSdll = getattr(self.dll, 'FLAGSdll')
+        self._RMIX2dll = getattr(self.dll, 'RMIX2dll')
+        
+
+    def FLAGSdll(self, iFlag,jFlag):
+        """ subroutine FLAGS (iFlag,jFlag,kFlag,ierr,herr) """
+        iflag = ct.c_long(iFlag)
+        jflag = ct.c_long(jFlag)
+        kflag = ct.c_long(0)
+        ierr = ct.c_long(0)
+        herr = ct.create_string_buffer(255)
+        self._FLAGSdll(ct.byref(iflag), ct.byref(jflag), ct.byref(kflag), ct.byref(ierr), herr)
+        return kflag.value, ierr.value, str(herr.raw)
+
+    def REDXdll(self, z):
+        z = (len(z)*ct.c_double)(*z)
+        Tr = ct.c_double()
+        rhor = ct.c_double()
+        self._REDXdll(z, ct.byref(Tr), ct.byref(rhor))
+        return Tr.value, rhor.value
+
+    def SETPATHdll(self, hpth):
+        hpth = ct.create_string_buffer(hpth, 256)
+        self._SETPATHdll(hpth, 255)
 
     def SETUPdll(self, nc, fld, hmx, ref):
         nc = ct.c_long(nc)
@@ -27,6 +60,35 @@ class REFPROPFunctionLibrary():
         self._SETUPdll(ct.byref(nc), hfld, hhmx, href, ct.byref(ierr), herr, 10000, 255, 3, 255)
         return ierr.value, str(herr.raw)
 
+    def GETMODdll(self, icomp, htype):
+        """
+        subroutine GETMODdll (icomp,htype,hcode,hcite)
+        """
+        icomp = ct.c_long(icomp)
+        htype = ct.create_string_buffer(htype, 3)
+        hcode = ct.create_string_buffer(3)
+        hcite = ct.create_string_buffer(255)
+        self._GETMODdll(ct.byref(icomp), htype, hcode, hcite, 3, 3, 255)
+        return str(hcite.raw), str(hcode.raw)
+
+    def SETREFdll(self,hrf,ixflag,x0,h0,s0,T0,P0):
+        """
+        subroutine SETREF (hrf,ixflag,x0,h0,s0,T0,P0,ierr,herr)
+        """
+        hrf = ct.create_string_buffer(hrf, 3)
+        ixflag = ct.c_long(ixflag)
+        x0 = (len(x0)*ct.c_double)(*x0)
+        h0 = ct.c_double(h0)
+        s0 = ct.c_double(s0)
+        T0 = ct.c_double(T0)
+        P0 = ct.c_double(P0)
+
+        ierr = ct.c_long(0)
+        herr = ct.create_string_buffer(255)
+
+        self._SETREFdll(hrf, ct.byref(ixflag), x0, ct.byref(h0), ct.byref(s0),ct.byref(T0),ct.byref(P0),ct.byref(ierr), herr, 3, 255)
+        return ierr.value, str(herr.raw)
+
     def LIMITSdll(self, typ, z):
         htyp = ct.create_string_buffer(typ, 4)
         Tmin, Tmax, Dmax, Pmax = ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double()
@@ -34,6 +96,25 @@ class REFPROPFunctionLibrary():
 
         self._LIMITSdll(htyp, z, ct.byref(Tmin), ct.byref(Tmax), ct.byref(Dmax), ct.byref(Pmax), 3)
         return Tmin.value, Tmax.value, Dmax.value, Pmax.value
+
+    def INFOdll(self, icomp):
+        """ subroutine INFOdll (icomp,wmm,Ttrp,Tnbpt,Tc,Pc,Dc,Zc,acf,dip,Rgas) """
+        icomp = ct.c_long(icomp)
+        wmm, Ttrp, Tnbpt, Tc, Pc, Dc, Zc, acf, dip, Rgas = [ct.c_double(0) for _ in range(10)]
+        self._INFOdll(ct.byref(icomp), ct.byref(wmm), ct.byref(Ttrp), ct.byref(Tnbpt), ct.byref(Tc), ct.byref(Pc), ct.byref(Dc), ct.byref(Zc), ct.byref(acf), ct.byref(dip), ct.byref(Rgas))
+        return [a.value for a in [wmm, Ttrp, Tnbpt, Tc, Pc, Dc, Zc, acf, dip, Rgas]]
+
+    def WMOLdll(self, z):
+        z = (len(z)*ct.c_double)(*z)
+        wm = ct.c_double()
+        self._WMOLdll(z, ct.byref(wm))
+        return wm.value
+
+    def RMIX2dll(self, z):
+        z = (len(z)*ct.c_double)(*z)
+        R = ct.c_double()
+        self._RMIX2dll(z, ct.byref(R))
+        return R.value
 
     def MELTTdll(self, T, z):
         T = ct.c_double(T)
@@ -67,6 +148,31 @@ class REFPROPFunctionLibrary():
         self._CRITPdll(z, ct.byref(Tc), ct.byref(Pc), ct.byref(Dc), ct.byref(ierr), herr, 255)
         return Tc.value, Pc.value, Dc.value, ierr, herr
 
+
+    def RESIDUALdll(self, T, rho_mol_L, z):
+        """ subroutine RESIDUALdll (T,D,z,Pr,er,hr,sr,Cvr,Cpr,ar,gr) """
+        pr, er, hr, sr,Cvr,Cpr,ar,gr = ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double()
+        T = ct.c_double(T)
+        rho_mol_L = ct.c_double(rho_mol_L)
+        z = (len(z)*ct.c_double)(*z)
+
+        self._RESIDUALdll(ct.byref(T), ct.byref(rho_mol_L), z, 
+                       ct.byref(pr), ct.byref(er), ct.byref(hr), ct.byref(sr), ct.byref(Cvr), ct.byref(Cpr), ct.byref(ar), ct.byref(gr))
+        return pr.value, er.value, hr.value, sr.value, Cvr.value, Cpr.value, ar.value, gr.value
+
+
+    def THERMdll(self, T, rho_mol_L, z):
+        """ subroutine THERMdll (T,D,z,P,e,h,s,Cv,Cp,w,hjt) """
+
+        p, e, h, s,Cv,Cp,w,hjt = ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double()
+        T = ct.c_double(T)
+        rho_mol_L = ct.c_double(rho_mol_L)
+        z = (len(z)*ct.c_double)(*z)
+
+        self._THERMdll(ct.byref(T), ct.byref(rho_mol_L), z, 
+                       ct.byref(p), ct.byref(e), ct.byref(h), ct.byref(s), ct.byref(Cv), ct.byref(Cp), ct.byref(w), ct.byref(hjt))
+        return p.value, e.value, h.value, s.value, Cv.value, Cp.value, w.value, hjt.value
+
     def TDFLSHdll(self, T, rho_mol_L, z):
         p, Dl, Dv, q, e, h, s, Cv, Cp, w = ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double()
         T = ct.c_double(T)
@@ -82,6 +188,25 @@ class REFPROPFunctionLibrary():
                         ct.byref(q), ct.byref(e), ct.byref(h), ct.byref(s), ct.byref(Cv), ct.byref(Cp), ct.byref(w), 
                         ct.byref(ierr), herr, 255)
         return p.value, Dl.value, Dv.value, list(x), list(y), q.value, e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, str(herr.raw)
+
+    def TPFLSHdll(self, T, p, z):
+        """
+        subroutine TPFLSH (T,P,z,D,Dl,Dv,x,y,q,e,h,s,Cv,Cp,w,ierr,herr)
+        """
+        D, Dl, Dv, q, e, h, s, Cv, Cp, w = ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double()
+        T = ct.c_double(T)
+        p = ct.c_double(p)
+        z = (len(z)*ct.c_double)(*z)
+        x = (len(z)*ct.c_double)()
+        y = (len(z)*ct.c_double)()
+        ierr = ct.c_long(0)
+        herr = ct.create_string_buffer(255)
+
+        self._TPFLSHdll(ct.byref(T), ct.byref(p), z, 
+                        ct.byref(D), ct.byref(Dl), ct.byref(Dv), x, y, 
+                        ct.byref(q), ct.byref(e), ct.byref(h), ct.byref(s), ct.byref(Cv), ct.byref(Cp), ct.byref(w), 
+                        ct.byref(ierr), herr, 255)
+        return D.value, Dl.value, Dv.value, list(x), list(y), q.value, e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, str(herr.raw)
 
     def PEFLSHdll(self, p, u_J_mol, z):
         D, T, Dl, Dv, q, e, h, s, Cv, Cp, w = ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double()
