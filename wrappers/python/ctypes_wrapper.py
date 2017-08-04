@@ -2,6 +2,9 @@ from __future__ import print_function
 import ctypes as ct
 import sys
 
+def trim(s):
+    return s.replace(b'\x00',b'').strip()
+
 class REFPROPFunctionLibrary():
     def __init__(self, name):
         if sys.platform.startswith('win'):
@@ -20,7 +23,7 @@ class REFPROPFunctionLibrary():
         self._TDFLSHdll = getattr(self.dll, 'TDFLSHdll')
         self._TPFLSHdll = getattr(self.dll, 'TPFLSHdll')
         self._PEFLSHdll = getattr(self.dll, 'PEFLSHdll')
-        #self._CRTPNTdll = getattr(self.dll, 'CRTPNTdll')
+        self._CRTPNTdll = getattr(self.dll, 'CRTPNTdll')
         self._CRITPdll = getattr(self.dll, 'CRITPdll')
         self._SATTdll = getattr(self.dll, 'SATTdll')
         self._SATTPdll = getattr(self.dll, 'SATTPdll')
@@ -43,7 +46,7 @@ class REFPROPFunctionLibrary():
         ierr = ct.c_long(0)
         herr = ct.create_string_buffer(255)
         self._FLAGSdll(ct.byref(iflag), ct.byref(jflag), ct.byref(kflag), ct.byref(ierr), herr)
-        return kflag.value, ierr.value, str(herr.raw)
+        return kflag.value, ierr.value, trim(herr.raw)
 
     def REDXdll(self, z):
         z = (len(z)*ct.c_double)(*z)
@@ -65,7 +68,7 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._SETUPdll(ct.byref(nc), hfld, hhmx, href, ct.byref(ierr), herr, 10000, 255, 3, 255)
-        return ierr.value, str(herr.raw)
+        return ierr.value, trim(herr.raw)
 
     def NAMEdll(self, icomp):
         """ subroutine NAMEdll (icomp,hnam,hn80,hcasn) """
@@ -103,7 +106,7 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._SETREFdll(hrf, ct.byref(ixflag), x0, ct.byref(h0), ct.byref(s0),ct.byref(T0),ct.byref(P0),ct.byref(ierr), herr, 3, 255)
-        return ierr.value, str(herr.raw)
+        return ierr.value, trim(herr.raw)
 
     def LIMITSdll(self, typ, z):
         htyp = ct.create_string_buffer(typ, 4)
@@ -140,7 +143,7 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._MELTTdll(ct.byref(T), z, ct.byref(Pmelt), ct.byref(ierr), herr, 255)
-        return Pmelt.value, ierr.value, str(herr.raw)
+        return Pmelt.value, ierr.value, trim(herr.raw)
 
     def CRTPNTdll(self, z, Tc, pc, rhoc_mol_L):
         z = (len(z)*ct.c_double)(*z)
@@ -151,7 +154,7 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._CRTPNTdll(z, ct.byref(Tc), ct.byref(Pc), ct.byref(Dc), ct.byref(ierr), herr, 255)
-        return Tc.value, Pc.value, Dc.value, ierr.value, str(herr.raw)
+        return Tc.value, Pc.value, Dc.value, ierr.value, trim(herr.raw)
 
     def TRNPRPdll(self,T,D,z):
         """ 
@@ -166,7 +169,7 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._TRNPRPdll(ct.byref(T), ct.byref(D), z, ct.byref(eta), ct.byref(tcx), ct.byref(ierr), herr, 255)
-        return eta.value, tcx.value, ierr.value, str(herr.raw)
+        return eta.value, tcx.value, ierr.value, trim(herr.raw)
 
     def SURFTdll(self,T,D,z):
         """ 
@@ -180,7 +183,7 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._SURFTdll(ct.byref(T), ct.byref(D), z, ct.byref(sigma), ct.byref(ierr), herr, 255)
-        return sigma.value, ierr.value, str(herr.raw)
+        return sigma.value, ierr.value, trim(herr.raw)
 
     def CRITPdll(self, z, Tc, pc, rhoc_mol_L):
         z = (len(z)*ct.c_double)(*z)
@@ -191,7 +194,7 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
 
         self._CRITPdll(z, ct.byref(Tc), ct.byref(Pc), ct.byref(Dc), ct.byref(ierr), herr, 255)
-        return Tc.value, Pc.value, Dc.value, ierr.value, str(herr.raw)
+        return Tc.value, Pc.value, Dc.value, ierr.value, trim(herr.raw)
 
 
     def RESIDUALdll(self, T, rho_mol_L, z):
@@ -232,7 +235,7 @@ class REFPROPFunctionLibrary():
                         ct.byref(p), ct.byref(Dl), ct.byref(Dv), x, y, 
                         ct.byref(q), ct.byref(e), ct.byref(h), ct.byref(s), ct.byref(Cv), ct.byref(Cp), ct.byref(w), 
                         ct.byref(ierr), herr, 255)
-        return p.value, Dl.value, Dv.value, list(x), list(y), q.value, e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, str(herr.raw)
+        return p.value, Dl.value, Dv.value, list(x), list(y), q.value, e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, trim(herr.raw)
 
     def TPFLSHdll(self, T, p, z):
         """
@@ -251,7 +254,7 @@ class REFPROPFunctionLibrary():
                         ct.byref(D), ct.byref(Dl), ct.byref(Dv), x, y, 
                         ct.byref(q), ct.byref(e), ct.byref(h), ct.byref(s), ct.byref(Cv), ct.byref(Cp), ct.byref(w), 
                         ct.byref(ierr), herr, 255)
-        return D.value, Dl.value, Dv.value, list(x), list(y), q.value, e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, str(herr.raw)
+        return D.value, Dl.value, Dv.value, list(x), list(y), q.value, e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, trim(herr.raw)
 
     def PEFLSHdll(self, p, u_J_mol, z):
         D, T, Dl, Dv, q, e, h, s, Cv, Cp, w = ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double(),ct.c_double()
@@ -267,7 +270,7 @@ class REFPROPFunctionLibrary():
                         ct.byref(Dl), ct.byref(Dv), x, y, 
                         ct.byref(q), ct.byref(h), ct.byref(s), ct.byref(Cv), ct.byref(Cp), ct.byref(w), 
                         ct.byref(ierr), herr, 255)
-        return T.value, D.value, Dl.value, Dv.value, list(x), list(y), q.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, str(herr.raw)
+        return T.value, D.value, Dl.value, Dv.value, list(x), list(y), q.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, trim(herr.raw)
 
     def SATTdll(self, T, z, q):
         T = ct.c_double(T)
@@ -288,7 +291,7 @@ class REFPROPFunctionLibrary():
         self._SATTdll(ct.byref(T), z, ct.byref(kph), ct.byref(p), 
                       ct.byref(dl), ct.byref(dv), x, y, 
                       ct.byref(ierr), herr, 255)
-        return p, dl.value, dv.value, list(x), list(y), ierr.value, str(herr.raw)
+        return p, dl.value, dv.value, list(x), list(y), ierr.value, trim(herr.raw)
 
     def SATTPdll(self, T, p, z, kph, iguess, d):
         T = ct.c_double(T)
@@ -308,7 +311,7 @@ class REFPROPFunctionLibrary():
                        ct.byref(d), ct.byref(dl), ct.byref(dv), x, y, ct.byref(q),
                        ct.byref(ierr), herr, 255)
 
-        return T.value, p.value, d.value, dl.value, dv.value, list(x), list(y), q.value, ierr.value, str(herr.raw)
+        return T.value, p.value, d.value, dl.value, dv.value, list(x), list(y), q.value, ierr.value, trim(herr.raw)
 
     def TQFLSHdll(self, T, q, z, kq = 1):
         T = ct.c_double(T)
@@ -326,7 +329,7 @@ class REFPROPFunctionLibrary():
         self._TQFLSHdll(ct.byref(T), ct.byref(q), z, ct.byref(kq),
                         ct.byref(p), ct.byref(d), ct.byref(dl), ct.byref(dv), x, y, ct.byref(e), ct.byref(h), ct.byref(s), ct.byref(Cv), ct.byref(Cp), ct.byref(w), 
                         ct.byref(ierr), herr, 255)
-        return p.value, d.value, dl.value, dv.value, list(x), list(y), e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, str(herr.raw)
+        return p.value, d.value, dl.value, dv.value, list(x), list(y), e.value, h.value, s.value, Cv.value, Cp.value, w.value, ierr.value, trim(herr.raw)
 
     def TPRHOdll(self, T,P,z,kph,kguess,D = 0):
         """ subroutine TPRHOdll (T,P,z,kph,kguess,D,ierr,herr) """
@@ -340,5 +343,5 @@ class REFPROPFunctionLibrary():
         herr = ct.create_string_buffer(255)
         self._TPRHOdll(ct.byref(T), ct.byref(P), z, ct.byref(kph), ct.byref(kguess), ct.byref(D), 
                        ct.byref(ierr), herr, 255)
-        return D.value, ierr.value, str(herr.raw)
+        return D.value, ierr.value, trim(herr.raw)
 
