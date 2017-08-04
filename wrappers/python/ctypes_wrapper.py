@@ -12,31 +12,39 @@ class REFPROPFunctionLibrary():
         else:
             self.dll = ct.CDLL(name)
 
-        self._SETUPdll = getattr(self.dll, 'SETUPdll')
-        self._SETPATHdll = getattr(self.dll, 'SETPATHdll')
-        self._INFOdll = getattr(self.dll, 'INFOdll')
-        self._SETREFdll = getattr(self.dll, 'SETREFdll')
-        self._LIMITSdll = getattr(self.dll, 'LIMITSdll')
-        self._MELTTdll = getattr(self.dll, 'MELTTdll')
-        self._THERMdll = getattr(self.dll, 'THERMdll')
-        self._RESIDUALdll = getattr(self.dll, 'RESIDUALdll')
-        self._TDFLSHdll = getattr(self.dll, 'TDFLSHdll')
-        self._TPFLSHdll = getattr(self.dll, 'TPFLSHdll')
-        self._PEFLSHdll = getattr(self.dll, 'PEFLSHdll')
-        self._CRTPNTdll = getattr(self.dll, 'CRTPNTdll')
-        self._CRITPdll = getattr(self.dll, 'CRITPdll')
-        self._SATTdll = getattr(self.dll, 'SATTdll')
-        self._SATTPdll = getattr(self.dll, 'SATTPdll')
-        self._TQFLSHdll = getattr(self.dll, 'TQFLSHdll')
-        self._WMOLdll = getattr(self.dll, 'WMOLdll')
-        self._GETMODdll = getattr(self.dll, 'GETMODdll')
-        self._REDXdll = getattr(self.dll, 'REDXdll')
-        self._FLAGSdll = getattr(self.dll, 'FLAGSdll')
-        self._RMIX2dll = getattr(self.dll, 'RMIX2dll')
-        self._TRNPRPdll = getattr(self.dll, 'TRNPRPdll')
-        self._TPRHOdll = getattr(self.dll, 'TPRHOdll')
-        self._SURFTdll = getattr(self.dll, 'SURFTdll') 
-        self._NAMEdll = getattr(self.dll, 'NAMEdll')         
+
+
+        self._SETUPdll = self.getfcn(self.dll, 'SETUPdll')
+        self._SETPATHdll = self.getfcn(self.dll, 'SETPATHdll')
+        self._INFOdll = self.getfcn(self.dll, 'INFOdll')
+        self._SETREFdll = self.getfcn(self.dll, 'SETREFdll')
+        self._LIMITSdll = self.getfcn(self.dll, 'LIMITSdll')
+        self._MELTTdll = self.getfcn(self.dll, 'MELTTdll')
+        self._THERMdll = self.getfcn(self.dll, 'THERMdll')
+        self._RESIDUALdll = self.getfcn(self.dll, 'RESIDUALdll')
+        self._TDFLSHdll = self.getfcn(self.dll, 'TDFLSHdll')
+        self._TPFLSHdll = self.getfcn(self.dll, 'TPFLSHdll')
+        self._PEFLSHdll = self.getfcn(self.dll, 'PEFLSHdll')
+        self._CRTPNTdll = self.getfcn(self.dll, 'CRTPNTdll')
+        self._CRITPdll = self.getfcn(self.dll, 'CRITPdll')
+        self._SATTdll = self.getfcn(self.dll, 'SATTdll')
+        self._SATTPdll = self.getfcn(self.dll, 'SATTPdll')
+        self._TQFLSHdll = self.getfcn(self.dll, 'TQFLSHdll')
+        self._WMOLdll = self.getfcn(self.dll, 'WMOLdll')
+        self._GETMODdll = self.getfcn(self.dll, 'GETMODdll')
+        self._REDXdll = self.getfcn(self.dll, 'REDXdll')
+        self._FLAGSdll = self.getfcn(self.dll, 'FLAGSdll')
+        self._RMIX2dll = self.getfcn(self.dll, 'RMIX2dll')
+        self._TRNPRPdll = self.getfcn(self.dll, 'TRNPRPdll')
+        self._TPRHOdll = self.getfcn(self.dll, 'TPRHOdll')
+        self._SURFTdll = self.getfcn(self.dll, 'SURFTdll') 
+        self._NAMEdll = self.getfcn(self.dll, 'NAMEdll')         
+
+    def getfcn(self, DLL, fname):
+        try:
+            return getattr(DLL, fname)
+        except:
+            return None
 
     def FLAGSdll(self, iFlag,jFlag):
         """ subroutine FLAGS (iFlag,jFlag,kFlag,ierr,herr) """
