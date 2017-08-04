@@ -3,7 +3,7 @@ import ctypes as ct
 import sys
 
 def trim(s):
-    return s.replace(b'\x00',b'').strip()
+    return s.replace(b'\x00',b'').strip().decode('utf-8')
 
 class REFPROPFunctionLibrary():
     def __init__(self, name):
