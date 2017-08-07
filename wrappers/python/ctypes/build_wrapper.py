@@ -228,7 +228,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
                     arg_strings.append('trim({arg:s}.raw)'.format(arg=arg))
                 else:
                     arg_strings.append(arg)
-        if len(arg_strings) > 0:
+        if len(arg_strings) > 1:
             body += 'return namedtuple(\'{fcn:s}output\',[{argnames:s}])({args:s})'.format(fcn=fcn,args=','.join(arg_strings), argnames = ','.join(arg_names)) + '\n\n'
         else:
             body += 'return\n\n'
