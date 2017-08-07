@@ -22,7 +22,7 @@ def parallel_evaluate(mixtures):
     
     kphase = 2 # Vapor
     kguess = 0 # Don't use guesses
-    rho, ierr, herr = R.TPRHOdll(300.0, 10.0, compositions, kphase, kguess)
+    rho, ierr, herr = R.TPRHOdll(300.0, 10.0, compositions, kphase, kguess,-1)
     out.append(rho)
     return out 
             
