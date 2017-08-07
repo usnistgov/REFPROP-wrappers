@@ -1,7 +1,7 @@
 import numpy as np
 
 from multiprocessing import Pool
-from ctypes_wrapper import REFPROPFunctionLibrary
+from ctREFPROP.ctREFPROP import REFPROPFunctionLibrary
 
 import os
 
