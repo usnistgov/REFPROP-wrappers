@@ -92,6 +92,8 @@ def gen_wrapper(pyf):
         # Parse the argument types
         for line in captured_lines[1::]:
             if not line.strip(): continue
+            if not 'intent(' in line: continue # Skip local variables
+            if 'intent(c)' in line: continue # Skip strings
             argname = line.split('::')[1].strip()
             datatype = ()
             dim = 0
@@ -143,6 +145,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
 
     contents = ''
     function_pointer_string = ''
+    namedtuples_header = ' '*8 + '# Named tuples to contain the outputs of DLL calls\n'
 
     for fcn, data in sorted(six.iteritems(fcninfo)):
 
@@ -229,7 +232,8 @@ def gen_ctypes_wrappers(fcninfo, ofname):
                 else:
                     arg_strings.append(arg)
         if len(arg_strings) > 1:
-            body += 'return namedtuple(\'{fcn:s}output\',[{argnames:s}])({args:s})'.format(fcn=fcn,args=','.join(arg_strings), argnames = ','.join(arg_names)) + '\n\n'
+            namedtuples_header += ' '*8 + 'self._{fcn:s}output_tuple = namedtuple(\'{fcn:s}output\',[{argnames:s}])\n'.format(fcn=fcn,  argnames = ','.join(arg_names))
+            body += 'return self._{fcn:s}output_tuple({args:s})'.format(fcn=fcn, args=','.join(arg_strings)) + '\n\n'
         elif len(arg_strings) == 1:
             body += 'return {arg:s}'.format(arg=arg_strings[0]) + '\n\n'
         else:
@@ -237,12 +241,12 @@ def gen_ctypes_wrappers(fcninfo, ofname):
         
         contents += textwrap.indent(headline,' '*4) + textwrap.indent(body,' '*8)
 
-    # Write it all into one string
-    print(wrapper_header + function_pointer_string + contents)
+    # Write it into the output file
     with open(ofname, 'w') as fp:
         fp.write(file_header)
         fp.write(wrapper_header)
-        fp.write(function_pointer_string)
+        fp.write(namedtuples_header + '\n')
+        fp.write(function_pointer_string + '\n')
         fp.write(contents)
 
 if __name__=='__main__':
