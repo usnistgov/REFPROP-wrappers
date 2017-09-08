@@ -49,6 +49,7 @@
 %                           -   Vapor density of equilibrium phase
 %                           [   Liquid spinodal density [kg/m^3]
 %                           ]   Vapor spinodal density [kg/m^3]
+%                           {   Dielectric constant 
 %
 %                           E   dP/dT (along the saturation line) [kPa/K]
 %                           #   dP/dT     (constant rho) [kPa/K]
@@ -620,6 +621,9 @@ for i = 1:length(propReq)
     case ']'
         [~,~,rho_molL,~,~] = calllib(libName,'VAPSPNDLdll', T, z, 0, 0, herr, 255);
         varargout(i) = {rho_molL*molw*1000}; % (mol/L)*(kg/mol)*(1000 L/m^3)
+    case '{'
+        [~,~,~,dielec] = calllib(libName,'DIELECdll', T, D_rp, z, 0);
+        varargout(i) = {dielec}; % [no units]
     otherwise
 
         if (q>0 && q<1)
