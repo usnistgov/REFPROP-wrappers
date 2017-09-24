@@ -158,9 +158,28 @@
 %       Added outputs B, E, F, J, and R.
 %       HQ input regressed.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%Use the call to PREOSdll to change the equation of state to Peng Robinson for all calculations.
+%To revert back to the normal REFPROP EOS and models, call it again with an input of 0.
+%   [dummy] = refprop.PREOSdll(2);
+
+%To enable better and faster calculations of saturation states, call the
+%subroutine SATSPLN.  However, this routine takes several seconds, and
+%should be disabled if changing the fluids regularly.
+% herr = char(32*ones(1,255));
+% [dummyx ierr errTxt] = refprop.SATSPLNdll( z, 0, herr, 255);
+
+% Use the following line to calculate enthalpies and entropies on a reference state
+% based on the currently defined mixture, or to change to some other reference state.
+% The routine does not have to be called, but doing so will cause calculations
+% to be the same as those produced from the graphical interface for mixtures.
+%   [href dummy dummy dummy dummy dummy ierr2 errTxt] = calllib(libName, 'SETREFdll( href, 2, z, 0, 0, 0, 0, 0, 32*ones(255,1), 3, 255);
+% Uncomment the next line to enable the use of AGA EOS for all
+        % components in the mixture
+        % [ierr errTxt] = refprop.SETAGAdll(0,herr,255);
 
 function varargout = refpropm( varargin )
-persistent RefpropLoadedState % use persistent variable to store the state
+persistent refprop % use persistent variable to store the state
 
 ierr = 0;
 q = 999; % Vapor quality (0: saturated liquid, 1: saturated vapor)
@@ -171,9 +190,6 @@ cv = 0; % Constant-volume specific heat (J/mol/K)
 cp = 0; % Constant-pressure specific heat (J/mol/K)
 w = 0; % Speed of sound (m/s)
 phaseFlag = 0;
-
-libName = 'refprop';
-dllName = 'REFPROP.dll';
 
 % Input Sanity Checking
 nc_base = 5;
@@ -189,58 +205,93 @@ end
 
 fluidType = [varargin{5+(1:numComponents)}];
 
-% Load DLL
-loaded = libisloaded(libName);
-if ~loaded || isempty(RefpropLoadedState)
-    FluidDir = 'FLUIDS/';
-    switch computer
-        case {'GLNXA64', 'GLNX86', 'MACI', 'MACI64', 'SOL64'}
-            BasePath = strcat(getenv('HOME'),'/refprop/');
-            dllName = 'librefprop.so';
-            switch computer
-                case {'MACI','MACI64'}
-                    dllName = 'librefprop.dylib';
-            end
-            FluidDir = lower(FluidDir);
 
+libName = 'refprop';
+
+% Get path of DLL and load it
+loaded = libisloaded(libName);
+if ~loaded || isempty(refprop)
+    
+    % Set default values for RefpropLoadedState
+    refprop.FluidType = 'none';
+    refprop.BasePath  = '';
+    refprop.FluidDir  = 'FLUIDS/';
+    refprop.header    = 'REFPROP.h';
+    refprop.prototype = get_header_path();
+    
+    refprop.ncomp     = 0;
+    refprop.mixFlag   = 0;
+    refprop.z_mix     = 0;
+
+    % Set base path and dll name
+    switch computer
+        
+        % Setup for Linux, Solaris
+        case {'GLNXA64', 'GLNX86', 'SOL64'}
+            refprop.BasePath  = strcat(getenv('HOME'),'/refprop/');
+            refprop.dllName   = 'libREFPRP64.so';
+            refprop.FluidDir  = lower(refprop.FluidDir);
+            refprop.prototype = manglePrototype('linux', strcat(refprop.BasePath, refprop.prototype));
+            
+        % OSX
+        case {'MACI','MACI64'}
+            refprop.dllName = 'librefprop.dylib';
+            refprop.FluidDir = lower(refprop.FluidDir);
+             
+        % 64 bit windows
+        case 'PCWIN64'
+            refprop.BasePath = 'C:/Program Files (x86)/REFPROP/';
+            refprop.dllName = 'REFPRP64.dll';
+            
+        % 32 bit windows
+        case {'PCWIN32','PCWIN'}
+            refprop.BasePath = 'C:/Program Files/REFPROP/';
+            refprop.dllName = 'REFPROP.dll';
+            
         otherwise
-            if strcmp(computer, 'PCWIN64')
-                BasePath = 'C:/Program Files (x86)/REFPROP/';
-                dllName = 'REFPRP64.dll';
-            else
-                if strcmp(computer, 'PCWIN32') || strcmp(computer, 'PCWIN')
-                    BasePath = 'C:/Program Files/REFPROP/';
-                    dllName = 'REFPROP.dll';
-                else
-                    error(strcat('Architecture[',computer,'] is not understood'));
-                end
-            end
+            error(strcat('Architecture[',computer,'] is not understood'));
     end
-    % v=char(calllib('REFPROP','RPVersion',zeros(255,1))'); % Useful for debugging...
-    RefpropLoadedState = struct('FluidType', 'none', 'BasePath', BasePath, 'FluidDir', FluidDir, 'nComp', 0, 'mixFlag', 0, 'z_mix', 0);
 
     if ~loaded
-        REFPROP_header='REFPROP.h';
-        prototype = get_header_path();
-
+        
+        refprop.dll_path  = strcat(refprop.BasePath, refprop.dllName);
+        
         w = warning('query');
         warning('off')
         try
             % Start by trying system resolution to find library
-            [~,~] = loadlibrary(dllName,prototype,'alias',libName);
+            [~,~] = loadlibrary(refprop.dllName,...
+                                refprop.prototype,...
+                                'alias', libName);
+        
+        % Assume that the loading failed due to the name having the wrong
+        % capitalisation.
         catch ME
             % the following returns:
             % 0 if REFPROP shared library does not exist,
             % 1 if refprop.dll is a variable name in the workspace,
             % 2 if C:\Program Files (x86)\REFPROP\refprop.dll exist, and 3 if refprop.dll exist but is a .dll file in the MATLAB path
-            if ~ismember(exist(strcat(BasePath, dllName),'file'),[2 3])
-                dllName = lower(dllName);
+            if ~ismember(exist(refprop.dll_path, 'file'), [2 3])
+                refprop.dllName  = lower(refprop.dllName);
+                refprop.dll_path = strcat(refprop.BasePath, refprop.dllName);
+                
+                if ~ismember(exist(refprop.dll_path, 'file'),[2 3])
+                    error(strcat(refprop.dll_path,...
+                                 ' could not be found at the absolute path: ',...
+                                 refprop.dll_path,...
+                                 '.  Please edit the refpropm.m file and ',...
+                                 'add your path to the lines above this error message.'));
+                end
             end
-            if ~ismember(exist(strcat(BasePath, dllName),'file'),[2 3])
-                error(strcat(dllName,' could not be found at the absolute path: ',strcat(BasePath, dllName),'.  Please edit the refpropm.m file and add your path to the lines above this error message.'));
-            end
-            [~,~] = loadlibrary(strcat(BasePath,dllName),prototype,'alias',libName);
+            
+            
+            % Load the library
+            [~,~] = loadlibrary(refprop.dll_path,...
+                                refprop.prototype,...
+                                'alias', libName);
         end
+        
+        % Re-enable warnings
         warning(w)
     end
 end
@@ -252,77 +303,67 @@ end
 
 
 % Prepare REFPROP
-if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
+if ~strcmpi(fluidType, refprop.FluidType)
     fluidFile = '';
-    RefpropLoadedState.FluidType = '';
-    RefpropLoadedState.mixFlag = 0;
-    setappdata(0, 'RefpropLoadedState', RefpropLoadedState);
+    refprop.FluidType = '';
+    refprop.mixFlag = 0;
+    setappdata(0, 'RefpropLoadedState', refprop);
     if strfind(lower(fluidType), '.mix') ~= 0
-        RefpropLoadedState.mixFlag = 1;
+        refprop.mixFlag = 1;
         fluidName = fluidType;
 
-        fluidFile = strcat(RefpropLoadedState.BasePath, 'mixtures/',fluidName);
+        fluidFile = strcat(refprop.BasePath, 'mixtures/',fluidName);
         hmxnme = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
         hmxnme(1:length(fluidFile)) = fluidFile;
-        mixFile = strcat(RefpropLoadedState.BasePath, ...
-            RefpropLoadedState.FluidDir, 'hmx.bnc');
+        mixFile = strcat(refprop.BasePath, ...
+            refprop.FluidDir, 'hmx.bnc');
         hmix = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
         hmix(1:length(mixFile)) = mixFile;
         href = 'DEF';
         herr = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
         ncc = 1;
-        [~,~,~,nc,~,z,ierr,errTxt] = calllib(libName,'SETMIXdll',hmxnme,hmix,href,ncc,char(32*ones(1,10000)),zeros(1,20),ierr,herr,255,255,3,10e3,255);
+        [~,~,~,nc,~,z,ierr,errTxt] = refprop.SETMIXdll(hmxnme,hmix,href,ncc,char(32*ones(1,10000)),zeros(1,20),ierr,herr,255,255,3,10e3,255);
 
     else
         for i = 1:numComponents
             fluidName=varargin{i+5};
-            if isempty(strfind(lower(fluidName),'.fld'))
-                if isempty(strfind(lower(fluidName),'.ppf'))
-                    fluidName = strcat(fluidName,'.fld');
-                end
+            
+            if ~contains(lower(fluidName),'.fld') && ~contains(lower(fluidName),'.ppf')
+                fluidName = strcat(fluidName,'.fld');
             end
-            fluidFile = strcat(fluidFile, RefpropLoadedState.BasePath, ...
-                RefpropLoadedState.FluidDir,upper(fluidName),'|');
+            
+            fluidFile = strcat(fluidFile,...
+                               refprop.BasePath, ...
+                               refprop.FluidDir, ...
+                               upper(fluidName),'|');
         end
 
+        
+        href    = 'DEF';
+        mixFile = strcat(refprop.BasePath, refprop.FluidDir, 'HMX.BNC'); 
+        
         path = char(32*zeros(1,10000)); % Pad out the string with spaces (32: ASCII code for space)
+        hmix = char(32*ones(1,255));    % Pad out the string with spaces (32: ASCII code for space)
+        herr = char(32*ones(1,255));    % Pad out the string with spaces (32: ASCII code for space)
+
         path(1:length(fluidFile)) = fluidFile;
-        mixFile = strcat(RefpropLoadedState.BasePath, RefpropLoadedState.FluidDir, 'HMX.BNC');
-        hmix = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
-        hmix(1:length(mixFile)) = mixFile;
-        href = 'DEF';
-        herr = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
-        [nc, ~,~,~,ierr,errTxt] = calllib(libName,'SETUPdll',numComponents,path,hmix,href,0,herr,10000,255,3,255);
+        hmix(1:length(mixFile))   = mixFile;
+        
+        [nc, ~,~,~,ierr,errTxt] = refprop.SETUPdll(numComponents,path,hmix,href,0,herr,10000,255,3,255);
         z = 1;
-        % Uncomment the next line to enable the use of AGA EOS for all
-        % components in the mixture
-        % [ierr errTxt] = calllib(libName,'SETAGAdll',0,herr,255);
+        
     end
+    
     if (ierr > 0)
         error(errTxt);
     end
-%Use the call to PREOSdll to change the equation of state to Peng Robinson for all calculations.
-%To revert back to the normal REFPROP EOS and models, call it again with an input of 0.
-%   [dummy] = calllib(libName,'PREOSdll',2);
-
-%To enable better and faster calculations of saturation states, call the
-%subroutine SATSPLN.  However, this routine takes several seconds, and
-%should be disabled if changing the fluids regularly.
-% herr = char(32*ones(1,255));
-% [dummyx ierr errTxt] = calllib(libName,'SATSPLNdll', z, 0, herr, 255);
-
-% Use the following line to calculate enthalpies and entropies on a reference state
-% based on the currently defined mixture, or to change to some other reference state.
-% The routine does not have to be called, but doing so will cause calculations
-% to be the same as those produced from the graphical interface for mixtures.
-%   [href dummy dummy dummy dummy dummy ierr2 errTxt] = calllib(libName, 'SETREFdll', href, 2, z, 0, 0, 0, 0, 0, 32*ones(255,1), 3, 255);
-
-    RefpropLoadedState.z_mix = z;
-    RefpropLoadedState.nComp = nc;
-    RefpropLoadedState.FluidType = lower(fluidType);
+    
+    refprop.z_mix     = z;
+    refprop.nComp     = nc;
+    refprop.FluidType = lower(fluidType);
 end
 
-numComponents = RefpropLoadedState.nComp;
+numComponents = refprop.nComp;
 
 % Extract Inputs from Varargin
 propReq = lower(varargin{1});
@@ -354,18 +395,18 @@ end
 % Calculate Molar Mass
 if numComponents == 1
     z = 1;
-elseif RefpropLoadedState.mixFlag == 0
+elseif refprop.mixFlag == 0
     z_kg = cell2mat(varargin(nargin));
     if length(z_kg) ~= numComponents
         error('Mass fraction must be given for all components');
     elseif abs(sum(z_kg)-1) > 1e-12
         error('Mass fractions must sum to 1');
     end
-    [~,z,~] = calllib(libName,'XMOLEdll',z_kg,zeros(1,numComponents),0);
-elseif RefpropLoadedState.mixFlag == 1
-    z = RefpropLoadedState.z_mix;
+    [~,z,~] = refprop.XMOLEdll(z_kg,zeros(1,numComponents),0);
+elseif refprop.mixFlag == 1
+    z = refprop.z_mix;
 end
-[~,molw] = calllib(libName,'WMOLdll',z,0);
+[~,molw] = refprop.WMOLdll(z,0);
 molw = molw*1e-3; % [kg/mol]
 
 % Sanity Check Provided Property Types
@@ -386,36 +427,36 @@ switch propTyp1
         h = propVal1 * molw;
     case 'c'
       if numComponents == 1
-     [~,~,~,~,T,P_rp,D_rp,~,~,~,~] = calllib(libName,'INFOdll', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+     [~,~,~,~,T,P_rp,D_rp,~,~,~,~] = refprop.INFOdll( 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
       else
-         [~,T,P_rp,D_rp,ierr,errTxt] = calllib(libName,'CRITPdll', z, 0, 0, 0, 0, herr, 255);
+         [~,T,P_rp,D_rp,ierr,errTxt] = refprop.CRITPdll( z, 0, 0, 0, 0, herr, 255);
       end
-      [~,~,~,~,e,h,s,cv,cp,w,~] = calllib(libName,'THERMdll', T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
+      [~,~,~,~,e,h,s,cv,cp,w,~] = refprop.THERMdll( T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
     case 'r'
       % Properties at the triple-point
       if numComponents == 1
          heos = 'EOS';
-         [~,~,~,~,~,T,~,~,~,~,~] = calllib(libName,'LIMITXdll', heos, 300, 0, 0, z, 0, 0, 0, 0, 0, herr, 3, 255);
-         if strncmp(RefpropLoadedState.FluidType,'water',5)
-            [~,~,T,~,~,~,~,~,~,~,~] = calllib(libName,'INFOdll', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+         [~,~,~,~,~,T,~,~,~,~,~] = refprop.LIMITXdll( heos, 300, 0, 0, z, 0, 0, 0, 0, 0, herr, 3, 255);
+         if strncmp(refprop.FluidType,'water',5)
+            [~,~,T,~,~,~,~,~,~,~,~] = refprop.INFOdll( 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
          end
          if propReq=='t'
             varargout(1) = {T};  %Exit early if only T required, not all fluids work at Ttrp.
             return
          end
-         [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TQFLSHdll', T, 0, z, 2, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
-%        [dummy dummy dummy P_rp Dl Dv x y ierr errTxt] = calllib(libName, 'SATTdll', T, z, 1, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
+         [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,e,h,s,cv,cp,w,ierr,errTxt] = refprop.TQFLSHdll( T, 0, z, 2, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+%        [dummy dummy dummy P_rp Dl Dv x y ierr errTxt] = calllib(libName, 'SATTdll( T, z, 1, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
       else
         error('Triple point not known for mixtures');
       end
     case 'm'
        % Properties at (Tmax,pmax)
        heos = 'EOS';
-       [~,~,~,~,~,~,T,~,P_rp,~,~] = calllib(libName,'LIMITXdll', heos, 300, 0, 0, z, 0, 0, 0, 0, 0, herr, 3, 255);
-       [~,~,~,D_rp,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TPFLSHdll', T, P_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
+       [~,~,~,~,~,~,T,~,P_rp,~,~] = refprop.LIMITXdll( heos, 300, 0, 0, z, 0, 0, 0, 0, 0, herr, 3, 255);
+       [~,~,~,D_rp,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = refprop.TPFLSHdll( T, P_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
     case '0'
        % Get the version number of REFPROP
-       [~,~,~,~,ierr,~] = calllib(libName,'SETUPdll',-1,char(32*ones(1,255)),char(32*ones(1,255)),char(32*ones(1,3)),0,char(32*ones(1,255)),10000,255,3,255);
+       [~,~,~,~,ierr,~] = refprop.SETUPdll(-1,char(32*ones(1,255)),char(32*ones(1,255)),char(32*ones(1,3)),0,char(32*ones(1,255)),10000,255,3,255);
        varargout(1)={double(ierr)/10000};
        return
     otherwise
@@ -444,65 +485,65 @@ end
 
 % Call Appropriate REFPROP Flash Function According to Provided Property Types
 if ((propTyp1 == 'p') && (propTyp2 == 'd')) || ((propTyp2 == 'p') && (propTyp1 == 'd'))
-    [~,~,~,T,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'PDFLSHdll',P_rp, D_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
+    [~,~,~,T,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = refprop.PDFLSHdll(P_rp, D_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
 elseif ((propTyp1 == 'p') && (propTyp2 == 'h')) || ((propTyp2 == 'p') && (propTyp1 == 'h'))
     if phaseFlag==0
-        [~,~,~,T,D_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = calllib(libName,'PHFLSHdll',P_rp, h, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+        [~,~,~,T,D_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = refprop.PHFLSHdll(P_rp, h, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
     else
-        [~,~,~,~,T,D_rp,ierr,errTxt] = calllib(libName,'PHFL1dll',P_rp, h, z, phaseFlag, 0, 0, 0, herr, 255);
-        [~,~,~,P_rp,e,h,s,cv,cp,w,~] = calllib(libName,'THERMdll', T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
+        [~,~,~,~,T,D_rp,ierr,errTxt] = refprop.PHFL1dll(P_rp, h, z, phaseFlag, 0, 0, 0, herr, 255);
+        [~,~,~,P_rp,e,h,s,cv,cp,w,~] = refprop.THERMdll( T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
     end
 elseif ((propTyp1 == 'p') && (propTyp2 == 't')) || ((propTyp2 == 'p') && (propTyp1 == 't'))
     if phaseFlag==0
-        [~,~,~,D_rp,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TPFLSHdll', T, P_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
+        [~,~,~,D_rp,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = refprop.TPFLSHdll( T, P_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
     else
-        [~,~,~,~,~,D_rp,ierr,errTxt] = calllib(libName,'TPRHOdll', T, P_rp, z, phaseFlag, 0, 0, 0, herr, 255);
-        [~,~,~,P_rp,e,h,s,cv,cp,w,~] = calllib(libName,'THERMdll', T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
+        [~,~,~,~,~,D_rp,ierr,errTxt] = refprop.TPRHOdll( T, P_rp, z, phaseFlag, 0, 0, 0, herr, 255);
+        [~,~,~,P_rp,e,h,s,cv,cp,w,~] = refprop.THERMdll( T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
     end
 elseif ((propTyp1 == 'h') && (propTyp2 == 'd')) || ((propTyp2 == 'h') && (propTyp1 == 'd'))
-    [~,~,~,T,P_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = calllib(libName,'DHFLSHdll', D_rp, h, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+    [~,~,~,T,P_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = refprop.DHFLSHdll( D_rp, h, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
 elseif ((propTyp1 == 't') && (propTyp2 == 'd')) || ((propTyp2 == 't') && (propTyp1 == 'd'))
     if phaseFlag==0
         % Do a "blind" flash evaluation
-        [~,~,~,P_rp,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TDFLSHdll', T, D_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
+        [~,~,~,P_rp,Dl,Dv,x,y,q,e,h,s,cv,cp,w,ierr,errTxt] = refprop.TDFLSHdll( T, D_rp, z, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, 0, herr, 255);
     else
         % Just use the given density to calculate everything else; evaluate the EOS directly
-        [~,~,~,P_rp,e,h,s,cv,cp,w,~] = calllib(libName,'THERMdll', T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
+        [~,~,~,P_rp,e,h,s,cv,cp,w,~] = refprop.THERMdll( T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
     end
 elseif ((propTyp1 == 't') && (propTyp2 == 'h')) || ((propTyp2 == 't') && (propTyp1 == 'h'))
-    [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = calllib(libName,'THFLSHdll', T, h, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+    [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,q,e,s,cv,cp,w,ierr,errTxt] = refprop.THFLSHdll( T, h, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
 else
     switch propTyp2
         case 's'
             switch propTyp1
                 case 't'
-                    [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,q,e,h,cv,cp,w,ierr,errTxt] = calllib(libName,'TSFLSHdll', T, s, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,q,e,h,cv,cp,w,ierr,errTxt] = refprop.TSFLSHdll( T, s, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
                 case 'p'
-                    [~,~,~,T,D_rp,Dl,Dv,x,y,q,e,h,cv,cp,w,ierr,errTxt] = calllib(libName,'PSFLSHdll', P_rp, s, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,T,D_rp,Dl,Dv,x,y,q,e,h,cv,cp,w,ierr,errTxt] = refprop.PSFLSHdll( P_rp, s, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
                 case 'h'
-                    [~,~,~,T,P_rp,D_rp,Dl,Dv,x,y,q,e,cv,cp,w,ierr,errTxt] = calllib(libName,'HSFLSHdll', h, s, z, 0, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,T,P_rp,D_rp,Dl,Dv,x,y,q,e,cv,cp,w,ierr,errTxt] = refprop.HSFLSHdll( h, s, z, 0, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, herr, 255);
                 case 'd'
-                    [~,~,~,T,P_rp,Dl,Dv,x,y,q,e,h,cv,cp,w,ierr,errTxt] = calllib(libName,'DSFLSHdll', D_rp, s, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,T,P_rp,Dl,Dv,x,y,q,e,h,cv,cp,w,ierr,errTxt] = refprop.DSFLSHdll( D_rp, s, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
             end
         case 'u'
             switch propTyp1
                 case 't'
-                    [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,q,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TEFLSHdll', T, e, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,q,h,s,cv,cp,w,ierr,errTxt] = refprop.TEFLSHdll( T, e, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
                 case 'p'
-                    [~,~,~,T,D_rp,Dl,Dv,x,y,q,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'PEFLSHdll', P_rp, e, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,T,D_rp,Dl,Dv,x,y,q,h,s,cv,cp,w,ierr,errTxt] = refprop.PEFLSHdll( P_rp, e, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
                 case 'd'
-                    [~,~,~,T,P_rp,Dl,Dv,x,y,q,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'DEFLSHdll', D_rp, e, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,T,P_rp,Dl,Dv,x,y,q,h,s,cv,cp,w,ierr,errTxt] = refprop.DEFLSHdll( D_rp, e, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
                 otherwise
                     error('HU not a supported combination');
             end
         case 'q'
             switch propTyp1
                 case 't'
-                    [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TQFLSHdll', T, q, z, 2, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,e,h,s,cv,cp,w,ierr,errTxt] = refprop.TQFLSHdll( T, q, z, 2, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
                 case 'p'
-                    [~,~,~,~,T,D_rp,Dl,Dv,x,y,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'PQFLSHdll', P_rp, q, z, 2, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                    [~,~,~,~,T,D_rp,Dl,Dv,x,y,e,h,s,cv,cp,w,ierr,errTxt] = refprop.PQFLSHdll( P_rp, q, z, 2, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
 %                case 'd'
-%                    [dummy dummy dummyx dummy T P_rp Dl Dv x y ierr errTxt] = calllib(libName,'DQFL2dll', D_rp, q, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
+%                    [dummy dummy dummyx dummy T P_rp Dl Dv x y ierr errTxt] = refprop.DQFL2dll( D_rp, q, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
                 otherwise
                     error('HQ or DQ are not supported combinations');
             end
@@ -513,21 +554,21 @@ if (ierr > 0)
     error(char(errTxt'));
 end
 
-if ~isempty(strfind(propReq,'g')) || ~isempty(strfind(propReq,'n'))
+if contains(propReq,'g') || contains(propReq,'n')
     if q>0 && q<1
         error('Heating value routines not valid for 2-phase states')
     end
-    [~,~,~,hg,hn,ierr,errTxt] = calllib(libName,'HEATdll',T,D_rp,z,0,0,0,herr,255);
+    [~,~,~,hg,hn,ierr,errTxt] = refprop.HEATdll(T,D_rp,z,0,0,0,herr,255);
     if (ierr ~= 0)
         error(char(errTxt'));
     end
 end
 
-if ~isempty(strfind(propReq,'v')) || ~isempty(strfind(propReq,'l')) || ~isempty(strfind(propReq,'$')) || ~isempty(strfind(propReq,'%')) || ~isempty(strfind(propReq,'^'))
+if contains(propReq,'v') || contains(propReq,'l') || contains(propReq,'$') || contains(propReq,'%') || contains(propReq,'^')
     if q>0 && q<1
         error('Transport routines not valid for 2-phase states')
     end
-    [~,~,~,eta,tcx,ierr,errTxt] = calllib(libName,'TRNPRPdll',T,D_rp,z,0,0,0,herr,255);
+    [~,~,~,eta,tcx,ierr,errTxt] = refprop.TRNPRPdll(T,D_rp,z,0,0,0,herr,255);
     if (ierr ~= 0)
         error(char(errTxt'));
     end
@@ -559,21 +600,21 @@ for i = 1:length(propReq)
     case 'n'
         varargout(i) = {hn/molw};
     case '+'
-        [~,~,xmolw] = calllib(libName,'XMASSdll',x,zeros(1,numComponents),0);
+        [~,~,xmolw] = refprop.XMASSdll(x,zeros(1,numComponents),0);
         varargout(i) = {Dl*xmolw};
     case '-'
-        [~,~,ymolw] = calllib(libName,'XMASSdll',y,zeros(1,numComponents),0);
+        [~,~,ymolw] = refprop.XMASSdll(y,zeros(1,numComponents),0);
         varargout(i) = {Dv*ymolw};
     case 'q'
         if ((q <= 0) || (q >= 1))
             varargout(i) = {q};
         else
-            [~,wmol] = calllib(libName,'WMOLdll',y,0);
+            [~,wmol] = refprop.WMOLdll(y,0);
             varargout(i) = {q*wmol*1e-3/molw};
         end
     case 'x'
-        [~,x_kg,~] = calllib(libName,'XMASSdll',x,zeros(1,numComponents),0);
-        [~,y_kg,~] = calllib(libName,'XMASSdll',y,zeros(1,numComponents),0);
+        [~,x_kg,~] = refprop.XMASSdll(x,zeros(1,numComponents),0);
+        [~,y_kg,~] = refprop.XMASSdll(y,zeros(1,numComponents),0);
 %       varargout(i) = {[x_kg ;y_kg]};
         if length(propReq)>1
             error('Only one input is allowed when using property input X since two outputs are returned (liquid and vapor compositions).');
@@ -582,15 +623,15 @@ for i = 1:length(propReq)
         varargout(i+1) = {y_kg'};
     case 'f'
         if ((q < 0) || (q > 1))
-           [~,~,~,f] = calllib(libName,'FGCTYdll',T,D_rp,z,zeros(1,numComponents));
+           [~,~,~,f] = refprop.FGCTYdll(T,D_rp,z,zeros(1,numComponents));
         else
            %Liquid and vapor fugacties are identical, use liquid phase here
-           [~,~,~,f] = calllib(libName,'FGCTYdll',T,Dl,x,zeros(1,numComponents));
+           [~,~,~,f] = refprop.FGCTYdll(T,Dl,x,zeros(1,numComponents));
         end
         varargout(i) = {f'};
     case 'i'
         if ((q >= 0) && (q <= 1))
-            [~,~,~,~,~,sigma,ierr,errTxt] = calllib(libName,'SURTENdll',T,Dl,Dv,x,y,0,0,herr,255);
+            [~,~,~,~,~,sigma,ierr,errTxt] = refprop.SURTENdll(T,Dl,Dv,x,y,0,0,herr,255);
             if (ierr ~= 0)
                 error(char(errTxt'));
             end
@@ -602,24 +643,24 @@ for i = 1:length(propReq)
         if numComponents > 1
             error('dP/dT (sat) not supported for mixtures');
         end
-        [~,~,~,~,~,~,dpdtSat,ierr,errTxt] = calllib(libName,'DPTSATKdll',1,T,1,0,0,0,0,0,herr,255);
+        [~,~,~,~,~,~,dpdtSat,ierr,errTxt] = refprop.DPTSATKdll(1,T,1,0,0,0,0,0,herr,255);
         varargout(i) = {dpdtSat};
     case 'y'
         if numComponents > 1
             error('Heat of Vaporization not supported for mixtures');
         end
-        [~,~,~,P_rp,Dl,Dv,x,y,ierr,errTxt] = calllib(libName, 'SATTdll', T, z, 1, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
+        [~,~,~,P_rp,Dl,Dv,x,y,ierr,errTxt] = refprop.SATTdll(T, z, 1, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
         if (ierr ~= 0)
           error(char(errTxt'));
         end
-        [~,~,~,~,~,hl,~,~,~,~,~] = calllib(libName,'THERMdll', T, Dl, z, 0, 0, 0, 0, 0, 0, 0, 0);
-        [~,~,~,~,~,hv,~,~,~,~,~] = calllib(libName,'THERMdll', T, Dv, z, 0, 0, 0, 0, 0, 0, 0, 0);
+        [~,~,~,~,~,hl,~,~,~,~,~] = refprop.THERMdll( T, Dl, z, 0, 0, 0, 0, 0, 0, 0, 0);
+        [~,~,~,~,~,hv,~,~,~,~,~] = refprop.THERMdll( T, Dv, z, 0, 0, 0, 0, 0, 0, 0, 0);
         varargout(i) = {(hv-hl)/molw};
     case '['
-        [~,~,rho_molL,~,~] = calllib(libName,'LIQSPNDLdll', T, z, 0, 0, herr, 255);
+        [~,~,rho_molL,~,~] = refprop.LIQSPNDLdll( T, z, 0, 0, herr, 255);
         varargout(i) = {rho_molL*molw*1000}; % (mol/L)*(kg/mol)*(1000 L/m^3)
     case ']'
-        [~,~,rho_molL,~,~] = calllib(libName,'VAPSPNDLdll', T, z, 0, 0, herr, 255);
+        [~,~,rho_molL,~,~] = refprop.VAPSPNDLdll( T, z, 0, 0, herr, 255);
         varargout(i) = {rho_molL*molw*1000}; % (mol/L)*(kg/mol)*(1000 L/m^3)
     case '{'
         [~,~,~,dielec] = calllib(libName,'DIELECdll', T, D_rp, z, 0);
@@ -643,43 +684,43 @@ for i = 1:length(propReq)
             case 'l'
                 varargout(i) = {tcx};
             case 'b'
-                [~,~,~,P_rp,e,h,s,cv,cp,w,~,~,~,~,~,beta,~,~,~,~,~,~,~,~,~] = calllib(libName,'THERM2dll',T,D_rp,z,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+                [~,~,~,P_rp,e,h,s,cv,cp,w,~,~,~,~,~,beta,~,~,~,~,~,~,~,~,~] = refprop.THERM2dll(T,D_rp,z,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
                 varargout(i) = {beta};
             case 'w'
-                [~,~,~,P_rp,e,h,s,cv,cp,w,~,~,~,~,~,~,~,~,~,drhodT,~,~,~,~,~] = calllib(libName,'THERM2dll',T,D_rp,z,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+                [~,~,~,P_rp,e,h,s,cv,cp,w,~,~,~,~,~,~,~,~,~,drhodT,~,~,~,~,~] = refprop.THERM2dll(T,D_rp,z,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
                 varargout(i) = {drhodT*molw*1000};
             case 'j'
-                [~,~,~,P_rp,e,h,s,cv,cp,w,hjt] = calllib(libName,'THERMdll', T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
+                [~,~,~,P_rp,e,h,s,cv,cp,w,hjt] = refprop.THERMdll( T, D_rp, z, 0, 0, 0, 0, 0, 0, 0, 0);
                 varargout(i) = {hjt};
             case 'r'
-                [~,~,~,drhodP] = calllib(libName,'DDDPdll', T, D_rp, z, 0);
+                [~,~,~,drhodP] = refprop.DDDPdll( T, D_rp, z, 0);
                 varargout(i) = {drhodP*molw*1000};
             case '!'
-                [~,~,~,~,~,dhdd_t,~,~,~] = calllib(libName,'DHD1dll',T,D_rp,z,0,0,0,0,0,0);
+                [~,~,~,~,~,dhdd_t,~,~,~] = refprop.DHD1dll(T,D_rp,z,0,0,0,0,0,0);
                 varargout(i) = {dhdd_t/molw/molw/1000};
             case '@'
-                [~,~,~,dhdt_d,~,~,~,~,~] = calllib(libName,'DHD1dll',T,D_rp,z,0,0,0,0,0,0);
+                [~,~,~,dhdt_d,~,~,~,~,~] = refprop.DHD1dll(T,D_rp,z,0,0,0,0,0,0);
                 varargout(i) = {dhdt_d/molw};
             case '*'
-                [~,~,~,~,~,~,~,dhdp_t,~] = calllib(libName,'DHD1dll',T,D_rp,z,0,0,0,0,0,0);
+                [~,~,~,~,~,~,~,dhdp_t,~] = refprop.DHD1dll(T,D_rp,z,0,0,0,0,0,0);
                 varargout(i) = {dhdp_t/molw};
             case '('
-                [~,~,~,~,dhdt_p,~,~,~,~] = calllib(libName,'DHD1dll',T,D_rp,z,0,0,0,0,0,0);
+                [~,~,~,~,dhdt_p,~,~,~,~] = refprop.DHD1dll(T,D_rp,z,0,0,0,0,0,0);
                 varargout(i) = {dhdt_p/molw};
             case '&'
-                [~,~,~,~,~,~,dhdd_p,~,~] = calllib(libName,'DHD1dll',T,D_rp,z,0,0,0,0,0,0);
+                [~,~,~,~,~,~,dhdd_p,~,~] = refprop.DHD1dll(T,D_rp,z,0,0,0,0,0,0);
                 varargout(i) = {dhdd_p/molw/molw/1000};
             case '#'
-                [~,~,~,P_rp,e,h,s,cv,cp,w,~,~,~,~,~,~,~,~,dPT,~,~,~,~,~,~] = calllib(libName,'THERM2dll',T,D_rp,z,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+                [~,~,~,P_rp,e,h,s,cv,cp,w,~,~,~,~,~,~,~,~,dPT,~,~,~,~,~,~] = refprop.THERM2dll(T,D_rp,z,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
                 varargout(i) = {dPT};
             case ')'
-                [~,~,~,~,~,~,~,~,bs,~,~,~,~] = calllib(libName,'THERM3dll',T,D_rp,z,0,0,0,0,0,0,0,0,0,0);
+                [~,~,~,~,~,~,~,~,bs,~,~,~,~] = refprop.THERM3dll(T,D_rp,z,0,0,0,0,0,0,0,0,0,0);
                 varargout(i) = {bs};
             case '='
-                [~,~,~,xkappa,~,~,~,~,~,~,~,~,~] = calllib(libName,'THERM3dll',T,D_rp,z,0,0,0,0,0,0,0,0,0,0);
+                [~,~,~,xkappa,~,~,~,~,~,~,~,~,~] = refprop.THERM3dll(T,D_rp,z,0,0,0,0,0,0,0,0,0,0);
                 varargout(i) = {xkappa};
             case '|'
-                [~,~,~,~,~,~,~,~,~,xkkt,~,~,~] = calllib(libName,'THERM3dll',T,D_rp,z,0,0,0,0,0,0,0,0,0,0);
+                [~,~,~,~,~,~,~,~,~,xkkt,~,~,~] = refprop.THERM3dll(T,D_rp,z,0,0,0,0,0,0,0,0,0,0);
                 varargout(i) = {xkkt};
             case '$'
                 varargout(i) = {eta/D_rp/molw/100/1000};
@@ -689,15 +730,15 @@ for i = 1:length(propReq)
                 varargout(i) = {eta*cp/tcx/molw/1000/1000};
             case '~'
                 v = 0;
-                [~,~,~,~,cs,~,~,~,~,ierr,errTxt] = calllib(libName,'CSTARdll',T,P_rp,v,z,0,0,0,0,0,0,herr,255);
+                [~,~,~,~,cs,~,~,~,~,ierr,errTxt] = refprop.CSTARdll(T,P_rp,v,z,0,0,0,0,0,0,herr,255);
                 varargout(i) = {cs};
             case '`'
                 v = 0;
-                [~,~,~,~,cs,~,~,~,~,ierr,errTxt] = calllib(libName,'CSTARdll',T,P_rp,v,z,0,0,0,0,0,0,herr,255);
+                [~,~,~,~,cs,~,~,~,~,ierr,errTxt] = refprop.CSTARdll(T,P_rp,v,z,0,0,0,0,0,0,herr,255);
                 tmf = 1000*cs*P_rp*sqrt(molw/8.3144621/T);
                 varargout(i) = {tmf};
             case '0'
-                [~,~,~,~,ierr,~] = calllib(libName,'SETUPdll',-1,char(32*ones(1,255)),char(32*ones(1,255)),char(32*ones(1,3)),0,char(32*ones(1,255)),10000,255,3,255);
+                [~,~,~,~,ierr,~] = refprop.SETUPdll(-1,char(32*ones(1,255)),char(32*ones(1,255)),char(32*ones(1,3)),0,char(32*ones(1,255)),10000,255,3,255);
                 varargout(i)={double(ierr)/10000};
                 return
             otherwise
@@ -719,22 +760,22 @@ function proto = get_header_path()
     % If a prototype file is needed (deployment of compiled code or usage
     % on computers with no valid compilers for MATLAB), run the following
     % command:
-    % >> loadlibrary('REFPRP64.dll', 'REFPROP.h', 'mfilename', 'rp_proto64.m')
+    % >> loadlibrary('REFPRP64.dll( 'REFPROP.h', 'mfilename', 'rp_proto64.m')
     if exist('rp_proto64', 'file')
         if nargin(@rp_proto64) == 0
            proto = @rp_proto64;
         else
-            proto = @() rp_proto64(BasePath);
+            proto = @() rp_proto64(refprop.BasePath);
         end
     elseif ~isdeployed
-        if exist(strcat(BasePath,REFPROP_header), 'file')
-            proto = strcat(BasePath,REFPROP_header);
-        elseif exist(strcat('/usr/include/',REFPROP_header), 'file')
-            proto = strcat('/usr/include/',REFPROP_header);
-        elseif exist(strcat('/usr/local/include/',REFPROP_header), 'file')
-            proto = strcat('/usr/local/include/',REFPROP_header);
-        elseif exist(REFPROP_header, 'file')
-            proto = REFPROP_header;
+        if exist(strcat(refprop.BasePath, refprop.header), 'file')
+            proto = strcat(refprop.BasePath, refprop.header);
+        elseif exist(strcat('/usr/include/', refprop.header), 'file')
+            proto = strcat('/usr/include/', refprop.header);
+        elseif exist(strcat('/usr/local/include/', refprop.header), 'file')
+            proto = strcat('/usr/local/include/', refprop.header);
+        elseif exist(refprop.header, 'file')
+            proto = refprop.header;
         else
             error('Could not find header file for loading library')
         end
@@ -743,4 +784,62 @@ function proto = get_header_path()
     end
 end
 
+    % This function handles the creation of calllib functions as well as
+    % the changing of function names. It might be benificial to split this
+    % functionality, however both are based on reading the detected
+    % prototype file.
+    function fn_out = manglePrototype(computer, proto)
+        fp_in  = fopen(proto, 'r');
+        fn_out = [proto(1:end-2) '_' computer '.h'];
+        fp_out = fopen(fn_out, 'w');
+        tline  = '';
+        
+        % Select the correct name mangle funtion
+        switch computer
+            % Linux (assume gfortran)
+            case {'GLNXA64', 'GLNX86', 'SOL64'}
+                mangle_fn = @(fn)lower(fn);
+                
+            % OSX
+            case {'MACI','MACI64'}
+                mangle_fn = @(fn)lower(fn);idDir);
+                
+            % Windows - no change
+            case {'PCWIN64', 'PCWIN32', 'PCWIN'}
+                mangle_fn = @(fn)fn;
+        end
+        
+        while ischar(tline)
+            tline = fgetl(fp_in);
+            if ~ischar(tline)
+                break
+            end
+            
+            % store the names for the functions
+            if contains(tline, 'void', 'IgnoreCase', true)
+                sig     = getDefParts(tline);
+                sig_m   = [sig{1} mangle_fn(sig{2}) sig{3}];
+                refprop.(sig{2}) = @(varargin)calllib(libName, sig_m{2}, varargin{:});
+                
+                fprintf(fp_out,'%s\n', strjoin(sig_m));
+            else
+                fprintf(fp_out,'%s\n', tline);
+            end  
+        end
+        
+        fclose(fp_in);
+        fclose(fp_out);
+        
+    end
+
+    function sig = getDefParts(def)
+        sig_s1 = strsplit(def, '(');
+        sig_s2 = strsplit(sig_s1{1}, ' ');
+        sig    = [sig_s2 ['(' sig_s1{2}]];
+    end
+
+    function varargout = callwrapper(fn, varargin)
+        v_unwrapped = varargin{1};
+        varargout = calllib(libName, fn, v_unwrapped{:});
+    end
 end
