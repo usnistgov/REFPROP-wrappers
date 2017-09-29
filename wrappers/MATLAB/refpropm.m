@@ -384,6 +384,10 @@ switch propTyp1
         D_rp = propVal1 * 1e-3 / molw;
     case 'h'
         h = propVal1 * molw;
+    case 's'
+        s = propVal1 * molw;
+    case 'u'
+        e = propVal1 * molw;
     case 'c'
       if numComponents == 1
      [~,~,~,~,T,P_rp,D_rp,~,~,~,~] = calllib(libName,'INFOdll', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -419,7 +423,7 @@ switch propTyp1
        varargout(1)={double(ierr)/10000};
        return
     otherwise
-       error('Provided value 1 is not P, T, H, D, C, R, or M');
+       error('Provided value 1 is not P, T, H, S, U, D, C, R, or M');
 end
 
 switch propTyp2
@@ -483,6 +487,8 @@ else
                     [~,~,~,T,P_rp,D_rp,Dl,Dv,x,y,q,e,cv,cp,w,ierr,errTxt] = calllib(libName,'HSFLSHdll', h, s, z, 0, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, herr, 255);
                 case 'd'
                     [~,~,~,T,P_rp,Dl,Dv,x,y,q,e,h,cv,cp,w,ierr,errTxt] = calllib(libName,'DSFLSHdll', D_rp, s, z, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
+                case 'u'
+                    [~,~,~,T,P_rp,D_rp,Dl,Dv,x,y,q,h,cv,cp,w,ierr,errTxt] = calllib(libName,'ESFLSHdll', e, s, z, 0, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, herr, 255);
             end
         case 'u'
             switch propTyp1
