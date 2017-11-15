@@ -34,7 +34,7 @@ wrapper_header = """
 
 from __future__ import print_function
 import ctypes as ct
-import sys
+import sys, os, glob
 from collections import namedtuple
 
 def trim(s):
@@ -59,11 +59,64 @@ class REFPROPFunctionLibrary():
         except:
             return None
 
-    def __init__(self, name):
+    def __init__(self, name, shared_extension = None):
+        \"\"\"
+        You can either provide a path to a directory, in which case it will search 
+        for the necessary DLL in that directory, or an absolute path to a shared library
+
+        Parameters
+        ==========
+        name : str 
+            The name, either of a folder or a file
+        shared_extension : str
+            The extension that should be queried when searching for shared libraries.  
+            Uses the architecture-specific file extension by default
+        \"\"\"
+
         if sys.platform.startswith('win'):
-            self.dll = ct.WinDLL(name)
+            loader_fcn = ct.WinDLL
         else:
-            self.dll = ct.CDLL(name)
+            loader_fcn = ct.CDLL
+
+        # An absolute path to a file was provided, we will use it
+        if os.path.isfile(name):
+            full_path = name
+        # If the provided string is a path, then we use it to find any shared libraries
+        elif os.path.isdir(name):
+            # Determine the shared library extension
+            if shared_extension is None:
+                if sys.platform.startswith('win'):
+                    shared_extension = 'dll'
+                elif sys.platform.startswith('darwin'):
+                    shared_extension = 'dylib'
+                else:
+                    shared_extension = 'so'
+
+            sos = glob.glob(os.path.join(name, '*.' + shared_extension))
+            if len(sos) == 0:
+                raise ValueError('No shared libraries were found in the folder "{name:s}" with the extension ".{ext:s}"'.format(ext=shared_extension,name=name))
+            elif len(sos) == 1:
+                full_path = sos[0]
+            else:
+                good_so = []
+                for so in sos:
+                    try:
+                        trash = loader_fcn(so)
+                        good_so.append(so)
+                        del trash
+                    except BaseException as BE:
+                        pass # do nothing, we just won't keep this shared library
+                if len(good_so) == 0:
+                    raise ValueError('No shared libraries were found in the folder "{name:s}" with the extension ".{ext:s}"'.format(ext=shared_extension,name=name))
+                elif len(good_so) == 1:
+                    full_path = good_so[0]
+                else:
+                    raise ValueError('Too many loadable shared libraries were found in the folder "{name:s}"; obtained libraries were: {libs:s}'.format(name=name, libs=str(list(good_so))))
+        else:
+            raise ValueError('"{name:s}" is neither a directory nor a file'.format(name=name))
+
+        # Now make it, set it, we're done
+        self.dll = loader_fcn(full_path)
 
 """
 
@@ -168,6 +221,8 @@ def gen_ctypes_wrappers(fcninfo, ofname):
         def gen_val(typ, dim, default = ''):
             if typ == 'int' and dim == 0:
                 return 'ct.c_long({default:s})'.format(default=default)
+            elif typ == 'int' and dim > 0:
+                return '({dim:d}*ct.c_long)()'.format(default=default, dim=dim)
             elif typ == 'double' and dim == 0:
                 return 'ct.c_double({default:s})'.format(default=default)
             elif typ == 'double' and dim < 0:
