@@ -31,7 +31,7 @@ Other tips:
 The Refprop.xls file that comes with the program has Visual Basic (VB) code embedded within it to make the connection between the workbook and the Refprop DLL.  However, when working with anything other than temporary calculations, it is best to start with a blank workbook that does not have the VB code.  In this manner, future updates to the Refprop program can be made available to all of your old workbooks through the instructions below.
 
 When making calculations of the critical point for mixtures, or when saturation states fail to converge, see:
-http://www.boulder.nist.gov/div838/theory/refprop/Frequently_asked_questions.htm#SaturationStates
+https://pages.nist.gov/REFPROP-docs/#calculation-of-the-critical-point-and-saturation-states-in-the-critical-region
 
 If calculations do not appear to work and you are located outside of the U.S., try switching the period and comma, or the comma and semicolon, to enter the numbers in the format required by your version of Microsoft products.  For example, try both of these to see which format is required:
 
