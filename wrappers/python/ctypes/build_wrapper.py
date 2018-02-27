@@ -30,37 +30,51 @@ def gen_pyf(fortran_root):
     os.remove(pyf_file)
     return pyf
     
-wrapper_header = """
+wrapper_header = '''
 
 from __future__ import print_function
 import ctypes as ct
 import sys, os, glob
 from collections import namedtuple
+import functools
 
 def trim(s):
     return s.replace(b'\\x00',b'').strip().decode('utf-8')
 
-class REFPROPFunctionLibrary():
+def get_default_DLL_extension():
+    """
+    Get the default file extension for a shared library
+    """
+    if sys.platform.startswith('win'):
+        shared_extension = 'dll'
+    elif sys.platform.startswith('darwin'):
+        shared_extension = 'dylib'
+    else:
+        shared_extension = 'so'
 
-    def _getfcn(self, DLL, fname):
-        \"\"\"
-        Try to obtain a function pointer to the function in the shared library.  
-        If you cannot attach the function, send a warning, and return None.  
+class REFPROPLibraryManager(object):
 
-        Warnings can be disabled with something like:
+    def __init__(self, manager_shared_library):
+        """
+        Parameters
+        ==========
+        manager_shared_library : str
+            The absolute path to the REFPROP manager that should be used (see https://github.com/usnistgov/REFPROP-manager)
+        """
 
-        import warnings
-        warnings.filterwarnings("ignore")
+        if sys.platform.startswith('win'):
+            loader_fcn = ct.WinDLL
+        else:
+            loader_fcn = ct.CDLL
 
-        or consult the python docs
-        \"\"\"
-        try:
-            return getattr(DLL, fname)
-        except:
-            return None
+        if not os.path.isfile(manager_shared_library):
+            raise ValueError("Absolute path to manager DLL is invalid")
+        else:
+            # Load the manager DLL!
+            self.manager = loader_fcn(manager_shared_library)
 
-    def __init__(self, name, shared_extension = None):
-        \"\"\"
+    def get_instance(self, path, shared_library_filename):
+        """
         You can either provide a path to a directory, in which case it will search 
         for the necessary DLL in that directory, or an absolute path to a shared library
 
@@ -71,54 +85,112 @@ class REFPROPFunctionLibrary():
         shared_extension : str
             The extension that should be queried when searching for shared libraries.  
             Uses the architecture-specific file extension by default
-        \"\"\"
+        """
+        # Get the handle to the construct_handle function
+        construct_handle = getattr(self.manager, "construct_handle")
+        # Construct the arguments
+        c_path = ct.create_string_buffer(path.encode('utf-8'))
+        c_shared_library_filename = ct.create_string_buffer(shared_library_filename.encode('utf-8'))
+        # Get the handle
+        managed_handle = construct_handle(c_path, c_shared_library_filename)
+        return REFPROPInstance(self.manager, managed_handle)
+        
+    def free_instance(self, instance):
+        free_handle = getattr(self.manager, "free_handle")
+        pass
 
-        if sys.platform.startswith('win'):
-            loader_fcn = ct.WinDLL
+def REFPROPFunctionLibrary(name, shared_extension):
+
+    """
+    You can either provide a path to a directory, in which case it will search 
+    for the necessary DLL in that directory, or an absolute path to a shared library
+
+    Parameters
+    ==========
+    name : str 
+        The name, either of a folder or a file
+    shared_extension : str
+        The extension that should be queried when searching for shared libraries.  
+        Uses the architecture-specific file extension by default
+    """
+
+    if sys.platform.startswith('win'):
+        loader_fcn = ct.WinDLL
+    else:
+        loader_fcn = ct.CDLL
+
+    # An absolute path to a file was provided, we will use it
+    if os.path.isfile(name):
+        full_path = name
+        root_dir = os.path.dirname(full_path)
+    # If the provided string is a path, then we use it to find any shared libraries
+    elif os.path.isdir(name):
+        root_dir = name
+        # Determine the shared library extension
+        if shared_extension is None:
+            shared_extension = get_default_DLL_extension()
+
+        sos = glob.glob(os.path.join(name, '*.' + shared_extension))
+        if len(sos) == 0:
+            raise ValueError('No shared libraries were found in the folder "{name:s}" with the extension ".{ext:s}"'.format(ext=shared_extension,name=name))
+        elif len(sos) == 1:
+            full_path = sos[0]
         else:
-            loader_fcn = ct.CDLL
-
-        # An absolute path to a file was provided, we will use it
-        if os.path.isfile(name):
-            full_path = name
-        # If the provided string is a path, then we use it to find any shared libraries
-        elif os.path.isdir(name):
-            # Determine the shared library extension
-            if shared_extension is None:
-                if sys.platform.startswith('win'):
-                    shared_extension = 'dll'
-                elif sys.platform.startswith('darwin'):
-                    shared_extension = 'dylib'
-                else:
-                    shared_extension = 'so'
-
-            sos = glob.glob(os.path.join(name, '*.' + shared_extension))
-            if len(sos) == 0:
+            good_so = []
+            for so in sos:
+                try:
+                    trash = loader_fcn(so)
+                    good_so.append(so)
+                    del trash
+                except BaseException as BE:
+                    pass # do nothing, we just won't keep this shared library
+            if len(good_so) == 0:
                 raise ValueError('No shared libraries were found in the folder "{name:s}" with the extension ".{ext:s}"'.format(ext=shared_extension,name=name))
-            elif len(sos) == 1:
-                full_path = sos[0]
+            elif len(good_so) == 1:
+                full_path = good_so[0]
             else:
-                good_so = []
-                for so in sos:
-                    try:
-                        trash = loader_fcn(so)
-                        good_so.append(so)
-                        del trash
-                    except BaseException as BE:
-                        pass # do nothing, we just won't keep this shared library
-                if len(good_so) == 0:
-                    raise ValueError('No shared libraries were found in the folder "{name:s}" with the extension ".{ext:s}"'.format(ext=shared_extension,name=name))
-                elif len(good_so) == 1:
-                    full_path = good_so[0]
-                else:
-                    raise ValueError('Too many loadable shared libraries were found in the folder "{name:s}"; obtained libraries were: {libs:s}'.format(name=name, libs=str(list(good_so))))
-        else:
-            raise ValueError('"{name:s}" is neither a directory nor a file'.format(name=name))
+                raise ValueError('Too many loadable shared libraries were found in the folder "{name:s}"; obtained libraries were: {libs:s}'.format(name=name, libs=str(list(good_so))))
+    else:
+        raise ValueError('"{name:s}" is neither a directory nor a file'.format(name=name))
 
-        # Now make it, set it, we're done
-        self.dll = loader_fcn(full_path)
+    # Now load the library
+    dll = loader_fcn(full_path)
 
-"""
+    managed_handle = None # Not part of the manager, we are creating a standalone instance of REFPROP
+    return REFPROPInstance(dll, managed_handle)
+
+class REFPROPInstance(object):
+
+    def _getfcn(self, DLL, fname):
+        """
+        Try to obtain a function pointer to the function in the shared library.  
+        If you cannot attach the function, return None.  
+        """
+        try:
+            if self.managed_handle:
+                handle = ct.c_long(self.managed_handle)
+                func = getattr(DLL, fname)
+                # Return a partial so that all the remaining arguments will be after the handle
+                return functools.partial(func, handle)
+            else:
+                return getattr(DLL, fname)
+        except BaseException as BE:
+            return None
+
+    def __init__(self, dll, managed_handle = None):
+        """
+        Parameters
+        ==========
+        dll : 
+            The instance of the DLL/SO/DYLIB generated by the REFPROPFunctionLibrary factory function
+            for by the manager class
+        managed_handle : int, optional
+            The integer handle of the copy of REFPROP being managed by the REFPROPLibraryManager
+        """
+        self.dll = dll
+        self.managed_handle = managed_handle
+
+'''
 
 def gen_wrapper(pyf):
     # grab each function in the PYF
@@ -305,7 +377,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
         fp.write(contents)
 
 if __name__=='__main__':
-    fortran_root = r'D:\Code\REFPROP-cmake\FORTRANsrc'
+    fortran_root = r'R:\FORTRAN'
     pyf = gen_pyf(fortran_root)
     with open('data.pyf','w') as fp:
         fp.write(pyf)
