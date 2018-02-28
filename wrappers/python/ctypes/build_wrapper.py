@@ -86,13 +86,22 @@ class REFPROPLibraryManager(object):
             The extension that should be queried when searching for shared libraries.  
             Uses the architecture-specific file extension by default
         """
+        
         # Get the handle to the construct_handle function
         construct_handle = getattr(self.manager, "construct_handle")
+
         # Construct the arguments
         c_path = ct.create_string_buffer(path.encode('utf-8'))
         c_shared_library_filename = ct.create_string_buffer(shared_library_filename.encode('utf-8'))
-        # Get the handle
-        managed_handle = construct_handle(c_path, c_shared_library_filename)
+        c_errcode = ct.c_long(0)
+        c_errstr = ct.create_string_buffer(255)
+
+        # Get the handle (hopefully)
+        managed_handle = construct_handle(c_path, c_shared_library_filename, ct.byref(c_errcode), c_errstr, 255)
+
+        # Check if it worked properly
+        if c_errcode.value != 0:
+            raise ValueError("Unable to get instance with error message:"+trim(c_errstr.raw))
         return REFPROPInstance(self.manager, managed_handle)
         
     def free_instance(self, instance):
@@ -161,21 +170,46 @@ def REFPROPFunctionLibrary(name, shared_extension):
 
 class REFPROPInstance(object):
 
+    class ManagedFunctionCall(object):
+        """ 
+        A wrapper class that decorates the call to the managed DLL so that the argument 
+        handling is the same as for "normal" DLL 
+        """
+        def __init__(self, f, managed_handle):
+            self.f = f
+            self.managed_handle = managed_handle
+
+        def __call__(self, *args, **kwargs):
+            handle = ct.c_long(self.managed_handle)
+            errcode = ct.c_long(0)
+            # Call the function, forwarding all arguments to the relevant function from the DLL
+            self.f(handle, ct.byref(errcode), *args, **kwargs)
+            # If it was not possible to get the handle, that is a terminal python-level error
+            # Otherwise, error handling is done by the REFPROP DLL itself
+            if errcode.value != 0:
+                raise ValueError("Unable to access the handle, error code was: " + str(errcode.value))
+
     def _getfcn(self, DLL, fname):
         """
         Try to obtain a function pointer to the function in the shared library.  
         If you cannot attach the function, return None.  
         """
-        try:
-            if self.managed_handle:
-                handle = ct.c_long(self.managed_handle)
+        
+        if self.managed_handle:
+            try:
+                # Get the function from the DLL
                 func = getattr(DLL, fname)
-                # Return a partial so that all the remaining arguments will be after the handle
-                return functools.partial(func, handle)
-            else:
+                # Return a managed function call so that all the remaining arguments will be after the handle
+                # The remaining arguments will be the "normal" arguments to the method
+                return self.ManagedFunctionCall(func, self.managed_handle)
+            except BaseException as BE:
+                # print(BE) # Uncomment to see why the call failed
+                return None
+        else:
+            try:
                 return getattr(DLL, fname)
-        except BaseException as BE:
-            return None
+            except BaseException as BE:
+                return None
 
     def __init__(self, dll, managed_handle = None):
         """
