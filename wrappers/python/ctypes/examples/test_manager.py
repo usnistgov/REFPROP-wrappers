@@ -1,12 +1,25 @@
-import timeit
+"""
+A runnable example of the use of the REFPROP-manager DLL to
+load many copies of REFPROP in memory
 
-import sys
-sys.path.insert(0,'..')
+By Ian Bell, 2018, ian.bell@nist.gov
+"""
+
+# Standard library imports
+import timeit, sys
+
+# pip installable imports
 import ctREFPROP.ctREFPROP as ct
 
+# The path to the folder that contains REFPROP build with dynamic linkage
+# of the runtime libraries (important so that you can load many copies)
 path = r"D:\Code\REFPROP-cmake\build\10dyn\Release"
+
+# Load one "normal" copy of REFPROP (not with the manager)
 RP1 = ct.REFPROPFunctionLibrary(path, "dll")
 
+# Instantiate the manager class (provide the absolute path to the DLL for the manager)
+# See https://github.com/usnistgov/REFPROP-manager
 manager = ct.REFPROPLibraryManager(r'D:\Code\REFPROP-manager\msvc\Release\REFMAN64.dll')
 N = 100
 tic = timeit.default_timer()
@@ -15,6 +28,9 @@ toc = timeit.default_timer()
 print((toc-tic)/N, 's: average time to load a copy of REFPROP')
 
 def do_stuff(RP):
+    """
+    Call the REFPROP function for REFPROP version 10+
+    """
     RP.SETPATHdll(path)
 
     baseSI = RP.GETENUMdll(0, "MOLAR BASE SI  ").iEnum
