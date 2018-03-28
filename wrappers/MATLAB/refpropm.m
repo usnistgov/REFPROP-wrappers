@@ -252,7 +252,9 @@ end
 
 
 % Prepare REFPROP
+newfluid=false;
 if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
+    newfluid=true;
     fluidFile = '';
     RefpropLoadedState.FluidType = '';
     RefpropLoadedState.mixFlag = 0;
@@ -305,19 +307,11 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
 %To revert back to the normal REFPROP EOS and models, call it again with an input of 0.
 %   [dummy] = calllib(libName,'PREOSdll',2);
 
-%To enable better and faster calculations of saturation states, call the
-%subroutine SATSPLN.  However, this routine takes several seconds, and
-%should be disabled if changing the fluids regularly.
-% herr = char(32*ones(1,255));
-% [dummyx ierr errTxt] = calllib(libName,'SATSPLNdll', z, 0, herr, 255);
-
 % Use the following line to calculate enthalpies and entropies on a reference state
 % based on the currently defined mixture, or to change to some other reference state.
 % The routine does not have to be called, but doing so will cause calculations
 % to be the same as those produced from the graphical interface for mixtures.
 %   [href dummy dummy dummy dummy dummy ierr2 errTxt] = calllib(libName, 'SETREFdll', href, 2, z, 0, 0, 0, 0, 0, 32*ones(255,1), 3, 255);
-
-    RefpropLoadedState.z_mix = z;
     RefpropLoadedState.nComp = nc;
     RefpropLoadedState.FluidType = lower(fluidType);
 end
@@ -354,6 +348,7 @@ end
 % Calculate Molar Mass
 if numComponents == 1
     z = 1;
+    RefpropLoadedState.z_mix = z;
 elseif RefpropLoadedState.mixFlag == 0
     z_kg = cell2mat(varargin(nargin));
     if length(z_kg) ~= numComponents
@@ -362,9 +357,24 @@ elseif RefpropLoadedState.mixFlag == 0
         error('Mass fractions must sum to 1');
     end
     [~,z,~] = calllib(libName,'XMOLEdll',z_kg,zeros(1,numComponents),0);
+    if RefpropLoadedState.z_mix == z
+        newmix=false;
+    else
+        newmix=true;
+    end
+    if newfluid && newmix
+    %To enable better and faster calculations of saturation states, call the
+    %subroutine SATSPLN.  However, this routine takes several seconds, and
+    %should be disabled if changing the fluids regularly.
+        herr = char(32*ones(1,255));
+        [~,ierr,errTxt] = calllib(libName,'SATSPLNdll', z, 0, herr, 255);
+    end
+    RefpropLoadedState.z_mix = z;
 elseif RefpropLoadedState.mixFlag == 1
     z = RefpropLoadedState.z_mix;
 end
+
+
 [~,molw] = calllib(libName,'WMOLdll',z,0);
 molw = molw*1e-3; % [kg/mol]
 
