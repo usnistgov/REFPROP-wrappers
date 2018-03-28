@@ -341,14 +341,12 @@ end
 
 herr = char(32*ones(1,255));
 
-if length(propReq)==2
-    if propReq(2)=='>'
-        propReq = propReq(1);
-        phaseFlag=1;
-    elseif propReq(2)=='<'
-        propReq = propReq(1);
-        phaseFlag=2;
-    end
+if propReq(end)=='>'
+    propReq = propReq(1:end-1);
+    phaseFlag=1;
+elseif propReq(end)=='<'
+    propReq = propReq(1:end-1);
+    phaseFlag=2;
 end
 
 % Calculate Molar Mass
