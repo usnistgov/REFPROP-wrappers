@@ -95,13 +95,13 @@
 %   1) P = refpropm('P','T',373.15,'Q',0,'water') gives
 %      Vapor pressure of water at 373.15 K in [kPa]
 %
-%   2) [S Cp] = refpropm('SC','T',373.15,'Q',1,'water') gives
+%   2) [S,Cp] = refpropm('SC','T',373.15,'Q',1,'water') gives
 %      Entropy and Cp of saturated steam at 373.15 K
 %
 %   3) D = refpropm('D','T',323.15,'P',1e2,'water','ammonia',[0.9 0.1])
 %      Density of a 10% ammonia/water solution at 100 kPa and 323.15 K.
 %
-%   4) [x y] = refpropm('X','P',5e2,'Q',0.4,'R134a','R32',[0.8, 0.2])
+%   4) [x,y] = refpropm('X','P',5e2,'Q',0.4,'R134a','R32',[0.8, 0.2])
 %      Temperature as well as gas and liquid compositions for a mixture
 %      of two refrigerants at a certain pressure and quality.
 %      Note that, when 'X' is requested, two variables must be sent, the
@@ -292,30 +292,30 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
         hmix(1:length(mixFile)) = mixFile;
         href = 'DEF';
         herr = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
-        [nc, ~,~,~,ierr,errTxt] = calllib(libName,'SETUPdll',numComponents,path,hmix,href,0,herr,10000,255,3,255);
+        [nc,~,~,~,ierr,errTxt] = calllib(libName,'SETUPdll',numComponents,path,hmix,href,0,herr,10000,255,3,255);
         z = 1;
         % Uncomment the next line to enable the use of AGA EOS for all
         % components in the mixture
-        % [ierr errTxt] = calllib(libName,'SETAGAdll',0,herr,255);
+        % [ierr,errTxt] = calllib(libName,'SETAGAdll',0,herr,255);
     end
     if (ierr > 0)
         error(errTxt);
     end
 %Use the call to PREOSdll to change the equation of state to Peng Robinson for all calculations.
 %To revert back to the normal REFPROP EOS and models, call it again with an input of 0.
-%   [dummy] = calllib(libName,'PREOSdll',2);
+%   [~] = calllib(libName,'PREOSdll',2);
 
 %To enable better and faster calculations of saturation states, call the
 %subroutine SATSPLN.  However, this routine takes several seconds, and
 %should be disabled if changing the fluids regularly.
 % herr = char(32*ones(1,255));
-% [dummyx ierr errTxt] = calllib(libName,'SATSPLNdll', z, 0, herr, 255);
+% [~,ierr,errTxt] = calllib(libName,'SATSPLNdll', z, 0, herr, 255);
 
 % Use the following line to calculate enthalpies and entropies on a reference state
 % based on the currently defined mixture, or to change to some other reference state.
 % The routine does not have to be called, but doing so will cause calculations
 % to be the same as those produced from the graphical interface for mixtures.
-%   [href dummy dummy dummy dummy dummy ierr2 errTxt] = calllib(libName, 'SETREFdll', href, 2, z, 0, 0, 0, 0, 0, 32*ones(255,1), 3, 255);
+%   [href,~,~,~,~,~,ierr2,errTxt] = calllib(libName, 'SETREFdll', href, 2, z, 0, 0, 0, 0, 0, 32*ones(255,1), 3, 255);
 
     RefpropLoadedState.z_mix = z;
     RefpropLoadedState.nComp = nc;
@@ -408,7 +408,7 @@ switch propTyp1
             return
          end
          [~,~,~,~,P_rp,D_rp,Dl,Dv,x,y,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'TQFLSHdll', T, 0, z, 2, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
-%        [dummy dummy dummy P_rp Dl Dv x y ierr errTxt] = calllib(libName, 'SATTdll', T, z, 1, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
+%        [~,~,~,P_rp,Dl,Dv,x,y,ierr,errTxt] = calllib(libName, 'SATTdll', T, z, 1, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
       else
         error('Triple point not known for mixtures');
       end
@@ -508,7 +508,7 @@ else
                 case 'p'
                     [~,~,~,~,T,D_rp,Dl,Dv,x,y,e,h,s,cv,cp,w,ierr,errTxt] = calllib(libName,'PQFLSHdll', P_rp, q, z, 2, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, 0, 0, 0, 0, 0, 0, herr, 255);
 %                case 'd'
-%                    [dummy dummy dummyx dummy T P_rp Dl Dv x y ierr errTxt] = calllib(libName,'DQFL2dll', D_rp, q, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
+%                    [~,~,~,~,T,P_rp,Dl,Dv,x,y,ierr,errTxt] = calllib(libName,'DQFL2dll', D_rp, q, z, 1, 0, 0, 0, 0, zeros(1,numComponents), zeros(1,numComponents), 0, herr, 255);
                 otherwise
                     error('HQ or DQ are not supported combinations');
             end
