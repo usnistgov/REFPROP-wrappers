@@ -276,8 +276,8 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
     else
         for i = 1:numComponents
             fluidName=varargin{i+5};
-            if isempty(strfind(lower(fluidName),'.fld'))
-                if isempty(strfind(lower(fluidName),'.ppf'))
+            if ~contains(lower(fluidName),'.fld')
+                if ~contains(lower(fluidName),'.ppf')
                     fluidName = strcat(fluidName,'.fld');
                 end
             end
@@ -519,7 +519,7 @@ if (ierr > 0)
     error(char(errTxt'));
 end
 
-if ~isempty(strfind(propReq,'g')) || ~isempty(strfind(propReq,'n'))
+if contains(propReq,'g') || contains(propReq,'n')
     if q>0 && q<1
         error('Heating value routines not valid for 2-phase states')
     end
@@ -529,7 +529,7 @@ if ~isempty(strfind(propReq,'g')) || ~isempty(strfind(propReq,'n'))
     end
 end
 
-if ~isempty(strfind(propReq,'v')) || ~isempty(strfind(propReq,'l')) || ~isempty(strfind(propReq,'$')) || ~isempty(strfind(propReq,'%')) || ~isempty(strfind(propReq,'^'))
+if contains(propReq,'v') || contains(propReq,'l') || contains(propReq,'$') || contains(propReq,'%') || contains(propReq,'^')
     if q>0 && q<1
         error('Transport routines not valid for 2-phase states')
     end
