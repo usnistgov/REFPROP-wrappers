@@ -315,7 +315,7 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
 % based on the currently defined mixture, or to change to some other reference state.
 % The routine does not have to be called, but doing so will cause calculations
 % to be the same as those produced from the graphical interface for mixtures.
-%   [href,~,~,~,~,~,ierr2,errTxt] = calllib(libName, 'SETREFdll', href, 2, z, 0, 0, 0, 0, 0, 32*ones(255,1), 3, 255);
+%   [href,~,~,~,~,~,ierr2,errTxt] = calllib(libName, 'SETREFdll', href, 2, z, 0, 0, 0, 0, 0, char(32*ones(255,1)), 3, 255);
 
     RefpropLoadedState.z_mix = z;
     RefpropLoadedState.nComp = nc;
