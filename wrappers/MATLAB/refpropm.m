@@ -251,8 +251,10 @@ end
 %libfunctionsview refprop
 
 
-% Prepare REFPROP
+% Prepare REFPROP for new mixture components
+newfluids=false;
 if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
+    newfluids=true;
     fluidFile = '';
     RefpropLoadedState.FluidType = '';
     RefpropLoadedState.mixFlag = 0;
@@ -293,7 +295,7 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
         href = 'DEF';
         herr = char(32*ones(1,255)); % Pad out the string with spaces (32: ASCII code for space)
         [nc,~,~,~,ierr,errTxt] = calllib(libName,'SETUPdll',numComponents,path,hmix,href,0,herr,10000,255,3,255);
-        z = 1;
+
         % Uncomment the next line to enable the use of AGA EOS for all
         % components in the mixture
         % [ierr,errTxt] = calllib(libName,'SETAGAdll',0,herr,255);
@@ -305,19 +307,12 @@ if ~strcmpi(fluidType, RefpropLoadedState.FluidType)
 %To revert back to the normal REFPROP EOS and models, call it again with an input of 0.
 %   [~] = calllib(libName,'PREOSdll',2);
 
-%To enable better and faster calculations of saturation states, call the
-%subroutine SATSPLN.  However, this routine takes several seconds, and
-%should be disabled if changing the fluids regularly.
-% herr = char(32*ones(1,255));
-% [~,ierr,errTxt] = calllib(libName,'SATSPLNdll', z, 0, herr, 255);
-
 % Use the following line to calculate enthalpies and entropies on a reference state
 % based on the currently defined mixture, or to change to some other reference state.
 % The routine does not have to be called, but doing so will cause calculations
 % to be the same as those produced from the graphical interface for mixtures.
 %   [href,~,~,~,~,~,ierr2,errTxt] = calllib(libName, 'SETREFdll', href, 2, z, 0, 0, 0, 0, 0, char(32*ones(255,1)), 3, 255);
 
-    RefpropLoadedState.z_mix = z;
     RefpropLoadedState.nComp = nc;
     RefpropLoadedState.FluidType = lower(fluidType);
 end
@@ -349,7 +344,7 @@ elseif propReq(end)=='<'
     phaseFlag=2;
 end
 
-% Calculate Molar Mass
+% Calculate Molar Mass and store in z
 if numComponents == 1
     z = 1;
 elseif RefpropLoadedState.mixFlag == 0
@@ -361,10 +356,26 @@ elseif RefpropLoadedState.mixFlag == 0
     end
     [~,z,~] = calllib(libName,'XMOLEdll',z_kg,zeros(1,numComponents),0);
 elseif RefpropLoadedState.mixFlag == 1
-    z = RefpropLoadedState.z_mix;
+    % no action required
 end
 [~,molw] = calllib(libName,'WMOLdll',z,0);
 molw = molw*1e-3; % [kg/mol]
+
+% Compare new mol fractions to those from prior call of refpropm
+if RefpropLoadedState.z_mix == z
+    newmixfractions=false;
+else
+    newmixfractions=true;
+end
+RefpropLoadedState.z_mix = z;
+
+if newmixfractions || newfluids
+    %To enable better and faster calculations of saturation states, call the
+    %subroutine SATSPLN.  However, this routine takes several seconds, and
+    %should be disabled if changing the fluids regularly.
+    % herr = char(32*ones(1,255));
+    % [~,ierr,errTxt] = calllib(libName,'SATSPLNdll', z, 0, herr, 255);
+end
 
 % Sanity Check Provided Property Types
 if propTyp1 == propTyp2
