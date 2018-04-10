@@ -5,7 +5,8 @@ the legacy version <10.0 API
 By Ian Bell, 2018, ian.bell@nist.gov
 """
 # Standard library imports
-import os. sys
+import os
+import sys
 
 # pip installable packages
 from ctREFPROP.ctREFPROP import REFPROPFunctionLibrary
