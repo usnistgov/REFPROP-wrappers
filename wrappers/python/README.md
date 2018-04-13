@@ -1,20 +1,19 @@
 # Python wrappers
 
-Due to the fact that python is the primary working environment for one of the main REFPROP developers (Ian Bell), the support of REFPROP in python is quite robust.  There are a number of options, depending on what kind of interface you are looking for:
-
-* Thin wrapper around the core functions exported in PASS_FTN.FOR:
-    * ctypes wrapper
-    * f2py wrapper
-* Super powered wrapper around REFPROP (for REFPROP 10+) allowing for multiple copies of REFPROP in memory, etc.:
-    * TO BE COMPLETED
+Due to the fact that Python is the primary working environment for one of the main REFPROP developers (Ian Bell), the support of REFPROP in Python is quite robust.  There are a number of options, depending on what kind of interface you are looking for
 
 ## ctypes wrapper
 
-There is a [ctypes](https://docs.python.org/3/library/ctypes.html) wrapper of REFPROP available, this wrapper is automatically generated for all functions exported from the DLL.  It sits in the ``ctypes`` folder relative to this folder.
+There is a [ctypes](https://docs.python.org/3/library/ctypes.html) wrapper of REFPROP available, this wrapper is automatically generated for all functions exported from the DLL.  It sits in the ``ctypes`` folder relative to this folder.  It can be installed from PYPI with:
+
+```
+pip install ctREFPROP
+```
 
 Some important notes:
 
 * The wrapper is single-threaded. It holds a pointer to an instance of REFPROP, and on windows, if multiple loads of the library are done, each reference points to the same instance.  As a result, you need to use separate *processes* to use multiple copies of REFPROP in parallel.  A stripped down example of the use of multiple processes (and therefore multiple copies of REFPROP) is provided in the file ``multiprocessing_example.py`` in the ``examples`` folder.
+* There are examples of calling the ctREFPROP interface in the examples folder: https://github.com/usnistgov/REFPROP-wrappers/tree/master/wrappers/python/ctypes/examples
 * You can regenerate the interface with the ``build_wrapper.py`` script, for instance to build the wrapper for an older version of REFPROP.  Requirements: ``numpy`` (for ``f2py``)
 * While you can just copy-paste the ``ctREFPROP.py`` script to your desired location, or anywhere that is on ``sys.path``, you can also run the ``setup.py`` script in the ``ctypes`` folder to install the interface to the default package location on your computer via ``python setup.py install`` in the ``ctypes`` folder.
 
