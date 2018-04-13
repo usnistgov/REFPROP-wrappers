@@ -84,7 +84,7 @@ class REFPROPLibraryManager(object):
         free_handle = getattr(self.manager, "free_handle")
         pass
 
-def REFPROPFunctionLibrary(name, shared_extension):
+def REFPROPFunctionLibrary(name, shared_extension = None):
 
     """
     You can either provide a path to a directory, in which case it will search 
