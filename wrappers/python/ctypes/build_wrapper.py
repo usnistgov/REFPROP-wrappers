@@ -51,6 +51,7 @@ def get_default_DLL_extension():
         shared_extension = 'dylib'
     else:
         shared_extension = 'so'
+    return shared_extension
 
 class REFPROPLibraryManager(object):
 
@@ -108,7 +109,7 @@ class REFPROPLibraryManager(object):
         free_handle = getattr(self.manager, "free_handle")
         pass
 
-def REFPROPFunctionLibrary(name, shared_extension):
+def REFPROPFunctionLibrary(name, shared_extension = None):
 
     """
     You can either provide a path to a directory, in which case it will search 
@@ -349,7 +350,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
                 if dim == '*':
                     body += '{name:s} = '.format(name=arg) + 'ct.create_string_buffer({default:s},len{default:s})'.format(default=arg) + '\n'
                 else:
-                    body += '{name:s} = '.format(name=arg) + gen_val(typ, -dim, default = arg) + '\n'
+                    body += '{name:s} = '.format(name=arg) + gen_val(typ, dim, default = arg) + '\n'
             elif arg in data['output_args']:
                 typ, dim = data['output_args'][arg]
                 body += '{name:s} = '.format(name=arg) + gen_val(typ, dim, default = '') + '\n'
@@ -415,6 +416,8 @@ if __name__=='__main__':
     pyf = gen_pyf(fortran_root)
     with open('data.pyf','w') as fp:
         fp.write(pyf)
+    with open('data.pyf') as fp:
+        pyf = fp.read()
     fcninfo = gen_wrapper(pyf)
     if not os.path.exists('ctREFPROP'): os.mkdir(os.path.join(os.path.dirname(__file__), 'ctREFPROP'))
     gen_ctypes_wrappers(fcninfo, os.path.join('ctREFPROP', 'ctREFPROP.py'))
