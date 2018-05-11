@@ -10,6 +10,23 @@ There is a [ctypes](https://docs.python.org/3/library/ctypes.html) wrapper of RE
 pip install ctREFPROP
 ```
 
+Example code to print the normal boiling point temperature of propane:
+``` python
+import os, numpy as np
+from ctREFPROP.ctREFPROP import REFPROPFunctionLibrary
+
+if __name__=='__main__':
+    # If needed...
+    os.environ['RPPREFIX'] = r'D:\Code\REFPROP-cmake\build\10\Release\\'
+    
+    RP = REFPROPFunctionLibrary(os.environ['RPPREFIX'])
+    print(RP.RPVersion())
+    MOLAR_BASE_SI = RP.GETENUMdll(0,"MOLAR BASE SI").iEnum
+
+    r = RP.REFPROPdll("PROPANE","PQ","T",MOLAR_BASE_SI, 0,0,101325, 0, [1.0])
+    print(r.ierr, r.herr, r.Output[0])
+```
+
 Some important notes:
 
 * The wrapper is single-threaded. It holds a pointer to an instance of REFPROP, and on windows, if multiple loads of the library are done, each reference points to the same instance.  As a result, you need to use separate *processes* to use multiple copies of REFPROP in parallel.  A stripped down example of the use of multiple processes (and therefore multiple copies of REFPROP) is provided in the file ``multiprocessing_example.py`` in the ``examples`` folder.
