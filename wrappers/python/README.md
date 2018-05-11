@@ -1,10 +1,10 @@
 # Python wrappers
 
-Due to the fact that Python is the primary working environment for one of the main REFPROP developers (Ian Bell), the support of REFPROP in Python is quite robust.  There are a number of options, depending on what kind of interface you are looking for
+Due to the fact that Python is the primary working environment for one of the main REFPROP developers (Ian Bell), the support of REFPROP in Python is quite robust.  
 
 ## ctypes wrapper
 
-There is a [ctypes](https://docs.python.org/3/library/ctypes.html) wrapper of REFPROP available, this wrapper is automatically generated for all functions exported from the DLL.  It sits in the ``ctypes`` folder relative to this folder.  It can be installed from PYPI with:
+There is a [ctypes](https://docs.python.org/3/library/ctypes.html) wrapper of REFPROP available, this wrapper is automatically generated for all functions exported from the DLL.  If you notice any inconsistencies between the DLL and the functions in the wrapper, please [open an issue](https://github.com/usnistgov/REFPROP-wrappers/issues/new) ASAP.   It sits in the ``ctypes`` folder relative to this folder.  It can be installed from PYPI with:
 
 ```
 pip install ctREFPROP
@@ -33,13 +33,6 @@ Some important notes:
 * There are examples of calling the ctREFPROP interface in the examples folder: https://github.com/usnistgov/REFPROP-wrappers/tree/master/wrappers/python/ctypes/examples
 * You can regenerate the interface with the ``build_wrapper.py`` script, for instance to build the wrapper for an older version of REFPROP.  Requirements: ``numpy`` (for ``f2py``)
 * While you can just copy-paste the ``ctREFPROP.py`` script to your desired location, or anywhere that is on ``sys.path``, you can also run the ``setup.py`` script in the ``ctypes`` folder to install the interface to the default package location on your computer via ``python setup.py install`` in the ``ctypes`` folder.
-
-## f2py wrapper
-
-There is also a ``f2py`` interface for REFPROP that you can compile yourself; this ``f2py`` wrapper is a native python extension module that provides a very thin wrapper around the REFPROP code.  It exports the same functions as the ``ctypes`` wrapper described above, with some important differences:
-
-* The ``f2py`` wrapper needs to be compiled for your architecture.  No precompiled binaries are available, but in anaconda/miniconda, you can build the wrapper with the ``build_f2py_wrapper.py`` script, which should compile a shared library of the wrapper on your computer.  You will need to install the package mingw on windows to get access to the gfortran compiler.
-* On windows, all function are exported with lower case, so ``SETUPdll`` becomes ``setupdll``, and so on. 
 
 ## Other python wrappers of REFPROP:
 
