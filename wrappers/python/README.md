@@ -34,6 +34,25 @@ if __name__=='__main__':
     
 ```
 
+or the same example with the legacy API from REFPROP 9.1:
+
+``` python
+import os, numpy as np
+from ctREFPROP.ctREFPROP import REFPROPFunctionLibrary
+
+def NBP():
+    RP = REFPROPFunctionLibrary(os.environ['RPPREFIX'])
+    print(RP.RPVersion())
+    RP.SETPATHdll(os.environ['RPPREFIX'])
+    r = RP.SETUPdll(1,"PROPANE.FLD","HMX.BNC","DEF")
+    assert(r.ierr == 0)
+    print(RP.PQFLSHdll(101.325, 0, [1.0], 0))
+
+if __name__=='__main__':
+    # Print the version of REFPROP in use and the NBP
+    NBP()
+```
+
 Some important notes:
 
 * The wrapper is single-threaded. It holds a pointer to an instance of REFPROP, and on windows, if multiple loads of the library are done, each reference points to the same instance.  As a result, you need to use separate *processes* to use multiple copies of REFPROP in parallel.  A stripped down example of the use of multiple processes (and therefore multiple copies of REFPROP) is provided in the file ``multiprocessing_example.py`` in the ``examples`` folder.
