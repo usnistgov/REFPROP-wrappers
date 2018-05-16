@@ -140,7 +140,7 @@ def REFPROPFunctionLibrary(name, shared_extension = None):
         if shared_extension is None:
             shared_extension = get_default_DLL_extension()
 
-        sos = glob.glob(os.path.join(name, '*.' + shared_extension))
+        sos = [f for f in glob.glob(os.path.join(name, '*.' + shared_extension)) if 'ISOCHR' not in f]
         if len(sos) == 0:
             raise ValueError('No shared libraries were found in the folder "{name:s}" with the extension ".{ext:s}"'.format(ext=shared_extension,name=name))
         elif len(sos) == 1:
@@ -159,7 +159,7 @@ def REFPROPFunctionLibrary(name, shared_extension = None):
             elif len(good_so) == 1:
                 full_path = good_so[0]
             else:
-                raise ValueError('Too many loadable shared libraries were found in the folder "{name:s}"; obtained libraries were: {libs:s}'.format(name=name, libs=str(list(good_so))))
+                raise ValueError('Too many loadable shared libraries were found in the folder "{name:s}"; obtained libraries were: {libs:s}.  You must provide an absolute path to the shared library you would like to load'.format(name=name, libs=str(list(good_so))))
     else:
         raise ValueError('"{name:s}" is neither a directory nor a file'.format(name=name))
 
@@ -330,6 +330,8 @@ def gen_ctypes_wrappers(fcninfo, ofname):
                 return 'ct.c_long({default:s})'.format(default=default)
             elif typ == 'int' and dim > 0:
                 return '({dim:d}*ct.c_long)()'.format(default=default, dim=dim)
+            elif typ == 'int' and dim < 0:
+                return '(len({default:s})*ct.c_long)(*{default:s})'.format(default=default)
             elif typ == 'double' and dim == 0:
                 return 'ct.c_double({default:s})'.format(default=default)
             elif typ == 'double' and dim < 0:
@@ -350,7 +352,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
                 if dim == '*':
                     body += '{name:s} = '.format(name=arg) + 'ct.create_string_buffer({default:s},len{default:s})'.format(default=arg) + '\n'
                 else:
-                    body += '{name:s} = '.format(name=arg) + gen_val(typ, dim, default = arg) + '\n'
+                    body += '{name:s} = '.format(name=arg) + gen_val(typ, -dim, default = arg) + '\n'
             elif arg in data['output_args']:
                 typ, dim = data['output_args'][arg]
                 body += '{name:s} = '.format(name=arg) + gen_val(typ, dim, default = '') + '\n'
