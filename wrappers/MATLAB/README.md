@@ -19,7 +19,7 @@ In your MATLAB shell, you can inquire about what Python version MATLAB intends t
        library: 'D:\Anaconda\python27.dll'
           home: 'D:\Anaconda'
       isloaded: 0
-``
+```
 Good.  It found Python, and has not loaded it yet.  You are ready!
 
 If you have multiple copies of Python on your computer already, then you can tell MATLAB which one you want it to use by passing the absolute path to the python executable to ``pyversion``.  For instance:
