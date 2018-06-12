@@ -19,6 +19,7 @@ from ctREFPROP.ctREFPROP import REFPROPFunctionLibrary
 
 def NBP():
     RP = REFPROPFunctionLibrary(os.environ['RPPREFIX'])
+    RP.SETPATHdll(os.environ['RPPREFIX'])
     print(RP.RPVersion())
     MOLAR_BASE_SI = RP.GETENUMdll(0,"MOLAR BASE SI").iEnum
 
