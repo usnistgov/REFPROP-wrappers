@@ -37,7 +37,7 @@ If you have multiple copies of Python on your computer already, then you can tel
 ```
 Finally, you need to install the ctREFPROP package (a ``ctypes``-based interface to REFPROP) into your given copy of python.  This one-liner calls the ``pip`` program of Python to install the ctREFPROP package from the PYPI package index.  Watch out for the spaces in the arguments, they are important!:
 ``` MATLAB
-[v,e] = pyversion; system([e,' -m',' pip',' install',' --user',' -U',' ctREFPROP'])
+[v,e] = pyversion; system([e,' -m pip install --user -U ctREFPROP'])
 ```
 
 ## Use
@@ -60,7 +60,7 @@ ans =
 
     10.0
 ```
-As the first practical example of the use of the MATLAB interface, let's calculate the normal boiling point temperature of water at one atmosphere (1 bar = 101.325 kPa). We will revisit the other arguments soon
+As the first practical example of the use of the MATLAB interface, let's calculate the normal boiling point temperature of water at one atmosphere (1 bar = 101.325 kPa). 
 
 ```
 >> r = RP.REFPROPdll('Water','PQ','T',int8(0),int8(0),int8(0),101.325,0.0,{1.0})
@@ -80,17 +80,21 @@ ans =
     y
     z
 ```
-Multiple outputs are returned in a data structure ([see the documentation for the REFPROPdll function](http://refprop-docs.readthedocs.io/en/latest/DLL/high_level.html#f/_/REFPROPdll)), and you can obtain the first output by indexing the ``Output`` list.  This interface calls directly into the DLL (via Python), so the documentation is exactly what you need to know for MATLAB too.
+Multiple outputs are returned in a data structure ([see the documentation for the REFPROPdll function](http://refprop-docs.readthedocs.io/en/latest/DLL/high_level.html#f/_/REFPROPdll)).  Then you can obtain the first output by indexing the ``Output`` list.  This interface calls directly into the DLL (via Python), so the documentation is exactly what you need to know for MATLAB too.
 
-The normal boiling point temperature is then obtained from the Output:
+As of ctREFPROP 0.7, the return type is an [array.array](https://docs.python.org/3/library/array.html) in Python in order to make the Python interface more computationally efficient (and thus the MATLAB one too).  In order to make use of this output in MATLAB, you can either 
+
+A) Convert the array.array to a list with ``py.list(r.Output)`` (less efficient option)
+B) Convert the array.array to a MATLAB array with ``double(r.Output)`` (more efficient option) [MATLAB docs](https://www.mathworks.com/help/matlab/matlab_external/handling-data-returned-from-python.html)
+
+The normal boiling point temperature is then obtained from the Output array:
 ```
->> r.Output(1)
+>> o = double(r.Output);
+>> o(1)
 
-ans = 
+ans =
 
-  Python list with no properties.
-
-    [373.1242958476959]
+  373.1243
 ```
 
 Success!
