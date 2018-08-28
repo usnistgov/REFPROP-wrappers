@@ -23,13 +23,13 @@ Instructions on windows
 
 1. Install REFPROP as normal.  (default installation directory on 64-bit windows is ``c:/Program Files (x86)/REFPROP``, or ``c:/Program Files/REFPROP`` on 32-bit windows)
 2. If you have a 64-bit MATLAB version, make sure you have a ``REFPRP64.dll`` file in your REFPROP installation directory.  If not, email ian.bell@nist.gov with your license information.
-3. Place the ``REFPROP.h`` that you can obtain from `REFPROP.h <https://raw.githubusercontent.com/usnistgov/REFPROP-wrappers/master/wrappers/MATLAB/REFPROP.h>`_ in the REFPROP installation directory
+3. Place the ``REFPROP.h`` that you can obtain from `REFPROP.h <https://raw.githubusercontent.com/usnistgov/REFPROP-wrappers/master/wrappers/MATLAB/legacy/REFPROP.h>`_ in the REFPROP installation directory
 4. Place `refpropm.m <https://raw.githubusercontent.com/usnistgov/REFPROP-wrappers/master/wrappers/MATLAB/refpropm.m>`_ in your REFPROP installation directory (so that it sits next to ``refprop.dll``).  Make sure to add this directory to your `MATLAB path <https://www.mathworks.com/help/matlab/ref/path.html>`_ (but do not recursively add subfolders).  Do not place refpropm.m in your working directory; ONLY place it in the REFPROP installation directory.
 5. If you did not use the version 9.1.1 patch installer, obtain the following files and place each of them in the your REFPROP installation directory (so they sit next to refprop.dll):
 
-    * `REFPRP64_thunk_pcwin64.dll <http://trc.nist.gov/refprop/FAQ/MATLAB/9.1.1/REFPRP64_thunk_pcwin64.dll>`_
+    * `REFPRP64_thunk_pcwin64.dll <https://trc.nist.gov/refprop/FAQ/MATLAB/9.1.1/REFPRP64_thunk_pcwin64.dll>`_
 
-    * `rp_proto64.m <http://trc.nist.gov/refprop/FAQ/MATLAB/9.1.1/rp_proto64.m>`_
+    * `rp_proto64.m <https://trc.nist.gov/refprop/FAQ/MATLAB/9.1.1/rp_proto64.m>`_
 
 6. Test your refpropm file with something like (the normal boiling point temperature of water at one atmosphere, or 101.325 kPa)::
 
