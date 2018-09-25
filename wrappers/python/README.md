@@ -67,6 +67,4 @@ Some important notes:
 
 These wrappers are all community developed/supported:
 
-* [Python wrapper of Bruce Wernick](http://trc.nist.gov/refprop/LINKING/WERNICK.ZIP)
-* [Updated wrapper of Ben Thelen of Leukothea Pte. Ltd. ](http://trc.nist.gov/refprop/LINKING/THELEN.ZIP)
 * [CoolProp wrapper](http://www.coolprop.org/coolprop/wrappers/Python/index.html#python)
