@@ -22,7 +22,17 @@ In your MATLAB shell, you can inquire about what Python version MATLAB intends t
 ```
 Good.  It found Python, and has not loaded it yet.  You are ready!
 
-If you have multiple copies of Python on your computer already, then you can tell MATLAB which one you want it to use by passing the absolute path to the python executable to ``pyversion``.  For instance:
+If you obtained Python from an Anaconda installation then you can open an Anaconda prompt (In Start Menu->Anaconda Prompt (64-bit) or somewhere similar depending on your sytem) and query the path of your Python installation with a command like:
+```
+(base) C:\Users\ihb>where python
+C:\Users\ihb\Miniconda3\python.exe
+```
+and then set the path to your Python in MATLAB:
+```
+>> pyversion C:\Users\ihb\Miniconda3\python.exe
+```
+
+If you have multiple copies of Python on your computer already (in conda environments, for instance), then you can tell MATLAB which one you want it to use by passing the absolute path to the python executable to ``pyversion``.  For instance:
 
 ```
 
@@ -42,13 +52,9 @@ Finally, you need to install the ctREFPROP package (a ``ctypes``-based interface
 
 ## Use
 
-At the beginning of your code you should add the import statement (similar to what you would do in Python):
+To initialize REFPROP, you tell it what the root path of your REFPROP installation is:
 ```
-import py.ctREFPROP.ctREFPROP.REFPROPFunctionLibrary
-```
-then to initialize REFPROP, you tell it what the root path of your REFPROP installation is:
-```
-RP = REFPROPFunctionLibrary('C:\Program Files (x86)\REFPROP')
+RP = py.ctREFPROP.ctREFPROP.REFPROPFunctionLibrary('C:\Program Files (x86)\REFPROP')
 ```
 and to confirm that everything is working correctly, let's print out the version of REFPROP that you have loaded:
 ```
