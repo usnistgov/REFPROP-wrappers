@@ -44,10 +44,17 @@ If you have multiple copies of Python on your computer already (in conda environ
        library: 'd:\Anaconda\envs\py36\python36.dll'
           home: 'd:\Anaconda\envs\py36'
       isloaded: 0
+
+## Install ctREFPROP
 ```
 Finally, you need to install the ctREFPROP package (a ``ctypes``-based interface to REFPROP) into your given copy of python.  This one-liner calls the ``pip`` program of Python to install the ctREFPROP package from the PYPI package index.  Watch out for the spaces in the arguments, they are important!:
 ``` MATLAB
 [v,e] = pyversion; system([e,' -m pip install --user -U ctREFPROP'])
+```
+
+If your python installation does not have ``pip`` installed (it is usually installed by default), you can install it with
+``` MATLAB
+[v,e] = pyversion; system([e,' -m easy_install pip'])
 ```
 
 ## Use
