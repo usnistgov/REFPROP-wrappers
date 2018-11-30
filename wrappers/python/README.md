@@ -12,7 +12,8 @@ pip install ctREFPROP
 
 Mini-tutorial available as a jupyter notebook: [Link to tutorial](https://nbviewer.jupyter.org/github/usnistgov/REFPROP-wrappers/blob/master/wrappers/python/notebooks/Tutorial.ipynb) .  The notebook can be accessed at [wrappers/python/notebooks](https://github.com/usnistgov/REFPROP-wrappers/tree/master/wrappers/python/notebooks)
 
-Example code to print the normal boiling point temperature of propane:
+Example code to print the normal boiling point temperature of propane using the interface in REFPROP 10 (see below if you use REFPROP 9.x):
+
 ``` python
 import os, numpy as np
 from ctREFPROP.ctREFPROP import REFPROPFunctionLibrary
