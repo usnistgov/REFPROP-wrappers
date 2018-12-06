@@ -247,5 +247,24 @@ namespace MCS
            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,  // => composition array
            ref double wm     //
         );
+
+
+        /* Provides fluid constants for specified component */
+        [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
+        public static extern void INFOdll
+            (
+            ref long icomp, // Component number in mixture. 1 for pure fluid
+            ref double wmm, // molecular weight [g/mol]
+            ref double ttrp, // triple point temperature [K]
+            ref double tnbpt, // normal boiling point temperature [K]
+            ref double tc, // critical temperature [K]
+            ref double pc, // critical pressure [kPa]
+            ref double Dc, // critical density [mol/L]
+            ref double Zc, // compressibility at critical point [pc/(Rgas*Tc*Dc)]
+            ref double acf, // acentric factor [dimensionless]
+            ref double dip, // dipole moment [debeye]
+            ref double Rgas // gas constant [J/mol-K]
+            );
+
     }
 }
