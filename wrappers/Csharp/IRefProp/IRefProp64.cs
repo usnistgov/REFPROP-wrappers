@@ -55,216 +55,333 @@ namespace MCS
     public static class IRefProp64
     {
 
-        /*! \brief Brief description.
-         *         Brief description continued.
-         *
-         *  Detailed description starts here.
-         */
+        /**************************************************************
+         * Set the path where the fluid files are located.
+         * The path does not need to contain the ending "\" and it can
+         * point directly to the location where the DLL is stored if a
+         * fluids subdirectory (with the corresponding fluid files) is
+         * located there.            
+         *************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll")]
         public static extern void SETPATHdll(string htype, ref long ln);
 
 
-        /*! \brief Brief description.
-        *         Brief description continued.
-        *
-        *  Detailed description starts here.
-        */
 
+        /******************************************************************************
+         * Define models and initialize arrays. A call to this subroutine is required
+        *******************************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
-        /*! \brief Brief description.
-        *         Brief description continued.
-        *
-        *  Detailed description starts here.
-        */
         public static extern void SETUPdll
              (
-             ref long nComps,
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hfld,
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hfmix,
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hrf,
-             ref long ierr,
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,
+             ref long nComps,                                          // (INPUT) number of components (1 for pure fluid) [integer]
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hfld,    // (INPUT) list of file names specifying fluid/mixture components. Separated by pipes "|"
+                                                                       //  e.g., METHANE|AMMONIA|ARGON
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hfmix,   // (INPUT) mixture coefficients. File name containing coefficients for mixture model, if applicable
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hrf,     // (INPUT) reference state for thermodynamic calculations [3 character string]
+                                                                       //  'DEF' : default reference state as specified in fluid file is applied to each pure component
+                                                                       //  'NBP' : h,s = 0 at pure component normal boiling point(s)
+                                                                       //  'ASH' : h,s = 0 for sat liquid at -40 C (ASHRAE convention)
+                                                                       //  'IIR' : h= 200, s = 1.0 for sat liq at 0 C (IIR convention)
+                                                                       //  other choices are possible, but these require a separate call to SETREF
+             ref long ierr,                                            // (OUTPUT) error flag: 
+                                                                       //  0 = successful
+                                                                       //  101 = error in opening file
+                                                                       //  102 = error in file or premature end of file
+                                                                       //  -103 = unknown model encountered in file
+                                                                       //  104 = error in setup of model
+                                                                       //  105 = specified model not found
+                                                                       //  111 = error in opening mixture file
+                                                                       //  112 = mixture file of wrong type
+                                                                       //  114 = nc<>nc from setmod
+                                                                       //  -117 = binary pair not found, all parameters will be estimated
+                                                                       //  117 = no mixture data are available, mixture is outside the range of the model and calculations will not be made
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,    // (OUTPUT) error string
              ref long hfldLen,
              ref long hfmixLen,
              ref long hrfLen,
              ref long herrLen);
 
-         /*! \brief Brief description.
-       *         Brief description continued.
-       *
-       *  Detailed description starts here.
-       */
+
+        /***************************************************************************************
+         * General Flash subroutine taking a temperature and pressure.
+         * This routine accepts both single-phase and two-phase states as input.
+         * If the the phase is know, the specialized routines are faster.
+         **************************************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
-        public static extern void TPFLSHdll //!< a member function.
+        public static extern void TPFLSHdll
         (
-            ref double t,
-            ref double p,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,
-            ref double d,
-            ref double Dl,
-            ref double Dv,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xliq,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xvap,
-            ref double q,
-            ref double ee,
-            ref double h,
-            ref double ss,
-            ref double Cv,
-            ref double Cp,
-            ref double w,
-            ref long ierr,
-            [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,
+            ref double t,                                                            // (INPUT) temperature [K]
+            ref double p,                                                            // (INPUT) pressure [kPa]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,       // (INPUT) overall (bulk) composition [array of mol frac]
+            ref double d,                                                            // (OUTPUT) overall (bulk) molar density [mol/L]
+            ref double Dl,                                                           // (OUTPUT) molar density of liquid phase [mol/L]
+            ref double Dv,                                                           // (OUTPUT) molar density of the vapor phase [mol/L]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xliq,    // (OUTPUT) composition of liquid phase [array of mol frac]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xvap,    // (OUTPUT) composition of vapor phase [array of mol frac]
+            ref double q,                                                            // (OUTPUT) vapor quality on a MOLAR basis [moles vapor/total moles]
+                                                                                     //  q < 0 indicates subcooled (compressed) liquid
+                                                                                     //  q = 0 indicates saturated liquid
+                                                                                     //  q = 1 indicates saturated vapor
+                                                                                     //  q > 1 indicates superheated vapor
+                                                                                     //  q = 998 superheated vapor, but quality not defined (in most situations, t > Tc)
+                                                                                     //  q = 999 indicates supercritical state (t > Tc) and (p > Pc)
+            ref double ee,                                                           // (OUTPUT) overall (bulk) internal energy [J/mol]
+            ref double h,                                                            // (OUTPUT) overall (bulk) enthalpy [J/mol]
+            ref double ss,                                                           // (OUTPUT) overall (bulk) entropy [J/mol-K]
+            ref double Cv,                                                           // (OUTPUT) isochoric (constant V) heat capacity [J/mol-K] 
+            ref double Cp,                                                           // (OUTPUT) isobaric (constatnt p) heat capacity [J/mol-K] (not defined for 2-phase)
+            ref double w,                                                            // (OUTPUT) speed of sound [m/s] (not defined for 2-phase)
+            ref long ierr,                                                           // (OUTPUT) error flag
+                                                                                     //  0 = all inputs within limits
+                                                                                     //  <> 0 = one or more inputs outside limits
+                                                                                     //  -1 = 1.5*tmax > t > tmax
+                                                                                     //  1 = t < tmin or t > 1.5*tmax
+                                                                                     //  2 = D > Dmax or D < 0
+                                                                                     //  -4 = 2*pmax > p > pmax
+                                                                                     //  4 = p < 0 or p > 2*pmax
+                                                                                     //  8 = component composition < 0 or > 1 and/or composition sum < 0 or > 1
+                                                                                     //  16 = p > pmelt
+                                                                                     //  -16 = t < ttrp (important for water)
+                                                                                     // If multiple inputs are outside limits, ierr = abs[sum(ierr)] with the sign determined by the most severe excursion
+                                                                                     // (ierr < 0 indicates a warning -- results may be questionable, ierr > 0 indicates an error -- calculations impossible)
+            [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,                   // (OUTPUT) error string
             ref long ln
             );
 
-        /*! \brief Brief description.
-        *         Brief description continued.
-        *
-        *  Detailed description starts here.
-        */
+
+
+        /****************************************************************************************
+         * Open a mixture file (e.g., R410A.mix) and read constituents and mole fractions
+        ****************************************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void SETMIXdll 
         (
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hmxnme,
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hfmix,
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hrf,
-             ref long nccp, // number of fluids
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hfiles,
-             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,
-             ref long ierr,
-             [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hmxnme,                   // (INPUT) mixture file name to be read in 
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hfmix,                    // (INPUT) mixture coefficients. File name containing coefficients for mixture model
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hrf,                      // (INPUT) reference state for thermodynamic calculations (see same variable in SETUPdll)
+             ref long nccp,                                                             // (OUTPUT) number of fluids in mixture
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string hfiles,                   // (OUTPUT) array of file names specifying mixture components that were used to call setup
+             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,         // (OUTPUT) array of mole fractions for the specified mixture
+             ref long ierr,                                                             // (OUTPUT) error flag
+                                                                                        //  0 = successful
+                                                                                        //  101 = error in opening file
+                                                                                        //  -102 = mixture file contains mixing parameters
+                                                                                        //  -103 = composition not equal to 1
+             [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,                     // (OUTPUT) error string
              ref long hfldLen,
              ref long hfmixLen,
              ref long hrfLen,
              ref long hfilesLen,
              ref long herrLen);
 
-        /*! \brief Brief description.
-        *
-        *  Detailed description starts here.
-        */
+        /**********************************************************************************************
+         * iterate for saturated liquid and vapor states given temperature and the composition of one phase
+        ***********************************************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void SATTdll //!< a member function.
         (
-            ref double t,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,
-            ref long kph,
-            ref double p,
-            ref double Dl,
-            ref double Dv,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xliq,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xvap,
-            ref long ierr,
-            [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,
-            ref long herrleng
+            ref double t,                                                               // (INPUT) temperature [K]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,          // (INPUT) composition [array of mol frac]
+            ref long kph,                                                               // (INPUT) phase flag
+                                                                                        //  1 = input x is liquid composition (bubble point)
+                                                                                        //  2 = input x is vapor composition (dew point)
+                                                                                        //  3 = input x is liquid composition (freezing point)
+                                                                                        //  4 = input x is vapor composition (sublimation point)
+            ref double p,                                                               // (OUTPUT) pressure [kPa]
+            ref double Dl,                                                              // (OUTPUT) molar density of saturated liquid [mol/L]
+            ref double Dv,                                                              // (OUTPUT) molar density of saturated vapor [mol/L]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xliq,       // (OUTPUT) liquid phase composition [array of mol frac]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xvap,       // (OUTPUT) vapor phase composition [array of mol frac]
+            ref long ierr,                                                              // (OUTPUT) error flag
+                                                                                        //  0 = successful
+                                                                                        //  1 = T < Tmin
+                                                                                        //  8 = x out of range
+                                                                                        //  9 = T and x out of range
+                                                                                        //  120 = CRITP did not converge
+                                                                                        //  121 = T > Tcrit
+                                                                                        //  122 = TPRHO-liquid did not converge (pure fluid)
+                                                                                        //  123 = TPRHO-vapor did not converge (pure fluid)
+                                                                                        //  124 = pure fluid iteration did not converge
+                                                                                        // following 3 error codes are advisory -- iteration will either converge on later guess or error out
+                                                                                        //  -125 = TPRHO did not converge for parent ph (mix)
+                                                                                        //  -126 = TPRHO did not converge for incipient (mix)
+                                                                                        //  -127 = composition iteration did not converge
+                                                                                        //  128 = mixture iteration did not converge (error out from previous 3)
+            [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,                      // (OUTPUT) error string
+            ref long herrLen
         );
 
+
+        /*******************************************************************************************************************************
+         * calculates the phase boundary of a mixture at a given composition, and the critical point, cricondentherm, and cricondenbar
+         ******************************************************************************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void SATSPLNdll
         (
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,
-            ref long ierr,
-            [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,
-            ref long ln
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,      // (INPUT) composition [array of mol frac]
+            ref long ierr,                                                          // (OUTPUT) error flag: 0 = successful
+            [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,                  // (OUTPUT) error string
+            ref long herrLen
          );
 
+
+        /*************************************************************************
+         * converts quality and composition on a mole basis to a mass basis
+         *************************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void QMASSdll
         (
-            ref double qmol,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xl,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xv,
-            ref double qkg,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xlkg,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xvkg,
-            ref double wliq,
-            ref double wvap,
-            ref long ierr,
+            ref double qmol,                                                                // (INPUT) molar quality [moles vapor/total moles] See parameter 'q' in TPFLSHdll
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xl,             // (INPUT) composition of liquid phase [array of mol frac]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xv,             // (INPUT) composition of vapor phase [array of mol frac]
+            ref double qkg,                                                                 // (OUTPUT) quality on mass basis [mass of vapor/total mass]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xlkg,           // (OUTPUT) mass composition of liquid phase [array of mass frac]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xvkg,           // (OUTPUT) mass composition of vapor phase [array of mass frac]
+            ref double wliq,                                                                // (OUTPUT) molecular weight of liquid phase [g/mol]
+            ref double wvap,                                                                // (OUTPUT) molecular weight of vapor phase [g/mol]
+            ref long ierr,                                                                  // (OUTPUT) error flag: 0 = all inputs within limits, -19 = q < 0 or > 1
             [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,
-            ref long ln
+            ref long herrLen
         );
 
+
+        /*************************************************************************************
+         * compute thermal quantities as a function of temperature, density, and compositions using core
+         * functions (Helmholtz free energy, ideal gas heat capacity and various derivatives and integrals)
+         ************************************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void THERMdll
         (
-            ref double t,
-            ref double Dl,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,
-            ref double p,
-            ref double el,
-            ref double hl,
-            ref double sl,
-            ref double cvl,
-            ref double cpl,
-            ref double wl,
-            ref double hjt
+            ref double t,                                                           // temperature [K]
+            ref double Dl,                                                          // molar density [mol/L]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,      // composition [array of mol frac]
+            ref double p,                                                           // (OUTPUT) pressure [kPa]
+            ref double el,                                                          // (OUTPUT) internal energy [J/mol]
+            ref double hl,                                                          // (OUTPUT) enthalpy [J/mol]
+            ref double sl,                                                          // (OUTPUT) entropy [J/mol-K]
+            ref double cvl,                                                         // (OUTPUT) isochoric heat capacity [J/mol-K]
+            ref double cpl,                                                         // (OUTPUT) isobaric heat capacity [J/mol-K]
+            ref double wl,                                                          // (OUTPUT) speed of sound [m/s]
+            ref double hjt                                                          // (OUTPUT) isenthalpic Joule-Thomson coefficient [K/kPa]
         );
 
+
+        /******************************************************************
+         * compute the transport properties of thermal conductivity and 
+         * viscosity as functions of temperature, density, and composition
+         *******************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void TRNPRPdll
         (
-            ref double t,
-            ref double d,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,
-            ref double eta,
-            ref double tcx,
-            ref long ierr,
+            ref double t,                                                           // (INPUT) temperature [K]
+            ref double d,                                                           // (INPUT) molar density [mol/L]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,      // (INPUT) composition array [mol frac]
+            ref double eta,                                                         // (OUTPUT) viscosity [uPa.s]
+            ref double tcx,                                                         // (OUTPUT) thermal conductivity [W/m.K]
+            ref long ierr,                                                          // (OUTPUT) error flag:
+                                                                                    //  0 = successful
+                                                                                    //  -31 = temperature out of range for conductivity
+                                                                                    //  -32 = density out of range for conductivity
+                                                                                    //  -33 = T and D out of range for conductivity
+                                                                                    //  -41 = temperature out of range for viscosity
+                                                                                    //  -42 = density out of range for viscosity
+                                                                                    //  -43 = T and D out of range for viscosity
+                                                                                    //  -51 = T out of range for both visc and t.c.
+                                                                                    //  -52 = D out of range for both visc and t.c.
+                                                                                    //  -53 = T and/or D out of range for visc and t.c.
+                                                                                    //  39 = model not found for thermal conductivity
+                                                                                    //  40 = model not found for thermal conductivity or viscosity
+                                                                                    //  49 = model not found for viscosity
+                                                                                    //  50 = ammonia/water mixture (no properties calculated)
+                                                                                    //  51 = exactly at t, rhoc for a pure fluid; k is infinite
+                                                                                    //  -58,-59 = ECS model did not converge
             [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,
-            ref long ln
+            ref long herrLen
         );
 
+
+
+        /***************************************************
+         * critical parameters as a function of composition
+         ***************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void CRITPdll
         (
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,
-            ref double tc,
-            ref double pc,
-            ref double Dc,
-            ref long ierr,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,      // (INPUT) composition [array of mol frac]
+            ref double tc,                                                          // (OUTPUT) critical temperature [K]
+            ref double pc,                                                          // (OUTPUT) critical pressure [kPa]
+            ref double Dc,                                                          // (OUTPUT) critical density [mol/L]
+            ref long ierr,                                                          // (OUTPUT) error flag: 0=successful, 1=did not converge
             [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,
             ref long herrLen
          );
 
+
+        /*************************************************************************************************
+         * iterate for saturated liquid and vapor states given pressure and the composition of one phase
+         ************************************************************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void SATPdll
         (
-            ref double p,   // => pressure
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,  // => composition array
-            ref long kph,   // => phase flag 
-            ref double t,   // <= temp
-            ref double Dl,  //  => density of liquid
-            ref double Dv,  //  => density of vapor
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xliq,  // <= liquid composition
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xvap,  // <= vapor composition
-            ref long ierr,  // <=>
-            [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,  // <=> error string
-            ref long ln     // => length of error string
+            ref double p,                                                           // (INPUT) pressure [kPa]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,      // (INPUT) composition array [array of mol frac]
+            ref long kph,                                                           // (INPUT) phase flag. see same parameter in SATPdll
+            ref double t,                                                           // (OUTPUT) temperature [K]
+            ref double Dl,                                                          // (OUTPUT) density of liquid [mol/L]
+            ref double Dv,                                                          // (OUTPUT) density of vapor [mol/L]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xliq,   // (OUTPUT) liquid composition [array of mol frac]
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] xvap,   // (OUTPUT) vapor composition [array of mol frac]
+            ref long ierr,                                                          // (OUTPUT) error flag:
+                                                                                    //  0 = successful
+                                                                                    //  2 = P<Ptp
+                                                                                    //  4 = P< 0
+                                                                                    //  8 = x out of range
+                                                                                    //  12 = P and x out of range
+                                                                                    //  140 = CRITP did not converge
+                                                                                    //  141 = P> Pcrit
+                                                                                    //  142 = TPRHO-liquid did not converge (pure fluid)
+                                                                                    //  143 = TPRHO-vapor did not converge (pure fluid)
+                                                                                    //  144 = pure fluid iteration did not converge
+                                                                                    //  following 3 error codes are advisory--iteration will either converge on later guess or error out (ierr = 148)
+                                                                                    //  -144 = Raoult's law (mixture initial guess) did  not converge
+                                                                                    //  -145 = TPRHO did not converge for parent ph(mix)
+                                                                                    //  -146 = TPRHO did not converge for incipient(mix)
+                                                                                    //  -147 = composition iteration did not converge
+                                                                                    //  148 = mixture iteration did not converge (error out from previous 3)
+            [MarshalAs(UnmanagedType.VBByRefStr)] ref string herr,                  // (OUTPUT) error string
+            ref long herrLen
         );
 
+
+        /***********************************************************
+         * molecular weight for a mixture of specified composition
+         ***********************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void WMOLdll
         (
-           [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,  // => composition array
-           ref double wm     //
+           [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] x,   // (INPUT) composition array [array of mol frac]
+           ref double wm                                                        // (OUTPUT) molar mass [g/mol]
         );
 
 
-        /* Provides fluid constants for specified component */
+        /******************************************************
+         * Provides fluid constants for specified component 
+         ******************************************************/
         [DllImport(@"C:\Program Files (x86)\REFPROP\REFPRP64.dll", CharSet = CharSet.Ansi)]
         public static extern void INFOdll
-            (
-            ref long icomp, // Component number in mixture. 1 for pure fluid
-            ref double wmm, // molecular weight [g/mol]
-            ref double ttrp, // triple point temperature [K]
-            ref double tnbpt, // normal boiling point temperature [K]
-            ref double tc, // critical temperature [K]
-            ref double pc, // critical pressure [kPa]
-            ref double Dc, // critical density [mol/L]
-            ref double Zc, // compressibility at critical point [pc/(Rgas*Tc*Dc)]
-            ref double acf, // acentric factor [dimensionless]
-            ref double dip, // dipole moment [debeye]
-            ref double Rgas // gas constant [J/mol-K]
-            );
+        (
+            ref long icomp,     // (INPUT) Component number in mixture. 1 for pure fluid
+            ref double wmm,     // (OUTPUT) molecular weight [g/mol]
+            ref double ttrp,    // (OUTPUT) triple point temperature [K]
+            ref double tnbpt,   // (OUTPUT) normal boiling point temperature [K]
+            ref double tc,      // (OUTPUT) critical temperature [K]
+            ref double pc,      // (OUTPUT) critical pressure [kPa]
+            ref double Dc,      // (OUTPUT) critical density [mol/L]
+            ref double Zc,      // (OUTPUT) compressibility at critical point [pc/(Rgas*Tc*Dc)]
+            ref double acf,     // (OUTPUT) acentric factor [dimensionless]
+            ref double dip,     // (OUTPUT) dipole moment [debeye]
+            ref double Rgas     // (OUTPUT) gas constant [J/mol-K]
+        );
 
     }
 }
