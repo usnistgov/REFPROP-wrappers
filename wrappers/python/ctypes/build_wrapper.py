@@ -330,6 +330,9 @@ def gen_ctypes_wrappers(fcninfo, ofname):
 
     for fcn, data in sorted(six.iteritems(fcninfo)):
 
+        if 'REFPROP' in fcn:
+            print(data)
+
         function_pointer_string += ' '*8 + 'self._{name:s} = self._getfcn(self.dll, \'{name:s}\')\n'.format(name=fcn)
 
         i, o = [], []
@@ -346,11 +349,11 @@ def gen_ctypes_wrappers(fcninfo, ofname):
         headline = 'def {fname:s}(self,{inargs:s}):\n'.format(inargs=','.join(i), fname = fcn)
         body = '\"\"\"\n{proto:s}\n\"\"\"\n'.format(proto=proto)
 
-        def gen_val(typ, dim, default = ''):
+        def gen_val(typ, dim, default = '', inout=False):
             if typ == 'int' and dim == 0:
                 return 'ct.c_long({default:s})'.format(default=default)
             elif typ == 'int' and dim > 0:
-                return '({dim:d}*ct.c_long)()'.format(default=default, dim=dim)
+                return '({dim:d}*ct.c_long)()'.format(dim=dim)
             elif typ == 'int' and dim < 0:
                 return '(len({default:s})*ct.c_long)(*{default:s})'.format(default=default)
             elif typ == 'double' and dim == 0:
@@ -358,7 +361,10 @@ def gen_ctypes_wrappers(fcninfo, ofname):
             elif typ == 'double' and dim < 0:
                 return '(len({default:s})*ct.c_double)(*{default:s})'.format(default=default)
             elif typ == 'double' and dim > 0:
-                return '({dim:d}*ct.c_double)()'.format(default=default, dim=dim)
+                if inout:
+                    return '({dim:d}*ct.c_double)(*{default:s})'.format(default=default, dim=dim)
+                else:
+                    return '({dim:d}*ct.c_double)()'.format(dim=dim)
             elif typ == 'char' and dim != 0 and default:
                 return 'ct.create_string_buffer({default:s}.encode(\'utf-8\'),{dim:d})'.format(default=default, dim = abs(dim))
             elif typ == 'char' and dim != 0 and not default:
@@ -370,10 +376,15 @@ def gen_ctypes_wrappers(fcninfo, ofname):
         for arg in data['argnames']:
             if arg in data['input_args'] or arg in data['inout_args']:
                 typ, dim = data['input_args'].get(arg,None) or data['inout_args'].get(arg, None)
+                # if 'REFPROP' in fcn:
+                #     print(arg, typ, dim)
                 if dim == '*':
                     body += '{name:s} = '.format(name=arg) + 'ct.create_string_buffer({default:s},len{default:s})'.format(default=arg) + '\n'
                 else:
-                    body += '{name:s} = '.format(name=arg) + gen_val(typ, -dim, default = arg) + '\n'
+                    if arg in data['inout_args']:
+                        body += '{name:s} = '.format(name=arg) + gen_val(typ, dim, default = arg, inout=True) + '\n'
+                    else:    
+                        body += '{name:s} = '.format(name=arg) + gen_val(typ, -dim, default = arg) + '\n'
             elif arg in data['output_args']:
                 typ, dim = data['output_args'][arg]
                 body += '{name:s} = '.format(name=arg) + gen_val(typ, dim, default = '') + '\n'
@@ -438,9 +449,9 @@ def gen_ctypes_wrappers(fcninfo, ofname):
 
 if __name__=='__main__':
     fortran_root = r'R:\FORTRAN'
-    pyf = gen_pyf(fortran_root)
-    with open('data.pyf','w') as fp:
-        fp.write(pyf)
+    # pyf = gen_pyf(fortran_root)
+    # with open('data.pyf','w') as fp:
+    #     fp.write(pyf)
     with open('data.pyf') as fp:
         pyf = fp.read()
     fcninfo = gen_wrapper(pyf)

@@ -7,7 +7,7 @@ activate py27 && python setup.py bdist_wheel && activate py36 && python setup.py
 """
 
 setup(name='ctREFPROP',
-      version='0.7.1',
+      version='0.7.2',
       description='A ctypes wrapper for NIST REFPROP library',
       author='Ian H. Bell',
       author_email='ian.bell@nist.gov',
