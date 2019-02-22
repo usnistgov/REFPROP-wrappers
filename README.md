@@ -14,7 +14,7 @@ Hint: click on the name to be taken to the appropriate wrapper code
 * [Python](wrappers/python)
 * [MATLAB](wrappers/MATLAB)
 * [Excel](wrappers/Excel)
-* Labview (work in progress, for more information, please email damian.lauria@nist.gov)
+* [Labview](wrappers/Labview)
 * [C/C++](wrappers/C_CPP)
 * [C#](wrappers/Csharp)
 * [VB, VB.NET](http://trc.nist.gov/refprop/LINKING/Linking.htm#NETApplications)
