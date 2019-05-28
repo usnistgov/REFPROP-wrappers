@@ -58,6 +58,16 @@ If your python installation does not have ``pip`` installed (it is usually insta
 [v,e] = pyversion; system([e,' -m easy_install pip'])
 ```
 
+If you run into SSL problems, you may want to install the ctREFPROP wrapper directly from an Anaconda prompt. To do so, open an Anaconda prompt (Start->Anaconda prompt on windows).  Then run:
+``` 
+pip install -U ctREFPROP
+```
+If that doesn't work, please open an issue on github.  If installing directly from pip still doesn't work within an Anaconda prompt, then you may want to try to install the wheel from PYPI.  First go to https://pypi.org/project/ctREFPROP/#files and download the appropriate wheel for your version of Python (3 or 2), then in an anaconda prompt, do
+```
+pip install -U c:/path/to/ctREFPROP-0.7.3-py3-none-any.whl
+``
+where the path to the .whl file that you downloaded to your computer should be updated as needed.
+
 ## Use
 
 To initialize REFPROP, you tell it what the root path of your REFPROP installation is:
