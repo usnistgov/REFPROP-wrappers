@@ -82,12 +82,16 @@ ans =
 
   Python str with no properties.
 
-    10.0
+    10.0068
 ```
-As the first practical example of the use of the MATLAB interface, let's calculate the normal boiling point temperature of water at one atmosphere (1 bar = 101.325 kPa). 
+As the first practical example of the use of the MATLAB interface, let's calculate the normal boiling point temperature of water at one atmosphere (1 atm = 101325 Pa). 
 
 ```
->> r = RP.REFPROPdll('Water','PQ','T',int8(0),int8(0),int8(0),101.325,0.0,{1.0})
+>> MOLSI = RP.GETENUMdll(int8(0),'MOLAR BASE SI').iEnum;
+>> iMass = int8(0); ' 0: mass fractions; 1: molar fractions
+>> iFlag = int8(0);
+>> z = {1.0};
+>> r = RP.REFPROPdll('Water','PQ','T',MOLSI,iMass,iFlag,101325,0.0,z)
 
 ans = 
 
