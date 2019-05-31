@@ -88,8 +88,8 @@ As the first practical example of the use of the MATLAB interface, let's calcula
 
 ```
 >> MOLSI = RP.GETENUMdll(int8(0),'MOLAR BASE SI').iEnum;
->> iMass = int8(0); ' 0: mass fractions; 1: molar fractions
->> iFlag = int8(0);
+>> iMass = int8(0); % 0: molar fractions; 1: mass fractions
+>> iFlag = int8(0); % 0: don't call SATSPLN; 1: call SATSPLN
 >> z = {1.0};
 >> r = RP.REFPROPdll('Water','PQ','T',MOLSI,iMass,iFlag,101325,0.0,z)
 
