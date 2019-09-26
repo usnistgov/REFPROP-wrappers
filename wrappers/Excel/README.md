@@ -7,6 +7,8 @@ Please file an issue at https://github.com/usnistgov/REFPROP-issues and we will 
 
 In addition to the information below, please look at https://github.com/usnistgov/REFPROP-wrappers/issues/105
 
+To download the above files (XLS and XLA), click on the file, then the download button (right-ish side).
+
 Installation
 ------------
 
