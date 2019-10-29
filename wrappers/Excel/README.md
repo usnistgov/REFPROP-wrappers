@@ -13,7 +13,7 @@ Installation
 ------------
 
 For OSX with Office 365:
-(The following has only been tested with REFPROP 9.1 as that is what I currently have)
+(The following has only been tested with REFPROP 9.1)
 
 1.  Build librefprop.dylib following instructions on REFPROP-cmake
 2.  Create a folder named "refprop" in "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
