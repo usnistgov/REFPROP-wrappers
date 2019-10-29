@@ -12,6 +12,17 @@ To download the above files (XLS and XLA), click on the file, then the download 
 Installation
 ------------
 
+For OSX with Office 365:
+(The following has only been tested with REFPROP 9.1 as that is what I currently have)
+
+1.  Build librefprop.dylib following instructions on REFPROP-cmake
+2.  Create a folder named "refprop" in "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
+3.  Copy your Refprop FLUIDS and MIXTURES folders (make sure they are capitilized) into the refprop folder just created
+4.  Copy the librefprop.dylib created in Step 1 into the refprop folder
+5.  Download REFPRP91.XLA and move to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
+6.  Open Excel, select Developer tab, click on 'Excel Add-ins'. Click 'Browse' and navigate to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/REFPRP91.XLA"; select file and click 'Open'. Make sure the box for Refprp91 is checked.
+7.  Open Visual Basic editor (top left icon inside Developer tab). Inside the project box (upper left) select 'Refprop91Code' under REFPROP/Modules. Replace all instances of "$USER" with your username and save.
+
 The following outlines the procedure for using REFPROP within any spreadsheet in Office 2007 or 2010:
 
 1.  Open REFPROP.xls and save it as an add-in, REFPROP.xla or REFPROP.xlam, in the main REFPROP folder, C:\Program Files\REFPROP.
