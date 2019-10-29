@@ -19,9 +19,9 @@ For OSX with Office 365:
 2.  Create a folder named "refprop" in "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
 3.  Copy your Refprop FLUIDS and MIXTURES folders (make sure they are capitilized) into the refprop folder just created
 4.  Copy the librefprop.dylib created in Step 1 into the refprop folder
-5.  Download REFPRP91.XLA and move to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
-6.  Open Excel, select Developer tab, click on 'Excel Add-ins'. Click 'Browse' and navigate to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/REFPRP91.XLA"; select file and click 'Open'. Make sure the box for Refprp91 is checked.
-7.  Open Visual Basic editor (top left icon inside Developer tab). Inside the project box (upper left) select 'Refprop91Code' under REFPROP/Modules. Replace all instances of "$USER" with your username and save.
+5.  Download REFPRP91.XLA and move file to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/", replacing $USER with your username.
+6.  Open Excel, select Developer tab, click on 'Excel Add-ins'. Click 'Browse' and navigate to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/REFPRP91.XLA"; select file and click 'Open'. Make sure the box for 'Refprp91' is checked.
+7.  Open Visual Basic editor (top left icon inside Developer tab). Inside the project box (upper left) select 'Refprop91Code' under REFPROP/Modules. Read comments below first variable declaration for OSX; comment out fluid/mixture directory declarations and uncomment OSX ones. Replace all instances of "$USER" within the module with your username and save.
 
 The following outlines the procedure for using REFPROP within any spreadsheet in Office 2007 or 2010:
 
