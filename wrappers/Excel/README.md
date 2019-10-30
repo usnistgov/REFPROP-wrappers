@@ -33,11 +33,11 @@ For OSX with Office 365: (The following has only been tested with REFPROP 9.1)
     Private Const FluidsDirectory As String = "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/FLUIDS/"
     Private Const MixturesDirectory As String = "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/MIXTURES/"
     ```
-    Replace all occurances of "REFPRP64.DLL" with  
+    Replace all occurrences of "REFPRP64.DLL" with  
     
     "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/librefprop.dylib"
     
-    Replace all occurances of "$USER" with your username
+    Replace all occurrences of "$USER" with your username
     
 9.  Save and all REFPROP functions should be accessible in Excel
 
