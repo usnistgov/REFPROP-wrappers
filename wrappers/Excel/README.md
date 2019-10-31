@@ -20,7 +20,7 @@ REFPROP 10
 3.  Copy your Refprop FLUIDS and MIXTURES folders into the refprop folder just created
 4.  Copy the "librefprop.dylib" created in Step 1 into the refprop folder
 5.  Move your copy of "REFPROP.XLA" and "REFPROP_Ribbon.xlam" to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/", replacing $USER with your username
-6.  Open Excel, select Developer tab, click on 'Excel Add-ins'. Click 'Browse' and navigate to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/REFPROP.XLA"; select file and click 'Open'. Make sure the box for 'Refprop' is checked.
+6.  Open Excel, select Developer tab, click on 'Excel Add-ins'. Click 'Browse' and navigate to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/REFPROP.XLA"; select file and click 'Open'. Make sure the box for 'Refprop' is checked. Repeat for "REFPROP_Ribbon.xlam" and select 'REFPROP Ribbon'.
 7.  Open Visual Basic editor (top left icon inside Developer tab). Inside the project box (upper left) double-click 'Refprop10Code' under REFPROPExcelSpreadsheet/Modules.
 8.  Perform the following code edits:  
 
@@ -33,6 +33,7 @@ REFPROP 10
     hFld = "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/"
     ```
     replacing $USER with your username
+9.  Save and be amazed!
 
 REFPROP 9.1
 1.  Build "librefprop.dylib" following instructions on https://github.com/usnistgov/REFPROP-cmake
