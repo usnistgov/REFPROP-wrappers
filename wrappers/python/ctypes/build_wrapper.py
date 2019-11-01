@@ -327,6 +327,14 @@ def gen_ctypes_wrappers(fcninfo, ofname):
     contents = ''
     function_pointer_string = ''
     namedtuples_header = ' '*8 + '# Named tuples to contain the outputs of DLL calls\n'
+    enums_string = ''
+
+    # Also set the enumerated values for the units systems so that they need not be obtained
+    # by the user by a call to GETENUMdll for each enumerated value
+    for enum in ['DEFAULT','MOLE_SI','MASS_SI','SI_WITH_C','MOLAR_BASE_SI',
+                 'MASS_BASE_SI','ENGLISH','MOLAR_ENGLISH',
+                 'MKS','CGS','MIXED','MEUNITS']:
+        enums_string += ' '*8  + "self.{key:s} = self.GETENUMdll(0, '{skey:s}').iEnum".format(key=enum, skey = enum.replace('_', ' ')) + '\n'
 
     for fcn, data in sorted(six.iteritems(fcninfo)):
 
@@ -445,6 +453,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
         fp.write(wrapper_header)
         fp.write(namedtuples_header + '\n')
         fp.write(function_pointer_string + '\n')
+        fp.write(enums_string + '\n')
         fp.write(contents)
 
 if __name__=='__main__':

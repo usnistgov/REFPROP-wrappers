@@ -3,11 +3,11 @@ import setuptools
 
 """
 To upload: 
-activate py27 && python setup.py bdist_wheel && activate py36 && python setup.py bdist_wheel && twine upload dist/*.whl
+activate py27 && python setup.py bdist_wheel && activate py37 && python setup.py bdist_wheel && deactivate && twine upload dist/*.whl
 """
 
 setup(name='ctREFPROP',
-      version='0.7.3',
+      version='0.8',
       description='A ctypes wrapper for NIST REFPROP library',
       author='Ian H. Bell',
       author_email='ian.bell@nist.gov',
