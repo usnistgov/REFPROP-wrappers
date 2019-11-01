@@ -7,8 +7,62 @@ Please file an issue at https://github.com/usnistgov/REFPROP-issues and we will 
 
 In addition to the information below, please look at https://github.com/usnistgov/REFPROP-wrappers/issues/105
 
+To download the above files (XLS and XLA), click on the file, then the download button (right-ish side).
+
 Installation
 ------------
+
+For OSX with Office 365:
+
+REFPROP 10
+1.  Build "librefprop.dylib" following instructions on https://github.com/usnistgov/REFPROP-cmake
+2.  Create a folder named "refprop" in "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
+3.  Copy your Refprop FLUIDS and MIXTURES folders into the refprop folder just created
+4.  Copy the "librefprop.dylib" created in Step 1 into the refprop folder
+5.  Move your copy of "REFPROP.XLA" and "REFPROP_Ribbon.xlam" to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/", replacing $USER with your username
+6.  Open Excel, select Developer tab, click on 'Excel Add-ins'. Click 'Browse' and navigate to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/REFPROP.XLA"; select file and click 'Open'. Make sure the box for 'Refprop' is checked. Repeat for "REFPROP_Ribbon.xlam" and select 'REFPROP Ribbon'.
+7.  Open Visual Basic editor (top left icon inside Developer tab). Inside the project box (upper left) double-click 'Refprop10Code' under REFPROPExcelSpreadsheet/Modules.
+8.  Perform the following code edits:  
+
+    Replace "REFPRP64.DLL" with 
+
+    "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/librefprop.dylib", replacing $USER with your username
+
+    Find 'Set the path to the fluid files.' in the VBA code and follow the instructions to set your fluids path as:
+    ``` 
+    hFld = "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/"
+    ```
+    replacing $USER with your username
+9.  Save and be amazed!
+
+REFPROP 9.1
+1.  Build "librefprop.dylib" following instructions on https://github.com/usnistgov/REFPROP-cmake
+2.  Create a folder named "refprop" in "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
+3.  Copy your Refprop FLUIDS and MIXTURES folders (make sure they are capitalized) into the refprop folder just created
+4.  Copy the "librefprop.dylib" created in Step 1 into the refprop folder
+5.  Download "REFPRP91.XLA" and move file to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/", replacing $USER with your username
+6.  Open Excel, select Developer tab, click on 'Excel Add-ins'. Click 'Browse' and navigate to "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/REFPRP91.XLA"; select file and click 'Open'. Make sure the box for 'Refprp91' is checked.
+7.  Open Visual Basic editor (top left icon inside Developer tab). Inside the project box (upper left) double-click 'Refprop91Code' under REFPROP/Modules.
+8.  Perform the following code edits:  
+    
+    Replace
+    ```
+    Private Const FluidsDirectory As String = "fluids\"
+    Private Const MixturesDirectory As String = "mixtures\"
+    ```
+    with
+    ```
+    Private Const FluidsDirectory As String = "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/FLUIDS/"
+    Private Const MixturesDirectory As String = "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/MIXTURES/"
+    ```
+    Replace all occurrences of "REFPRP64.DLL" with  
+    
+    "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/librefprop.dylib"
+    
+    Replace all occurrences of "$USER" with your username
+    
+9.  Save and all REFPROP functions should be accessible in Excel
+
 
 The following outlines the procedure for using REFPROP within any spreadsheet in Office 2007 or 2010:
 
