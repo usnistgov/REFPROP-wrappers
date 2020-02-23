@@ -327,14 +327,16 @@ def gen_ctypes_wrappers(fcninfo, ofname):
     contents = ''
     function_pointer_string = ''
     namedtuples_header = ' '*8 + '# Named tuples to contain the outputs of DLL calls\n'
-    enums_string = ''
 
     # Also set the enumerated values for the units systems so that they need not be obtained
     # by the user by a call to GETENUMdll for each enumerated value
+    enums_string = ' '*8 + 'try:\n'
     for enum in ['DEFAULT','MOLE_SI','MASS_SI','SI_WITH_C','MOLAR_BASE_SI',
                  'MASS_BASE_SI','ENGLISH','MOLAR_ENGLISH',
                  'MKS','CGS','MIXED','MEUNITS']:
-        enums_string += ' '*8  + "self.{key:s} = self.GETENUMdll(0, '{skey:s}').iEnum".format(key=enum, skey = enum.replace('_', ' ')) + '\n'
+        enums_string += ' '*12  + "self.{key:s} = self.GETENUMdll(0, '{skey:s}').iEnum".format(key=enum, skey = enum.replace('_', ' ')) + '\n'
+    enums_string += ' '*8 + 'except:\n'
+    enums_string += ' '*12 + 'pass:\n'
 
     for fcn, data in sorted(six.iteritems(fcninfo)):
 
@@ -458,9 +460,9 @@ def gen_ctypes_wrappers(fcninfo, ofname):
 
 if __name__=='__main__':
     fortran_root = r'R:\FORTRAN'
-    # pyf = gen_pyf(fortran_root)
-    # with open('data.pyf','w') as fp:
-    #     fp.write(pyf)
+    pyf = gen_pyf(fortran_root)
+    with open('data.pyf','w') as fp:
+        fp.write(pyf)
     with open('data.pyf') as fp:
         pyf = fp.read()
     fcninfo = gen_wrapper(pyf)
