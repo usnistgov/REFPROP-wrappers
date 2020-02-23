@@ -3,7 +3,7 @@ import setuptools
 
 """
 To upload: 
-activate py27 && python setup.py bdist_wheel && activate py37 && python setup.py bdist_wheel && deactivate && twine upload dist/*.whl
+conda activate py27 && python setup.py bdist_wheel && conda activate py37 && python setup.py bdist_wheel && conda deactivate && twine upload dist/*.whl
 """
 
 setup(name='ctREFPROP',
