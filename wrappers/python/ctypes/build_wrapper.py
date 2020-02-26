@@ -336,7 +336,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
                  'MKS','CGS','MIXED','MEUNITS']:
         enums_string += ' '*12  + "self.{key:s} = self.GETENUMdll(0, '{skey:s}').iEnum".format(key=enum, skey = enum.replace('_', ' ')) + '\n'
     enums_string += ' '*8 + 'except:\n'
-    enums_string += ' '*12 + 'pass:\n'
+    enums_string += ' '*12 + 'pass\n'
 
     for fcn, data in sorted(six.iteritems(fcninfo)):
 
@@ -459,7 +459,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
         fp.write(contents)
 
 if __name__=='__main__':
-    fortran_root = r'R:\FORTRAN'
+    fortran_root = r'Q:\PUBLIC\ERIC\INSTALL\BETA\FORTRAN'
     pyf = gen_pyf(fortran_root)
     with open('data.pyf','w') as fp:
         fp.write(pyf)
