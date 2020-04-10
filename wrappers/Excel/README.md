@@ -9,12 +9,24 @@ In addition to the information below, please look at https://github.com/usnistgo
 
 To download the above files (XLS and XLA), click on the file, then the download button (right-ish side).
 
-Installation
-------------
+## Installation
 
-For OSX with Office 365:
+### Windows 
 
-REFPROP 10
+The following outlines the procedure for using REFPROP within any spreadsheet in Office 2007 or 2010:
+
+1.  Open REFPROP.xls and save it as an add-in, REFPROP.xla or REFPROP.xlam, in the main REFPROP folder, C:\Program Files\REFPROP.
+2.  Go to File/Options/Trust Center/Trust Center Settings (button at bottom right).
+3.  Select "Trusted Locations" on the left.  Click "Add new location".  Browse to C:\Program Files\REFPROP, select "Subfolders of this location are also trusted", and click "OK".
+4.  Go to File/Options/Add-Ins and select "Excel Add-ins" in the Manage drop-down box at the bottom, and click Go.
+5.  Click "Browse", and navigate to C:\Program Files\REFPROP, select REFPROP.xlam and click OK.  IMPORTANT: Do not simply select REFPROP.xlam when it first comes up, as this will be in the wrong folder (C:\Documents and Settings\Username\Application Data\Microsoft\AddIns), which is not trusted and will not work. 
+6.  Select the Data tab, and click on Edit Links.  Select REFPROP.xlam.  Click on Change Source and navigate to C:\Program Files\REFPROP.  Select REFPROP.xlam there and click OK.  (This is just to make sure you are connected to the correct Add-in.)  If the Data tab is greyed out, start typing in a Refprop command [such as “=Density("water","TP","SI",300,1) ] and the button should become active.
+7.  Once you have the xla or xlam file set up, you can open a brand new work book and the functions should be available to you.  Do not continue working with the Refprop.xls file since it still contains the VB code that is also in the xlam file.  In this manner, future updates from NIST of the Refprop.xls file can be resaved as the xlam file, and all of your work books will have access to the most recent code.
+
+### For OSX with Office 365:
+
+**REFPROP 10**
+
 1.  Build "librefprop.dylib" following instructions on https://github.com/usnistgov/REFPROP-cmake
 2.  Create a folder named "refprop" in "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
 3.  Copy your Refprop FLUIDS and MIXTURES folders into the refprop folder just created
@@ -35,7 +47,8 @@ REFPROP 10
     replacing $USER with your username
 9.  Save and be amazed!
 
-REFPROP 9.1
+**REFPROP 9.1**
+
 1.  Build "librefprop.dylib" following instructions on https://github.com/usnistgov/REFPROP-cmake
 2.  Create a folder named "refprop" in "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
 3.  Copy your Refprop FLUIDS and MIXTURES folders (make sure they are capitalized) into the refprop folder just created
@@ -64,15 +77,7 @@ REFPROP 9.1
 9.  Save and all REFPROP functions should be accessible in Excel
 
 
-The following outlines the procedure for using REFPROP within any spreadsheet in Office 2007 or 2010:
 
-1.  Open REFPROP.xls and save it as an add-in, REFPROP.xla or REFPROP.xlam, in the main REFPROP folder, C:\Program Files\REFPROP.
-2.  Go to File/Options/Trust Center/Trust Center Settings (button at bottom right).
-3.  Select "Trusted Locations" on the left.  Click "Add new location".  Browse to C:\Program Files\REFPROP, select "Subfolders of this location are also trusted", and click "OK".
-4.  Go to File/Options/Add-Ins and select "Excel Add-ins" in the Manage drop-down box at the bottom, and click Go.
-5.  Click "Browse", and navigate to C:\Program Files\REFPROP, select REFPROP.xlam and click OK.  IMPORTANT: Do not simply select REFPROP.xlam when it first comes up, as this will be in the wrong folder (C:\Documents and Settings\Username\Application Data\Microsoft\AddIns), which is not trusted and will not work. 
-6.  Select the Data tab, and click on Edit Links.  Select REFPROP.xlam.  Click on Change Source and navigate to C:\Program Files\REFPROP.  Select REFPROP.xlam there and click OK.  (This is just to make sure you are connected to the correct Add-in.)  If the Data tab is greyed out, start typing in a Refprop command [such as “=Density("water","TP","SI",300,1) ] and the button should become active.
-7.  Once you have the xla or xlam file set up, you can open a brand new work book and the functions should be available to you.  Do not continue working with the Refprop.xls file since it still contains the VB code that is also in the xlam file.  In this manner, future updates from NIST of the Refprop.xls file can be resaved as the xlam file, and all of your work books will have access to the most recent code.
 
 Other tips:
 
