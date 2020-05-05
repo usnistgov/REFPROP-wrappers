@@ -66,7 +66,7 @@ Some important notes:
 
 ## Parallel calls
 
-As mentioned above, calls to REPROP are NOT(!) threadsafe.  Therefore to call in parallel, you must fork threads, load the fluids in each thread in serial, and then make your calls in parallel.  Here is an example in Python with all the bits and pieces you'll need:
+As mentioned above, calls to REPROP are NOT(!) threadsafe.  Therefore to call in parallel, you must fork processes, load the fluids in each process in serial, and then make your calls in parallel. Here is an example in Python with all the bits and pieces you'll need for REFPROP 10:
 
 ``` python
 import timeit
