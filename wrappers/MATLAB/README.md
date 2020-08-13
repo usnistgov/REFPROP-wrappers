@@ -50,12 +50,12 @@ If you have multiple copies of Python on your computer already (in conda environ
 
 Finally, you need to install the ctREFPROP package (a ``ctypes``-based interface to REFPROP) into your given copy of python.  This one-liner calls the ``pip`` program of Python to install the ctREFPROP package from the PYPI package index.  Watch out for the spaces in the arguments, they are important!:
 ``` MATLAB
-[v,e] = pyversion; system([e,' -m pip install --user -U ctREFPROP'])
+[v,e] = pyversion; system(['"', e, '" -m pip install --user -U ctREFPROP'])
 ```
 
 If your python installation does not have ``pip`` installed (it is usually installed by default), you can install it with
 ``` MATLAB
-[v,e] = pyversion; system([e,' -m easy_install pip'])
+[v,e] = pyversion; system(['"', e, '" -m easy_install pip'])
 ```
 
 If you run into SSL problems, you may want to install the ctREFPROP wrapper directly from an Anaconda prompt. To do so, open an Anaconda prompt (Start->Anaconda prompt on windows).  Then run:
