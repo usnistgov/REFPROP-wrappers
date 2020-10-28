@@ -6,7 +6,7 @@ By Ian Bell, NIST, 2018 (ian.bell@nist.gov)
 """
 
 # Python standard library
-import os, timeit, itertools
+import os, timeit
 from multiprocessing import Pool
 
 # Pip installable packages
@@ -15,21 +15,25 @@ from ctREFPROP.ctREFPROP import REFPROPFunctionLibrary
 # Conda packages
 import numpy as np
 
-def parallel_evaluate(mixture):
+def parallel_evaluate(mixtures):
     """ 
     Fully encapsulated for multiprocessing support 
     Fresh copy of REFPROP will be loaded into each instance, for parallelism
     """
     root = os.environ['RPPREFIX']
-    R = REFPROPFunctionLibrary(root)
+    R = REFPROPFunctionLibrary(os.path.join(root, 'REFPRP64.dll')) # Change this as needed
     R.SETPATHdll(root)
-    components, compositions = mixture
-    names = '*'.join([f+'.FLD' for f in components])
-    r = R.REFPROPdll(names, 'TP', 'D', R.MOLAR_BASE_SI,0,0,300,10e3,compositions)
-    if r.ierr == 0:
-        return [r.Output[0]]
-    else:
-        return r.herr
+    out = []
+    names, compositions = mixtures
+    ierr, herr = R.SETUPdll(2, '|'.join([f+'.FLD' for f in names]), 'HMX.BNC', 'DEF')
+    if ierr != 0:
+        print(ierr, herr)
+        return herr
+    
+    kphase = 2 # Vapor
+    kguess = 0 # Don't use guesses
+    rho, ierr, herr = R.TPRHOdll(300.0, 10.0, compositions, kphase, kguess,-1)
+    out.append(rho)
     return out 
             
 if __name__=='__main__':
@@ -48,15 +52,8 @@ if __name__=='__main__':
     print(toc-tic, 's for serial evaluation')
 
     # Parallel evaluation
-    p = Pool(2)
+    p = Pool(4)
     tic = timeit.default_timer()
     outparallel = p.map(parallel_evaluate, inputs)
     toc = timeit.default_timer()
     print(toc-tic, 's for parallel evaluation')
-
-    # Unravel the nested lists
-    serial = np.array(list(itertools.chain.from_iterable(outserial)))
-    parallel = np.array(list(itertools.chain.from_iterable(outparallel)))
-    err = 100*(serial/parallel-1)
-
-    print('error: ', err, '%')
