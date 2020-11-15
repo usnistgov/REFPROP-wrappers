@@ -1,6 +1,6 @@
 # Mathcad Prime REFPROP Wrapper
 
-This directory contains the Microsoft Visual Studio 2015 solution files for building the **NIST RefProp** add-in for **Mathcad Prime**.  It is targeted for **Prime 6.0.0.0*, but has been compiled and tested on versions 3 through 6.
+This directory contains the Microsoft Visual Studio 2015 solution files for building the **NIST RefProp** add-in for **Mathcad Prime**.  It is targeted for **Prime 6.0.0.0**, but has been compiled and tested on versions 3 through 6.
 
 ## Building the Mathcad Prime Custom Function DLL
 
