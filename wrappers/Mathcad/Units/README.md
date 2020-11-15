@@ -1,0 +1,3 @@
+## Unit Aware User Defined Functions
+
+Include the appropriate reference worksheet in your own **Mathcad 15** (RefProp_units.xmcd) or **Mathcad Prime** (RefProp_units.mcdx) worksheets to provide user-defined function wrappers for all of the **NIST RefProp Add-in** function calls and more.  View these files in Mathcad 15 (.xmcd) or Mathcad Prime (.mcdx) to see all of the functions available.  The are also listed in the Mathcad 15 Handbook (e-Book) and Appendix C of the User Guid PDF under PrimeDocs.
