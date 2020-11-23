@@ -7,7 +7,7 @@ LRESULT rp_Extrap(
 	char hset[23]    = "Extrapolation Enabled";
 	char hnotset[23] = "Extrapolation Disabled";
 
-	iset = (int)flag->real;
+	iset = static_cast<int>(flag->real);
 
     if ((iset == 0) || (iset = 1))
         extr = iset;

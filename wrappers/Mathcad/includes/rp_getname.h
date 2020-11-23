@@ -21,7 +21,7 @@ LRESULT rp_Getname(
     if (ierr != 0)
         return MAKELRESULT(ierr, 1);
 
-    icomp = (int)comp->real;
+    icomp = static_cast<int>(comp->real);
 
     if ((icomp == 0) && (upper(strFluid).find(".MIX") != strFluid.npos)) //     if this is a mixture file (*.mix),
     {

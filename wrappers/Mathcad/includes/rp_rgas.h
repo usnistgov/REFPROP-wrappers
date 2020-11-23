@@ -14,7 +14,7 @@ LRESULT rp_Rgas(
     if( comp->imag != 0.0 )
 		return MAKELRESULT(MUST_BE_REAL,2);
 	else
-		icomp = (int)comp->real;
+		icomp = static_cast<int>(comp->real);
 	
     if ((icomp > ncomp) || (icomp < 0))
     {

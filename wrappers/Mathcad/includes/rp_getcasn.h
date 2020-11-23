@@ -22,7 +22,7 @@ LRESULT rp_GetCAS(
     if (ierr != 0)
         return MAKELRESULT(FLUID_NOT_FOUND, 1);
 
-    icomp = (int)comp->real;
+    icomp = static_cast<int>(comp->real);
     if (icomp == 0)
     {
         if (ncomp == 1)

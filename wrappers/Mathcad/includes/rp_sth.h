@@ -37,7 +37,7 @@ LRESULT rp_Sth(
 		return MAKELRESULT(MUST_BE_REAL,4);
 	else
 	{
-		kr = (int)r->real;  // Convert to integer
+		kr = static_cast<int>(r->real);  // Convert to integer
 		// root must be 1 or 2...
 		if ((kr<1)||(kr>2)) return MAKELRESULT(INVALID_FLAG,4); 
 	}

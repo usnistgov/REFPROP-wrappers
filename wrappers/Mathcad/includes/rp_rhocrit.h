@@ -16,7 +16,7 @@ LRESULT rp_Rhocrit(
     if( comp->imag != 0.0 )
 		return MAKELRESULT(1,2);
 	else
-		icomp = (int)comp->real;
+		icomp = static_cast<int>(comp->real);
 	
 	if ((icomp > ncomp)||(icomp < 0))
 		return MAKELRESULT(10,2);

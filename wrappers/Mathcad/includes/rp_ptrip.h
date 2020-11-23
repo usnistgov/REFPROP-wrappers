@@ -23,7 +23,7 @@ LRESULT rp_Ptrip(
     if( comp->imag != 0.0 )            // If Imaginary part of component not zero..
 		return MAKELRESULT(MUST_BE_REAL,2);       //    Return and error,
 	else
-		icomp = (int)comp->real;       //    Otherwise, get the real part.
+		icomp = static_cast<int>(comp->real);       //    Otherwise, get the real part.
 	
 	if ((icomp > ncomp)||(icomp < 0))  // Illegal component number...
 		return MAKELRESULT(BAD_COMPONENT,2);      //    ...Return and error.
