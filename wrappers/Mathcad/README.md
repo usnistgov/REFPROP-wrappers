@@ -1,18 +1,14 @@
 # Mathcad REFPROP Wrapper
 
-Initial Mathcad wrappers (version 2.0) provided here by NNL (J. Henning) with approval. 
+The initial Mathcad wrapper was created by Jeff Henning of the Naval Nuclear Laboratory (NNL) and provided to the RefProp community here with agreement from NNL.  Patrick Fourspring (NNL) facilitated the agreement, which also included release of a Mathematica (Wolfram Language) wrapper package.
 
-This directory contains the source for building the Mathcad 15 and Mathcad Prime wrappers for the NIST RefProp materials library.   This is version 2.0 of the code which makes calls to the REFPROP.dll (or REFPROP64.dll) when NIST RefProp 9.1 or later is installed on the Windows 10 computer.
+## Overview
 
-## Using This Directory as a Git Repository
+The Mathcad wrapper provides a diverse range of add-in functions (all beginning with *rp_*) that make subsequent calls to the NIST RefProp DLL.  These wrapper functions will retrieve the requested fluid properties (based on the function name) for a specific fluid material and state point (based on the input parameters).  Utility functions are also provided for retrieving and setting specific NIST RefProp parameters and version information.
 
-In order to properly transfer the Mathcad 15 Handbook and Units directory, which consists of many Mathcad worksheets with the `.xmcd` and `.mcdx` file extensions, you will need a `.gitattributes` file (provided in this download) with the following lines in it:  
+This repository contains the source for building the Mathcad 15 and/or Mathcad Prime wrappers for the NIST RefProp materials library using a community or professional version of Microsoft Visual Studio with Visual C++.   This wrapper code, starting with version 2.0, uses [REFPROP-headers](https://github.com/CoolProp/REFPROP-headers) to make call directly to the REFPROP.dll (or REFPROP64.dll) when NIST RefProp 9.1 or later is installed.  Mathcad only runs on the Windows platform. 
 
-    *.xmcd binary
-    *.xmcdz binary
-    *.mdcx binary
-
-While the Mathcad 15 Handbook worksheets are XML and not binary, this attribute will keep git from messing with the CRLF on the line endings in the XML worksheets, corrupting them and making them unusable when committed or transferred to and from a Git remote repository.	
+------
 
 ## Building the Mathcad 15 add-in DLL
 
@@ -46,6 +42,8 @@ If you have a different version than **Mathcad Prime 6.0.0.0**, you will need to
     - Build Events > Post-Build Events
 to change the applicable `PTC\Mathcad Prime 6.0.0.0` path strings to the appropriate version for your system.
 
+------
+
 ## Using the RefProp Add-in in either Mathcad 15 or Mathcad Prime
 
 With the Mathcad wrapper DLL compiled and copied to the appropriate Mathcad directories, the RefProp functions,
@@ -65,11 +63,22 @@ See the documentation (Mathcad 15 Handbook and Mathcad Prime PDF User's Guide) f
 
 The files in the /Handbook directory can be copied into the /Handbook subdirectory in the Mathcad 15 installation path.  This copy procedure happens automatically when you compile and link the Mathcad Add-in DLL.  These files will allow the electronic handbook for RefProp to be available from the Mathcad **Help | e-Books** menu under **NIST RefProp**.  This electronic handbook will provide usage instruction and Mathcad usage examples that can be copied and pasted into your own worksheets.
   
-For more information on how to use the RefProp functions in either flavor of Mathcad, see [RefProp Help](./doc/HELP_EN/Refprop/RefpropHelp.htm)  
+For more information on how to use the RefProp functions in either flavor of Mathcad, see [RefProp Help](https://rawcdn.githack.com/henningjp/REFPROP-wrappers/fa07a8348c41330633af324482585637764709e4/wrappers/Mathcad/doc/HELP_EN/Refprop/RefpropHelp.htm)  
 
 ## Possible Future Enhancements
 
 1. Add new interface functions from RefProp 10 (if loaded) in addition to the legacy functions initially provided in version 2.0.
 2. Add a CMake build system to dynamically create the \build15 and \buildPrime directories, taking Mathcad and VS versions as parameters for a simpler build.
 
+------
+
+## A Note on Cloning and Transferring this Git Repository
+
+In order to properly transfer the Mathcad 15 Handbook and Units directory, which consists of many Mathcad worksheets with the `.xmcd` and `.mcdx` file extensions, you will need a `.gitattributes` file (provided in this download) with the following lines in it:  
+
+    *.xmcd binary
+    *.xmcdz binary
+    *.mdcx binary
+
+While the Mathcad 15 Handbook worksheets are XML and not binary, this attribute will keep git from messing with the CRLF on the line endings in the XML worksheets, corrupting them and making them unusable when committed or transferred to and from a Git remote repository.	
 
