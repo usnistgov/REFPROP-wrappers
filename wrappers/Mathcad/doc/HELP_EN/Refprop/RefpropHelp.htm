@@ -16,7 +16,7 @@
         <p>The NIST RefProp Add-in functions make calls to th NIST RefProp fluid properties
             DLL. All RefProp functions are prefixed with <b>rp_</b> followed by the function
             name. Please note that a <b class="hmath">fluid string</b> must be passed as
-            the first parameter to any fluid property functions. A Desctription of the
+            the first parameter to any fluid property functions. A Description of the
             functions follows below.</p>
         <h5><big>Fluid Setup</big></h5>
         <blockquote> <a name="setup"></a>
@@ -59,7 +59,7 @@
                             <h2><big>Table 1 : RefProp Pure Fluid Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="PureFluids.PNG" align="middle" border="1"> <a name="Pure"></a>
+                    <img src="./PureFluids.PNG" align="middle" border="1"> <a name="Pure"></a>
                 </ul>
                 <ul>
                     <ul>
@@ -67,7 +67,7 @@
                             <h2><big>Table 2 : RefProp Pseudo-Pure Fluid Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="PseudoPureFluids.PNG" align="middle" border="1"> <a name="PseudoPure"></a>
+                    <img src="./PseudoPureFluids.PNG" align="middle" border="1"> <a name="PseudoPure"></a>
                 </ul>
                 <ul>
                     <ul>
@@ -75,7 +75,7 @@
                             <h2><big>Table 3 : RefProp Predefined Mixture Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="Mixtures.PNG" align="middle" border="1"> <a name="Mixture"></a>
+                    <img src="./Mixtures.PNG" align="middle" border="1"> <a name="Mixture"></a>
                 </ul>
             </ul>
             <br><br>
@@ -187,7 +187,7 @@
             </ul>
             <a name="ttrip"></a>
             <p><b class="hmath">rp_ttrip(flstr,icomp)</b> returns the current fluid triple
-                point temperaute [K].</p>
+                point temperature [K].</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -213,7 +213,7 @@
             </ul>
             <a name="rhotrip"></a>
             <p><b class="hmath">rp_rhotrip(flstr,icomp)</b> returns the current fluid triple
-                point density [kg/m³].</p>
+                point density [kg/mÂ³].</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -226,7 +226,7 @@
             </ul>
             <a name="tcrit"></a>
             <p><b class="hmath">rp_tcrit(flstr,icomp)</b> returns the current fluid critical
-                point temperaute [K].</p>
+                point temperature [K].</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -252,7 +252,7 @@
             </ul>
             <a name="rhocrit"></a>
             <p><b class="hmath">rp_rhocrit(flstr,icomp)</b> returns the current fluid critical
-                point density [kg/m³].</p>
+                point density [kg/mÂ³].</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -263,9 +263,9 @@
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
                 </li>
             </ul>
-            <a name="rhocrit"></a>
+            <a name="rgas"></a>
             <p><b class="hmath">rp_rgas(flstr,icomp)</b> Returns the ideal gas constant used by
-                the loaded fluid [J/mol*K] or [kJ/kmol*K]. <i>This function is provided because there may be
+                the loaded fluid [J/(mol*K)] or [kJ/(kmol*K)]. <br><i>This function is provided because there may be
                     slight differences in the ideal gas constant in the definition of each fluid.
                     The "mixture" constant is calculated as the mole weighted average of each
                     component model's value.</i></p>
@@ -319,22 +319,22 @@
             <li>
                 <P><b class="hmath">g</b>, for the saturated vapor value</P>
             <li>
-                <p>(<i>none</i>), for the subcooled liquid or superheated vapor value</p>
+                <p>(<i>none</i>), for the sub-cooled liquid or superheated vapor value</p>
             </li>
         </ul>
         <P>The phase character is then followed by the required parameter symbol(s) (ie. <b class="hmath">
                 t, p, tp, ph, ps</b>).</P>
         <p>The table below lists a summary of all the thermodynamic and transport property
             functions with the units of the returned quantity and the required input
-            variables. <b><i>Please note that each function requires a fluid string (see above) as
+            variables. <br><b><i>Please note that each function requires a fluid string (see above) as
                     the first parameter, in addition to the parameters listed in the table.</i></b></p>
         <h2 align="center"><big>Table 2 : Property Function Summary</big></h2>
         <TABLE id="Table1" cellSpacing="1" cellPadding="3" width="520" align="center" border="3">
             <TR>
-                <TD align="right" width="130">Phase</TD>
+                <TD align="center" width="130">Phase</TD>
                 <TD align="center" width="160" colSpan="2" rowSpan="1">Saturated Liquid</TD>
                 <TD align="center" width="160" colSpan="2" rowSpan="1">Saturated Vapor</TD>
-                <TD align="center">Subcooled Liquid<br>
+                <TD align="center">Sub-cooled Liquid<br>
                     or
                     <br>
                     Superheated Vapor</TD>
@@ -349,7 +349,7 @@
             </TR>
             <TR>
                 <TD noWrap width="130"><b>Density</b>, rho<br>
-                    [kg/m³]</TD>
+                    [kg/mÂ³]</TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_rhoft</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_rhofp</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_rhogt</b></TD>
@@ -376,7 +376,7 @@
             </TR>
             <TR>
                 <TD noWrap width="130"><b>Entropy</b>, s<br>
-                    [kJ/kg-K]</TD>
+                    [kJ/(kg-K)]</TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_sft</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_sfp</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_sgt</b></TD>
@@ -385,7 +385,7 @@
             </TR>
             <TR>
                 <TD noWrap width="130"><b>Specific Heat</b>, Cp (isobaric)<br>
-                    [kJ/kg-K]</TD>
+                    [kJ/(kg-K)]</TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_cpft</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_cpfp</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_cpgt</b></TD>
@@ -394,7 +394,7 @@
             </TR>
             <TR>
                 <TD noWrap width="130"><b>Specific Heat</b>, Cv (isochoric)<br>
-                    [kJ/kg-K]</TD>
+                    [kJ/(kg-K)]</TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_cvft</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_cvfp</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_cvgt</b></TD>
@@ -420,8 +420,8 @@
                 <TD noWrap align="center" width="80"><b class="hmath">tp_ktp</b></TD>
             </TR>
             <TR>
-                <TD noWrap width="130"><b>Viscosity</b>, µ<br>
-                    [µPa-s]</TD>
+                <TD noWrap width="130"><b>Viscosity</b>, Âµ<br>
+                    [ÂµPa-s]</TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_muft</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_mufp</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_mugt</b></TD>
@@ -430,7 +430,7 @@
             </TR>
             <TR>
                 <TD noWrap width="130"><b>surface tension</b>, <font face="symbol" size="3">s</font><br>
-                    [µPa-s]</TD>
+                    [kg/sÂ²]</TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_surften</b></TD>
                 <TD noWrap align="center" width="80">n/a<sup>*</sup></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_surften</b></TD>
@@ -476,7 +476,7 @@
                 <li>
                     <p><b class="hmath">p</b> is the input pressure [MPa].</p>
                 <li>
-                    <p><b class="hmath">s</b> is the input entropy [kJ/kg-K].</p>
+                    <p><b class="hmath">s</b> is the input entropy [kJ/(kg-K)].</p>
                 </li>
             </ul>
             <a name="ths"></a>
@@ -492,7 +492,7 @@
                 <li>
                     <p><b class="hmath">h</b> is the input enthalpy [kJ/kg].</p>
                 <li>
-                    <p><b class="hmath">s</b> is the input entropy [kJ/kg-K].</p>
+                    <p><b class="hmath">s</b> is the input entropy [kJ/(kg-K)].</p>
                 </li>
             </ul>
             <a name="phs"></a>
@@ -508,12 +508,12 @@
                 <li>
                     <p><b class="hmath">h</b> is the input enthalpy [kJ/kg].</p>
                 <li>
-                    <p><b class="hmath">s</b> is the input entropy [kJ/kg-K].</p>
+                    <p><b class="hmath">s</b> is the input entropy [kJ/(kg-K)].</p>
                 </li>
             </ul>
             <a name="pth"></a>
             <p><b class="hmath">rp_pth(flstr,t,h,r)</b> Returns the fluid pressure [MPa] in any
-                phase, as a function of the temperatrue and enthalpy. The state point specified
+                phase, as a function of the temperatures and enthalpy. The state point specified
                 may be in any single phase vapor or liquid region, or in the two phase
                 vapor/liquid region.</p>
             <h4>Arguments:</h4>
@@ -532,7 +532,7 @@
             </ul>
             <a name="pts"></a>
             <p><b class="hmath">rp_pts(flstr,t,s,r)</b> Returns the fluid pressure [MPa] in any
-                phase, as a function of the temperatrue and entropy. The state point specified
+                phase, as a function of the temperatures and entropy. The state point specified
                 may be in any single phase vapor or liquid region, or in the two phase
                 vapor/liquid region.</p>
             <h4>Arguments:</h4>
@@ -543,14 +543,14 @@
                 <li>
                     <p><b class="hmath">t</b> is the input temperature [K].</p>
                 <li>
-                    <p><b class="hmath">s</b> is the input entropy [kJ/kg-K].</p>
+                    <p><b class="hmath">s</b> is the input entropy [kJ/(kg-K)].</p>
                 <li>
                     <p><b class="hmath">r</b> is the requested root. Lower density root is returned if
                         r=1, while the higher density root is returned if r=2.</p>
                 </li>
             </ul>
             <a name="rhoth"></a>
-            <p><b class="hmath">rp_rhoth(flstr,t,h,r)</b> Returns the fluid density [kg/m³] in
+            <p><b class="hmath">rp_rhoth(flstr,t,h,r)</b> Returns the fluid density [kg/mÂ³] in
                 any phase, as a function of the temperature and enthalpy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region.</p>
@@ -569,7 +569,7 @@
                 </li>
             </ul>
             <a name="rhots"></a>
-            <p><b class="hmath">rp_rhots(flstr,t,s,r)</b> Returns the fluid density [kg/m³] in
+            <p><b class="hmath">rp_rhots(flstr,t,s,r)</b> Returns the fluid density [kg/mÂ³] in
                 any phase, as a function of the temperature and entropy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region.</p>
@@ -581,14 +581,14 @@
                 <li>
                     <p><b class="hmath">t</b> is the input temperature [K].</p>
                 <li>
-                    <p><b class="hmath">s</b> is the input entropy [kJ/kg-K].</p>
+                    <p><b class="hmath">s</b> is the input entropy [kJ/(kg-K)].</p>
                 <li>
                     <p><b class="hmath">r</b> is the requested root. Lower density root is returned if
                         r=1, while the higher density root is returned if r=2.</p>
                 </li>
             </ul>
             <a name="rhoph"></a>
-            <p><b class="hmath">rp_rhoph(flstr,p,h)</b> Returns the fluid density [kg/m³] in
+            <p><b class="hmath">rp_rhoph(flstr,p,h)</b> Returns the fluid density [kg/mÂ³] in
                 any phase, as a function of the pressure and enthalpy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region.</p>
@@ -604,7 +604,7 @@
                 </li>
             </ul>
             <a name="rhops"></a>
-            <p><b class="hmath">rp_rhops(flstr,p,s)</b> Returns the fluid density [kg/m³] in
+            <p><b class="hmath">rp_rhops(flstr,p,s)</b> Returns the fluid density [kg/mÂ³] in
                 any phase, as a function of the pressure and entropy. The state point specified
                 may be in any single phase vapor or liquid region, or in the two phase
                 vapor/liquid region.</p>
@@ -616,11 +616,11 @@
                 <li>
                     <p><b class="hmath">p</b> is the input pressure [MPa].</p>
                 <li>
-                    <p><b class="hmath">s</b> is the input entropy [kJ/kg-K].</p>
+                    <p><b class="hmath">s</b> is the input entropy [kJ/(kg-K)].</p>
                 </li>
             </ul>
             <a name="sph"></a>
-            <p><b class="hmath">rp_sph(flstr,p,h)</b> Returns the fluid entropy [kJ/kg-K] in
+            <p><b class="hmath">rp_sph(flstr,p,h)</b> Returns the fluid entropy [kJ/(kg-K)] in
                 any phase, as a function of the pressure and enthalpy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region.</p>
@@ -636,7 +636,7 @@
                 </li>
             </ul>
             <a name="hps"></a>
-            <p><b class="hmath">rp_hps(flstr,p,s)</b> Returns the fluid enthalpy [kJ/kg-K] in
+            <p><b class="hmath">rp_hps(flstr,p,s)</b> Returns the fluid enthalpy [kJ/(kg-K)] in
                 any phase, as a function of the pressure and entropy. The state point specified
                 may be in any single phase vapor or liquid region, or in the two phase
                 vapor/liquid region.</p>
@@ -648,11 +648,11 @@
                 <li>
                     <p><b class="hmath">p</b> is the input pressure [MPa].</p>
                 <li>
-                    <p><b class="hmath">s</b> is the input entropy [kJ/kg-K].</p>
+                    <p><b class="hmath">s</b> is the input entropy [kJ/(kg-K)].</p>
                 </li>
             </ul>
             <a name="sth"></a>
-            <p><b class="hmath">rp_sth(flstr,t,h,r)</b> Returns the fluid entropy [kJ/kg-K] in
+            <p><b class="hmath">rp_sth(flstr,t,h,r)</b> Returns the fluid entropy [kJ/(kg-K)] in
                 any phase, as a function of the temperature and enthalpy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region. This function is not single valued so the desired
@@ -672,7 +672,7 @@
                 </li>
             </ul>
             <a name="hts"></a>
-            <p><b class="hmath">rp_hts(flstr,t,s)</b> Returns the fluid enthalpy [kJ/kg-K] in
+            <p><b class="hmath">rp_hts(flstr,t,s)</b> Returns the fluid enthalpy [kJ/(kg-K)] in
                 any phase, as a function of the temperature and entropy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region.</p>
@@ -684,7 +684,7 @@
                 <li>
                     <p><b class="hmath">p</b> is the input temperature [K].</p>
                 <li>
-                    <p><b class="hmath">s</b> is the input entropy [kJ/kg-K].</p>
+                    <p><b class="hmath">s</b> is the input entropy [kJ/(kg-K)].</p>
                 </li>
             </ul>
         </blockquote>

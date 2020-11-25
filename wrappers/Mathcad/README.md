@@ -63,7 +63,7 @@ See the documentation (Mathcad 15 Handbook and Mathcad Prime PDF User's Guide) f
 
 The files in the /Handbook directory can be copied into the /Handbook subdirectory in the Mathcad 15 installation path.  This copy procedure happens automatically when you compile and link the Mathcad Add-in DLL.  These files will allow the electronic handbook for RefProp to be available from the Mathcad **Help | e-Books** menu under **NIST RefProp**.  This electronic handbook will provide usage instruction and Mathcad usage examples that can be copied and pasted into your own worksheets.
   
-For more information on how to use the RefProp functions in either flavor of Mathcad, see [RefProp Help](https://rawcdn.githack.com/henningjp/REFPROP-wrappers/fa07a8348c41330633af324482585637764709e4/wrappers/Mathcad/doc/HELP_EN/Refprop/RefpropHelp.htm)  
+For more information on how to use the RefProp functions in either flavor of Mathcad, see [RefProp Help](https://raw.githack.com/henningjp/REFPROP-wrappers/Mathcad/wrappers/Mathcad/doc/HELP_EN/Refprop/RefpropHelp.htm)  
 
 ## Possible Future Enhancements
 
