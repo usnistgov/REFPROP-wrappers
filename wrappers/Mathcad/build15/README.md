@@ -9,7 +9,7 @@ To build the Mathcad 15 add-in DLL,
 1. Make sure that Mathcad is not running
 2. Go to the /build15 directory
 3. Use the `MathcadREFPROPwrapper.sln` file to open the solution in VisualStudio 2015 or later.  This will open the MathcadREFPROPwrapper project. 
-4. Make sure that the build is set to "**Release**" and target is "**Win32**" (Mathcad 15 is 32-bit) 
+4. Make sure that the build is set to "**Release**" and target is "**Win32**"/"**x86**" (Mathcad 15 is 32-bit) 
 5. Select **Build | Rebuild MathcadREFPROPwrapper**
 6. This will build the add-in DLL and it will be placed in the Mathcad 15 installation directory under **/userfi**
 7. The function interface doc (RefProp_EN.xml) will be copied to the Mathcad 15 installation directory under **/doc/funcdoc**
