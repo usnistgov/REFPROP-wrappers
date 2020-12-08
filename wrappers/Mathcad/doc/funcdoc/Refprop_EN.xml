@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FUNCTIONS>
+	<help_file>help_%s\Refprop\RefpropHelp.htm
+		<!-- Insert the name of your custom help file and path here -->
+		<!-- help_%s looks in the help file in ..\doc that corresponds -->
+		<!-- to your language version.  The user folder is there. -->
+	</help_file>
+	<!-- Below are the entries for Fluid Setup and Information -->
+	<function>
+		<name>rp_extrapolate</name>
+		<params>flag</params>
+		<category>NIST Refprop</category>
+		<description>Sets a flag that allows extrapolation to 1.5*Tmax and returns a verification string.  (flag = 0: no extrapolation past Tmax; 1: extrapolate to 1.5 x Tmax)</description>
+		<help_topic>extrapolate</help_topic>
+	</function>
+	<function>
+		<name>rp_getname</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the full fluid name description of the loaded fluid file. The parameter, icomp, is the component number in a mixture; 1 for a pure fluid. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string). </description>
+		<help_topic>getname</help_topic>
+	</function>
+	<function>
+		<name>rp_getcasn</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the CAS Number of the loaded fluid file. The parameter, icomp, is the component number in a mixture; 1 for a pure fluid. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>getcasn</help_topic>
+	</function>
+	<function>
+		<name>rp_getvers</name>
+		<params>idum</params>
+		<category>NIST Refprop</category>
+		<description>Returns the version of the Refprop Mathcad Add-in.  The parameter idum is an arbitrary number (ie. 0).</description>
+		<help_topic>getvers</help_topic>
+	</function>
+	<function>
+		<name>rp_getNIST</name>
+		<params>idum</params>
+		<category>NIST Refprop</category>
+		<description>Returns the version of the NIST Refprop library and materials properties being used.  The parameter idum is an arbitrary number (ie. 0).</description>
+		<help_topic>getNIST</help_topic>
+	</function>
+	<function>
+		<name>rp_getpath</name>
+		<params>idum</params>
+		<category>NIST Refprop</category>
+		<description>Returns the path found to the NIST Refprop DLL being used.  The parameter idum is an arbitrary number (ie. 0). This function can be useful when debugging the NIST Refprop installation location or when multiple version are loaded on the machine.</description>
+		<help_topic>getpath</help_topic>
+	</function>
+	<!-- Below are the entries for Fluid Constants -->
+	<function>
+		<name>rp_wmol</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the molecular weight of the loaded fluid [gm/mol].  The parameter, icomp, is the component number in a mixture; 0 for the mixture value (same as 1 for a pure fluid). The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>wmol</help_topic>
+	</function>
+	<function>
+		<name>rp_tcrit</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the critical temperature of the loaded fluid [K].  The parameter, icomp, is the component number in a mixture; 0 for the mixture value (same as 1 for a pure fluid). The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>tcrit</help_topic>
+	</function>
+	<function>
+		<name>rp_pcrit</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the critical pressure of the loaded fluid [MPa].  The parameter, icomp, is the component number in a mixture; 0 for the mixture value (same as 1 for a pure fluid). The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>pcrit</help_topic>
+	</function>
+	<function>
+		<name>rp_rhocrit</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the critical density of the loaded fluid [kg/m³].  The parameter, icomp, is the component number in a mixture; 0 for the mixture value (same as 1 for a pure fluid). The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>rhocrit</help_topic>
+	</function>
+	<function>
+		<name>rp_ttrip</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the triple point temperature of the loaded fluid [K].  The parameter, icomp, is the component number in a mixture; 0 for the mixture value (same as 1 for a pure fluid). The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>ttrip</help_topic>
+	</function>
+	<function>
+		<name>rp_ptrip</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the triple point pressure of the loaded fluid [MPa].  The parameter, icomp, is the component number in a mixture; 0 for the mixture value (same as 1 for a pure fluid). The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>ptrip</help_topic>
+	</function>
+	<function>
+		<name>rp_rhotrip</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the triple point density of the loaded fluid [kg/m³].  The parameter, icomp, is the component number in a mixture; 0 for the mixture value (same as 1 for a pure fluid). The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>rhotrip</help_topic>
+	</function>
+	<function>
+		<name>rp_rgas</name>
+		<params>flstr,icomp</params>
+		<category>NIST Refprop</category>
+		<description>Returns the ideal gas constant used by the loaded fluid [J/mol*K].  The parameter, icomp, is the component number in a mixture; 0 for the mixture value (same as 1 for a pure fluid). The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>rgas</help_topic>
+	</function>
+	<!-- Saturation properties as a function of temperature -->
+	<function>
+		<name>rp_psatt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturation pressure [MPa].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>psatt</help_topic>
+	</function>
+	<function>
+		<name>rp_rhoft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid density [kg/m³].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_hft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid enthalpy [kJ/kg].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_uft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid internal energy [kJ/kg].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_sft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid entropy [kJ/kg-K].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cpft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid isobaric specific heat [kJ/kg-K].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cvft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid isochoric specific heat [kJ/kg-K].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_wft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid sonic velocity [m/s].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_kft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid thermal conductivity [W/m-K].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_muft</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid viscosity [µPa-s].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_rhogt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor density [kg/m³].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_hgt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor enthalpy [kJ/kg].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_ugt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor internal energy [kJ/kg].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_sgt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor entropy [kJ/kg-K].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cpgt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor isobaric specific heat [kJ/kg-K].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cvgt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor isochoric specific heat [kJ/kg-K].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_wgt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor sonic velocity [m/s].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_kgt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor thermal conductivity [W/m-K].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_mugt</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor viscosity [µPa-s].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_surften</name>
+		<params>flstr,t</params>
+		<category>NIST Refprop</category>
+		<description>Returns the liquid-vapor surface tension coefficient [N/m].  The parameter, t, is the input saturation temperature [K].  The function is only defined for saturation temperatures between the triple point and the critical point.  Temperatures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<!-- Saturation properties as a function of pressure -->
+	<function>
+		<name>rp_tsatp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturation temperature [K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>tsatp</help_topic>
+	</function>
+	<function>
+		<name>rp_rhofp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid density [kg/m³].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_hfp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid enthalpy [kJ/kg].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_ufp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid internal energy [kJ/kg].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_sfp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid entropy [kJ/kg-K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cpfp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid isobaric specific heat [kJ/kg-K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cvfp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid isochoric specific heat [kJ/kg-K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_wfp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid sonic velocity [m/s].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_kfp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid thermal conductivity [W/m-K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_mufp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated liquid viscosity [µPa-s].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_rhogp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor density [kg/m³].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_hgp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor enthalpy [kJ/kg].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_ugp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor internal energy [kJ/kg].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_sgp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor entropy [kJ/kg-K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cpgp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor isobaric specific heat [kJ/kg-K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cvgp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor isochoric specific heat [kJ/kg-K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_wgp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor sonic velocity [m/s].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_kgp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor thermal conductivity [W/m-K].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_mugp</name>
+		<params>flstr,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the saturated vapor viscosity [µPa-s].  The parameter, p, is the input saturation pressure [MPa].  The function is only defined for saturation pressures between the triple point and the critical point.  Pressures outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<!-- Fluid properties as a function of temperature and pressure -->
+	<function>
+		<name>rp_rhotp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor density [kg/m³].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_htp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor enthalpy [kJ/kg].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_utp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor internal energy [kJ/kg].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_stp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor entropy [kJ/kg-K].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cptp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor isobaric specific heat [kJ/kg-K].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_cvtp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor isochoric specific heat [kJ/kg-K].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_wtp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor sonic velocity [m/s].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_ktp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor thermal conductivity [W/m-K].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<function>
+		<name>rp_mutp</name>
+		<params>flstr,t,p</params>
+		<category>NIST Refprop</category>
+		<description>Returns the subcooled liquid or superheated vapor viscosity [µPa-s].  The parameters, t and p, are the input temperature [K] and pressure [Mpa].  Each fluid is defined with minimum and maximum temperatures and pressures over which the property curves are defined.  Inputs outside this range will generate an error. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>fluid_props</help_topic>
+	</function>
+	<!-- Reverse functions returning temperature -->
+	<function>
+		<name>rp_tph</name>
+		<params>flstr,p,h</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid temperature in any phase [K].  The parameters, p and h, are the input pressure [MPa] and enthalpy [kJ/kg].  This function performs an iterative search for the state temperature and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>tph</help_topic>
+	</function>
+	<function>
+		<name>rp_tps</name>
+		<params>flstr,p,s</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid temperature in any phase [K].  The parameters, p and h, are the input pressure [MPa] and entropy [kJ/kg-K].  This function performs an iterative search for the state temperature and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>tps</help_topic>
+	</function>
+	<function>
+		<name>rp_ths</name>
+		<params>flstr,h,s</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid temperature in any phase [K].  The parameters, h and s, are the input enthalpy [kJ/kg] and entropy [kJ/kg-K].  This function performs an iterative search for the state temperature and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>ths</help_topic>
+	</function>
+	<!-- Reverse functions returning pressure -->
+	<function>
+		<name>rp_phs</name>
+		<params>flstr,h,s</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid pressure in any phase [MPa].  The parameters, h and s, are the input enthalpy [kJ/kg] and entropy [kJ/kg-K].  This function performs an iterative search for the state pressure and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>phs</help_topic>
+	</function>
+	<function>
+		<name>rp_pth</name>
+		<params>flstr,t,h,r</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid pressure in any phase [MPa].  The parameters, t and h, are the input temperature [K] and enthalpy [kJ/kg].  The parameter, r, specifies if the lower root (r=1) or the upper root (r=2) is requested.  This function performs an iterative search for the state pressure and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>pth</help_topic>
+	</function>
+	<function>
+		<name>rp_pts</name>
+		<params>flstr,t,s,r</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid pressure in any phase [MPa].  The parameters, t and s, are the input temperature [K] and entropy [kJ/kg-K].  The parameter, r, specifies if the lower root (r=1) or the upper root (r=2) is requested.  This function performs an iterative search for the state pressure and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>pts</help_topic>
+	</function>
+	<!-- Reverse functions returning density -->
+	<function>
+		<name>rp_rhoth</name>
+		<params>flstr,t,h,r</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid density in any single phase [kg/m³]. An error is returned in the two-phase saturation region.  The parameters, t and h, are the input temperature [K] and enthalpy [kJ/kg].  The parameter, r, specifies if the lower root (r=1) or the upper root (r=2) is requested.  This function performs an iterative search for the state pressure and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>rhoth</help_topic>
+	</function>
+	<function>
+		<name>rp_rhots</name>
+		<params>flstr,t,s,r</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid density in any single phase [kg/m³]. An error is returned in the two-phase saturation region.  The parameters, t and s, are the input temperature [K] and entropy [kJ/kg-K].  The parameter, r, specifies if the lower root (r=1) or the upper root (r=2) is requested.  This function performs an iterative search for the state pressure and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>rhots</help_topic>
+	</function>
+	<function>
+		<name>rp_rhoph</name>
+		<params>flstr,p,h,r</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid density in any single phase [kg/m³]. An error is returned in the two-phase saturation region.  The parameters, p and h, are the input pressure [MPa] and enthalpy [kJ/kg].  The parameter, r, specifies if the lower root (r=1) or the upper root (r=2) is requested.  This function performs an iterative search for the state pressure and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>rhoph</help_topic>
+	</function>
+	<function>
+		<name>rp_rhops</name>
+		<params>flstr,p,s,r</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid density in any single phase [kg/m³]. An error is returned in the two-phase saturation region.  The parameters, p and s, are the input pressure [MPa] and entropy [kJ/kg-K].  The parameter, r, specifies if the lower root (r=1) or the upper root (r=2) is requested.  This function performs an iterative search for the state pressure and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>rhops</help_topic>
+	</function>
+	<function>
+		<name>rp_sph</name>
+		<params>flstr,p,h</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid entropy in any phase [kJ/kg-K].  The parameters, p and h, are the input pressure [MPa] and enthalpy [kJ/kg].  This function performs an iterative search for the state temperature and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>sph</help_topic>
+	</function>
+	<function>
+		<name>rp_hps</name>
+		<params>flstr,p,s</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid enthalpy in any phase [kJ/kg].  The parameters, p and h, are the input pressure [MPa] and entropy [kJ/kg-K].  This function performs an iterative search for the state temperature and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>hps</help_topic>
+	</function>
+	<function>
+		<name>rp_sth</name>
+		<params>flstr,t,h,r</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid entropy in any phase [kJ/kg-K].  The parameters, t and h, are the input temperature [K] and enthalpy [kJ/kg].    The parameter, r, specifies if the lower root (r=1) or the upper root (r=2) is requested.  This function performs an iterative search for the state temperature and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>sph</help_topic>
+	</function>
+	<function>
+		<name>rp_hts</name>
+		<params>flstr,t,s</params>
+		<category>NIST Refprop</category>
+		<description>Returns the fluid enthalpy in any phase [kJ/kg].  The parameters, t and h, are the input temperature [K] and entropy [kJ/kg-K].  This function performs an iterative search for the state temperature and may be slower than other functions. The parameter, flstr, is a string containing the Refprop fluid file name (Press F1 for help on defining this string).</description>
+		<help_topic>hps</help_topic>
+	</function>
+</FUNCTIONS>
