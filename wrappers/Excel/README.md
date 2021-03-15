@@ -3,6 +3,8 @@
 Help!
 -----
 
+Most issues dealing with linking Refprop and Excel can be found below and at the following website:  https://pages.nist.gov/REFPROP-docs/#resolving-problems-linking-with-excel
+
 Please file an issue at https://github.com/usnistgov/REFPROP-issues and we will get back to you as quickly as possible.  Please don't email NIST staff directly, the only exception being if you have proprietary code that cannot be shared publicly.
 
 In addition to the information below, please look at https://github.com/usnistgov/REFPROP-wrappers/issues/105
