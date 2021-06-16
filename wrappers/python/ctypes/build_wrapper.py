@@ -280,8 +280,15 @@ def gen_wrapper(pyf):
             dim = 0
             if 'dimension' in line:
                 # find the dimension
-                match = re.findall(r'dimension\((.*?)\)',line)
-                dim = int(match[0])
+                match = re.findall(r'dimension\(+(.*?)\)+', line)
+                if match[0] == 'ncmax':
+                    dim = 20
+                elif match[0].lower() == 'ipropmax':
+                    dim = 200
+                elif match[0].lower() == 'nmxpar':
+                    dim = 6
+                else:
+                    dim = int(match[0])
 
             if 'integer' in line:
                 datatype = ('int', dim)
@@ -318,6 +325,12 @@ on {datetime:s}.  This interface was written by Ian Bell.
 If you have any problems, please file an issue at:
 https://github.com/usnistgov/REFPROP-wrappers/issues/
 """
+'''
+
+RPVersionhack = '''
+    def RPVersion(self):
+        """ Replace the normal implementation to get the semantic versioned version from REFPROPdll functionsupport getting version from 10.0.0 """
+        return self.REFPROPdll('','','DLL#',0,0,0,0,0,[1.0]).hUnits
 '''
 
 def gen_ctypes_wrappers(fcninfo, ofname):
@@ -456,7 +469,8 @@ def gen_ctypes_wrappers(fcninfo, ofname):
         fp.write(namedtuples_header + '\n')
         fp.write(function_pointer_string + '\n')
         fp.write(enums_string + '\n')
-        fp.write(contents)
+        fp.write(contents +'\n\n')
+        fp.write(RPVersionhack)
 
 if __name__=='__main__':
     fortran_root = r'Q:\PUBLIC\ERIC\INSTALL\BETA\FORTRAN'
