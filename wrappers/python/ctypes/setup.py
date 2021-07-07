@@ -7,7 +7,7 @@ conda activate py38 && python setup.py bdist_wheel && conda deactivate && twine 
 """
 
 setup(name='ctREFPROP',
-      version='0.9',
+      version='0.10',
       description='A ctypes wrapper for NIST REFPROP library',
       author='Ian H. Bell',
       author_email='ian.bell@nist.gov',
