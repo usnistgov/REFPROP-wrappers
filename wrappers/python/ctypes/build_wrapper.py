@@ -115,7 +115,7 @@ class REFPROPLibraryManager(object):
         # Construct the arguments
         c_path = ct.create_string_buffer(path.encode('utf-8'))
         c_shared_library_filename = ct.create_string_buffer(shared_library_filename.encode('utf-8'))
-        c_errcode = ct.c_long(0)
+        c_errcode = ct.c_int(0)
         c_errstr = ct.create_string_buffer(255)
 
         # Get the handle (hopefully)
@@ -202,8 +202,8 @@ class REFPROPInstance(object):
             self.managed_handle = managed_handle
 
         def __call__(self, *args, **kwargs):
-            handle = ct.c_long(self.managed_handle)
-            errcode = ct.c_long(0)
+            handle = ct.c_int(self.managed_handle)
+            errcode = ct.c_int(0)
             # Call the function, forwarding all arguments to the relevant function from the DLL
             self.f(handle, ct.byref(errcode), *args, **kwargs)
             # If it was not possible to get the handle, that is a terminal python-level error
@@ -374,11 +374,11 @@ def gen_ctypes_wrappers(fcninfo, ofname):
 
         def gen_val(typ, dim, default = '', inout=False):
             if typ == 'int' and dim == 0:
-                return 'ct.c_long({default:s})'.format(default=default)
+                return 'ct.c_int({default:s})'.format(default=default)
             elif typ == 'int' and dim > 0:
-                return '({dim:d}*ct.c_long)()'.format(dim=dim)
+                return '({dim:d}*ct.c_int)()'.format(dim=dim)
             elif typ == 'int' and dim < 0:
-                return '(len({default:s})*ct.c_long)(*{default:s})'.format(default=default)
+                return '(len({default:s})*ct.c_int)(*{default:s})'.format(default=default)
             elif typ == 'double' and dim == 0:
                 return 'ct.c_double({default:s})'.format(default=default)
             elif typ == 'double' and dim < 0:
@@ -474,7 +474,9 @@ def gen_ctypes_wrappers(fcninfo, ofname):
 
 if __name__=='__main__':
     fortran_root = r'Q:\PUBLIC\ERIC\INSTALL\BETA\FORTRAN'
-    pyf = gen_pyf(fortran_root)
+    if not os.path.exists(fortran_root):
+        raise ValueError("Bad fortran_root: "+ fortran_root)
+    pyf = gen_pyf(fortran_root+r'\DLLFILES')
     with open('data.pyf','w') as fp:
         fp.write(pyf)
     with open('data.pyf') as fp:
