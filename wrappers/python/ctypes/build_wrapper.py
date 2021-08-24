@@ -161,7 +161,7 @@ def REFPROPFunctionLibrary(name, shared_extension = None):
         if shared_extension is None:
             shared_extension = get_default_DLL_extension()
 
-        sos = [f for f in glob.glob(os.path.join(name, '*.' + shared_extension)) if 'ISOCHR' not in f]
+        sos = [f for f in glob.glob(os.path.join(name, '*.' + shared_extension)) if 'ISOCHR' not in f and '_thunk_pcwin64' not in f]
         if len(sos) == 0:
             raise ValueError('No shared libraries were found in the folder "{name:s}" with the extension ".{ext:s}"'.format(ext=shared_extension,name=name))
         elif len(sos) == 1:
@@ -329,8 +329,18 @@ https://github.com/usnistgov/REFPROP-wrappers/issues/
 
 RPVersionhack = '''
     def RPVersion(self):
-        """ Replace the normal implementation to get the semantic versioned version from REFPROPdll functionsupport getting version from 10.0.0 """
-        return self.REFPROPdll('','','DLL#',0,0,0,0,0,[1.0]).hUnits
+        """ Replace the normal implementation of RPVersion to get the semantic versioned 
+        version from REFPROPdll function to support getting version from 10.0.0 
+
+        Falls back to old implementation for REFPROP < 10.0.0
+        """
+        if self._REFPROPdll is not None:
+            return self.REFPROPdll('','','DLL#',0,0,0,0,0,[1.0]).hUnits
+        else:
+            hv = ct.create_string_buffer(255)
+            if self._RPVersion is None: raise ValueError("The function RPVersion could not be loaded from the shared library.")
+            self._RPVersion(hv,255)
+            return trim(hv.raw)
 '''
 
 def gen_ctypes_wrappers(fcninfo, ofname):
