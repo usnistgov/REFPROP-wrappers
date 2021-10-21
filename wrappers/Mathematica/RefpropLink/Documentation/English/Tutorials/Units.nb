@@ -1,0 +1,2043 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     78056,       2035]
+NotebookOptionsPosition[     59936,       1640]
+NotebookOutlinePosition[     60759,       1667]
+CellTagsIndexPosition[     60684,       1662]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "New in: ",
+ Cell["1.0", "HistoryData",
+  CellTags->"New",ExpressionUUID->"d084ca0a-268f-4ede-8d06-207d5e84a99b"],
+ " | Modified in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Modified",ExpressionUUID->"e765a361-9e29-4711-95e2-3278f881549b"],
+ " | Obsolete in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Obsolete",ExpressionUUID->"b0ef6890-1452-46c5-b4b0-484fc52bda43"],
+ " | Excised in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Excised",ExpressionUUID->"bf6affe9-cc21-4d24-8853-9350987209a8"]
+}], "History",
+ CellID->1247902091,ExpressionUUID->"1caa4da2-f151-442f-a0d7-9fe3759da451"],
+
+Cell[CellGroupData[{
+
+Cell["Categorization", "CategorizationSection",
+ CellID->1122911449,ExpressionUUID->"a3d8faa6-2ce3-4fa7-b045-3c136b001ff6"],
+
+Cell["Tutorial", "Categorization",
+ CellLabel->"Entity Type",
+ CellID->686433507,ExpressionUUID->"3c98faf4-be79-4839-a41d-6f83ca01dc81"],
+
+Cell["RefpropLink", "Categorization",
+ CellLabel->"Paclet Name",
+ CellID->605800465,ExpressionUUID->"b0997276-5cfb-4bc6-b95a-8378fb21a942"],
+
+Cell["RefpropLink`", "Categorization",
+ CellLabel->"Context",
+ CellID->468444828,ExpressionUUID->"6b3f4ee4-9e10-4c1b-aab5-4dbf33dfcee6"],
+
+Cell["RefpropLink/tutorial/RefpropLink Quantity Implementation", \
+"Categorization",
+ CellLabel->"URI",ExpressionUUID->"70127cc0-826f-4614-ae17-b081503ff111"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Keywords", "KeywordsSection",
+ CellID->1427428552,ExpressionUUID->"1541d5f7-b6a0-42d1-b09e-6413bc8ea3f9"],
+
+Cell["RefpropLink", "Keywords",
+ CellChangeTimes->{{3.818397903291265*^9, 3.8183979081123724`*^9}},
+ CellID->1251852827,ExpressionUUID->"20fc1729-47d6-4bc8-ba50-f8f3f9f13f2c"],
+
+Cell["Units", "Keywords",
+ CellChangeTimes->{{3.818397903291265*^9, 3.818397910599724*^9}},
+ CellID->40814159,ExpressionUUID->"7a00d3cd-1c21-4ba9-b7c3-ef6ec9671b16"],
+
+Cell["Quantities", "Keywords",
+ CellChangeTimes->{{3.818397903291265*^9, 3.8183979132835464`*^9}},
+ CellID->83968126,ExpressionUUID->"58c0c7a1-ce3c-4c79-8060-4a22cfb12bf3"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Details", "DetailsSection",
+ CellID->307771771,ExpressionUUID->"fac36d9c-87d2-4173-a458-c70caa0ef386"],
+
+Cell["Patrick Fourspring", "Details",
+ CellChangeTimes->{{3.8183979232189784`*^9, 3.8183979280849676`*^9}},
+ CellLabel->"Lead",
+ CellID->218895918,ExpressionUUID->"e2b1713d-671b-4425-8fe3-67f6a3667390"],
+
+Cell["WRI, Jeff Henning", "Details",
+ CellChangeTimes->{{3.8183979312834167`*^9, 3.8183979368355684`*^9}},
+ CellLabel->"Developers",
+ CellID->350963985,ExpressionUUID->"20f8d38b-7d6c-4285-9336-58204947b05e"],
+
+Cell["Jeff Henning", "Details",
+ CellChangeTimes->{{3.818397939211219*^9, 3.8183979430519466`*^9}},
+ CellLabel->"Authors",
+ CellID->795871300,ExpressionUUID->"9546fc14-2f1f-4f2c-9dda-deb1d7a8c556"],
+
+Cell["XXXX", "Details",
+ CellLabel->"Feature Name",
+ CellID->199739161,ExpressionUUID->"371f3cf8-464b-4b01-9fa4-b978e9fb36bb"],
+
+Cell["XXXX", "Details",
+ CellLabel->"QA",
+ CellID->40625308,ExpressionUUID->"4e9d265b-093d-4e32-917b-1e5f85c89de3"],
+
+Cell["XXXX", "Details",
+ CellLabel->"DA",
+ CellID->357121918,ExpressionUUID->"795396ee-5866-4a8b-a869-d45a00d37ba5"],
+
+Cell["XXXX", "Details",
+ CellLabel->"Docs",
+ CellID->35949532,ExpressionUUID->"74c3eaca-9f1c-46c7-81b4-d82b30881b65"],
+
+Cell["XXXX", "Details",
+ CellLabel->"Features Page Notes",
+ CellID->929432370,ExpressionUUID->"569b2c6f-b718-4464-a34c-bc8dc3dadd4f"],
+
+Cell["XXXX", "Details",
+ CellLabel->"Comments",
+ CellID->240026365,ExpressionUUID->"2142dc17-2d43-4bb2-840f-5f89013e6317"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["RefpropLink Units", "Title",
+ CellChangeTimes->{{3.818390107860553*^9, 3.8183901099918213`*^9}, {
+  3.830243834594347*^9, 3.8302438378792086`*^9}, {3.8311873880389185`*^9, 
+  3.831187391070809*^9}},
+ CellID->509267359,ExpressionUUID->"b0b5e3cf-7c82-4038-a307-647c5c736ce3"],
+
+Cell[TextData[{
+ "Wolfram Language (Mathematica) allows users to assign units to values using \
+the ",
+ Cell[BoxData[
+  ButtonBox["Quantity",
+   BaseStyle->"Link"]], "InlineFormula",ExpressionUUID->
+  "309e84e2-82a7-4f05-8081-3798dd70d880"],
+ " function to create Quantity data types.  RefpropLink is implemented to \
+handle inputs/outputs as Wolfram Language ",
+ Cell[BoxData[
+  ButtonBox["Quantity",
+   BaseStyle->"Link"]], "InlineFormula",ExpressionUUID->
+  "3c2612b8-6778-4e18-b09b-c73b5e55fe96"],
+ " values with units.  This ensures that values being passed to and from the \
+underlying NIST RefProp functions are in the appropriate system of units.   \
+However, RefpropLink may also be used with unit-less values if the user \
+prefers to work with non-Quantity, Real parameters."
+}], "Text",
+ CellChangeTimes->{{3.8253476493165693`*^9, 3.8253476528012533`*^9}, {
+  3.830270086024793*^9, 3.830270092232078*^9}, {3.83027013512796*^9, 
+  3.8302701485443473`*^9}, {3.8302844488116956`*^9, 3.83028452421896*^9}, {
+  3.8302847299307203`*^9, 3.830284809726248*^9}, {3.830284861481699*^9, 
+  3.8302848779785624`*^9}},
+ CellID->500433602,ExpressionUUID->"1076fc0a-c8b8-4be4-a022-9db01e54d8ca"],
+
+Cell[CellGroupData[{
+
+Cell["Predefined Unit Variables for Input", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellChangeTimes->{{3.8183899477985396`*^9, 3.8183899535172415`*^9}, {
+  3.818391657035658*^9, 3.8183916623564024`*^9}},
+ CellID->168392342,ExpressionUUID->"d1afd747-23a5-475d-8cb9-1eabd01ba948"],
+
+Cell[TextData[{
+ "To facilitate the input and conversion of units (Quantities), RefpropLink \
+provides a set of pre-defined ",
+ Cell[BoxData[
+  ButtonBox["Quantity",
+   BaseStyle->"Link"]], "InlineFormula",ExpressionUUID->
+  "58b34408-8616-47fb-9d7e-c640a8820140"],
+ " variables.  One of the design requirements for RefpropLink is to be able \
+to use it on off-line networks that do not necessarily have access to the \
+internet or Wolfram|Alpha and its natural language implementation of units.  \
+While the ",
+ Cell[BoxData[
+  ButtonBox["Quantity",
+   BaseStyle->"Link"]], "InlineFormula",ExpressionUUID->
+  "885e14b0-d5fe-4965-937b-c5d27613c35f"],
+ " function is available for applying units to the thermodynamic quantities \
+of interest, RefpropLink's short-cut variables provide a much simpler method \
+of unit entry."
+}], "Text",
+ CellChangeTimes->{{3.81839017714825*^9, 3.8183904170368414`*^9}, {
+  3.8183907949318433`*^9, 3.818390971727088*^9}, {3.830284887610792*^9, 
+  3.8302848930661974`*^9}, {3.8302849411146536`*^9, 3.830284971579151*^9}},
+ CellID->77774008,ExpressionUUID->"a332c712-1bac-42c5-884b-e6917c7b24ae"],
+
+Cell["The unit variables are created using this template:  ", "Text",
+ CellChangeTimes->{{3.8183910914739175`*^9, 3.8183910973820915`*^9}},
+ CellID->58461204,ExpressionUUID->"4ec575c2-11de-4c60-bd3c-b7dbc07e4fd7"],
+
+Cell[CellGroupData[{
+
+Cell["Length Units", "MathCaption",
+ CellChangeTimes->{{3.8183911288130765`*^9, 3.818391142461554*^9}},
+ CellID->225758353,ExpressionUUID->"91f19f27-a7f9-4a09-969d-72200665189d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"m", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Meters\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"in", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Inches\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ft", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Feet\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.818391152304242*^9, 3.8183912039002714`*^9}},
+ CellID->204456884,ExpressionUUID->"95f85a9a-1157-4f4c-a7b2-9a3b37cbb6da"]
+}, Open  ]],
+
+Cell["\<\
+By creating a predefined set of variables in this way, unit application is \
+greatly simplified.\
+\>", "Text",
+ CellChangeTimes->{{3.8183912225583816`*^9, 3.8183912401583543`*^9}, {
+  3.818391353245963*^9, 3.8183913714133825`*^9}},
+ CellID->131734807,ExpressionUUID->"d50d7cd4-1940-41bf-99ef-f3dfa78b21bd"],
+
+Cell[CellGroupData[{
+
+Cell["Define some variables for use with RefpropLink", "MathCaption",
+ CellChangeTimes->{{3.818391379413995*^9, 3.8183914052927947`*^9}, {
+  3.818391439396598*^9, 3.818391447238608*^9}},
+ CellID->22682509,ExpressionUUID->"feb0ddd7-b859-481a-a4f3-1411e5871436"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"T1", "=", 
+  RowBox[{"22", "\[Degree]C"}]}]], "Input",
+ CellChangeTimes->{{3.8183914610855827`*^9, 3.8183915046690717`*^9}},
+ CellLabel->"In[1]:=",
+ CellID->242568717,ExpressionUUID->"1f268546-4698-4ac3-a549-ff380d28dd88"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "22.`", "\"\[Degree]C\"", "degrees Celsius", "\"DegreesCelsius\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.818391513584239*^9, 3.825347705248989*^9},
+ CellLabel->"Out[1]=",
+ CellID->761300198,ExpressionUUID->"bc9f37ed-97ff-4374-9a34-6ddbf1bb502e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"P1", "=", 
+  RowBox[{"1", "atm"}]}]], "Input",
+ CellChangeTimes->{{3.8183916230904007`*^9, 3.8183916334686737`*^9}, {
+  3.818391666892304*^9, 3.8183916682606435`*^9}},
+ CellLabel->"In[2]:=",
+ CellID->294167828,ExpressionUUID->"1ae0f7ac-ca90-4619-8522-2a0c72990f30"],
+
+Cell[BoxData[
+ TemplateBox[{"1.`", "\"atm\"", "atmospheres", "\"Atmospheres\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.818391670247302*^9, 3.8253477080804467`*^9},
+ CellLabel->"Out[2]=",
+ CellID->442771127,ExpressionUUID->"ef9e1fa6-7b1b-43ba-899a-cdbd7f015f7e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"P2", "=", 
+  RowBox[{"10", "MPa"}]}]], "Input",
+ CellChangeTimes->{{3.8183916867052975`*^9, 3.818391709700836*^9}},
+ CellLabel->"In[3]:=",
+ CellID->30598148,ExpressionUUID->"5d709ef0-6cd6-46b9-a6f7-656bda13f719"],
+
+Cell[BoxData[
+ TemplateBox[{"10.`", "\"MPa\"", "megapascals", "\"Megapascals\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.818391712490378*^9, 3.825347710283555*^9},
+ CellLabel->"Out[3]=",
+ CellID->102333220,ExpressionUUID->"4132ea44-3c19-4bfa-9439-1494b3a1a4a4"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+The predefined units can be used to simplify converting variables from one \
+set of units to another, without using the Mathematica unit strings or the \
+Wolfram server.\
+\>", "MathCaption",
+ CellChangeTimes->{{3.818391379413995*^9, 3.8183914052927947`*^9}, {
+  3.818391439396598*^9, 3.818391447238608*^9}, {3.822562739806923*^9, 
+  3.8225628263753724`*^9}},
+ CellID->318487788,ExpressionUUID->"0484abcf-eb2d-4353-8291-4767bf824725"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"T2", "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{"T1", ",", "\[Degree]F"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8183915673444834`*^9, 3.818391605628117*^9}},
+ CellLabel->"In[4]:=",
+ CellID->221508414,ExpressionUUID->"2358bfff-f8b5-4bed-8ddb-0f1237f9dcff"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "71.59999999999997`", "\"\[Degree]F\"", "degrees Fahrenheit", 
+   "\"DegreesFahrenheit\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.8183916156562996`*^9, 3.825347714735655*^9},
+ CellLabel->"Out[4]=",
+ CellID->32885828,ExpressionUUID->"83a42fe5-2c5e-4af5-9845-3a1fd8f1b07b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"P3", "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{"P2", ",", "kPa"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.818391715194125*^9, 3.8183917463807573`*^9}},
+ CellLabel->"In[5]:=",
+ CellID->336593233,ExpressionUUID->"34070764-b895-430c-9ec6-d04cb5b30afc"],
+
+Cell[BoxData[
+ TemplateBox[{"10000.`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.818391750164611*^9, 3.825347717633874*^9},
+ CellLabel->"Out[5]=",
+ CellID->358691173,ExpressionUUID->"bbbd0380-7217-4875-b4b2-5f0beb1ce9d6"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MolWt", "=", 
+  RowBox[{"18", 
+   RowBox[{"gm", "/", "mol"}]}]}]], "Input",
+ CellChangeTimes->{{3.818391752627027*^9, 3.8183917984445434`*^9}},
+ CellLabel->"In[6]:=",
+ CellID->275625031,ExpressionUUID->"80b18df4-b308-4e58-8c8b-b62baf39be91"],
+
+Cell[BoxData[
+ TemplateBox[{"18.`", 
+   RowBox[{
+    "\"g\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"mol\""}], 
+   "grams per mole", 
+   FractionBox["\"Grams\"", "\"Moles\""]},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.8183918015542307`*^9, 3.8253477207645364`*^9},
+ CellLabel->"Out[6]=",
+ CellID->202100377,ExpressionUUID->"403ae82e-4621-4699-9866-52a136d6046c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dmolar", "=", 
+  RowBox[{"UnitConvert", "[", 
+   RowBox[{
+    RowBox[{"32", 
+     RowBox[{
+      FractionBox["lb", 
+       SuperscriptBox["ft", "3"]], "/", "MolWt"}]}], ",", 
+    RowBox[{"mol", "/", "L"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8183918071552515`*^9, 3.818391891308235*^9}, {
+  3.8183919392759733`*^9, 3.8183919566525097`*^9}},
+ CellLabel->"In[7]:=",
+ CellID->160703707,ExpressionUUID->"a7ce5b07-f3a6-4b40-a554-253b14a5e9fe"],
+
+Cell[BoxData[
+ TemplateBox[{"28.47726822037358`", 
+   RowBox[{
+    "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}], 
+   "moles per liter", 
+   FractionBox["\"Moles\"", "\"Liters\""]},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.818391959532781*^9, 3.825347723668766*^9},
+ CellLabel->"Out[7]=",
+ CellID->484593544,ExpressionUUID->"14568269-7e16-4f77-a6c9-70bce65305e4"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Note:",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[" Because the unit variables are defined with numeric real values \
+(1.), multiplying by these values also results in numeric real values and not \
+symbolic evaluations.",
+  FontSlant->"Italic"]
+}], "Text",
+ CellChangeTimes->{{3.818391992205445*^9, 3.818392094596632*^9}, {
+  3.8225468848462324`*^9, 3.822546885213278*^9}, {3.8302860003928075`*^9, 
+  3.830286008304627*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellID->111462763,ExpressionUUID->"be362151-d9b5-41d4-8ab8-32676858283c"],
+
+Cell[TextData[{
+ "A full list of pre-defined unit variables is provided below under ",
+ StyleBox[ButtonBox["Predefined Unit Listing",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/tutorial/Units#15936146"],
+  FontWeight->"Bold"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.8183921385531263`*^9, 3.818392188131529*^9}, {
+   3.8183924372205143`*^9, 3.818392443824823*^9}, {3.818393005883238*^9, 
+   3.8183930372922506`*^9}, {3.8183969980517893`*^9, 
+   3.8183970092468266`*^9}, {3.822563291078644*^9, 3.8225632910806437`*^9}, {
+   3.8314918480162687`*^9, 3.8314918711274233`*^9}, 3.8314919731445794`*^9},
+ CellID->25180744,ExpressionUUID->"dd158a04-2eb8-4917-b6bf-2046e52e3f80"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Information Functions", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellChangeTimes->{{3.8183900014171453`*^9, 3.818390004629577*^9}},
+ CellID->487800081,ExpressionUUID->"55a5c272-c4bd-4ed5-b5a7-4f2219e28acc"],
+
+Cell["\<\
+RefpropLink contains a number of legacy API information functions that return \
+physical constants for fluid materials that have been loaded through setup.  \
+The information provided is general and does not require a state point to be \
+specified.  Other information functions (name[], etc.) do not return numeric \
+values and are not relevant to this discussion.\
+\>", "Text",
+ CellChangeTimes->{{3.818397643212694*^9, 3.818397829204337*^9}, {
+  3.830286092848447*^9, 3.8302861653285728`*^9}},
+ CellID->43572451,ExpressionUUID->"254ecbd0-d83f-4840-86ab-ee8badb85e16"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"info", "[", 
+     RowBox[{"icomp", ",", " ", 
+      RowBox[{"SuppressUnits", "\[Rule]", "False"}]}], "]"}], Cell[
+    "Returns fluid constants", "TableText",ExpressionUUID->
+     "a02a9e1c-e929-401f-aec9-1158af84bb06"]},
+   {
+    RowBox[{"limits", "[", 
+     RowBox[{"icomp", ",", 
+      RowBox[{"SuppressUnits", "\[Rule]", "False"}]}], "]"}], Cell[
+    "Returns range of validity values for fluid equations", "TableText",
+     ExpressionUUID->"70f5f42c-4bbc-46ca-8ff3-224b3537540a"]}
+  }]], "DefinitionBox",
+ CellChangeTimes->{{3.8183933428043623`*^9, 3.8183935176687965`*^9}, {
+  3.818397861953797*^9, 3.8183978619687557`*^9}},
+ CellID->2096742444,ExpressionUUID->"610db4d5-2bd1-4b7b-a72a-f772ec09677e"],
+
+Cell["\<\
+These information functions do not take any state point values as inputs.\
+\>", "Caption",
+ CellChangeTimes->{{3.8183932595280123`*^9, 3.8183933372681723`*^9}},
+ CellID->1891092685,ExpressionUUID->"6ebaec25-c6c7-4f81-96bd-4e0ce34d4ff2"],
+
+Cell["\<\
+These functions will return fluid constants as Quantity types (values + \
+Units) by default, since there is no way for the function to determine if the \
+user is using units, based on a set of state-point parameters.  An extra \
+parameter option is available to allow the user to suppress units on the \
+returned values (saving the trouble of stripping them off later).\
+\>", "Text",
+ CellChangeTimes->{{3.818393552822799*^9, 3.8183937019161377`*^9}, {
+  3.830286190240893*^9, 3.8302862333286495`*^9}, {3.830286429760131*^9, 
+  3.830286450063819*^9}, {3.830286523031579*^9, 3.8302865488964114`*^9}},
+ CellID->140716974,ExpressionUUID->"18776dda-8775-4d3a-85ed-61397566d6c9"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Getting Fluid Information ",
+ StyleBox["with",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " Units"
+}], "MathCaption",
+ CellChangeTimes->{{3.8183937161640406`*^9, 3.8183937287085104`*^9}},
+ CellID->836781195,ExpressionUUID->"aacf1a68-d488-4a92-8c62-402be971f1d3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"info", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.818393737900917*^9, 3.8183937398766336`*^9}},
+ CellLabel->"In[10]:=",
+ CellID->2058623809,ExpressionUUID->"e009a42b-4cd5-4791-a666-7d4f32dace43"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"wmm\"\>", "\[Rule]", 
+    TemplateBox[{"18.015268`", 
+      RowBox[{
+       "\"kg\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"kmol\""}], "kilograms per kilomole", 
+      FractionBox["\"Kilograms\"", "\"Kilomoles\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"Ttriple\"\>", "\[Rule]", 
+    TemplateBox[{"273.16`", "\"K\"", "kelvins", "\"Kelvins\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"Tnbpt\"\>", "\[Rule]", 
+    TemplateBox[{"373.1243`", "\"K\"", "kelvins", "\"Kelvins\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"Tcrit\"\>", "\[Rule]", 
+    TemplateBox[{"647.096`", "\"K\"", "kelvins", "\"Kelvins\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"Pcrit\"\>", "\[Rule]", 
+    TemplateBox[{"22064.`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"Dcrit\"\>", "\[Rule]", 
+    TemplateBox[{"17.8737279956`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"Zcrit\"\>", "\[Rule]", "0.22944097045346462`"}], ",", 
+   RowBox[{"\<\"acf\"\>", "\[Rule]", "0.3443`"}], ",", 
+   RowBox[{"\<\"dip\"\>", "\[Rule]", 
+    TemplateBox[{"1.855`", "\"D\"", "debyes", "\"Debyes\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"Rgas\"\>", "\[Rule]", 
+    TemplateBox[{"8.314371357587`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.818393747317709*^9, 3.8253477300836143`*^9, 
+  3.8253478551482215`*^9},
+ CellLabel->"Out[10]=",
+ CellID->87098352,ExpressionUUID->"9c041b81-5884-4840-ba98-6ab65a5edf95"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+Each variable in the returned list is a Mathematica Quantity expressed in \
+RefProp's default units.\
+\>", "Text",
+ CellChangeTimes->{{3.818393979533784*^9, 3.818394032388484*^9}},
+ CellID->123421445,ExpressionUUID->"86d94333-ce34-4a92-91f2-a2acb5e4c2a4"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Getting Fluid Information ",
+ StyleBox["without",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " Units"
+}], "MathCaption",
+ CellChangeTimes->{{3.818393772943212*^9, 3.8183937824448047`*^9}},
+ CellID->59770841,ExpressionUUID->"2cf51bd2-539e-408c-8206-9d3b04bf2538"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"info", "[", 
+  RowBox[{"SuppressUnits", "\[Rule]", "True"}], "]"}]], "Input",
+ CellChangeTimes->{{3.818393885200054*^9, 3.8183939051726494`*^9}},
+ CellLabel->"In[11]:=",
+ CellID->206704800,ExpressionUUID->"b31f025b-88ca-4b83-9b87-735039026e01"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"wmm [g/mol]\"\>", "\[Rule]", "18.015268`"}], ",", 
+   RowBox[{"\<\"Ttriple [K]\"\>", "\[Rule]", "273.16`"}], ",", 
+   RowBox[{"\<\"Tnbpt [K]\"\>", "\[Rule]", "373.1243`"}], ",", 
+   RowBox[{"\<\"Tcrit [K]\"\>", "\[Rule]", "647.096`"}], ",", 
+   RowBox[{"\<\"Pcrit [kPa]\"\>", "\[Rule]", "22064.`"}], ",", 
+   RowBox[{"\<\"Dcrit [mol/L]\"\>", "\[Rule]", "17.8737279956`"}], ",", 
+   RowBox[{"\<\"Zcrit\"\>", "\[Rule]", "0.22944097045346462`"}], ",", 
+   RowBox[{"\<\"acf\"\>", "\[Rule]", "0.3443`"}], ",", 
+   RowBox[{"\<\"dip [debye]\"\>", "\[Rule]", "1.855`"}], ",", 
+   RowBox[{"\<\"Rgas [J/mol-K]\"\>", "\[Rule]", "8.314371357587`"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.818393918595728*^9, 3.825347863391177*^9},
+ CellLabel->"Out[11]=",
+ CellID->201625443,ExpressionUUID->"1e6c670c-d2ff-408f-aaed-28391e803733"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+With units suppressed, the dimensions of each returned value is expressed as \
+a \"hint\" in the rules of the returned list, but the values themselves are \
+non-Quantity, numeric reals.\
+\>", "Text",
+ CellChangeTimes->{{3.8183940630873985`*^9, 3.81839416629241*^9}},
+ CellID->87117656,ExpressionUUID->"00215907-1da5-4ac5-860c-5bb4690b8634"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["State Point Functions", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellChangeTimes->{{3.8183900540294867`*^9, 3.818390062013139*^9}},
+ CellID->343817223,ExpressionUUID->"f99a7adb-15dd-4eeb-8379-63bb536e3790"],
+
+Cell[TextData[{
+ "State point functions typically require two state point variables (say \
+temperature and pressure, or temperature and density) as inputs in order to \
+extract thermodynamic information at that state point.  Since the user is \
+providing these state point variables, either with or without units, these \
+functions can easily determine if the function results should be retuned as ",
+ Cell[BoxData[
+  ButtonBox["Quantity",
+   BaseStyle->"Link"]], "InlineFormula",ExpressionUUID->
+  "e34b5e74-72a9-4192-bd57-01b5dc2a7474"],
+ " values, based on the type of input state point values provided.  Since \
+state-point functions determine unit behavior based on the input state-point \
+parameters, the SuppressUnits option (available on the information functions \
+as noted above) is not available on these functions."
+}], "Text",
+ CellChangeTimes->{{3.8183946404455967`*^9, 3.8183948567482233`*^9}, {
+  3.822547774740063*^9, 3.8225477897498865`*^9}, {3.8302866655762296`*^9, 
+  3.830286846743553*^9}},
+ CellID->65621483,ExpressionUUID->"302f199a-2620-435f-a63e-68adb8c6f5f0"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     ButtonBox["tprho",
+      BaseStyle->"Link",
+      ButtonData->"paclet:RefpropLink/ref/Tprho"], "[", 
+     RowBox[{
+      ButtonBox["T",
+       BaseStyle->"Link"], ",", " ", 
+      ButtonBox["P",
+       BaseStyle->"Link"], ",", " ", 
+      StyleBox["z", "TI"]}], "]"}], 
+    StyleBox[
+     RowBox[{
+      RowBox[{
+      "Returns", " ", "density", " ", "at", " ", "specified", " ", 
+       "temperature"}], ",", " ", "pressure", ",", " ", 
+      RowBox[{"and", " ", "molar", " ", "composition", " ", 
+       RowBox[{"(", 
+        RowBox[{"optional", " ", "for", " ", "pure", " ", "fluids"}], 
+        ")"}]}]}],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"]},
+   {
+    RowBox[{
+     ButtonBox["enthal",
+      BaseStyle->"Link",
+      ButtonData->"paclet:RefpropLink/ref/Enthal"], "[", 
+     RowBox[{
+      ButtonBox["T",
+       BaseStyle->"Link"], ",", " ", 
+      StyleBox["\[Rho]", "TR"], ",", " ", 
+      StyleBox["z", "TI"]}], "]"}], Cell[TextData[StyleBox[
+    "Returns enthalpy at specified temperature, molar density, and molar \
+composition (optional for pure fluids)",
+     FontSize->11,
+     FontWeight->"Normal"]], "TableText",ExpressionUUID->
+     "de95d65b-3a22-41cf-9594-1e67bb1879b8"]},
+   {
+    RowBox[{
+     ButtonBox["tpflsh",
+      BaseStyle->"Link",
+      ButtonData->"paclet:RefpropLink/ref/Tpflsh"], "[", 
+     RowBox[{
+      ButtonBox["T",
+       BaseStyle->"Link"], ",", " ", 
+      ButtonBox["P",
+       BaseStyle->"Link"], ",", " ", 
+      StyleBox["z", "TI"]}], "]"}], Cell[TextData[StyleBox[
+    "Returns flash parameters at specified temperature, pressure, and molar \
+composition (optional for pure fluids)",
+     FontSize->11,
+     FontWeight->"Normal"]], "TableText",ExpressionUUID->
+     "e45d03c3-1934-4a76-9377-dd891c193452"]},
+   {
+    RowBox[{
+     ButtonBox["RefProp",
+      BaseStyle->"Link",
+      ButtonData->"paclet:RefpropLink/ref/RefProp"], "[", 
+     RowBox[{
+      StyleBox["hIn", "TI"], ",", 
+      StyleBox["hOut", "TI"], ",", 
+      StyleBox["a", "TI"], ",", 
+      StyleBox["b", "TI"], ",", 
+      StyleBox["z", "TI"]}], "]"}], Cell[TextData[{
+     StyleBox["Calculates the properties idetified in the ",
+      FontSize->11,
+      FontWeight->"Normal"],
+     Cell[BoxData[
+      StyleBox["hOut", "TI"]], "InlineFormula",
+      FontFamily->"Verdana",
+      FontSize->11,
+      FontWeight->"Normal",ExpressionUUID->
+      "deb5373d-cd8e-4b16-930c-6c63b2dcbcd4"],
+     StyleBox[" string for the inputs specified in the ",
+      FontSize->11,
+      FontWeight->"Normal"],
+     Cell[BoxData[
+      StyleBox["hIn", "TI"]], "InlineFormula",
+      FontFamily->"Verdana",
+      FontSize->11,
+      FontWeight->"Normal",ExpressionUUID->
+      "a552244f-4d2f-44a4-9a01-2f2f7ae2b361"],
+     StyleBox[" string for the loaded fluid or mixture.",
+      FontSize->11,
+      FontWeight->"Normal"]
+    }], "TableText",ExpressionUUID->"db8c042c-11ff-4c97-b203-a6b330668138"]}
+  }]], "DefinitionBox",
+ CellChangeTimes->{{3.818394865867841*^9, 3.818394961468211*^9}, {
+  3.8183968038759975`*^9, 3.818396961067653*^9}, {3.822547670342267*^9, 
+  3.822547671278762*^9}, {3.822547894766028*^9, 3.8225480089406176`*^9}, {
+  3.8225482122149205`*^9, 3.8225483368247423`*^9}, {3.8225483688919735`*^9, 
+  3.822548374189802*^9}},
+ CellID->741850302,ExpressionUUID->"f46c927f-af46-43d3-af7e-e016209310fd"],
+
+Cell["\<\
+Only a few examples of functions requiring state-point inputs are shown here.\
+\>", "Caption",
+ CellChangeTimes->{{3.818394595547651*^9, 3.8183946274922285`*^9}},
+ CellID->540231321,ExpressionUUID->"7fd07af2-cdaf-4daa-8ea6-1a2ef1d96c5f"],
+
+Cell["\<\
+If not using Quantities, the user must take care to provide values to the \
+RefpropLink functions that have been converted to the appropriate default \
+units expected by the NIST RefProp functions are expecting.\
+\>", "Text",
+ CellChangeTimes->{{3.8183950685329313`*^9, 3.8183951599714365`*^9}, {
+  3.8302869846390657`*^9, 3.8302869877277822`*^9}},
+ CellID->108797488,ExpressionUUID->"a90cb9da-30c2-4174-aa22-1a511c056e82"],
+
+Cell[CellGroupData[{
+
+Cell["Not using Quantities", "MathCaption",
+ CellChangeTimes->{{3.8183951732848344`*^9, 3.818395179980932*^9}},
+ CellID->921517796,ExpressionUUID->"802c1f6f-b6b7-43fc-8dd5-1d68d641682a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"T", "=", "295.372"}], ";"}], "            ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Temps", " ", "have", " ", "to", " ", "be", " ", 
+    RowBox[{"in", " ", "[", "K", "]"}]}], "       ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"P", "=", "101.325"}], ";"}], "           ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Pressures", " ", "have", " ", "to", " ", "be", " ", 
+    RowBox[{"in", " ", "[", "kPa", "]"}]}], " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.818395194650676*^9, 3.8183953576039853`*^9}, {
+  3.818396684932045*^9, 3.8183966874443245`*^9}},
+ CellLabel->"In[18]:=",
+ CellID->773647331,ExpressionUUID->"819f19c3-1a91-4836-a0b2-ec500e9c551f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tprho", "[", 
+  RowBox[{"T", ",", "P"}], "]"}]], "Input",
+ CellChangeTimes->{{3.818395246248708*^9, 3.8183952496626062`*^9}, {
+  3.818395368899779*^9, 3.8183953774439387`*^9}},
+ CellLabel->"In[20]:=",
+ CellID->117583059,ExpressionUUID->"c6f5e6f2-d7f1-465a-a728-021b5f7e801a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Dmolar [mol/L]\"\>", "\[Rule]", "55.38206971724217`"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.8183953845020585`*^9, 3.8183959780978737`*^9, 3.818396217674445*^9, 
+   3.8183966942939863`*^9, {3.825347877690942*^9, 3.8253479001538815`*^9}},
+ CellLabel->"Out[20]=",
+ CellID->830825296,ExpressionUUID->"79c4dd5d-a5f2-4ef7-b450-d5b5dd6e772b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+If using Quantity values, however, the user can provide inputs in any \
+convenient unit system.  The inputs will be internally converted to the NIST \
+RefProp default units and the resulting magnitudes passed to the RefProp \
+functions.  Results will be retuned as Quantities with the default units \
+applied.\
+\>", "Text",
+ CellChangeTimes->{{3.8183962667492266`*^9, 3.8183964639489307`*^9}, {
+  3.830287001415183*^9, 3.830287002567102*^9}},
+ CellID->133812848,ExpressionUUID->"e398a2d3-2449-4db0-87c0-2832ec375457"],
+
+Cell[CellGroupData[{
+
+Cell["Using Quantities", "MathCaption",
+ CellChangeTimes->{{3.8183964786964693`*^9, 3.8183964830628185`*^9}},
+ CellID->104795730,ExpressionUUID->"badda7c5-333e-4a93-abc7-d3b8d4744e62"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"T", "=", 
+    RowBox[{"72", "\[Degree]F"}]}], ";"}], "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Any", " ", "convenient", " ", "units", " ", "can", " ", "be", " ", "used",
+     " ", "here"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", "=", 
+   RowBox[{"1", "atm"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8183964887695627`*^9, 3.8183965317247057`*^9}},
+ CellLabel->"In[21]:=",
+ CellID->62392634,ExpressionUUID->"db3f1bdd-cd97-4022-b52f-e010548f3431"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tprho", "[", 
+  RowBox[{"T", ",", "P"}], "]"}]], "Input",
+ CellChangeTimes->{{3.818396539241577*^9, 3.8183965484609537`*^9}},
+ CellLabel->"In[23]:=",
+ CellID->7934655,ExpressionUUID->"907d4623-a1cd-4c79-8478-b3558f253072"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Dmolar\"\>", "\[Rule]", 
+   TemplateBox[{"55.38206688848727`", 
+     RowBox[{
+      "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}],
+      "moles per liter", 
+     FractionBox["\"Moles\"", "\"Liters\""]},
+    "Quantity"]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.818396553132465*^9, 3.8183967031084366`*^9, {3.8253478884282055`*^9, 
+   3.825347908202363*^9}},
+ CellLabel->"Out[23]=",
+ CellID->347487643,ExpressionUUID->"0d9c7302-0279-4481-a095-a6358931e890"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[TextData[{
+ "Note that the High-Level API function ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " can behave both as an information function and a state point function, \
+depending on the values provided in hIn and hOut.  If a state point or \
+saturation value is provided with Quantity inputs, the state of the \
+SuppressUnits option is overridden. "
+}], "Text",
+ CellChangeTimes->{{3.822548095277719*^9, 3.8225481584527497`*^9}, {
+  3.8225484510363045`*^9, 3.82254855088323*^9}, {3.8302870154386697`*^9, 
+  3.8302870251187425`*^9}},
+ CellID->20003106,ExpressionUUID->"a9c9bd1a-776f-4e10-90ce-00edf2c77f83"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Adding and Removing Units with rpUnits[]", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellChangeTimes->{{3.8183970567328844`*^9, 3.8183970621902914`*^9}, {
+  3.82534606041735*^9, 3.825346080017909*^9}, {3.825346126073789*^9, 
+  3.8253461353220654`*^9}},
+ CellTags->"UnitListing",
+ CellID->474298572,ExpressionUUID->"ef95e1d0-cfbc-434f-afbc-3c3aadd05f06"],
+
+Cell["\<\
+The RefpropLink functions automatically handle input and output Quantity \
+values.  This is done with a utility function called rpUnits (stands for \
+REFPROP Units).  While this function is intended for internal use by \
+RefpropLink, it can be quite useful if certain calculations and functions \
+(dimensionless solvers) need to be performed without units. \
+\>", "Text",
+ CellChangeTimes->{{3.825346094362582*^9, 3.8253463405942087`*^9}, {
+  3.825346890836315*^9, 3.8253468933126802`*^9}, {3.8253480343141637`*^9, 
+  3.8253481292662797`*^9}},
+ CellID->211894381,ExpressionUUID->"e1d40685-9c38-4392-85ec-9aab2d68684f"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"rpUnits", "[", 
+     ButtonBox["x",
+      BaseStyle->"Link"], "]"}], 
+    StyleBox[
+     RowBox[{
+      RowBox[{"Takes", " ", "a", " ", "Quantity"}], ",", " ", "x", ",", " ", 
+      RowBox[{"identifies", " ", "the", " ", "unit", " ", "type"}], ",", " ", 
+      RowBox[{
+      "then", " ", "returns", " ", "the", " ", "magnitude", " ", "in", "  ", 
+       RowBox[{"REFPROP", "'"}], "s", " ", "default", " ", "unit", " ", 
+       RowBox[{"system", "."}]}]}],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"]},
+   {
+    RowBox[{"rpUnits", "[", 
+     RowBox[{
+      ButtonBox["x",
+       BaseStyle->"Link"], ",", "uOut"}], "]"}], 
+    StyleBox[Cell[TextData[StyleBox[
+     "Takes a Real value x and returns a Quantity with units appropriate for \
+the type string passed in uOut.",
+      FontSize->11]], "TableText",ExpressionUUID->
+      "5a5c6106-b4e3-4816-9d32-a12d34b0581b"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"]}
+  }]], "DefinitionBox",
+ CellChangeTimes->{{3.818394865867841*^9, 3.818394961468211*^9}, {
+  3.8183968038759975`*^9, 3.818396961067653*^9}, {3.822547670342267*^9, 
+  3.822547671278762*^9}, {3.822547894766028*^9, 3.8225480089406176`*^9}, {
+  3.8225482122149205`*^9, 3.8225483368247423`*^9}, {3.8225483688919735`*^9, 
+  3.822548374189802*^9}, {3.82534644970547*^9, 3.8253468155565834`*^9}},
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.2], {
+      Scaled[0.8]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->202135091,ExpressionUUID->"8a36bd08-7c19-4603-b88c-eb3f10d47a20"],
+
+Cell["Input and Output forms of rpUnits.", "Caption",
+ CellChangeTimes->{{3.818394595547651*^9, 3.8183946274922285`*^9}, {
+  3.8253468724494925`*^9, 3.8253468802416596`*^9}},
+ CellID->735618057,ExpressionUUID->"c819a18c-d0a1-4363-8836-b11d47796d91"],
+
+Cell[TextData[{
+ "In ",
+ StyleBox["input mode",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ ", with a single parameter, rpUnits checks to see if the input parameter is \
+a Quantity and identifies its unit \"type\".  It then converts the Quantity \
+to the appropriate REFPROP default units system, and returns only the \
+Magnitude of the converted value."
+}], "Text",
+ CellChangeTimes->{{3.8183950685329313`*^9, 3.8183951599714365`*^9}, {
+  3.8253469001145215`*^9, 3.8253469911461215`*^9}},
+ CellID->335346041,ExpressionUUID->"32f1253b-538b-4ce1-b6ad-f33fa30a523f"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Convert a Temperature, Pressure, and Enthalpy Quantity, to a magnitude in \
+REFPROP units.\
+\>", "MathCaption",
+ CellChangeTimes->{{3.825347005250409*^9, 3.8253470262502594`*^9}, {
+  3.825348315569147*^9, 3.8253483305700064`*^9}},
+ CellID->231964404,ExpressionUUID->"92997f69-86f7-495f-b7e6-2b1350210daf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Tmag", "=", 
+  RowBox[{"rpUnits", "[", 
+   RowBox[{"72", "\[Degree]F"}], "]"}], "      ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Convert", " ", "to", " ", "K", " ", "and", " ", "return", " ", 
+    "magnitude"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.8253470386391068`*^9, 3.8253471254180765`*^9}},
+ CellLabel->"In[24]:=",
+ CellID->267895102,ExpressionUUID->"ab90ec04-5572-4e76-ad1d-763a38639aac"],
+
+Cell[BoxData["295.37222222222226`"], "Output",
+ CellChangeTimes->{3.8253470772708397`*^9, 3.8253471294921846`*^9, 
+  3.8253479133625636`*^9},
+ CellLabel->"Out[24]=",
+ CellID->45406569,ExpressionUUID->"fa96544b-1e0d-46ca-9799-44997a7a4144"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Pmag", "=", 
+  RowBox[{"rpUnits", "[", 
+   RowBox[{"1000", "psi"}], "]"}], "      ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Convert", " ", "to", " ", "kPa", " ", "and", " ", "return", " ", 
+    "magnitude"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.8253470386391068`*^9, 3.8253471487227926`*^9}},
+ CellLabel->"In[25]:=",
+ CellID->713350514,ExpressionUUID->"51c02238-be04-431e-8784-fff39b3bdf67"],
+
+Cell[BoxData["6894.757293168362`"], "Output",
+ CellChangeTimes->{3.8253470772708397`*^9, 3.8253471642781715`*^9, 
+  3.8253479166408005`*^9},
+ CellLabel->"Out[25]=",
+ CellID->689682708,ExpressionUUID->"499650c0-e16b-4f0f-b0f7-2f42270e6191"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Hmag", "=", 
+  RowBox[{"rpUnits", "[", 
+   RowBox[{"120", 
+    RowBox[{"BTU", "/", "mol"}]}], "]"}], "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Convert", " ", "to", " ", 
+    RowBox[{"J", "/", "mol"}], " ", "and", " ", "return", " ", "magnitude"}], 
+   " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.8253471689028063`*^9, 3.825347278874095*^9}, {
+  3.825347317907689*^9, 3.825347326617404*^9}, {3.825347930161647*^9, 
+  3.825347946921833*^9}},
+ CellLabel->"In[27]:=",
+ CellID->204583805,ExpressionUUID->"c42ca0ae-3238-42cb-9669-f94658d751c6"],
+
+Cell[BoxData["126606.7023144`"], "Output",
+ CellChangeTimes->{
+  3.8253472803800297`*^9, {3.825347937145971*^9, 3.825347947726653*^9}},
+ CellLabel->"Out[27]=",
+ CellID->23583575,ExpressionUUID->"7bda85a0-1ab9-41df-80fd-5e778aca6a4a"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[TextData[{
+ "In ",
+ StyleBox["output mode",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ ", given two parameters, rpUnits takes a value as its first parameter and \
+applies the default REFPROP units for a standard REFPROP name string passed \
+in the second parameter.  The value returned is a Quantity with appropriately \
+applied units."
+}], "Text",
+ CellChangeTimes->{{3.8183950685329313`*^9, 3.8183951599714365`*^9}, {
+  3.8253469001145215`*^9, 3.8253469911461215`*^9}, {3.825348146233912*^9, 
+  3.8253482944575872`*^9}},
+ CellID->493875139,ExpressionUUID->"f9a71cfb-ed73-4c7a-ae17-86a3d5c11db4"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Convert values to a Quantity, with the default REFPROP units applied.\
+\>", "MathCaption",
+ CellChangeTimes->{{3.825347005250409*^9, 3.8253470262502594`*^9}, {
+  3.8253483577054806`*^9, 3.825348382441346*^9}},
+ CellID->81124175,ExpressionUUID->"f24c7cb4-f5a9-4514-bf8e-7543fb38322d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Tret", "=", 
+  RowBox[{"rpUnits", "[", 
+   RowBox[{"295.372", ",", "\"\<T\>\""}], "]"}], "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Return", " ", "with", " ", "default", " ", "Temperature", " ", "units"}], 
+   " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.8253470386391068`*^9, 3.8253471254180765`*^9}, {
+  3.825348412298481*^9, 3.8253484972583485`*^9}, {3.825348594522252*^9, 
+  3.825348596107027*^9}},
+ CellLabel->"In[31]:=",
+ CellID->358696701,ExpressionUUID->"4ef4a3b5-56c7-463a-b29b-0781516923bf"],
+
+Cell[BoxData[
+ TemplateBox[{"295.372`", "\"K\"", "kelvins", "\"Kelvins\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.8253470772708397`*^9, 3.8253471294921846`*^9, 
+  3.8253479133625636`*^9, 3.825348505602036*^9, 3.8253485972410097`*^9},
+ CellLabel->"Out[31]=",
+ CellID->481848091,ExpressionUUID->"00535ed5-8738-4f9e-9bfa-aee8b673236e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Pret", "=", 
+  RowBox[{"rpUnits", "[", 
+   RowBox[{"6894.76", ",", "\"\<P\>\""}], "]"}], "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Return", " ", "with", " ", "default", " ", "Pressure", " ", "units"}], 
+   " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.8253470386391068`*^9, 3.8253471487227926`*^9}, {
+  3.825348522169736*^9, 3.8253485580986705`*^9}, {3.8253485896353455`*^9, 
+  3.825348591761633*^9}},
+ CellLabel->"In[32]:=",
+ CellID->85778456,ExpressionUUID->"f25893b5-06a1-4c69-8fa1-cca267c91ac8"],
+
+Cell[BoxData[
+ TemplateBox[{"6894.76`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.8253470772708397`*^9, 3.8253471642781715`*^9, 
+  3.8253479166408005`*^9, 3.8253485633835382`*^9, 3.8253486007725663`*^9},
+ CellLabel->"Out[32]=",
+ CellID->787093837,ExpressionUUID->"b8ac2c75-e0f7-418c-9383-0feb14087437"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Hret", "=", 
+  RowBox[{"rpUnits", "[", 
+   RowBox[{"120", ",", "\"\<H\>\""}], "]"}], "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Return", " ", "with", " ", "default", " ", "Enthalpy", " ", "units"}], 
+   " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.8253471689028063`*^9, 3.825347278874095*^9}, {
+  3.825347317907689*^9, 3.825347326617404*^9}, {3.825347930161647*^9, 
+  3.825347946921833*^9}, {3.8253485722179165`*^9, 3.8253486181620717`*^9}},
+ CellLabel->"In[33]:=",
+ CellID->296103542,ExpressionUUID->"671d8676-7708-4554-9ae3-ff0ebb1dcccd"],
+
+Cell[BoxData[
+ TemplateBox[{"120", 
+   RowBox[{
+    "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"mol\""}], 
+   "joules per mole", 
+   FractionBox["\"Joules\"", "\"Moles\""]},
+  "Quantity"]], "Output",
+ CellChangeTimes->{
+  3.8253472803800297`*^9, {3.825347937145971*^9, 3.825347947726653*^9}, 
+   3.825348621121132*^9},
+ CellLabel->"Out[33]=",
+ CellID->51628656,ExpressionUUID->"e975676f-2e3d-4d7c-a608-d1b0d6df5884"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+The uOut string can be any of the valid REFPROP variable name strings \
+identified in the High-Level API documentation.\
+\>", "Text",
+ CellChangeTimes->{{3.8253486279947824`*^9, 3.82534867214571*^9}},
+ CellID->40049350,ExpressionUUID->"86e925bd-7114-4028-ae10-daa6b2c26119"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Predefined Unit Listing", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellChangeTimes->{{3.8183970567328844`*^9, 3.8183970621902914`*^9}},
+ CellTags->"UnitListing",
+ CellID->15936146,ExpressionUUID->"eae5b49f-b6be-4968-8d47-1d25fbfef6eb"],
+
+Cell["\<\
+These unit variables are used internally within RefpropLink and available for \
+the user to easily apply units to input values and variables as well as \
+simplifying unit conversions.  An effort is made here to define the most \
+commonly encountered units when using the NIST REFPROP library and performing \
+thermodynamic calculations. \
+\>", "Text",
+ CellChangeTimes->{{3.8183970776928368`*^9, 3.8183971511244593`*^9}, {
+  3.822562584583097*^9, 3.822562615670936*^9}, {3.82256337485458*^9, 
+  3.8225633911589975`*^9}, {3.822563445005983*^9, 3.8225635008466167`*^9}},
+ CellID->89803241,ExpressionUUID->"4cb6130f-3821-4a66-bc1a-3d383c59f2e8"],
+
+Cell[CellGroupData[{
+
+Cell["Length Units", "MathCaption",
+ CellChangeTimes->{{3.8183971945573516`*^9, 3.8183971974047375`*^9}},
+ CellID->457083384,ExpressionUUID->"187971d2-988c-491f-bb58-945d74b900a8"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"km", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Kilometers\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"m", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Meters\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"mm", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Millimeters\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"cm", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Centimeters\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Mu]m", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Micrometers\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"nm", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Nanometers\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"in", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Inches\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"ft", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Feet\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"mi", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Miles\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"mil", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"1.0", "e"}], "-", "6"}], ",", "\"\<Inches\>\""}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"micron", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Microinches\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8183972146815405`*^9, 3.8183972146865*^9}, {
+  3.8253453164993963`*^9, 3.8253453938096848`*^9}},
+ CellID->343781452,ExpressionUUID->"5c955c1c-b67e-4c53-b585-e3d70eec1d56"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Volume Units", "MathCaption",
+ CellChangeTimes->{{3.818397225336024*^9, 3.8183972278922176`*^9}},
+ CellID->275932980,ExpressionUUID->"1a0c482a-8103-4312-a91f-88e44bf33a1f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"L", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Liters\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"cc", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", 
+     RowBox[{"\"\<Centimeters\>\"", "^", "3"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"gal", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Gallons\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8183972404446254`*^9, 3.8183972404496126`*^9}},
+ CellID->59535446,ExpressionUUID->"8089ed67-3cf5-4d8a-8ad6-10d17d9ae24b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Time Units", "MathCaption",
+ CellChangeTimes->{{3.818397259188536*^9, 3.8183972608201714`*^9}},
+ CellID->971958366,ExpressionUUID->"cd219fd5-7bb0-4ce6-a582-e103e562fa4c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"s", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Seconds\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"min", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Minutes\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"hr", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Hours\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"ms", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Milliseconds\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Mu]s", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Microseconds\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"ns", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Nanoseconds\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.818397275930769*^9, 3.818397275936723*^9}},
+ CellID->252037139,ExpressionUUID->"457e3c8e-4c0d-475a-9ecd-734f97654b87"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Velocity Units", "MathCaption",
+ CellChangeTimes->{{3.8183972866530695`*^9, 3.8183972885081153`*^9}, {
+  3.825345434520832*^9, 3.8253454357375793`*^9}},
+ CellID->77593042,ExpressionUUID->"2bdabcc4-dc5e-4d57-9b84-e81eece3feb6"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mph", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", 
+     RowBox[{"\"\<Miles\>\"", "/", "\"\<Hours\>\""}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kph", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", 
+     RowBox[{"\"\<Kilometers\>\"", "/", "\"\<Hours\>\""}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8183972984335995`*^9, 3.818397298439553*^9}, {
+  3.825345440969561*^9, 3.8253454952335052`*^9}},
+ CellID->72925378,ExpressionUUID->"70db3722-2194-4547-884c-60205a3165fc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Mass Units", "MathCaption",
+ CellChangeTimes->{{3.8183972866530695`*^9, 3.8183972885081153`*^9}},
+ CellID->429218002,ExpressionUUID->"42c08527-d73f-4635-8c5c-df875edd5000"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"gm", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Grams\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kg", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Kilograms\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lb", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Pounds\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8183972984335995`*^9, 3.818397298439553*^9}},
+ CellID->313199094,ExpressionUUID->"a62931d5-7b87-4637-b2c3-01cc3cfa46a1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Force Units", "MathCaption",
+ CellChangeTimes->{{3.818397316748624*^9, 3.818397318796149*^9}},
+ CellID->7025256,ExpressionUUID->"2490fdf6-8842-49bd-9469-e5f747050db5"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Newton", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Newtons\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"mN", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"0.001", ",", "Newton"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lbf", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<PoundsForce\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.818397350153303*^9, 3.8183973501602745`*^9}},
+ CellID->154982085,ExpressionUUID->"5012501f-7a83-4216-99f2-ee295d970de1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Pressure Units", "MathCaption",
+ CellChangeTimes->{{3.818397367805106*^9, 3.818397370540784*^9}},
+ CellID->456165731,ExpressionUUID->"2b32d606-1fc1-4b00-a625-248e504183a0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"psi", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", 
+     RowBox[{"\"\<PoundsForce\>\"", "/", 
+      RowBox[{"\"\<Inches\>\"", "^", "2"}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"psf", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", 
+     RowBox[{"\"\<PoundsForce\>\"", "/", 
+      RowBox[{"\"\<Feet\>\"", "^", "2"}]}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"ksi", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1000.", ",", 
+     RowBox[{"\"\<PoundsForce\>\"", "/", 
+      RowBox[{"\"\<Inches\>\"", "^", "2"}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"atm", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Atmospheres\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Pa", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Pascals\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Mu]Pa", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Micropascals\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kPa", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Kilopascals\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MPa", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Megapascals\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"bar", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Bars\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"torr", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Torr\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"mmHg", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<MillimetersOfMercury\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"inHg", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<InchesOfMercury\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"inH2O", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<InchesOfWaterColumn\>\""}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8183973819014106`*^9, 3.8183973819063983`*^9}, {
+  3.8253455151771755`*^9, 3.8253455308023653`*^9}, {3.825345561017606*^9, 
+  3.8253456555388727`*^9}},
+ CellID->158656461,ExpressionUUID->"fbd109b9-ab77-4ff2-a931-97f32aef1ac8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Temperature Units", "MathCaption",
+ CellChangeTimes->{{3.8183974477872405`*^9, 3.8183974514214926`*^9}},
+ CellID->731389191,ExpressionUUID->"b96c5144-7a5a-4148-b043-a729c49be003"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Degree]F", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<DegreesFahrenheit\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"R", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<DegreesRankine\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"K", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Kelvins\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Degree]C", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<DegreesCelsius\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8183974659397035`*^9, 3.8183974659446597`*^9}},
+ CellID->692752610,ExpressionUUID->"1d526d01-32c1-41ff-9e57-e371d1b6888c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Molar Units", "MathCaption",
+ CellChangeTimes->{{3.818397476547338*^9, 3.8183974887716517`*^9}},
+ CellID->4112165,ExpressionUUID->"44243d85-e479-49f3-aa44-69248e4af147"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mol", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Moles\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kmol", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Kilomoles\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.818397499227664*^9, 3.8183974992306604`*^9}},
+ CellID->173259624,ExpressionUUID->"599dd656-3307-4362-ab51-a2059f1593fe"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Energy Units", "MathCaption",
+ CellChangeTimes->{{3.8183975266593437`*^9, 3.8183975296034718`*^9}},
+ CellID->20424975,ExpressionUUID->"47550905-0d01-4d6a-a16b-7419ff4bd0d1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"J", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Joules\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kJ", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Kilojoules\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MJ", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Megajoules\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"BTU", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<BritishThermalUnitsIT\>\""}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kBTU", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1000.", ",", "\"\<BritishThermalUnitsIT\>\""}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MBTU", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{
+     RowBox[{"1.", "e6"}], ",", "\"\<BritishThermalUnitsIT\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ergs", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Ergs\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8183975413400593`*^9, 3.818397541344076*^9}, {
+  3.8253457178652267`*^9, 3.825345759226638*^9}},
+ CellID->247938534,ExpressionUUID->"0597a7b1-2931-4f77-a76e-ff6630a12313"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Power Units", "MathCaption",
+ CellChangeTimes->{{3.8183975536631083`*^9, 3.8183975561963377`*^9}},
+ CellID->466691419,ExpressionUUID->"f7bd691a-bd53-467b-8551-00b6c528d2f9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"W", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Watts\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"mW", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Milliwatts\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kW", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Kilowatts\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MW", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Megawatts\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.818397566546667*^9, 3.8183975665516453`*^9}},
+ CellID->156276581,ExpressionUUID->"37d66f11-2e36-40d7-aef9-d2f6c49d6f56"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Viscosity Units", "MathCaption",
+ CellChangeTimes->{{3.8183975536631083`*^9, 3.8183975561963377`*^9}, {
+  3.8225474567006917`*^9, 3.822547463228265*^9}},
+ CellID->159265239,ExpressionUUID->"6215928e-2f3d-41b0-975c-5d6672d98082"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"poise", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Poise\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"cP", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Centipoise\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Mu]cP", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Micropoise\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.818397566546667*^9, 3.8183975665516453`*^9}, 
+   3.822547491186454*^9},
+ CellID->477294091,ExpressionUUID->"b470c126-b148-493f-850f-64c09bb737c4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Dipole Moment Units", "MathCaption",
+ CellChangeTimes->{{3.818397582590759*^9, 3.8183975885967283`*^9}},
+ CellID->87968082,ExpressionUUID->"ce44abe3-2bd6-4265-a915-46ccfb63c495"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"debye", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1.", ",", "\"\<Debyes\>\""}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.818397598916107*^9, 3.8183975989210925`*^9}},
+ CellID->157708355,ExpressionUUID->"8a21ee8e-0f54-4f68-85ea-d434b163191f"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["More About", "TutorialMoreAboutSection",
+ CellID->23220180,ExpressionUUID->"e5ec96eb-4500-424d-9234-a01c38c4cf85"],
+
+Cell[TextData[ButtonBox["RefpropLink Guide",
+ BaseStyle->"Link",
+ ButtonData->"paclet:RefpropLink/guide/RefpropLink"]], "TutorialMoreAbout",
+ CellChangeTimes->{{3.8295561729135475`*^9, 3.829556187869563*^9}},
+ CellID->1567025153,ExpressionUUID->"019f94e2-b527-49bf-92f9-20ae1b496199"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related Tutorials", "RelatedTutorialsSection",
+ CellID->415694126,ExpressionUUID->"7d2b0a58-c273-4fab-9a7a-dcd282893bbb"],
+
+Cell[TextData[ButtonBox["RefpropLink Overview",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/RefpropLinkOverview"]], "RelatedTutorials",
+ CellChangeTimes->{{3.831186766631734*^9, 3.831186789799773*^9}},
+ CellID->90776795,ExpressionUUID->"26551345-d825-4eb8-b331-f4e0a95c5de0"],
+
+Cell[TextData[ButtonBox["RefpropLink Implementation",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/Implementation"]], "RelatedTutorials",
+ CellChangeTimes->{{3.8295561633470955`*^9, 3.8295561679617863`*^9}, {
+  3.8295562342814484`*^9, 3.829556249907692*^9}},
+ CellID->806871991,ExpressionUUID->"8f3f9c64-5c7b-4f69-809d-2169d82e7f45"],
+
+Cell[TextData[ButtonBox["Pure Fluids",
+ BaseStyle->"Link",
+ ButtonData->"paclet:RefpropLink/tutorial/PureFluids"]], "RelatedTutorials",
+ CellChangeTimes->{{3.8295561964894886`*^9, 3.829556198257761*^9}, {
+  3.8295562598860073`*^9, 3.8295562601153994`*^9}},
+ CellID->589674989,ExpressionUUID->"525d1f73-fb67-48fa-81c4-6f395c93deb8"],
+
+Cell[TextData[ButtonBox["Mixtures",
+ BaseStyle->"Link",
+ ButtonData->"paclet:RefpropLink/tutorial/Mixtures"]], "RelatedTutorials",
+ CellChangeTimes->{{3.82955620402534*^9, 3.8295562051144323`*^9}, {
+  3.829556270119632*^9, 3.829556270340067*^9}},
+ CellID->199677328,ExpressionUUID->"bdcee390-e54e-4a06-8572-1138c490425a"],
+
+Cell[TextData[ButtonBox["Pure Fluids (Legacy API)",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/PureFluidsLegacyAPI"]], "RelatedTutorials",
+ CellChangeTimes->{{3.8295561964894886`*^9, 3.8295562199537535`*^9}, {
+  3.829556285424712*^9, 3.8295562856641026`*^9}},
+ CellID->103662598,ExpressionUUID->"118b2600-4b9e-4c71-8cc6-f7885163253d"],
+
+Cell[TextData[ButtonBox["Mixtures (Legacy API)",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/MixturesLegacyAPI"]], "RelatedTutorials",
+ CellChangeTimes->{{3.82955620402534*^9, 3.829556228169789*^9}, {
+  3.8295563025080395`*^9, 3.829556302694574*^9}},
+ CellID->17959204,ExpressionUUID->"7a15e4ef-4404-4797-9cca-29fa2cddafb7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related Wolfram Education Group Courses", "TutorialRelatedLinksSection",
+ CellID->415694148,ExpressionUUID->"09979b7c-5901-45e2-a77c-908b8d89a982"],
+
+Cell["XXXX", "TutorialRelatedLinks",
+ CellID->415694149,ExpressionUUID->"649d2e2c-319d-4d74-9a77-77978f021de7"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{868, 1021},
+WindowMargins->{{334, Automatic}, {Automatic, 3}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "TutorialPageStyles.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"da0e4cfa-f29c-4d4a-aaec-f0147e569028"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "UnitListing"->{
+  Cell[31939, 857, 359, 6, 50, "Section",ExpressionUUID->"ef95e1d0-cfbc-434f-afbc-3c3aadd05f06",
+   CellTags->"UnitListing",
+   CellID->474298572],
+  Cell[42094, 1127, 242, 4, 50, "Section",ExpressionUUID->"eae5b49f-b6be-4968-8d47-1d25fbfef6eb",
+   CellTags->"UnitListing",
+   CellID->15936146]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"UnitListing", 60364, 1652}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 600, 14, 22, "History",ExpressionUUID->"1caa4da2-f151-442f-a0d7-9fe3759da451",
+ CellID->1247902091],
+Cell[CellGroupData[{
+Cell[1183, 38, 123, 1, 27, "CategorizationSection",ExpressionUUID->"a3d8faa6-2ce3-4fa7-b045-3c136b001ff6",
+ CellID->1122911449],
+Cell[1309, 41, 136, 2, 70, "Categorization",ExpressionUUID->"3c98faf4-be79-4839-a41d-6f83ca01dc81",
+ CellID->686433507],
+Cell[1448, 45, 139, 2, 70, "Categorization",ExpressionUUID->"b0997276-5cfb-4bc6-b95a-8378fb21a942",
+ CellID->605800465],
+Cell[1590, 49, 136, 2, 70, "Categorization",ExpressionUUID->"6b3f4ee4-9e10-4c1b-aab5-4dbf33dfcee6",
+ CellID->468444828],
+Cell[1729, 53, 158, 2, 70, "Categorization",ExpressionUUID->"70127cc0-826f-4614-ae17-b081503ff111"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[1924, 60, 111, 1, 17, "KeywordsSection",ExpressionUUID->"1541d5f7-b6a0-42d1-b09e-6413bc8ea3f9",
+ CellID->1427428552],
+Cell[2038, 63, 175, 2, 17, "Keywords",ExpressionUUID->"20fc1729-47d6-4bc8-ba50-f8f3f9f13f2c",
+ CellID->1251852827],
+Cell[2216, 67, 165, 2, 17, "Keywords",ExpressionUUID->"7a00d3cd-1c21-4ba9-b7c3-ef6ec9671b16",
+ CellID->40814159],
+Cell[2384, 71, 172, 2, 17, "Keywords",ExpressionUUID->"58c0c7a1-ce3c-4c79-8060-4a22cfb12bf3",
+ CellID->83968126]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[2593, 78, 108, 1, 17, "DetailsSection",ExpressionUUID->"fac36d9c-87d2-4173-a458-c70caa0ef386",
+ CellID->307771771],
+Cell[2704, 81, 202, 3, 31, "Details",ExpressionUUID->"e2b1713d-671b-4425-8fe3-67f6a3667390",
+ CellID->218895918],
+Cell[2909, 86, 207, 3, 31, "Details",ExpressionUUID->"20f8d38b-7d6c-4285-9336-58204947b05e",
+ CellID->350963985],
+Cell[3119, 91, 197, 3, 31, "Details",ExpressionUUID->"9546fc14-2f1f-4f2c-9dda-deb1d7a8c556",
+ CellID->795871300],
+Cell[3319, 96, 126, 2, 31, "Details",ExpressionUUID->"371f3cf8-464b-4b01-9fa4-b978e9fb36bb",
+ CellID->199739161],
+Cell[3448, 100, 115, 2, 31, "Details",ExpressionUUID->"4e9d265b-093d-4e32-917b-1e5f85c89de3",
+ CellID->40625308],
+Cell[3566, 104, 116, 2, 31, "Details",ExpressionUUID->"795396ee-5866-4a8b-a869-d45a00d37ba5",
+ CellID->357121918],
+Cell[3685, 108, 117, 2, 31, "Details",ExpressionUUID->"74c3eaca-9f1c-46c7-81b4-d82b30881b65",
+ CellID->35949532],
+Cell[3805, 112, 133, 2, 31, "Details",ExpressionUUID->"569b2c6f-b718-4464-a34c-bc8dc3dadd4f",
+ CellID->929432370],
+Cell[3941, 116, 122, 2, 31, "Details",ExpressionUUID->"2142dc17-2d43-4bb2-840f-5f89013e6317",
+ CellID->240026365]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4100, 123, 279, 4, 105, "Title",ExpressionUUID->"b0b5e3cf-7c82-4038-a307-647c5c736ce3",
+ CellID->509267359],
+Cell[4382, 129, 1190, 23, 83, "Text",ExpressionUUID->"1076fc0a-c8b8-4be4-a022-9db01e54d8ca",
+ CellID->500433602],
+Cell[CellGroupData[{
+Cell[5597, 156, 280, 4, 50, "Section",ExpressionUUID->"d1afd747-23a5-475d-8cb9-1eabd01ba948",
+ CellID->168392342],
+Cell[5880, 162, 1126, 22, 98, "Text",ExpressionUUID->"a332c712-1bac-42c5-884b-e6917c7b24ae",
+ CellID->77774008],
+Cell[7009, 186, 213, 2, 21, "Text",ExpressionUUID->"4ec575c2-11de-4c60-bd3c-b7dbc07e4fd7",
+ CellID->58461204],
+Cell[CellGroupData[{
+Cell[7247, 192, 178, 2, 38, "MathCaption",ExpressionUUID->"91f19f27-a7f9-4a09-969d-72200665189d",
+ CellID->225758353],
+Cell[7428, 196, 579, 16, 62, "Input",ExpressionUUID->"95f85a9a-1157-4f4c-a7b2-9a3b37cbb6da",
+ CellID->204456884]
+}, Open  ]],
+Cell[8022, 215, 316, 6, 21, "Text",ExpressionUUID->"d50d7cd4-1940-41bf-99ef-f3dfa78b21bd",
+ CellID->131734807],
+Cell[CellGroupData[{
+Cell[8363, 225, 260, 3, 38, "MathCaption",ExpressionUUID->"feb0ddd7-b859-481a-a4f3-1411e5871436",
+ CellID->22682509],
+Cell[CellGroupData[{
+Cell[8648, 232, 246, 5, 25, "Input",ExpressionUUID->"1f268546-4698-4ac3-a549-ff380d28dd88",
+ CellID->242568717],
+Cell[8897, 239, 286, 6, 34, "Output",ExpressionUUID->"bc9f37ed-97ff-4374-9a34-6ddbf1bb502e",
+ CellID->761300198]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9220, 250, 289, 6, 25, "Input",ExpressionUUID->"1ae0f7ac-ca90-4619-8522-2a0c72990f30",
+ CellID->294167828],
+Cell[9512, 258, 270, 5, 33, "Output",ExpressionUUID->"ef9e1fa6-7b1b-43ba-899a-cdbd7f015f7e",
+ CellID->442771127]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9819, 268, 236, 5, 25, "Input",ExpressionUUID->"5d709ef0-6cd6-46b9-a6f7-656bda13f719",
+ CellID->30598148],
+Cell[10058, 275, 269, 5, 33, "Output",ExpressionUUID->"4132ea44-3c19-4bfa-9439-1494b3a1a4a4",
+ CellID->102333220]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10376, 286, 443, 8, 52, "MathCaption",ExpressionUUID->"0484abcf-eb2d-4353-8291-4767bf824725",
+ CellID->318487788],
+Cell[CellGroupData[{
+Cell[10844, 298, 288, 6, 25, "Input",ExpressionUUID->"2358bfff-f8b5-4bed-8ddb-0f1237f9dcff",
+ CellID->221508414],
+Cell[11135, 306, 311, 7, 34, "Output",ExpressionUUID->"83a42fe5-2c5e-4af5-9845-3a1fd8f1b07b",
+ CellID->32885828]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11483, 318, 281, 6, 25, "Input",ExpressionUUID->"34070764-b895-430c-9ec6-d04cb5b30afc",
+ CellID->336593233],
+Cell[11767, 326, 272, 5, 33, "Output",ExpressionUUID->"bbbd0380-7217-4875-b4b2-5f0beb1ce9d6",
+ CellID->358691173]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12076, 336, 265, 6, 25, "Input",ExpressionUUID->"80b18df4-b308-4e58-8c8b-b62baf39be91",
+ CellID->275625031],
+Cell[12344, 344, 383, 9, 35, "Output",ExpressionUUID->"403ae82e-4621-4699-9866-52a136d6046c",
+ CellID->202100377]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12764, 358, 469, 12, 43, "Input",ExpressionUUID->"a7ce5b07-f3a6-4b40-a554-253b14a5e9fe",
+ CellID->160703707],
+Cell[13236, 372, 395, 9, 34, "Output",ExpressionUUID->"14568269-7e16-4f77-a6c9-70bce65305e4",
+ CellID->484593544]
+}, Open  ]]
+}, Open  ]],
+Cell[13658, 385, 578, 13, 52, "Text",ExpressionUUID->"be362151-d9b5-41d4-8ab8-32676858283c",
+ CellID->111462763],
+Cell[14239, 400, 681, 13, 21, "Text",ExpressionUUID->"dd158a04-2eb8-4917-b6bf-2046e52e3f80",
+ CellID->25180744]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14957, 418, 213, 3, 50, "Section",ExpressionUUID->"55a5c272-c4bd-4ed5-b5a7-4f2219e28acc",
+ CellID->487800081],
+Cell[15173, 423, 579, 9, 66, "Text",ExpressionUUID->"254ecbd0-d83f-4840-86ab-ee8badb85e16",
+ CellID->43572451],
+Cell[15755, 434, 746, 16, 60, "DefinitionBox",ExpressionUUID->"610db4d5-2bd1-4b7b-a72a-f772ec09677e",
+ CellID->2096742444],
+Cell[16504, 452, 246, 4, 27, "Caption",ExpressionUUID->"6ebaec25-c6c7-4f81-96bd-4e0ce34d4ff2",
+ CellID->1891092685],
+Cell[16753, 458, 684, 10, 66, "Text",ExpressionUUID->"18776dda-8775-4d3a-85ed-61397566d6c9",
+ CellID->140716974],
+Cell[CellGroupData[{
+Cell[17462, 472, 284, 8, 38, "MathCaption",ExpressionUUID->"aacf1a68-d488-4a92-8c62-402be971f1d3",
+ CellID->836781195],
+Cell[CellGroupData[{
+Cell[17771, 484, 220, 4, 25, "Input",ExpressionUUID->"e009a42b-4cd5-4791-a666-7d4f32dace43",
+ CellID->2058623809],
+Cell[17994, 490, 1968, 46, 94, "Output",ExpressionUUID->"9c041b81-5884-4840-ba98-6ab65a5edf95",
+ CellID->87098352]
+}, Open  ]]
+}, Open  ]],
+Cell[19989, 540, 265, 5, 21, "Text",ExpressionUUID->"86d94333-ce34-4a92-91f2-a2acb5e4c2a4",
+ CellID->123421445],
+Cell[CellGroupData[{
+Cell[20279, 549, 284, 8, 38, "MathCaption",ExpressionUUID->"2cf51bd2-539e-408c-8206-9d3b04bf2538",
+ CellID->59770841],
+Cell[CellGroupData[{
+Cell[20588, 561, 268, 5, 25, "Input",ExpressionUUID->"b31f025b-88ca-4b83-9b87-735039026e01",
+ CellID->206704800],
+Cell[20859, 568, 879, 16, 61, "Output",ExpressionUUID->"1e6c670c-d2ff-408f-aaed-28391e803733",
+ CellID->201625443]
+}, Open  ]]
+}, Open  ]],
+Cell[21765, 588, 350, 6, 36, "Text",ExpressionUUID->"00215907-1da5-4ac5-860c-5bb4690b8634",
+ CellID->87117656]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22152, 599, 213, 3, 50, "Section",ExpressionUUID->"f99a7adb-15dd-4eeb-8379-63bb536e3790",
+ CellID->343817223],
+Cell[22368, 604, 1085, 18, 112, "Text",ExpressionUUID->"302f199a-2620-435f-a63e-68adb8c6f5f0",
+ CellID->65621483],
+Cell[23456, 624, 3376, 93, 195, "DefinitionBox",ExpressionUUID->"f46c927f-af46-43d3-af7e-e016209310fd",
+ CellID->741850302],
+Cell[26835, 719, 247, 4, 27, "Caption",ExpressionUUID->"7fd07af2-cdaf-4daa-8ea6-1a2ef1d96c5f",
+ CellID->540231321],
+Cell[27085, 725, 433, 7, 51, "Text",ExpressionUUID->"a90cb9da-30c2-4174-aa22-1a511c056e82",
+ CellID->108797488],
+Cell[CellGroupData[{
+Cell[27543, 736, 186, 2, 38, "MathCaption",ExpressionUUID->"802c1f6f-b6b7-43fc-8dd5-1d68d641682a",
+ CellID->921517796],
+Cell[27732, 740, 720, 17, 44, "Input",ExpressionUUID->"819f19c3-1a91-4836-a0b2-ec500e9c551f",
+ CellID->773647331],
+Cell[CellGroupData[{
+Cell[28477, 761, 299, 6, 25, "Input",ExpressionUUID->"c6f5e6f2-d7f1-465a-a728-021b5f7e801a",
+ CellID->117583059],
+Cell[28779, 769, 388, 8, 24, "Output",ExpressionUUID->"79c4dd5d-a5f2-4ef7-b450-d5b5dd6e772b",
+ CellID->830825296]
+}, Open  ]]
+}, Open  ]],
+Cell[29194, 781, 527, 9, 51, "Text",ExpressionUUID->"e398a2d3-2449-4db0-87c0-2832ec375457",
+ CellID->133812848],
+Cell[CellGroupData[{
+Cell[29746, 794, 184, 2, 38, "MathCaption",ExpressionUUID->"badda7c5-333e-4a93-abc7-d3b8d4744e62",
+ CellID->104795730],
+Cell[29933, 798, 523, 14, 44, "Input",ExpressionUUID->"db3f1bdd-cd97-4022-b52f-e010548f3431",
+ CellID->62392634],
+Cell[CellGroupData[{
+Cell[30481, 816, 246, 5, 25, "Input",ExpressionUUID->"907d4623-a1cd-4c79-8478-b3558f253072",
+ CellID->7934655],
+Cell[30730, 823, 529, 13, 36, "Output",ExpressionUUID->"0d9c7302-0279-4481-a095-a6358931e890",
+ CellID->347487643]
+}, Open  ]]
+}, Open  ]],
+Cell[31286, 840, 616, 12, 51, "Text",ExpressionUUID->"a9c9bd1a-776f-4e10-90ce-00edf2c77f83",
+ CellID->20003106]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31939, 857, 359, 6, 50, "Section",ExpressionUUID->"ef95e1d0-cfbc-434f-afbc-3c3aadd05f06",
+ CellTags->"UnitListing",
+ CellID->474298572],
+Cell[32301, 865, 628, 10, 66, "Text",ExpressionUUID->"e1d40685-9c38-4392-85ec-9aab2d68684f",
+ CellID->211894381],
+Cell[32932, 877, 1602, 37, 96, "DefinitionBox",ExpressionUUID->"8a36bd08-7c19-4603-b88c-eb3f10d47a20",
+ CellID->202135091],
+Cell[34537, 916, 249, 3, 27, "Caption",ExpressionUUID->"c819a18c-d0a1-4363-8836-b11d47796d91",
+ CellID->735618057],
+Cell[34789, 921, 567, 12, 51, "Text",ExpressionUUID->"32f1253b-538b-4ce1-b6ad-f33fa30a523f",
+ CellID->335346041],
+Cell[CellGroupData[{
+Cell[35381, 937, 315, 6, 52, "MathCaption",ExpressionUUID->"92997f69-86f7-495f-b7e6-2b1350210daf",
+ CellID->231964404],
+Cell[CellGroupData[{
+Cell[35721, 947, 429, 10, 25, "Input",ExpressionUUID->"ab90ec04-5572-4e76-ad1d-763a38639aac",
+ CellID->267895102],
+Cell[36153, 959, 239, 4, 24, "Output",ExpressionUUID->"fa96544b-1e0d-46ca-9799-44997a7a4144",
+ CellID->45406569]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36429, 968, 426, 10, 25, "Input",ExpressionUUID->"51c02238-be04-431e-8784-fff39b3bdf67",
+ CellID->713350514],
+Cell[36858, 980, 239, 4, 24, "Output",ExpressionUUID->"499650c0-e16b-4f0f-b0f7-2f42270e6191",
+ CellID->689682708]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37134, 989, 564, 13, 25, "Input",ExpressionUUID->"c42ca0ae-3238-42cb-9669-f94658d751c6",
+ CellID->204583805],
+Cell[37701, 1004, 233, 4, 24, "Output",ExpressionUUID->"7bda85a0-1ab9-41df-80fd-5e778aca6a4a",
+ CellID->23583575]
+}, Open  ]]
+}, Open  ]],
+Cell[37961, 1012, 606, 13, 51, "Text",ExpressionUUID->"f9a71cfb-ed73-4c7a-ae17-86a3d5c11db4",
+ CellID->493875139],
+Cell[CellGroupData[{
+Cell[38592, 1029, 293, 5, 38, "MathCaption",ExpressionUUID->"f24c7cb4-f5a9-4514-bf8e-7543fb38322d",
+ CellID->81124175],
+Cell[CellGroupData[{
+Cell[38910, 1038, 529, 12, 25, "Input",ExpressionUUID->"4ef4a3b5-56c7-463a-b29b-0781516923bf",
+ CellID->358696701],
+Cell[39442, 1052, 341, 6, 33, "Output",ExpressionUUID->"00535ed5-8738-4f9e-9bfa-aee8b673236e",
+ CellID->481848091]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39820, 1063, 527, 12, 25, "Input",ExpressionUUID->"f25893b5-06a1-4c69-8fa1-cca267c91ac8",
+ CellID->85778456],
+Cell[40350, 1077, 353, 6, 33, "Output",ExpressionUUID->"b8ac2c75-e0f7-418c-9383-0feb14087437",
+ CellID->787093837]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40740, 1088, 568, 12, 25, "Input",ExpressionUUID->"671d8676-7708-4554-9ae3-ff0ebb1dcccd",
+ CellID->296103542],
+Cell[41311, 1102, 435, 11, 34, "Output",ExpressionUUID->"e975676f-2e3d-4d7c-a608-d1b0d6df5884",
+ CellID->51628656]
+}, Open  ]]
+}, Open  ]],
+Cell[41773, 1117, 284, 5, 36, "Text",ExpressionUUID->"86e925bd-7114-4028-ae10-daa6b2c26119",
+ CellID->40049350]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42094, 1127, 242, 4, 50, "Section",ExpressionUUID->"eae5b49f-b6be-4968-8d47-1d25fbfef6eb",
+ CellTags->"UnitListing",
+ CellID->15936146],
+Cell[42339, 1133, 652, 10, 66, "Text",ExpressionUUID->"4cb6130f-3821-4a66-bc1a-3d383c59f2e8",
+ CellID->89803241],
+Cell[CellGroupData[{
+Cell[43016, 1147, 180, 2, 38, "MathCaption",ExpressionUUID->"187971d2-988c-491f-bb58-945d74b900a8",
+ CellID->457083384],
+Cell[43199, 1151, 1734, 52, 206, "Input",ExpressionUUID->"5c955c1c-b67e-4c53-b585-e3d70eec1d56",
+ CellID->343781452]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44970, 1208, 178, 2, 38, "MathCaption",ExpressionUUID->"1a0c482a-8103-4312-a91f-88e44bf33a1f",
+ CellID->275932980],
+Cell[45151, 1212, 575, 15, 62, "Input",ExpressionUUID->"8089ed67-3cf5-4d8a-8ad6-10d17d9ae24b",
+ CellID->59535446]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45763, 1232, 176, 2, 38, "MathCaption",ExpressionUUID->"cd219fd5-7bb0-4ce6-a582-e103e562fa4c",
+ CellID->971958366],
+Cell[45942, 1236, 943, 26, 116, "Input",ExpressionUUID->"457e3c8e-4c0d-475a-9ecd-734f97654b87",
+ CellID->252037139]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46922, 1267, 232, 3, 38, "MathCaption",ExpressionUUID->"2bdabcc4-dc5e-4d57-9b84-e81eece3feb6",
+ CellID->77593042],
+Cell[47157, 1272, 549, 14, 44, "Input",ExpressionUUID->"70db3722-2194-4547-884c-60205a3165fc",
+ CellID->72925378]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47743, 1291, 178, 2, 38, "MathCaption",ExpressionUUID->"42c08527-d73f-4635-8c5c-df875edd5000",
+ CellID->429218002],
+Cell[47924, 1295, 544, 14, 62, "Input",ExpressionUUID->"a62931d5-7b87-4637-b2c3-01cc3cfa46a1",
+ CellID->313199094]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48505, 1314, 173, 2, 38, "MathCaption",ExpressionUUID->"2490fdf6-8842-49bd-9469-e5f747050db5",
+ CellID->7025256],
+Cell[48681, 1318, 548, 14, 62, "Input",ExpressionUUID->"5012501f-7a83-4216-99f2-ee295d970de1",
+ CellID->154982085]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49266, 1337, 178, 2, 38, "MathCaption",ExpressionUUID->"2b32d606-1fc1-4b00-a625-248e504183a0",
+ CellID->456165731],
+Cell[49447, 1341, 2250, 65, 242, "Input",ExpressionUUID->"fbd109b9-ab77-4ff2-a931-97f32aef1ac8",
+ CellID->158656461]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51734, 1411, 185, 2, 38, "MathCaption",ExpressionUUID->"b96c5144-7a5a-4148-b043-a729c49be003",
+ CellID->731389191],
+Cell[51922, 1415, 713, 18, 80, "Input",ExpressionUUID->"1d526d01-32c1-41ff-9e57-e371d1b6888c",
+ CellID->692752610]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[52672, 1438, 175, 2, 38, "MathCaption",ExpressionUUID->"44243d85-e479-49f3-aa44-69248e4af147",
+ CellID->4112165],
+Cell[52850, 1442, 420, 10, 44, "Input",ExpressionUUID->"599dd656-3307-4362-ab51-a2059f1593fe",
+ CellID->173259624]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53307, 1457, 179, 2, 38, "MathCaption",ExpressionUUID->"47550905-0d01-4d6a-a16b-7419ff4bd0d1",
+ CellID->20424975],
+Cell[53489, 1461, 1209, 35, 134, "Input",ExpressionUUID->"0597a7b1-2931-4f77-a76e-ff6630a12313",
+ CellID->247938534]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54735, 1501, 179, 2, 38, "MathCaption",ExpressionUUID->"f7bd691a-bd53-467b-8551-00b6c528d2f9",
+ CellID->466691419],
+Cell[54917, 1505, 677, 18, 80, "Input",ExpressionUUID->"37d66f11-2e36-40d7-aef9-d2f6c49d6f56",
+ CellID->156276581]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55631, 1528, 234, 3, 38, "MathCaption",ExpressionUUID->"6215928e-2f3d-41b0-975c-5d6672d98082",
+ CellID->159265239],
+Cell[55868, 1533, 583, 15, 62, "Input",ExpressionUUID->"b470c126-b148-493f-850f-64c09bb737c4",
+ CellID->477294091]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56488, 1553, 184, 2, 38, "MathCaption",ExpressionUUID->"ce44abe3-2bd6-4265-a915-46ccfb63c495",
+ CellID->87968082],
+Cell[56675, 1557, 289, 6, 25, "Input",ExpressionUUID->"8a21ee8e-0f54-4f68-85ea-d434b163191f",
+ CellID->157708355]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57013, 1569, 120, 1, 70, "TutorialMoreAboutSection",ExpressionUUID->"e5ec96eb-4500-424d-9234-a01c38c4cf85",
+ CellID->23220180],
+Cell[57136, 1572, 284, 4, 20, "TutorialMoreAbout",ExpressionUUID->"019f94e2-b527-49bf-92f9-20ae1b496199",
+ CellID->1567025153]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57457, 1581, 127, 1, 70, "RelatedTutorialsSection",ExpressionUUID->"7d2b0a58-c273-4fab-9a7a-dcd282893bbb",
+ CellID->415694126],
+Cell[57587, 1584, 296, 5, 20, "RelatedTutorials",ExpressionUUID->"26551345-d825-4eb8-b331-f4e0a95c5de0",
+ CellID->90776795],
+Cell[57886, 1591, 353, 6, 20, "RelatedTutorials",ExpressionUUID->"8f3f9c64-5c7b-4f69-809d-2169d82e7f45",
+ CellID->806871991],
+Cell[58242, 1599, 331, 5, 20, "RelatedTutorials",ExpressionUUID->"525d1f73-fb67-48fa-81c4-6f395c93deb8",
+ CellID->589674989],
+Cell[58576, 1606, 321, 5, 20, "RelatedTutorials",ExpressionUUID->"bdcee390-e54e-4a06-8572-1138c490425a",
+ CellID->199677328],
+Cell[58900, 1613, 356, 6, 20, "RelatedTutorials",ExpressionUUID->"118b2600-4b9e-4c71-8cc6-f7885163253d",
+ CellID->103662598],
+Cell[59259, 1621, 345, 6, 20, "RelatedTutorials",ExpressionUUID->"7a15e4ef-4404-4797-9cca-29fa2cddafb7",
+ CellID->17959204]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59641, 1632, 153, 1, 70, "TutorialRelatedLinksSection",ExpressionUUID->"09979b7c-5901-45e2-a77c-908b8d89a982",
+ CellID->415694148],
+Cell[59797, 1635, 111, 1, 20, "TutorialRelatedLinks",ExpressionUUID->"649d2e2c-319d-4d74-9a77-77978f021de7",
+ CellID->415694149]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

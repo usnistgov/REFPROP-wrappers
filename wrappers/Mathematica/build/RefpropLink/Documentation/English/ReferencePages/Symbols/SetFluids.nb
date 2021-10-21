@@ -1,0 +1,628 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23478,        618]
+NotebookOptionsPosition[     16587,        474]
+NotebookOutlinePosition[     19064,        534]
+CellTagsIndexPosition[     18979,        529]
+WindowTitle->SetFluids
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["REFPROP LINK PACKAGE SYMBOL", "PacletNameCell",ExpressionUUID->
+     "55c491fd-59df-4f50-b089-65556284211a"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"4ae7dd2c-d137-497b-98a7-3af2376d5f27"],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink\"\>":>
+       Documentation`HelpLookup["paclet:RefpropLink/guide/RefpropLink"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"MoreAbout"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "ac6ac2a5-2630-46d0-af4f-1423df43d825"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"663fb22c-795a-4fdb-8999-2f75765e12d6"],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink/ref/SetFluids\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["RefpropLink/ref/SetFluids"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/RefpropLink/ref/\
+SetFluids.html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]},
+             Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$32701], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "RefpropLink/ref/SetFluids", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "4459b071-cae8-4978-b704-6fd8d3e1f6ef"]
+    }], "AnchorBar",ExpressionUUID->"4317ae32-7051-4a96-8b3f-1ad728990a7e"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1,ExpressionUUID->"2d171da1-5931-44fd-880c-c3f5d7482592"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell["SetFluids", "ObjectName",ExpressionUUID->
+  "e0deaa3a-7194-4e78-98cb-5ee71e9c9b7e"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]],ExpressionUUID->"f0ec6f08-7314-4334-bd36-fa4e65b01834"],
+ Cell[BoxData[
+ ""], "ObjectNameTranslation",ExpressionUUID->
+  "954dc289-04a1-4272-8892-0c6d10cd4b35"]
+}], "ObjectNameGrid",ExpressionUUID->"a527c2fd-e8c8-44d4-a347-a93ec9934db5"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"SetFluids", "[", 
+       StyleBox["hFld", "TI"], "]"}]], "InlineFormula",ExpressionUUID->
+      "0a824393-b197-4fe6-b684-b1f4b7b26a9b"],
+     "\[LineSeparator]Loads fluid component file(s) specified in the hFld \
+string (setup replacement). Load a single pure fluid, or load multiple fluids \
+separated by a pipe symbol \"|\", a semicolon \";\", or an asterisk \"*\"."
+    }],ExpressionUUID->"0cb095d4-ed1b-4b35-a724-0aa5cc37c922"]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, 
+   "Rows" -> {{
+     None}}}},ExpressionUUID->"ba189b1d-5164-451d-b966-44c400d6f62a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]],ExpressionUUID->"2ee90433-b697-4b83-bbc8-c7dabab59f9c"],
+   "Details"
+  }], "NotesFrameText",ExpressionUUID->"79c08eca-2bf6-4d35-8c60-db232c473716"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"f9faae4f-1b75-4a02-89f6-a87c92821148"]], \
+"NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->202356556,ExpressionUUID->"46ec900c-8560-4209-bafe-ef4674580d84"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"b83d0efd-f15f-45c9-9dd8-7ec4a19c8fd3"],
+
+Cell[TextData[{
+ "This routing is a simplified replacement for the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["SETUP"]], "paclet:RefpropLink/ref/SETUP"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "b278f3d9-35c5-4f45-b5ed-e8b49cab615a"],
+ " function in the Legacy API, removing the need to pass ",
+ Cell[BoxData[
+  StyleBox["ncomp", "TI"]], "InlineFormula",ExpressionUUID->
+  "bfee72df-2b7e-44cd-a10f-6ba2650f7e7a"],
+ ", ",
+ Cell[BoxData[
+  StyleBox["hrf", "TI"]], "InlineFormula",ExpressionUUID->
+  "b168cc6e-9041-4e08-ab50-ae67286fbc07"],
+ ", ",
+ Cell[BoxData[
+  StyleBox["hFmix", "TI"]], "InlineFormula",ExpressionUUID->
+  "dee0918b-4c26-424f-9b33-fe296a3a42ed"],
+ ", or ",
+ Cell[BoxData[
+  StyleBox["herr", "TI"]], "InlineFormula",ExpressionUUID->
+  "fc349564-9143-4640-b878-337fa1fbbbed"],
+ ".  However, the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["setup"]], "paclet:RefpropLink/ref/Setup"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "73ab5fba-73b8-44f2-baf8-7b4e208a8420"],
+ " implementation in RefpropLink took care of this already, making the \
+parameters optional with default values.  Therefore, this routine may be used \
+interchangeably with ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["setup"]], "paclet:RefpropLink/ref/Setup"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "ffe3cc4b-a4ab-4c49-a875-bc98d12aee33"],
+ ".  The main difference is that the fluid(s) can be specified as a single \
+string, rather than a List."
+}], "Notes",
+ CellID->1067943069,ExpressionUUID->"5c5ebb68-2b86-446b-84ce-6e30f73fecc5"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox["hfld", "TI"]], "InlineFormula",ExpressionUUID->
+  "8ea2d16d-06ee-4129-b0fc-3046c7c45ee5"],
+ " is a string specifying the name of the fluid file to be loaded.  A path to \
+the fluid file can be included if needed.  For pure fluids, the .FLD \
+extension may be omitted.  For pseudo-pure fluids, the .PPF extension should \
+be included (e.g. \"AIR.ppf\"). "
+}], "Notes",
+ CellID->90868254,ExpressionUUID->"d57a1f50-e2da-4da8-9e3a-266def5d8506"],
+
+Cell["\<\
+For a mixture, it contains the names of the constituents in the mixture \
+separated by a pipe character \"|\", a semicolon \";\", or an asterisk \"*\", \
+but these symbols should not be mixed in the same call.\
+\>", "Notes",
+ CellID->909138798,ExpressionUUID->"633dd35c-5e6e-4a01-99db-d5a422565e7b"],
+
+Cell[TextData[{
+ "The error code (",
+ Cell[BoxData[
+  StyleBox["ierr", "TI"]], "InlineFormula",ExpressionUUID->
+  "51aedaf9-6001-4aec-b625-f63e11c3f375"],
+ ") will be returned and will be zero (0) if the call was successful.  If ",
+ Cell[BoxData[
+  StyleBox["ierr", "TI"]], "InlineFormula",ExpressionUUID->
+  "8d9ce1a6-5561-4762-9e61-9237fa812fb8"],
+ " is non-zero, the corresponding error ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["Message"]], "paclet:ref/Message"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "dc0e2ac2-bde7-4040-a8eb-4459e14b9543"],
+ " will be returned as well."
+}], "Notes",
+ CellID->227630775,ExpressionUUID->"7ddb5a81-f390-4e50-8cf2-7add66ecedaa"],
+
+Cell[TextData[{
+ "To load a ",
+ StyleBox["predefined",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " mixture file, call the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["SetMixture"]], "paclet:RefpropLink/ref/SETMIXTURE"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "998c7da5-8487-4bfc-b3eb-cd050b25ebcc"],
+ " subroutine (which must return the composition array and thus cannot be \
+included here)."
+}], "Notes",
+ CellID->460022730,ExpressionUUID->"0fb428bf-59ba-4cc2-814b-19b47f76f772"],
+
+Cell[TextData[{
+ "If it is necessary to set the reference state, call ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["setup"]], "paclet:RefpropLink/ref/SETUP"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "e53f6f92-faf7-417f-b28d-7a308fce57de"],
+ " instead, or call ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["setref"]], "paclet:RefpropLink/ref/Setref"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "4f7687a1-0c40-41ec-a97f-1e69fdc52f81"],
+ " after the call to ",
+ Cell[BoxData[
+ "SetFluids"], "InlineFormula",ExpressionUUID->
+  "8ae39406-3748-45f4-b7d3-2ac98c21d26d"],
+ "."
+}], "Notes",
+ CellID->134364360,ExpressionUUID->"94e879eb-3d94-4e67-bb51-3461ce897dcf"],
+
+Cell["", "SectionFooterSpacer",ExpressionUUID->"04f02701-4fbc-4ac9-9f98-917f82c75e31"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"9c6746b9-6400-454a-a0b9-705df9262ded"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(4)", "ExampleCount",ExpressionUUID->
+  "89e118f4-6591-481c-be09-83dc24c3ae71"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CellTags->"PrimaryExamplesSection",
+ CellID->172225914,ExpressionUUID->"8894262d-d9e4-4c86-87c6-17e26084b5bf"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(4)", "ExampleCount",ExpressionUUID->
+  "63a74a09-907e-432e-8ae4-9e8043b95cb4"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CellID->43868914,ExpressionUUID->"94bec952-41da-48bb-b4f5-eaa69573bec9"],
+
+Cell["Load Argon as a pure fluid:", "ExampleText",
+ CellID->192317322,ExpressionUUID->"e4727ab1-cf43-463c-bc06-8ca012d55825"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetFluids", "[", "\"\<Argon\>\"", "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->97131292,ExpressionUUID->"ab5cd7cf-0f0c-4e51-9b59-9c25a35fd72c"],
+
+Cell[BoxData["0"], "Output",
+ CellLabel->"Out[1]=",
+ CellID->173405698,ExpressionUUID->"5acd45a1-0319-476f-9041-22949c0e5027"]
+}, Open  ]],
+
+Cell["\<\
+A zero return value means that the fluid file was loaded and there were no \
+errors.\
+\>", "ExampleText",
+ CellID->124440418,ExpressionUUID->"dbd5d1fb-6da1-4e93-af76-bd907f09186b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "\t", "ExampleDelimiter",ExpressionUUID->
+   "fe2322b5-8597-4d98-9d28-a3b392032b02"],
+  $Line = 0; Null]], "ExampleDelimiter",
+ CellID->223070330,ExpressionUUID->"83d8c8c8-3bea-4d2f-be62-420464f69b6f"],
+
+Cell[TextData[{
+ "If the fluid file cannot be found, not only will the returned error code be \
+non-zero, but the REFPROP error string will be returned using the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["Message"]], "paclet:ref/Message"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "8d5801cd-7616-4c30-8c7d-b5ed12b26ca9"],
+ " system.  This obviates the need to actually display the error code (i.e. \
+expression can end with a semicolon)."
+}], "ExampleText",
+ CellID->145567311,ExpressionUUID->"3702625b-2a88-45cb-b77d-cbba23fca7ee"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ierr", "=", 
+   RowBox[{"SetFluids", "[", "\"\<Argonne\>\"", "]"}]}], ";"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->1009374704,ExpressionUUID->"4ca2d7a4-9adc-4979-b37e-baaa8e622d93"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetFluids", "refprop", 
+   "\"\\!\\(\\*RowBox[{\\\"\\\\\\\"[SETUP error 101] Error in opening file \
+for component 1: filename = Argonne.FLD\\\\\\\"\\\"}]\\)\"", 2, 16, 4, 
+   33557458114887677865, "Local", "RefpropLink`SetFluids"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->220816353,ExpressionUUID->"4bd9a96c-0b3e-4404-8a23-e1327c7f5920"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "\t", "ExampleDelimiter",ExpressionUUID->
+   "0f57cda3-8fef-4a3a-8662-15024bbb9d8a"],
+  $Line = 0; Null]], "ExampleDelimiter",
+ CellID->469003589,ExpressionUUID->"d0381470-aa01-4be2-8b78-3b973bd7801e"],
+
+Cell["\<\
+Load several components for Air, using the pipe character to separate them.\
+\>", "ExampleText",
+ CellID->364712381,ExpressionUUID->"ec2fb45b-b66b-481b-80d5-e14bd9cec841"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ierr", "=", 
+   RowBox[{"SetFluids", "[", "\"\<Nitrogen|Argon|Oxygen\>\"", "]"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->530503267,ExpressionUUID->"2161494b-e1ee-4c2a-b208-40e639fa9480"],
+
+Cell["Load a mixture using an alternate separator character.", "ExampleText",
+ CellID->12183042,ExpressionUUID->"5363875a-2a55-47f4-8325-f2c84788eb54"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ierr", "=", 
+   RowBox[{
+   "SetFluids", "[", "\"\<methane * ethane * propane * butane\>\"", "]"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->662383610,ExpressionUUID->"530ee012-7033-41c7-8a19-825e483b550d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ierr", "=", 
+   RowBox[{"SetFluids", "[", "\"\<methane;ethane;propane;butane\>\"", "]"}]}],
+   ";"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->150194185,ExpressionUUID->"7274d049-1b3a-4fce-a515-9e44868f5ee9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "\t", "ExampleDelimiter",ExpressionUUID->
+   "5b1b885a-fc6b-419c-820a-6d63a01a59d4"],
+  $Line = 0; Null]], "ExampleDelimiter",
+ CellID->39729234,ExpressionUUID->"b38ad230-2085-4821-a89d-06f3204dc87d"],
+
+Cell["Load a pseudo-pure fluid.", "ExampleText",
+ CellID->231830093,ExpressionUUID->"93b74d1c-a7a3-4bcb-a9b2-d12b5cb6d218"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ierr", "=", 
+   RowBox[{"SetFluids", "[", "\"\<AIR.ppf\>\"", "]"}]}], ";"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->499482569,ExpressionUUID->"ea6ff46c-06af-493c-8f1d-522cf916b129"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["", "SectionFooterSpacer",ExpressionUUID->"2a53bde9-ec8a-473f-8d22-30cbbbcc48d6"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"b0010249-9921-4fab-a73c-5eb6535d4a03"],
+ "Related Guides"
+}], "MoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->38303248,ExpressionUUID->"7c35186c-58f6-4eba-bcc3-cb6919058dd5"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"2b54a4b3-13e3-4227-8f07-77244fd3a8b2"],
+
+Cell[BoxData[
+ TemplateBox[{
+   Cell[
+    TextData["RefpropLink"]], "paclet:RefpropLink/guide/RefpropLink"},
+  "RefLink",
+  BaseStyle->"MoreAbout"]], "MoreAbout",
+ CellID->39261154,ExpressionUUID->"c17818de-dea4-483a-ae6b-d3ff74909f39"]
+}, Open  ]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"469737fd-63a9-4bcf-b7ec-f04d20336fcc"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{726, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"SetFluids",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "RefpropLink", ButtonData -> "paclet:RefpropLink/guide/RefpropLink", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2021, 10, 11, 17, 51, 37.7865659}", 
+    "history" -> {"1.0", "", "", ""}, "context" -> "RefpropLink`", 
+    "keywords" -> {"Fluids", "Components", "Mixture", "Setup"}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "Refprop Link Package Symbol", "language" -> "en", "paclet" -> 
+    "RefpropLink Package", "status" -> "None", "summary" -> 
+    "SetFluids[hFld] Loads fluid component file(s) specified in the hFld \
+string (setup replacement). Load a single pure fluid, or load multiple fluids \
+separated by a pipe symbol \"|\", a semicolon \";\", or an asterisk \"*\".", 
+    "synonyms" -> {}, "tabletags" -> {}, "title" -> "SetFluids", 
+    "titlemodifier" -> "", "windowtitle" -> "SetFluids", "type" -> "Symbol", 
+    "uri" -> "RefpropLink/ref/SetFluids", "WorkflowDockedCell" -> ""}, 
+  "SearchTextTranslated" -> "", "NewStyles" -> False},
+CellContext->"Global`",
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  TaggingRules -> {"NewStyles" -> False}, FrontEndVersion -> 
+  "12.1 for Microsoft Windows (64-bit) (June 19, 2020)", StyleDefinitions -> 
+  "Default.nb"],
+ExpressionUUID->"f239b9cb-3c8e-42c0-b098-0258d0d866b0"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[10789, 293, 435, 11, 35, "PrimaryExamplesSection",ExpressionUUID->"8894262d-d9e4-4c86-87c6-17e26084b5bf",
+   CellTags->"PrimaryExamplesSection",
+   CellID->172225914]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 18780, 522}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[581, 21, 3457, 77, 53, "AnchorBarGrid",ExpressionUUID->"2d171da1-5931-44fd-880c-c3f5d7482592",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[4063, 102, 394, 9, 52, "ObjectNameGrid",ExpressionUUID->"a527c2fd-e8c8-44d4-a347-a93ec9934db5"],
+Cell[4460, 113, 682, 15, 130, "Usage",ExpressionUUID->"ba189b1d-5164-451d-b966-44c400d6f62a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5179, 133, 855, 21, 37, "NotesSection",ExpressionUUID->"46ec900c-8560-4209-bafe-ef4674580d84",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->202356556],
+Cell[6037, 156, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"b83d0efd-f15f-45c9-9dd8-7ec4a19c8fd3"],
+Cell[6126, 158, 1691, 46, 70, "Notes",ExpressionUUID->"5c5ebb68-2b86-446b-84ce-6e30f73fecc5",
+ CellID->1067943069],
+Cell[7820, 206, 484, 9, 70, "Notes",ExpressionUUID->"d57a1f50-e2da-4da8-9e3a-266def5d8506",
+ CellID->90868254],
+Cell[8307, 217, 309, 5, 70, "Notes",ExpressionUUID->"633dd35c-5e6e-4a01-99db-d5a422565e7b",
+ CellID->909138798],
+Cell[8619, 224, 726, 19, 70, "Notes",ExpressionUUID->"7ddb5a81-f390-4e50-8cf2-7add66ecedaa",
+ CellID->227630775],
+Cell[9348, 245, 544, 16, 70, "Notes",ExpressionUUID->"0fb428bf-59ba-4cc2-814b-19b47f76f772",
+ CellID->460022730],
+Cell[9895, 263, 768, 23, 70, "Notes",ExpressionUUID->"94e879eb-3d94-4e67-bb51-3461ce897dcf",
+ CellID->134364360],
+Cell[10666, 288, 86, 0, 70, "SectionFooterSpacer",ExpressionUUID->"04f02701-4fbc-4ac9-9f98-917f82c75e31"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10789, 293, 435, 11, 35, "PrimaryExamplesSection",ExpressionUUID->"8894262d-d9e4-4c86-87c6-17e26084b5bf",
+ CellTags->"PrimaryExamplesSection",
+ CellID->172225914],
+Cell[CellGroupData[{
+Cell[11249, 308, 307, 7, 29, "ExampleSection",ExpressionUUID->"94bec952-41da-48bb-b4f5-eaa69573bec9",
+ CellID->43868914],
+Cell[11559, 317, 125, 1, 38, "ExampleText",ExpressionUUID->"e4727ab1-cf43-463c-bc06-8ca012d55825",
+ CellID->192317322],
+Cell[CellGroupData[{
+Cell[11709, 322, 171, 3, 26, "Input",ExpressionUUID->"ab5cd7cf-0f0c-4e51-9b59-9c25a35fd72c",
+ CellID->97131292],
+Cell[11883, 327, 126, 2, 35, "Output",ExpressionUUID->"5acd45a1-0319-476f-9041-22949c0e5027",
+ CellID->173405698]
+}, Open  ]],
+Cell[12024, 332, 190, 4, 38, "ExampleText",ExpressionUUID->"dbd5d1fb-6da1-4e93-af76-bd907f09186b",
+ CellID->124440418],
+Cell[CellGroupData[{
+Cell[12239, 340, 242, 5, 13, "ExampleDelimiter",ExpressionUUID->"83d8c8c8-3bea-4d2f-be62-420464f69b6f",
+ CellID->223070330],
+Cell[12484, 347, 591, 13, 77, "ExampleText",ExpressionUUID->"3702625b-2a88-45cb-b77d-cbba23fca7ee",
+ CellID->145567311],
+Cell[CellGroupData[{
+Cell[13100, 364, 220, 5, 26, "Input",ExpressionUUID->"4ca2d7a4-9adc-4979-b37e-baaa8e622d93",
+ CellID->1009374704],
+Cell[13323, 371, 425, 8, 24, "Message",ExpressionUUID->"4bd9a96c-0b3e-4404-8a23-e1327c7f5920",
+ CellID->220816353]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13797, 385, 242, 5, 13, "ExampleDelimiter",ExpressionUUID->"d0381470-aa01-4be2-8b78-3b973bd7801e",
+ CellID->469003589],
+Cell[14042, 392, 181, 3, 38, "ExampleText",ExpressionUUID->"ec2fb45b-b66b-481b-80d5-e14bd9cec841",
+ CellID->364712381],
+Cell[14226, 397, 236, 6, 26, "Input",ExpressionUUID->"2161494b-e1ee-4c2a-b208-40e639fa9480",
+ CellID->530503267],
+Cell[14465, 405, 151, 1, 38, "ExampleText",ExpressionUUID->"5363875a-2a55-47f4-8325-f2c84788eb54",
+ CellID->12183042],
+Cell[14619, 408, 254, 7, 70, "Input",ExpressionUUID->"530ee012-7033-41c7-8a19-825e483b550d",
+ CellID->662383610],
+Cell[14876, 417, 244, 6, 70, "Input",ExpressionUUID->"7274d049-1b3a-4fce-a515-9e44868f5ee9",
+ CellID->150194185]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15157, 428, 241, 5, 70, "ExampleDelimiter",ExpressionUUID->"b38ad230-2085-4821-a89d-06f3204dc87d",
+ CellID->39729234],
+Cell[15401, 435, 123, 1, 70, "ExampleText",ExpressionUUID->"93b74d1c-a7a3-4bcb-a9b2-d12b5cb6d218",
+ CellID->231830093],
+Cell[15527, 438, 219, 5, 70, "Input",ExpressionUUID->"ea6ff46c-06af-493c-8f1d-522cf916b129",
+ CellID->499482569]
+}, Open  ]]
+}, Open  ]],
+Cell[15773, 447, 86, 0, 70, "SectionFooterSpacer",ExpressionUUID->"2a53bde9-ec8a-473f-8d22-30cbbbcc48d6"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15896, 452, 266, 7, 70, "MoreAboutSection",ExpressionUUID->"7c35186c-58f6-4eba-bcc3-cb6919058dd5",
+ CellID->38303248],
+Cell[16165, 461, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"2b54a4b3-13e3-4227-8f07-77244fd3a8b2"],
+Cell[16254, 463, 236, 6, 70, "MoreAbout",ExpressionUUID->"c17818de-dea4-483a-ae6b-d3ff74909f39",
+ CellID->39261154]
+}, Open  ]],
+Cell[16505, 472, 78, 0, 70, "FooterCell",ExpressionUUID->"469737fd-63a9-4bcf-b7ec-f04d20336fcc"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,3 +1,3 @@
-(* ::Package:: *)
+(* Wolfram Language Init File *)
 
-Get["RefpropLink`RefpropLink`"]
+Get[ "RefpropLink`RefpropLink`"]

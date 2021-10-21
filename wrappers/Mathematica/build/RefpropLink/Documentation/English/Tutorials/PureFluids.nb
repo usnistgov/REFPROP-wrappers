@@ -1,0 +1,4493 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    191985,       4483]
+NotebookOptionsPosition[    158336,       3814]
+NotebookOutlinePosition[    161885,       3889]
+CellTagsIndexPosition[    161842,       3886]
+WindowTitle->Pure Fluids
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["REFPROP LINK TUTORIAL", "PacletNameCell",ExpressionUUID->
+     "915dc20d-a4bd-40f2-bf6c-156aa0af5983"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Tutorials",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"f0555d95-ef54-4080-8423-fa1b5f30072e"],
+         TextCell[
+          Row[{"Related Tutorials", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink Overview\"\>":>
+       Documentation`HelpLookup[
+       "paclet:RefpropLink/tutorial/RefpropLinkOverview"], "\<\"RefpropLink \
+Implementation\"\>":>Documentation`HelpLookup[
+       "paclet:RefpropLink/tutorial/Implementation"], "\<\"RefpropLink \
+Units\"\>":>Documentation`HelpLookup[
+       "paclet:RefpropLink/tutorial/Units"], "\<\"Mixtures\"\>":>
+       Documentation`HelpLookup[
+       "paclet:RefpropLink/tutorial/Mixtures"], "\<\"Pure Fluids (Legacy API)\
+\"\>":>Documentation`HelpLookup[
+       "paclet:RefpropLink/tutorial/PureFluidsLegacyAPI"], "\<\"Mixtures \
+(Legacy API)\"\>":>Documentation`HelpLookup[
+       "paclet:RefpropLink/tutorial/MixturesLegacyAPI"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"RelatedTutorialsSection"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "53503141-3d92-4f43-9f3d-786297ca31cd"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"aedfd867-97b4-42be-a295-4cf11f25cbac"],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink Guide\"\>":>
+       Documentation`HelpLookup["paclet:RefpropLink/guide/RefpropLink"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"TutorialMoreAboutSection"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "d52133c3-ce2a-47f6-80d0-6f4d0d6d9634"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"ccf2b79e-8de1-40f0-9d65-56ef624efbc4"],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink/tutorial/PureFluids\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["RefpropLink/tutorial/PureFluids"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/RefpropLink/tutorial/\
+PureFluids.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$51700], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "RefpropLink/tutorial/PureFluids", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "47319827-05e1-4e7b-8aa6-2b617d166ca0"]
+    }], "AnchorBar",ExpressionUUID->"c8fd8bba-dd8f-43a9-b308-7c0b2101d09d"]}
+  }]], "AnchorBarGrid",
+ CellID->1,ExpressionUUID->"bad63e99-411d-4a9f-9501-10e7cf8382d6"],
+
+Cell[CellGroupData[{
+
+Cell["Pure Fluids", "Title",
+ CellID->509267359,ExpressionUUID->"bf24d7fd-590e-48c3-a385-10415dbed039"],
+
+Cell[BoxData[GridBox[{
+   {
+    TemplateBox[{
+      Cell["Initializing RefpropLink"], 
+      "paclet:RefpropLink/tutorial/PureFluids#43322749", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}], 
+    TemplateBox[{
+      Cell["State Point Properties"], 
+      "paclet:RefpropLink/tutorial/PureFluids#95238974", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}]},
+   {
+    TemplateBox[{
+      Cell["Load a Fluids File"], 
+      "paclet:RefpropLink/tutorial/PureFluids#44087500", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}], 
+    TemplateBox[{
+      Cell["Saturation Properties"], 
+      "paclet:RefpropLink/tutorial/PureFluids#670941316", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}]},
+   {
+    TemplateBox[{
+      Cell["Get Non-Numeric Fluid Information"], 
+      "paclet:RefpropLink/tutorial/PureFluids#168967793", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}], 
+    TemplateBox[{
+      Cell["Single Phase Properties"], 
+      "paclet:RefpropLink/tutorial/PureFluids#465795248", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}]},
+   {
+    TemplateBox[{
+      Cell["Get Fluid Numeric Constants"], 
+      "paclet:RefpropLink/tutorial/PureFluids#217680659", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}], 
+    TemplateBox[{
+      Cell["Two Phase Properties"], 
+      "paclet:RefpropLink/tutorial/PureFluids#328677578", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}]},
+   {
+    TemplateBox[{
+      Cell["Fluid Equation Limits"], 
+      "paclet:RefpropLink/tutorial/PureFluids#254897833", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}], 
+    TemplateBox[{
+      Cell["References"], "paclet:RefpropLink/tutorial/PureFluids#776680", 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{128, 128, 128, 32}, {128, 128, 128, 
+          16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 
+          128, 128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 
+          128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 
+          128, 143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 
+          128, 64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 
+          128, 32}}, {{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 
+          128, 16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 
+          128, 127}, {128, 128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 
+          128, 48}, {128, 128, 128, 239}, {128, 128, 128, 112}, {128, 128, 
+          128, 0}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+          143}, {128, 128, 128, 239}}, {{128, 128, 128, 0}, {128, 128, 128, 
+          64}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          112}, {128, 128, 128, 223}, {128, 128, 128, 191}, {128, 128, 128, 
+          32}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 
+          16}, {128, 128, 128, 175}, {128, 128, 128, 255}, {128, 128, 128, 
+          127}, {128, 128, 128, 0}, {128, 128, 128, 0}}, {{128, 128, 128, 
+          0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {
+          128, 128, 128, 16}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 
+          128, 128, 0}}}], {{0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> 
+         RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}], 
+      GraphicsBox[
+       TagBox[
+        RasterBox[
+        RawArray["UnsignedInteger8",{{{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 
+          95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{
+          229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 
+          28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95, 28, 
+          191}, {229, 95, 28, 32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {
+          229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229, 95, 
+          28, 127}, {229, 95, 28, 0}, {229, 95, 28, 48}}, {{229, 95, 28, 
+          48}, {229, 95, 28, 239}, {229, 95, 28, 112}, {229, 95, 28, 0}, {229,
+           95, 28, 16}, {229, 95, 28, 16}, {229, 95, 28, 143}, {229, 95, 28, 
+          239}}, {{229, 95, 28, 0}, {229, 95, 28, 64}, {229, 95, 28, 223}, {
+          229, 95, 28, 191}, {229, 95, 28, 112}, {229, 95, 28, 223}, {229, 95,
+           28, 191}, {229, 95, 28, 32}}, {{229, 95, 28, 0}, {229, 95, 28, 
+          0}, {229, 95, 28, 16}, {229, 95, 28, 175}, {229, 95, 28, 255}, {229,
+           95, 28, 127}, {229, 95, 28, 0}, {229, 95, 28, 0}}, {{229, 95, 28, 
+          0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 
+          28, 16}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}}}], {{
+          0, 8.}, {8., 0}}, {0, 255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic, MetaInformation -> 
+         Association[{
+           "XMP" -> Association[{
+              "BasicSchema" -> 
+               Association[{
+                 "CreatorTool" -> "Adobe Photoshop CS5 Macintosh"}], 
+               "MediaManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}], 
+                  "DocumentID" -> "xmp.did:AA75CDBB059711E28ADB8BB95CCA5C5A", 
+                  "InstanceID" -> 
+                  "xmp.iid:AA75CDBA059711E28ADB8BB95CCA5C5A"}], 
+               "RightsManagementSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}], 
+               "PagedTextSchema" -> 
+               Association[{
+                 "DerivedFrom" -> 
+                  Association[{
+                    "DerivedFrom" -> 
+                    Association[{
+                    "InstanceID" -> 
+                    "xmp.iid:AA75CDB8059711E28ADB8BB95CCA5C5A", "DocumentID" -> 
+                    "xmp.did:AA75CDB9059711E28ADB8BB95CCA5C5A"}]}]}]}], 
+            "Comments" -> Association[{"Software" -> "Adobe ImageReady"}]}]], 
+        Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8., 8.}, PlotRange -> {{0, 8.}, {0, 8.}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}]}
+  }]], "TutorialJumpBox",ExpressionUUID->"405758e5-952d-4679-9917-\
+70af35dc6413"],
+
+Cell[TextData[{
+ "This tutorial demonstrates how to use ",
+ StyleBox[ButtonBox["RefpropLink",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/guide/RefpropLink"],
+  FontWeight->"Bold"],
+ " to access pure fluid material properties using the High-Level Application \
+Program Interface (API) functions introduced with NIST REFPROP 10.  These \
+functions can be generally slower than the Legacy API functions because, \
+while simpler and more convenient, they require a fair amount text string \
+processing in the underlying, Fortran-based Dynamic Linked Library (DLL), \
+which is slow at handling string manipulations and comparisons.  Benchmarks \
+of ",
+ StyleBox["RefpropLink",
+  FontWeight->"Bold"],
+ " implementation show that the Legacy API functions can be up to 2X faster \
+than performing the same calculations through the High-Level API with the \
+same DLL."
+}], "Text",
+ CellID->1534169418,ExpressionUUID->"944de537-a4a9-40d0-9189-b67d7ad652f4"],
+
+Cell[TextData[{
+ "That said, the High-Level API consists of basically one single function (",
+ StyleBox[ButtonBox["RefProp",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/ref/RefProp"],
+  FontWeight->"Bold"],
+ ") through which all of the NIST REFPROP features can be accessed.  This \
+makes the High-Level API both simple and versatile, since there is really \
+just one function, but it has many parameters and options that allow it to \
+access most, if not all of the NIST REFPROP features."
+}], "Text",
+ CellID->72059017,ExpressionUUID->"91ba4114-02f5-4129-ba00-83dcae0f51f1"],
+
+Cell[TextData[{
+ "An attempt is made to make this tutorial mirror the ",
+ StyleBox[ButtonBox["Pure Fluids (Legacy API)",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/tutorial/PureFluidsLegacyAPI"],
+  FontWeight->"Bold"],
+ " tutorial as closely as possible so that the difference between these APIs \
+is clearly visible."
+}], "Text",
+ CellID->36100660,ExpressionUUID->"95ad17d9-befc-464b-a5c0-f27f5a534f51"],
+
+Cell[TextData[{
+ "Before diving in, and along the way, one should probably delve into the \
+unique way that ",
+ StyleBox[ButtonBox["RefpropLink ",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/guide/RefpropLink"],
+  FontWeight->"Bold"],
+ "facilitates units by reviewing the ",
+ StyleBox[ButtonBox["RefpropLink Units",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/tutorial/Units"],
+  FontWeight->"Bold"],
+ " tutorial."
+}], "Text",
+ CellID->189076469,ExpressionUUID->"b0057339-dd29-4d4f-957b-0557ff15617f"],
+
+Cell[TextData[{
+ "Not all functionalities are demonstrated here and for more complex usage, \
+the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["NIST REFPROP Online DLL Documentation"]], 
+    "https://refprop-docs.readthedocs.io/en/latest/DLL/index.html"},
+   "WebLink",
+   BaseStyle->{"Text", FontWeight -> "Bold"}]],ExpressionUUID->
+  "0c507bdd-9687-4498-b73d-c52a2c86b41a"],
+ " should be consulted as well."
+}], "Text",
+ CellID->203927537,ExpressionUUID->"4247f8b4-5549-4054-bc6c-5a62c98d39e7"],
+
+Cell[CellGroupData[{
+
+Cell["Initializing RefpropLink", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->43322749,ExpressionUUID->"446855ec-2294-4053-af6d-b664debb148e"],
+
+Cell[TextData[{
+ "Before initializing the ",
+ StyleBox[ButtonBox["RefpropLink",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/guide/RefpropLink"],
+  FontWeight->"Bold"],
+ " package, it is a good idea to clear out any variables and previously \
+loaded packages using the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["Quit"]], "paclet:ref/Quit"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "e4eed052-5acd-49e1-ae42-6ff58b89395e"],
+ " command to restart the Mathematica kernel.  This is especially true when \
+reloading ",
+ StyleBox["RefpropLink",
+  FontWeight->"Bold"],
+ " without shutting down Mathematica."
+}], "Text",
+ CellID->573431709,ExpressionUUID->"7d66f9b4-c360-40d0-a6ff-32fd06dda91a"],
+
+Cell["Restart the kernel", "MathCaption",
+ CellID->279625114,ExpressionUUID->"96aed69d-5d86-4e5e-96dd-0d4150774653"],
+
+Cell[BoxData["Quit"], "Input",
+ CellLabel->"In[62]:=",
+ CellID->713385182,ExpressionUUID->"1ca234e3-523f-4b70-ab91-8d57f53b8940"],
+
+Cell[TextData[{
+ "Use the ",
+ StyleBox["Needs",
+  FontWeight->"Bold"],
+ " function to load the RefpropLink package (Note the \"back apostrophe\")"
+}], "MathCaption",
+ CellID->872464924,ExpressionUUID->"6ad0cd35-aa2f-497c-a972-0f16bc0c144f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<RefpropLink`\>\"", "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->68619680,ExpressionUUID->"513534e0-8fae-4a15-b52c-6437ff2b9474"],
+
+Cell[BoxData[
+ FrameBox["\<\"Found NIST REFPROP Version: 10.0.0.2\"\>",
+  Background->RGBColor[0.88, 1, 0.88],
+  FrameStyle->None,
+  StripOnInput->False]], "Print",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->305347762,ExpressionUUID->"1a052188-d561-4f56-b918-41a46def85dc"]
+}, Open  ]],
+
+Cell[TextData[{
+ "That's it!  ",
+ StyleBox["RefpropLink",
+  FontWeight->"Bold"],
+ " is now loaded and all of it's public functions and variables are available \
+for use.  The initialization will print out the version of NIST REFPROP that \
+is installed and being used by RefpropLink.  If a REFPROP installation is not \
+found, an error message will display.  "
+}], "Text",
+ CellID->86903750,ExpressionUUID->"e4450b58-9363-4aa6-893e-463714532d33"],
+
+Cell[TextData[{
+ "This initialization step only needs to be performed once at the beginning \
+of a Mathematica session and it's a good idea to put these commands at the \
+top of any notebook file.  However, this step doesn't have to be executed in \
+the current notebook.  It can be executed in a completely separate notebook, \
+but should be executed ",
+ StyleBox["before",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " any commands in the current notebook in the current Mathematica session."
+}], "Text",
+ CellID->159972398,ExpressionUUID->"16f29a8e-31b9-43fc-9bfc-925ca0fd795b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Load a Fluids File", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->44087500,ExpressionUUID->"79552c8f-497f-4776-ba58-6a324d960ce6"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"SetFluids", "[", 
+     StyleBox["hFld", "TI"], "]"}], Cell[
+    "Load a pure fluid specified in the hFld string parameter.", "TableText",
+     ExpressionUUID->"9c6c04a8-633a-4054-9449-e721884ad108"]},
+   {
+    RowBox[{"RefProp", "[", 
+     RowBox[{
+      StyleBox["hFld", "TI"], ",", 
+      StyleBox["hIn", "TI"], ",", 
+      StyleBox["hOut", "TI"], ",", 
+      StyleBox["a", "TI"], ",", 
+      StyleBox["b", "TI"]}], "]"}], Cell["\<\
+Perform a Refprop calculation after loading the fluid file specified in the \
+optional hFLD string parameter \
+\>", "TableText",ExpressionUUID->"3573f7b1-1f92-4dd6-accc-5dbe9e4a8a3d"]}
+  }]], "DefinitionBox",
+ CellID->2096742444,ExpressionUUID->"3724ed61-98bc-4078-bdbd-c3c9577b181b"],
+
+Cell["Methods used to specify the working fluids file.", "Caption",
+ CellID->1891092685,ExpressionUUID->"7b4500fb-8a80-41c7-ad24-3eeb735c8e49"],
+
+Cell[TextData[{
+ "There are two ways to load a pure fluid into REFPROP.  The first is to load \
+a specified fluid file using the ",
+ StyleBox["SetFluids",
+  FontWeight->"Bold"],
+ " command, which takes a single string parameter containing the name of the \
+fluid to be loaded.  The fluid name is not case sensitive.  The actual \
+REFPROP fluid files have the extension \".FLD\", but this is optional in the \
+fluid name string.  The full fluid file path can be specified as well, if the \
+file is in a location other than the default ",
+ StyleBox["FLUIDS\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " folder under the REFPROP installation directory."
+}], "Text",
+ CellID->9367822,ExpressionUUID->"c95fe574-5682-41d0-b277-5b132223c1e9"],
+
+Cell["These four fluid string names are valid for water.", "MathCaption",
+ CellID->836781195,ExpressionUUID->"b2732365-8678-49c7-a3cc-84e83d6e8524"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"hFld", "=", "\"\<WATER.FLD\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "hFld", "=", 
+   "\"\<C:\\\\Program Files (x86)\\\\REFPROP\\\\FLUIDS\\\\WATER.FLD\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hFld", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<C:\>\"", ",", "\"\<Program Files (x86)\>\"", ",", "\"\<REFPROP\>\"",
+       ",", "\"\<FLUIDS\>\"", ",", "\"\<WATER\>\""}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hFld", "=", "\"\<water\>\""}], ";"}]}], "Input",
+ CellLabel->"In[1]:=",
+ CellID->2058623809,ExpressionUUID->"bb1f64ee-b488-4802-bae8-98002ee5c395"],
+
+Cell[TextData[{
+ "The full list of fluids available can be found in the default ",
+ StyleBox["FLUIDS\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " folder under the REFPROP installation directory as well as .  A \
+pseudo-pure fluid is a mixture that has been curve fit to behave like a pure \
+fluid.  These files have a \".PPF\" extension, which ",
+ StyleBox["must",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " be included in the fluid name."
+}], "Text",
+ CellID->31667136,ExpressionUUID->"b52f8538-fe67-4701-8ff7-4966ebab1f5d"],
+
+Cell["Identify a pseudo-pure fluid string", "MathCaption",
+ CellID->745559432,ExpressionUUID->"6af4ab8e-d223-47b7-9de3-5c6fa7f13f6e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hPPF", "=", "\"\<R404A.PPF\>\""}], ";"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->625027908,ExpressionUUID->"91a41a29-9ce5-4ae6-8bf6-4c006cb938ad"],
+
+Cell["\<\
+Call SetFluids and pass it a string variable or a literal string.\
+\>", "MathCaption",
+ CellID->1992131,ExpressionUUID->"f44ad4c4-2471-41f8-bc2e-a6f04a7a10eb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetFluids", "[", "hFld", "]"}]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->602888993,ExpressionUUID->"4c6bcdb8-894b-488d-a091-ee09b39b72ee"],
+
+Cell[BoxData["0"], "Output",
+ CellLabel->"Out[6]=",
+ CellID->865316893,ExpressionUUID->"bd398038-3dd5-4e16-87fa-94cf1904d48a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetFluids", "[", "\"\<water\>\"", "]"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->550005453,ExpressionUUID->"3d941fd2-5d85-49e9-ba8c-9ecbd188e9d6"],
+
+Cell[BoxData["0"], "Output",
+ CellLabel->"Out[7]=",
+ CellID->60422796,ExpressionUUID->"76eaa35a-7f6a-43c6-940b-239b5a48ef12"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["SetFluids",
+  FontWeight->"Bold"],
+ " function returns a REFPROP error code, ",
+ Cell[BoxData[
+  StyleBox["ierr", "TI"]], "InlineFormula",ExpressionUUID->
+  "29500028-a1cd-4792-b34f-bb872c11f67b"],
+ ".  If the returned error code is zero (0), then the call was successful.  \
+If not successful, ",
+ StyleBox["SetFluids",
+  FontWeight->"Bold"],
+ " will generate a non-zero error code and a companion error message, which \
+will be displayed through the Message system."
+}], "Text",
+ CellID->191796628,ExpressionUUID->"c008bf71-2429-41fa-a6f9-8af13061c788"],
+
+Cell["Call SetFluids with an invalid fluid name.", "MathCaption",
+ CellID->147634239,ExpressionUUID->"f2b5d98e-8117-4d4b-a401-caec7beb80b3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetFluids", "[", "\"\<unknown\>\"", "]"}]], "Input",
+ CellLabel->"In[8]:=",
+ CellID->209108873,ExpressionUUID->"e1cd92c5-4f8e-455d-9c74-35987994125b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetFluids", "refprop", 
+   "\"\\!\\(\\*RowBox[{\\\"\\\\\\\"[SETUP error 101] Error in opening file \
+for component 1: filename = unknown.FLD in the path C:\\\\\\\\\\\\\\\\Program \
+Files (x86)\\\\\\\\\\\\\\\\REFPROP\\\\\\\"\\\"}]\\)\"", 2, 8, 1, 
+   33616106306742442129, "Local", "RefpropLink`SetFluids"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[8]:=",
+ CellID->329427531,ExpressionUUID->"7b969e84-a82e-4e13-b072-cf50a4a98540"],
+
+Cell[BoxData["101"], "Output",
+ CellLabel->"Out[8]=",
+ CellID->10643477,ExpressionUUID->"0623f7eb-e192-4704-b528-9e76891a0d69"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Since the REFPROP error Message is returned if an error occurs and it has \
+the error code, ",
+ Cell[BoxData[
+  StyleBox["ierr", "TI"]], "InlineFormula",ExpressionUUID->
+  "254d1261-af55-4778-9e0f-bb030f52302c"],
+ ", embedded in it, the output from setup can be suppressed with a \
+semi-colon, since no error message means that the error code was zero."
+}], "Text",
+ CellID->24003802,ExpressionUUID->"e7b8c2b2-e92d-47e0-a44e-bba3d61eeca8"],
+
+Cell["Suppress the numeric error code output from SetFluids", "MathCaption",
+ CellID->50496077,ExpressionUUID->"6bc48adb-fbe1-451e-99e0-9be04126aa63"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetFluids", "[", "\"\<unknown\>\"", "]"}], ";"}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->257827635,ExpressionUUID->"7950c2c6-0d0b-4e2e-9ef5-d98afb16ef83"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetFluids", "refprop", 
+   "\"\\!\\(\\*RowBox[{\\\"\\\\\\\"[SETUP error 101] Error in opening file \
+for component 1: filename = unknown.FLD in the path C:\\\\\\\\\\\\\\\\Program \
+Files (x86)\\\\\\\\\\\\\\\\REFPROP\\\\\\\"\\\"}]\\)\"", 2, 9, 2, 
+   33616106306742442129, "Local", "RefpropLink`SetFluids"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[9]:=",
+ CellID->661059401,ExpressionUUID->"2de9c84b-165d-4473-9fdc-b47ae9d0593d"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetFluids", "[", "\"\<water\>\"", "]"}], ";"}]], "Input",
+ CellLabel->"In[10]:=",
+ CellID->102645484,ExpressionUUID->"7e3777f7-6e0b-4aa8-9b65-157fbaa4cfec"],
+
+Cell[TextData[StyleBox["NO news is GOOD news!",
+ FontSlant->"Italic"]], "Text",
+ CellID->457182272,ExpressionUUID->"593bd07a-c4f0-42c1-93a9-2bc78fbceaf8"],
+
+Cell[CellGroupData[{
+
+Cell["Loading the Fluid on the first property call to RefProp", "Subsection",
+ CellID->147952826,ExpressionUUID->"61ef9288-17d6-4808-bfa2-2f4c3e257ff9"],
+
+Cell[TextData[{
+ "Alternatively, REFPROP's High-Level API provides a single function, ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ ", that can be used to calculate all fluid properties and perform all of \
+REFPROP's functions.  The very first parameter to the ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " function is the fluid string, ",
+ Cell[BoxData[
+  StyleBox["hFld", "TI"]], "InlineFormula",ExpressionUUID->
+  "c55707cc-5ae7-4f40-80de-d7998309a411"],
+ ", which will be loaded before any other action is taken by the function."
+}], "Text",
+ CellID->438536369,ExpressionUUID->"95e39684-cfaa-4aa9-8b63-a70fbc6a7bb4"],
+
+Cell["Calculate the density of water at 72\[Degree]F and 14.7psi", \
+"MathCaption",
+ CellID->4312122,ExpressionUUID->"08c4e3a3-ff83-4d24-b73c-02244e921c88"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<water\>\"", ",", "\"\<TP\>\"", ",", "\"\<D\>\"", ",", 
+   RowBox[{"72", "\[Degree]F"}], ",", 
+   RowBox[{"14.7", "psi"}]}], "]"}]], "Input",
+ CellLabel->"In[11]:=",
+ CellID->161902410,ExpressionUUID->"2d16c7ca-7076-41d4-91ba-249da6bd9c52"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"D\"\>", "\[Rule]", 
+   TemplateBox[{"55.382067593622146`", 
+     RowBox[{
+      "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}],
+      "moles per liter", 
+     FractionBox["\"Moles\"", "\"Liters\""]},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[11]=",
+ CellID->20757527,ExpressionUUID->"ee909102-131a-4cc5-935e-f912438db941"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Once the fluid has been loaded, the first parameter in ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " can, and should be omitted for all subsequent calls and the currently \
+loaded fluid will be used.  The first parameter, ",
+ Cell[BoxData[
+  StyleBox["hFld", "TI"]], "InlineFormula",ExpressionUUID->
+  "27b987aa-3ee8-4786-94d7-a475041a4338"],
+ ", should only be passed again to load a different fluid file or mixture."
+}], "Text",
+ CellID->529267541,ExpressionUUID->"3423377f-ff87-423c-a422-8ce64b85229b"],
+
+Cell["\<\
+Calculate water density again, without specifying the fluid name.\
+\>", "MathCaption",
+ CellID->478095006,ExpressionUUID->"695b673c-6e8c-4d7d-a2ef-276f3926e27e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<TP\>\"", ",", "\"\<D\>\"", ",", 
+   RowBox[{"72", "\[Degree]F"}], ",", 
+   RowBox[{"14.7", "psi"}]}], "]"}]], "Input",
+ CellLabel->"In[12]:=",
+ CellID->260241142,ExpressionUUID->"61cbe9e4-6a96-4d30-bdc5-25a3daa8b2d7"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"D\"\>", "\[Rule]", 
+   TemplateBox[{"55.382067593622146`", 
+     RowBox[{
+      "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}],
+      "moles per liter", 
+     FractionBox["\"Moles\"", "\"Liters\""]},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[12]=",
+ CellID->696739875,ExpressionUUID->"b9a32786-8823-4182-9d19-de984f397a6f"]
+}, Open  ]],
+
+Cell[TextData[{
+ "NOTE: The remainder of this tutorial will use just the ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " function and will, for the most part, omit the first ",
+ Cell[BoxData[
+  StyleBox["hFld", "TI"]], "InlineFormula",ExpressionUUID->
+  "f9c0534f-77d9-45ef-94a0-1a5aafe99b56"],
+ " parameter, thereby using the fluid name previously loaded fluid."
+}], "Text",
+ Background->RGBColor[1, 1, 0.85],
+ CellID->207435388,ExpressionUUID->"c360f53e-2de4-4704-9907-0192b05ad7ae"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Get Non-Numeric Fluid Information", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->168967793,ExpressionUUID->"87a0ce7e-3778-454a-ad4d-7105fa6ef9ae"],
+
+Cell[TextData[{
+ "In addition to calculating thermodynamic and transport properties, the ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " function is the Swiss Army knife of accessing all of the functions and \
+features of NIST REFPROP.  Non-numeric information about the loaded fluid and \
+even NIST REFPROP itself, can be retrieved for pure fluids using ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["RefProp"]], "paclet:RefpropLink/ref/RefProp"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "9e5a5a68-4792-4a95-8772-93163d9282ee"],
+ ".  Since this information is non-state dependent, the ",
+ Cell[BoxData[
+  StyleBox["hIn", "TI"]], "InlineFormula",ExpressionUUID->
+  "8ef01fd1-1b19-454d-bd97-ce000633c7f8"],
+ " string can be blank (but not omitted), numeric inputs ",
+ Cell[BoxData[
+  StyleBox["a", "TI"]], "InlineFormula",ExpressionUUID->
+  "f5f46f80-9cda-4545-b489-1415a7c04a11"],
+ " and ",
+ Cell[BoxData[
+  StyleBox["b", "TI"]], "InlineFormula",ExpressionUUID->
+  "9b99fc8e-e1d3-43b2-b58e-c276177088e9"],
+ " can be passed as 0 (they are ignored), and the composition array, ",
+ Cell[BoxData[
+  StyleBox["z", "TI"]], "InlineFormula",ExpressionUUID->
+  "43c3d666-8617-40d9-983e-052a3f012c6e"],
+ ", is not needed as the last parameter."
+}], "Text",
+ CellID->777290077,ExpressionUUID->"5fea5f69-a829-4a24-b681-4d590c4ef419"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"RefProp", "[", 
+     RowBox[{
+      StyleBox["hFld", "TI"], ",", "\"\<\>\"", ",", 
+      StyleBox["hOut", "TI"], ",", "0", ",", "0"}], "]"}], Cell["\<\
+Perform a Refprop calculation after loading the fluid file specified in the \
+hFLD string parameter \
+\>", "TableText",ExpressionUUID->"293adddd-ac1b-4244-a944-c614c3f3abf3"]}
+  }]], "DefinitionBox",
+ CellID->43206102,ExpressionUUID->"e4f8e866-9217-4683-8bed-fb583391261a"],
+
+Cell["RefProp for retrieving non-numeric fluid information.", "Caption",
+ CellID->735775108,ExpressionUUID->"843c043c-d835-4fe2-b48f-1e8e2df600c0"],
+
+Cell[TextData[{
+ "Note that when retrieving this information, ",
+ Cell[BoxData[
+  StyleBox["hFld", "TI"]], "InlineFormula",ExpressionUUID->
+  "d40d6699-445e-4b79-82a4-1e6310cd5f3b"],
+ " need only be specified when changing fluids. All of the remaining \
+parameters in the template above, beyond ",
+ Cell[BoxData[
+  StyleBox["hFld", "TI"]], "InlineFormula",ExpressionUUID->
+  "f93f0f6c-15fd-4fc1-927e-2ddbeb14a881"],
+ ", ",
+ StyleBox["must",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " be present (even if arbitrary) with a minimum of four parameters being \
+passed."
+}], "Text",
+ CellID->442086200,ExpressionUUID->"19d5f4ca-c57b-406c-90b7-912111e29bff"],
+
+Cell[TextData[{
+ "NOTE: ",
+ StyleBox["Only one string value can be returned at a time.",
+  FontSlant->"Italic"]
+}], "Text",
+ Background->RGBColor[1, 1, 0.85],
+ CellID->329574969,ExpressionUUID->"eccb81a8-5bb9-44a1-a34c-1f327310ad11"],
+
+Cell[TextData[{
+ "The ",
+ Cell[BoxData[
+  StyleBox["hOut", "TI"]], "InlineFormula",ExpressionUUID->
+  "bb073ce2-2d66-4a68-9c58-f1ff19fabbac"],
+ " string parameter, is set to ",
+ StyleBox["one",
+  FontSlant->"Italic",
+  FontVariations->{"Underline"->True}],
+ " of the information strings in the partial list below.  For the full list \
+of ",
+ Cell[BoxData[
+  StyleBox["hOut", "TI"]], "InlineFormula",ExpressionUUID->
+  "69fb1061-b4de-4059-a31f-3b07d4110912"],
+ " strings, see the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["NIST REFPROP Online DLL Documentation"]], 
+    "https://refprop-docs.readthedocs.io/en/latest/DLL/index.html"},
+   "WebLink",
+   BaseStyle->{"Text", FontWeight -> "Bold"}]],ExpressionUUID->
+  "08da002c-262e-427b-9dc9-04c474726823"],
+ " in the REFPROPdll function description."
+}], "Text",
+ CellID->134133454,ExpressionUUID->"7c81065b-274b-49d3-b7ee-cc8f231f4912"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"CAS", "#"}], Cell[
+    "Return the Chemical Abstracts Service (CAS) number.", "TableText",
+     ExpressionUUID->"cc1d411f-2da3-42b1-972e-d18dbf1de765"]},
+   {"CMEMFORM", Cell[
+    "Rethurn the short Chemical Formula.", "TableText",ExpressionUUID->
+     "9f372088-ca54-46d4-926a-1b53e8c48e96"]},
+   {"NAME", Cell[
+    "Return the Short Fluid Name.", "TableText",ExpressionUUID->
+     "b31ee12f-e152-401c-89e5-8784cbd1bf59"]},
+   {"LONGNAME", Cell["\<\
+Return the Long fluid name given in the 3rd line fo the fluids files.\
+\>", "TableText",ExpressionUUID->"edf73d09-9126-4cfb-b416-72423fa08874"]},
+   {"HASH", Cell[
+    "Return the hash number.", "TableText",ExpressionUUID->
+     "243b9ab4-d65c-46aa-be06-d581973264f5"]},
+   {"INCHI", Cell[
+    "Return the INCHI string.", "TableText",ExpressionUUID->
+     "1fd38376-f978-4607-a011-90e9a1fa4e86"]},
+   {"SAFETY", Cell[
+    "Return the ASHRAE-34 classification", "TableText",ExpressionUUID->
+     "a30e1893-633a-49d7-8396-a17da30ee489"]}
+  }]], "DefinitionBox",
+ Background->GrayLevel[0.85],
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.2], {
+      Scaled[0.8]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->248133496,ExpressionUUID->"384fcfa3-5b79-4062-a711-b9870e745cf9"],
+
+Cell["\<\
+hOut strings for fluid component identification information (see NIST REFPROP \
+Manual for full list).\
+\>", "Caption",
+ CellID->475182523,ExpressionUUID->"8caaeaf1-fe47-4666-9e3f-7f9ec3af67ce"],
+
+Cell["Get the fluid NAME, LONGNAME, and CAS# of a fluid", "MathCaption",
+ CellID->214308626,ExpressionUUID->"f36941ee-8e56-4b9c-bdf7-d4fbcb10f7e6"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RefProp", "[", 
+   RowBox[{
+   "\"\<R12\>\"", ",", "\"\<TP\>\"", ",", "\"\<NAME\>\"", ",", "0", ",", 
+    "0"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Load", " ", "fluid", " ", "on", " ", "first", " ", "call"}], " ", 
+   "*)"}]}]], "Input",
+ CellLabel->"In[30]:=",
+ CellID->859327599,ExpressionUUID->"dd3fe161-cc78-4c12-b550-46e9132a366f"],
+
+Cell[BoxData["\<\"R12\"\>"], "Output",
+ CellLabel->"Out[30]=",
+ CellID->100225071,ExpressionUUID->"56741453-1e27-4ff5-ad3b-475d9db02054"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RefProp", "[", 
+   RowBox[{"\"\<TP\>\"", ",", "\"\<LONGNAME\>\"", ",", "0", ",", "0"}], "]"}],
+   "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"use", " ", "current", " ", "fluid"}], " ", "*)"}]}]], "Input",
+ CellLabel->"In[31]:=",
+ CellID->145434806,ExpressionUUID->"84757fcd-8f73-48b8-abbb-f0e164aec055"],
+
+Cell[BoxData["\<\"Dichlorodifluoromethane\"\>"], "Output",
+ CellLabel->"Out[31]=",
+ CellID->587136245,ExpressionUUID->"64a47759-028e-4d07-8285-e126abddc318"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RefProp", "[", 
+   RowBox[{"\"\<XX\>\"", ",", "\"\<CAS#\>\"", ",", "0", ",", "0"}], "]"}], 
+  "           ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"hIn", ",", " ", "a", ",", " ", 
+    RowBox[{"and", " ", "b", " ", "are", " ", "arbitrary"}]}], " ", 
+   "*)"}]}]], "Input",
+ CellLabel->"In[32]:=",
+ CellID->350921121,ExpressionUUID->"ec579f3c-b9dd-47cd-81e3-268d2e30b383"],
+
+Cell[BoxData["\<\"75-71-8\"\>"], "Output",
+ CellLabel->"Out[32]=",
+ CellID->85943562,ExpressionUUID->"3fbb8416-b18a-440d-8fbe-3e39b5b20566"]
+}, Open  ]],
+
+Cell["\<\
+Just about any of the fluid information strings in the fluids file can be \
+retrieved.\
+\>", "Text",
+ CellID->65466232,ExpressionUUID->"880699a7-83a8-411c-b770-e59b03feea93"],
+
+Cell["\<\
+Attempting to retrieve more that one fluid information string simultaneously \
+will return just the first string. \
+\>", "MathCaption",
+ CellID->69051426,ExpressionUUID->"43d553b4-1db0-472f-aa69-0a7964aec395"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<\>\"", ",", "\"\<NAME LONGNAME CAS#\>\"", ",", "0", ",", "0"}],
+   "]"}]], "Input",
+ CellLabel->"In[33]:=",
+ CellID->529151913,ExpressionUUID->"a9872f26-56f1-4e55-a970-2c7d5be088b2"],
+
+Cell[BoxData["\<\"R12\"\>"], "Output",
+ CellLabel->"Out[33]=",
+ CellID->467831935,ExpressionUUID->"6ecff0d4-fdbe-468a-a57a-51fbdea91170"]
+}, Open  ]],
+
+Cell["Chemical Formula (CHEMFORM) for the current fluid", "MathCaption",
+ CellID->132293235,ExpressionUUID->"578baf87-36ef-4d09-a31a-e77e1b53aa22"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RefProp", "[", 
+   RowBox[{"\"\<XX\>\"", ",", "\"\<CHEMFORM\>\"", ",", "0", ",", "0"}], "]"}],
+   " "}]], "Input",
+ CellLabel->"In[16]:=",
+ CellID->32351803,ExpressionUUID->"da25958f-05d7-4d44-b7d6-5f0e4f7f2e54"],
+
+Cell[BoxData["\<\"CCl2F2\"\>"], "Output",
+ CellLabel->"Out[16]=",
+ CellID->149626786,ExpressionUUID->"5b03dbd2-280c-4faf-965d-ccea95f75ec7"]
+}, Open  ]],
+
+Cell["IUPAC International Chemical Identifier (InChI)", "MathCaption",
+ CellID->16667521,ExpressionUUID->"f0456d1d-ed32-41a3-a199-e72d62745a6f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<\>\"", ",", "\"\<InChI\>\"", ",", "0", ",", "0"}], 
+  "]"}]], "Input",
+ CellLabel->"In[17]:=",
+ CellID->571050780,ExpressionUUID->"3047b263-b398-4e6f-b666-c83221875201"],
+
+Cell[BoxData["\<\"1S/CCl2F2/c2-1(3,4)5\"\>"], "Output",
+ CellLabel->"Out[17]=",
+ CellID->187492022,ExpressionUUID->"9d56a382-90de-4198-b6f0-e70ac967a0e1"]
+}, Open  ]],
+
+Cell["ASHRAE 34 characterization", "MathCaption",
+ CellID->925534222,ExpressionUUID->"4a393a03-78ca-4174-916b-7a0626bf36fc"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<\>\"", ",", "\"\<SAFETY\>\"", ",", "0", ",", "0"}], 
+  "]"}]], "Input",
+ CellLabel->"In[18]:=",
+ CellID->726611780,ExpressionUUID->"da56dc65-88fc-456a-bcfa-63d42c4a8a41"],
+
+Cell[BoxData["\<\"A1\"\>"], "Output",
+ CellLabel->"Out[18]=",
+ CellID->426563230,ExpressionUUID->"376f6c9f-43b2-4b1d-ab3f-3e0768e5b3da"]
+}, Open  ]],
+
+Cell["NIST REFPROP DLL version number", "MathCaption",
+ CellID->372873216,ExpressionUUID->"81df5a16-4a97-4122-8108-817419c4dd18"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<\>\"", ",", "\"\<DLL#\>\"", ",", "0", ",", "0"}], 
+  "]"}]], "Input",
+ CellLabel->"In[19]:=",
+ CellID->100613727,ExpressionUUID->"cdc17103-8801-4812-b7e4-6ebae65b28f2"],
+
+Cell[BoxData["\<\"10.0.0.02\"\>"], "Output",
+ CellLabel->"Out[19]=",
+ CellID->322628945,ExpressionUUID->"5e4a10ba-67aa-459a-9726-daddb107f646"]
+}, Open  ]],
+
+Cell[TextData[{
+ "There are a large number of non-numeric information options available.  The \
+NIST REFPROP documentation should be consulted for a full list of ",
+ Cell[BoxData[
+  StyleBox["hOut", "TI"]], "InlineFormula",ExpressionUUID->
+  "f048d685-d0bc-4fd7-a241-b13becf9ede1"],
+ " requests and understanding of how to use them."
+}], "Text",
+ CellID->822504919,ExpressionUUID->"b5e23ae8-f3f2-4993-934f-125cdec70fa4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Get Fluid Numeric Constants", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->217680659,ExpressionUUID->"6eef46b0-3390-4f12-8ebc-d2f1a5822697"],
+
+Cell[TextData[{
+ "Again, we only need to use the ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " function to return any of the fluid constants, such as the critical point \
+or triple point values.  Since these fluid constants are not state dependent, \
+the ",
+ Cell[BoxData[
+  StyleBox["hIn", "TI"]], "InlineFormula",ExpressionUUID->
+  "f3f8968a-248f-429e-80ad-9493716a7b41"],
+ " string parameter can be an empty string and the numeric inputs  ",
+ Cell[BoxData[
+  StyleBox["a", "TI"]], "InlineFormula",ExpressionUUID->
+  "c5dc21ab-5b3a-4937-a87f-74554c415ac0"],
+ " and ",
+ Cell[BoxData[
+  StyleBox["b", "TI"]], "InlineFormula",ExpressionUUID->
+  "8285e910-6e7c-4737-a528-cb8587586349"],
+ " can be passed arbitrarily as 0.  "
+}], "Text",
+ CellID->309768251,ExpressionUUID->"61a43ac0-9634-40e4-925d-09d9b0451651"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"RefProp", "[", 
+     RowBox[{
+      StyleBox["hFld", "TI"], ",", "\"\<\>\"", ",", 
+      StyleBox["hOut", "TI"], ",", "0", ",", "0"}], "]"}], Cell["\<\
+Retrieve fluid numeric constants requested in the hOut string\
+\>", "TableText",ExpressionUUID->"ad509bd0-18dd-46a1-8829-7752f3470c31"]}
+  }]], "DefinitionBox",
+ CellID->400179512,ExpressionUUID->"44b3e478-8979-403a-a05f-8f59cde2d71c"],
+
+Cell["RefProp for calculating equation limits.", "Caption",
+ CellID->531457254,ExpressionUUID->"0e58de96-c064-4103-82cd-49e5588573ed"],
+
+Cell[TextData[{
+ "For numeric output, the underlying REFPROPdll routine sends results back in \
+an array.  This means that multiple values can be requested at the same time \
+by including them to the ",
+ Cell[BoxData[
+  StyleBox["hOut", "TI"]], "InlineFormula",ExpressionUUID->
+  "e9f753ec-b985-4dc0-8470-713b74065b65"],
+ " string, separated by spaces, commas, semicolons, or vertical bars (pipe \
+char), but different separators should ",
+ StyleBox["not",
+  FontSlant->"Italic",
+  FontVariations->{"Underline"->True}],
+ " be mixed.  As before, the ",
+ Cell[BoxData[
+  StyleBox["hFld", "TI"]], "InlineFormula",ExpressionUUID->
+  "c0de493b-0e94-4513-889e-78c50cbc7d7c"],
+ " parameter is optional if not changing fluids."
+}], "Text",
+ CellID->26859345,ExpressionUUID->"73ebb41a-40de-4ff5-ac1c-41546191611c"],
+
+Cell["Get the temperature at the critical point for water", "MathCaption",
+ CellID->297053278,ExpressionUUID->"ae587db6-21e0-49fd-9181-3b677b67d0fd"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{
+  "\"\<water\>\"", ",", "\"\<XX\>\"", ",", "\"\<TCRIT\>\"", ",", "0", ",", 
+   "0"}], "]"}]], "Input",
+ CellLabel->"In[34]:=",
+ CellID->438876674,ExpressionUUID->"b7ac6cd3-6237-456a-9173-77bc58dba227"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"TCRIT\"\>", "\[Rule]", 
+   TemplateBox[{"647.096`", "\"K\"", "kelvins", "\"Kelvins\""},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[34]=",
+ CellID->364096811,ExpressionUUID->"e9678ca3-3acd-46fb-8a95-63780db4adff"]
+}, Open  ]],
+
+Cell["\<\
+Emulate the behavior of the INFO function from the Legacy API by requesting a \
+number of property constants at once.\
+\>", "MathCaption",
+ CellID->141653994,ExpressionUUID->"a08e2ef7-855e-4251-88ba-6d11723f48cc"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"const", "=", 
+  RowBox[{"RefProp", "[", 
+   RowBox[{
+   "\"\<\>\"", ",", "\"\<M TTRP TNBP TC PC DC ACF DIPOLE REOS\>\"", ",", "0", 
+    ",", "0"}], "]"}]}]], "Input",
+ CellLabel->"In[35]:=",
+ CellID->7620002,ExpressionUUID->"070a8474-3eeb-4d93-b2ec-95d53c2dff99"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"M\"\>", "\[Rule]", 
+    TemplateBox[{"18.015268`", 
+      RowBox[{
+       "\"kg\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"kmol\""}], "kilograms per kilomole", 
+      FractionBox["\"Kilograms\"", "\"Kilomoles\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"TTRP\"\>", "\[Rule]", 
+    TemplateBox[{"273.16`", "\"K\"", "kelvins", "\"Kelvins\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"TNBP\"\>", "\[Rule]", 
+    TemplateBox[{"373.1243`", "\"K\"", "kelvins", "\"Kelvins\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"TC\"\>", "\[Rule]", 
+    TemplateBox[{"647.096`", "\"K\"", "kelvins", "\"Kelvins\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"PC\"\>", "\[Rule]", 
+    TemplateBox[{"22064.`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"DC\"\>", "\[Rule]", 
+    TemplateBox[{"17.8737279956`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"ACF\"\>", "\[Rule]", "0.3443`"}], ",", 
+   RowBox[{"\<\"DIPOLE\"\>", "\[Rule]", 
+    TemplateBox[{"1.855`", "\"D\"", "debyes", "\"Debyes\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"REOS\"\>", "\[Rule]", 
+    TemplateBox[{"8.314371357587`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellLabel->"Out[35]=",
+ CellID->189798443,ExpressionUUID->"ec4d6f83-c5c8-4bf2-8635-4772198f8d60"]
+}, Open  ]],
+
+Cell["\<\
+Display the constants in a formatted list for easier viewing.\
+\>", "MathCaption",
+ CellID->132103409,ExpressionUUID->"3fdb8fec-321f-4910-b37c-3dead3f8504c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TableForm", "[", 
+  RowBox[{"Apply", "[", 
+   RowBox[{"List", ",", "const", ",", 
+    RowBox[{"{", "1", "}"}]}], "]"}], "]"}]], "Input",
+ CellLabel->"In[36]:=",
+ CellID->428491342,ExpressionUUID->"544da4d8-752c-410e-b036-b8eea8d884f9"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"M\"\>", 
+     TemplateBox[{"18.015268`", 
+       RowBox[{
+        "\"kg\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+         "\"kmol\""}], "kilograms per kilomole", 
+       FractionBox["\"Kilograms\"", "\"Kilomoles\""]},
+      "Quantity"]},
+    {"\<\"TTRP\"\>", 
+     TemplateBox[{"273.16`", "\"K\"", "kelvins", "\"Kelvins\""},
+      "Quantity"]},
+    {"\<\"TNBP\"\>", 
+     TemplateBox[{"373.1243`", "\"K\"", "kelvins", "\"Kelvins\""},
+      "Quantity"]},
+    {"\<\"TC\"\>", 
+     TemplateBox[{"647.096`", "\"K\"", "kelvins", "\"Kelvins\""},
+      "Quantity"]},
+    {"\<\"PC\"\>", 
+     TemplateBox[{"22064.`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+      "Quantity"]},
+    {"\<\"DC\"\>", 
+     TemplateBox[{"17.8737279956`", 
+       RowBox[{
+        "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+         "\"L\""}], "moles per liter", 
+       FractionBox["\"Moles\"", "\"Liters\""]},
+      "Quantity"]},
+    {"\<\"ACF\"\>", "0.3443`"},
+    {"\<\"DIPOLE\"\>", 
+     TemplateBox[{"1.855`", "\"D\"", "debyes", "\"Debyes\""},
+      "Quantity"]},
+    {"\<\"REOS\"\>", 
+     TemplateBox[{"8.314371357587`", 
+       RowBox[{
+        "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+         "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+       "joules per kelvin mole", 
+       FractionBox["\"Joules\"", 
+        RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+      "Quantity"]}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellLabel->"Out[36]//TableForm=",
+ CellID->139208044,ExpressionUUID->"48056a38-7fa0-4db8-a264-e3118c1a107e"]
+}, Open  ]],
+
+Cell["\<\
+Extract the returned List values from info to individual variables for use in \
+other functions.\
+\>", "MathCaption",
+ CellID->234012741,ExpressionUUID->"5a092571-2c40-434a-a934-dca9d389fefe"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+   "molWt", ",", "tTrip", ",", "tNBP", ",", "tCrit", ",", "pCrit", ",", 
+    "dCrit", ",", "acf", ",", "dip", ",", "rGas"}], "}"}], "=", 
+  RowBox[{"const", "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", "2"}], "]"}], "]"}]}]], "Input",
+ CellLabel->"In[37]:=",
+ CellID->18320211,ExpressionUUID->"8997ec89-a1af-4a87-ac20-fa0d14377a15"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{"18.015268`", 
+     RowBox[{
+      "\"kg\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+       "\"kmol\""}], "kilograms per kilomole", 
+     FractionBox["\"Kilograms\"", "\"Kilomoles\""]},
+    "Quantity"], ",", 
+   TemplateBox[{"273.16`", "\"K\"", "kelvins", "\"Kelvins\""},
+    "Quantity"], ",", 
+   TemplateBox[{"373.1243`", "\"K\"", "kelvins", "\"Kelvins\""},
+    "Quantity"], ",", 
+   TemplateBox[{"647.096`", "\"K\"", "kelvins", "\"Kelvins\""},
+    "Quantity"], ",", 
+   TemplateBox[{"22064.`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+    "Quantity"], ",", 
+   TemplateBox[{"17.8737279956`", 
+     RowBox[{
+      "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}],
+      "moles per liter", 
+     FractionBox["\"Moles\"", "\"Liters\""]},
+    "Quantity"], ",", "0.3443`", ",", 
+   TemplateBox[{"1.855`", "\"D\"", "debyes", "\"Debyes\""},
+    "Quantity"], ",", 
+   TemplateBox[{"8.314371357587`", 
+     RowBox[{
+      "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+       "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+     "joules per kelvin mole", 
+     FractionBox["\"Joules\"", 
+      RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[37]=",
+ CellID->584020064,ExpressionUUID->"e2608957-9f56-4b94-a719-c75b74694733"]
+}, Open  ]],
+
+Cell["\<\
+The constants for this fluid are now stored in individual variables.\
+\>", "MathCaption",
+ CellID->284021356,ExpressionUUID->"eb2bcd93-2611-4774-8888-c58c9385d64a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["molWt"], "Input",
+ CellLabel->"In[38]:=",
+ CellID->3044338,ExpressionUUID->"8b3fb31f-7955-43ff-aec7-25e54abb012a"],
+
+Cell[BoxData[
+ TemplateBox[{"18.015268`", 
+   RowBox[{
+    "\"kg\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"kmol\""}],
+    "kilograms per kilomole", 
+   FractionBox["\"Kilograms\"", "\"Kilomoles\""]},
+  "Quantity"]], "Output",
+ CellLabel->"Out[38]=",
+ CellID->327464765,ExpressionUUID->"b80801f4-3530-463c-82c2-78d72af146a7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["tCrit"], "Input",
+ CellLabel->"In[39]:=",
+ CellID->83767176,ExpressionUUID->"b732ca73-58e5-4286-b848-14e7be2343d9"],
+
+Cell[BoxData[
+ TemplateBox[{"647.096`", "\"K\"", "kelvins", "\"Kelvins\""},
+  "Quantity"]], "Output",
+ CellLabel->"Out[39]=",
+ CellID->291330739,ExpressionUUID->"de895b7a-0176-42df-b89c-6cd49fd5d589"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["rGas"], "Input",
+ CellLabel->"In[40]:=",
+ CellID->369442671,ExpressionUUID->"5e249230-0e4b-4a19-aed4-fc16789d3bfb"],
+
+Cell[BoxData[
+ TemplateBox[{"8.314371357587`", 
+   RowBox[{
+    "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+     "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+   "joules per kelvin mole", 
+   FractionBox["\"Joules\"", 
+    RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+  "Quantity"]], "Output",
+ CellLabel->"Out[40]=",
+ CellID->288882511,ExpressionUUID->"8e445f56-0adf-49f3-b799-3e5575125e40"]
+}, Open  ]],
+
+Cell["\<\
+Note: ZCRIT is not retrievable from RefProp, but can easily be calculated \
+from the ideal gas law, using the critical values determined above.\
+\>", "MathCaption",
+ CellID->126272510,ExpressionUUID->"37be1ae0-24f7-4a5a-a804-d5876c8d17af"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"vCrit", "=", 
+  RowBox[{"1", "/", "dCrit"}]}]], "Input",
+ CellLabel->"In[41]:=",
+ CellID->343623176,ExpressionUUID->"8c28bde7-4ef3-416b-b0ac-bb648a4758e6"],
+
+Cell[BoxData[
+ TemplateBox[{"0.0559480372671091`", 
+   RowBox[{
+    "\"L\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"mol\""}], 
+   "liters per mole", 
+   FractionBox["\"Liters\"", "\"Moles\""]},
+  "Quantity"]], "Output",
+ CellLabel->"Out[41]=",
+ CellID->258221495,ExpressionUUID->"cac670ad-5ca3-4c09-8561-2ae2f874e542"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"zCrit", "=", 
+  FractionBox[
+   RowBox[{"pCrit", "*", "vCrit"}], 
+   RowBox[{"rGas", "*", "tCrit"}]]}]], "Input",
+ CellLabel->"In[42]:=",
+ CellID->14690021,ExpressionUUID->"94f90244-4c72-4310-bc89-964254efd084"],
+
+Cell[BoxData["0.22944097045346462`"], "Output",
+ CellLabel->"Out[42]=",
+ CellID->84931282,ExpressionUUID->"2bf27e15-b8d8-4f88-ae6b-d24bae170e6f"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Fluid Equation Limits", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->254897833,ExpressionUUID->"8c37b6f3-d4c1-42cf-8715-c989bfd6172f"],
+
+Cell["\<\
+Each set of fluid equations was generated within a specific range of validity \
+for the independent variables of temperature, pressure, and density.  It is a \
+best practice to restrict calculations between these limits.\
+\>", "Text",
+ CellID->594464066,ExpressionUUID->"ee8a739e-4c36-4a7a-95c7-67795fe54b9e"],
+
+Cell["\<\
+Attempting calculations below the minimum temperature and/or above the \
+maximum density is not recommended. These will often correspond to a \
+physically unreasonable state; also, many equations of state do not \
+extrapolate reliably to lower temperatures and higher densities.\
+\>", "Text",
+ CellID->92632341,ExpressionUUID->"04b27a8e-7516-4c05-89f7-16faaaa008f1"],
+
+Cell[TextData[{
+ "Most equations of state, however, may be extrapolated to higher \
+temperatures and pressures.  Temperatures can usually safely be extrapolated \
+to Temperatures up to 1.5 * ",
+ Cell[BoxData[
+  SubscriptBox[
+   StyleBox["T", "TI"], 
+   StyleBox["max", "TI"]]], "InlineFormula",ExpressionUUID->
+  "d606755f-efef-425a-8d45-40f770e97e26"],
+ " and pressures up to 2 * ",
+ Cell[BoxData[
+  SubscriptBox[
+   StyleBox["P", "TI"], 
+   StyleBox["max", "TI"]]], "InlineFormula",ExpressionUUID->
+  "57973e3c-4d00-43d1-a2f3-e480ddea2f10"],
+ ".  Extrapolation beyond these extended limits is not recommended."
+}], "Text",
+ CellID->395169496,ExpressionUUID->"3cb92313-f031-436c-9103-d6103b8fc232"],
+
+Cell[TextData[{
+ "Again, we'll be using the ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " function to get these values."
+}], "Text",
+ CellID->6091344,ExpressionUUID->"76e40096-65ad-4e5e-b977-9d0db9b9a3dd"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"RefProp", "[", 
+     RowBox[{
+      StyleBox["hFld", "TI"], ",", "\"\<XX\>\"", ",", 
+      StyleBox["hOut", "TI"], ",", "0", ",", "0"}], "]"}], Cell["\<\
+Perform a Refprop calculation after loading the fluid file specified in the \
+hFLD string parameter \
+\>", "TableText",ExpressionUUID->"5a161d5e-38eb-4696-b491-53a0475e8e54"]}
+  }]], "DefinitionBox",
+ CellID->83391216,ExpressionUUID->"95f606e7-021b-45f8-80ff-de1dc7de3895"],
+
+Cell["RefProp for calculating equation limits.", "Caption",
+ CellID->79998218,ExpressionUUID->"f1c901ce-14d7-4ca2-8de8-6a856d210c13"],
+
+Cell["\<\
+The hOut strings to acquire the equation limits are demonstrated below and \
+may all be requested at once.  The minimum limits on pressure and density are \
+zero.\
+\>", "Text",
+ CellID->171995161,ExpressionUUID->"346cfe21-ccec-40af-8152-e8f4a5e4a2c9"],
+
+Cell["\<\
+NOTE: We're going to call RefProp and pull All of the values out of the \
+returned list to individual variables in on step.\
+\>", "Text",
+ CellID->533644,ExpressionUUID->"ad21bb7a-5e0b-41b7-aaca-53641c8f5585"],
+
+Cell["Get the EOS Limits of Tmin, Tmax, Pmax and Dmax", "MathCaption",
+ CellID->562879126,ExpressionUUID->"665094d5-f391-4bcb-a5a3-0cc7264c4c7d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    SubscriptBox["T", "min"], ",", 
+    SubscriptBox["T", "max"], ",", 
+    SubscriptBox["P", "max"], ",", 
+    SubscriptBox["D", "max"]}], "}"}], "=", 
+  RowBox[{
+   RowBox[{"RefProp", "[", 
+    RowBox[{
+    "\"\<\>\"", ",", "\"\<Tmin Tmax Pmax Dmax\>\"", ",", "0", ",", "0"}], 
+    "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", "2"}], "]"}], "]"}]}]], "Input",
+ CellLabel->"In[43]:=",
+ CellID->171360131,ExpressionUUID->"e092ffe6-bd2e-4545-9c8c-de20bc3c40df"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{"251.165`", "\"K\"", "kelvins", "\"Kelvins\""},
+    "Quantity"], ",", 
+   TemplateBox[{"2000.`", "\"K\"", "kelvins", "\"Kelvins\""},
+    "Quantity"], ",", 
+   TemplateBox[{"1.`*^6", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+    "Quantity"], ",", 
+   TemplateBox[{"73.96`", 
+     RowBox[{
+      "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}],
+      "moles per liter", 
+     FractionBox["\"Moles\"", "\"Liters\""]},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[43]=",
+ CellID->121436709,ExpressionUUID->"8670b060-6bf2-4e10-843d-46d8d866a02c"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["State Point Properties", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->95238974,ExpressionUUID->"1513b838-564a-4e8c-a07c-e2be4356aa9e"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"RefProp", "[", 
+     RowBox[{
+      StyleBox["hFld", "TI"], ",", 
+      StyleBox["hIn", "TI"], ",", 
+      StyleBox["hOut", "TI"], ",", 
+      StyleBox["a", "TI"], ",", 
+      StyleBox["b", "TI"]}], "]"}], Cell["\<\
+Perform a Refprop calculation after loading the fluid file specified in the \
+hFLD string parameter \
+\>", "TableText",ExpressionUUID->"745228c0-ad0b-407f-a0af-b71a6988d288"]}
+  }]], "DefinitionBox",
+ CellID->446905933,ExpressionUUID->"0b57aa9c-6311-4ece-a256-3b6c7fbffc9a"],
+
+Cell["RefProp for calculating state point properties.", "Caption",
+ CellID->221740640,ExpressionUUID->"9624ca90-873e-402f-a78e-9b40cbd44e9c"],
+
+Cell[TextData[{
+ "To identify a unique thermodynamic state point, typically two state point \
+parameters must be supplied.  These values are passed to RefProp as \
+parameters ",
+ Cell[BoxData[
+  StyleBox["a", "TI"]], "InlineFormula",ExpressionUUID->
+  "bfc45d3f-c421-421a-9e2b-0ef16dbcb73c"],
+ " and ",
+ Cell[BoxData[
+  StyleBox["b", "TI"]], "InlineFormula",ExpressionUUID->
+  "5fe7e9fd-fde4-4c7e-81a8-113ad025203a"],
+ " and are identified by the string parameter, ",
+ Cell[BoxData[
+  StyleBox["hIn", "TI"]], "InlineFormula",ExpressionUUID->
+  "6acf6331-9f5d-47e4-9bf8-3c06a25703bc"],
+ "."
+}], "Text",
+ CellID->9962670,ExpressionUUID->"ac479c17-e5f3-4e00-8301-e0aea96599eb"],
+
+Cell[TextData[{
+ "Valid character codes for ",
+ Cell[BoxData[
+  StyleBox["hIn", "TI"]], "InlineFormula",ExpressionUUID->
+  "8b3f543b-ca67-4e2c-aa03-be6155f96bf3"],
+ " are T, P, D, E, H, S, and Q (temperature, pressure, density, energy, \
+enthalpy, entropy, and quality).  Two of these should be sent together to \
+identify the contents and order of the ",
+ Cell[BoxData[
+  StyleBox["a", "TI"]], "InlineFormula",ExpressionUUID->
+  "962fa4f0-1232-491c-ab10-2a5675a21b9f"],
+ " and ",
+ Cell[BoxData[
+  StyleBox["b", "TI"]], "InlineFormula",ExpressionUUID->
+  "82a1ac80-8253-4165-a8ab-364a065a2ead"],
+ " variables. For example, \"TP\" would indicate inputs of temperature and \
+pressure, and \"TQ\" would indicate inputs of temperature and quality.  Valid \
+input pairs are: TP, TD, TE, TH, TS, TQ, PD, PE, PH, PS, PQ, DE, DH, DS, DQ, \
+ES, EQ, HS, HQ, SQ (or the inverse of any of these, e.g., QT)."
+}], "Text",
+ CellID->174857264,ExpressionUUID->"80c1bec0-3dfe-413b-ba1a-1baa0fe617a3"],
+
+Cell[TextData[{
+ "IMPORTANT: The order of the properties being sent to the routine in the \
+variables ",
+ Cell[BoxData[
+  StyleBox["a", "TI"]], "InlineFormula",ExpressionUUID->
+  "c6f312c4-fa77-47f5-9c80-49a92a4ff459"],
+ " and ",
+ Cell[BoxData[
+  StyleBox["b", "TI"]], "InlineFormula",ExpressionUUID->
+  "db5260b1-e5e2-4ec0-9dce-9ad24a16a05a"],
+ " has to be the same as the order of the letter pair sent to ",
+ Cell[BoxData[
+  StyleBox["hIn", "TI"]], "InlineFormula",ExpressionUUID->
+  "3452d7a0-beb5-435c-b494-8e5a8c17fcfc"],
+ "; for example, if ",
+ Cell[BoxData[
+  StyleBox["hIn", "TI"]], "InlineFormula",ExpressionUUID->
+  "4169d66b-ba7f-4799-ac76-b723553ab67c"],
+ " is \"QT\", then ",
+ Cell[BoxData[
+  StyleBox["a", "TI"]], "InlineFormula",ExpressionUUID->
+  "d546231e-0bef-44b9-8d08-7d2648f958de"],
+ "=Q and ",
+ Cell[BoxData[
+  StyleBox["b", "TI"]], "InlineFormula",ExpressionUUID->
+  "e82eb339-f599-492c-b6ab-9925a9af5fe7"],
+ "=T."
+}], "Text",
+ Background->RGBColor[0.9, 1, 1],
+ CellID->569057450,ExpressionUUID->"222e6d28-79c5-4327-b9b0-fc94b7214590"],
+
+Cell[TextData[{
+ "The valid output variables specified in ",
+ Cell[BoxData[
+  StyleBox["hOut", "TI"]], "InlineFormula",ExpressionUUID->
+  "582c2e73-e750-4e57-9faa-813561a293fe"],
+ " are many an varied.  The ",
+ StyleBox["ALLPROPSdll",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " should be consulted in the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["NIST REFPROP Online DLL Documentation"]], 
+    "https://refprop-docs.readthedocs.io/en/latest/DLL/index.html"},
+   "WebLink",
+   BaseStyle->{"Text", FontWeight -> "Bold"}]],ExpressionUUID->
+  "de7801ad-6de4-43dd-8807-8f40eb6b215a"],
+ "  for the complete list of valid output variables. "
+}], "Text",
+ CellID->632653306,ExpressionUUID->"3a40f4bb-5520-4896-a70f-b3cd4bd6dbf4"],
+
+Cell["Properties of water at 72\[Degree]F and 1 atm", "MathCaption",
+ CellID->148081773,ExpressionUUID->"a33f8fe1-510c-4634-beae-ac425310c95d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<water\>\"", ",", "\"\<TP\>\"", ",", "\"\<D H S Cp W\>\"", ",", 
+   RowBox[{"72", "\[Degree]F"}], ",", 
+   RowBox[{"1", "atm"}]}], "]"}]], "Input",
+ CellLabel->"In[29]:=",
+ CellID->209953228,ExpressionUUID->"cd5f314c-c5b2-4f2e-96df-2bd0923d2aad"],
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\<\"water\"\>", ",", "\<\"TP\"\>", ",", "\<\"D H S Cp W\"\>", ",", 
+   RowBox[{"72", " ", "\[Degree]F"}], ",", "atm"}], "]"}]], "Output",
+ CellLabel->"Out[29]=",
+ CellID->467002382,ExpressionUUID->"23ea8748-bb04-4b74-9507-c2e1e4db4413"]
+}, Open  ]],
+
+Cell["\<\
+Properties of water at 1 atm and 300\[Degree]F - above the boiling point\
+\[LineSeparator](NOTE: inputs are in reverse order for demonstration purposes)\
+\>", "MathCaption",
+ CellID->717828542,ExpressionUUID->"95c16630-7ef3-4f9f-8db9-c019600f78c8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<PT\>\"", ",", "\"\<D H S Cp W\>\"", ",", 
+   RowBox[{"1", "atm"}], ",", 
+   RowBox[{"300", "\[Degree]F"}]}], "]"}]], "Input",
+ CellLabel->"In[30]:=",
+ CellID->23378095,ExpressionUUID->"036df9ea-1c06-40d7-b6bb-f29d5662288a"],
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\<\"PT\"\>", ",", "\<\"D H S Cp W\"\>", ",", "atm", ",", 
+   RowBox[{"300", " ", "\[Degree]F"}]}], "]"}]], "Output",
+ CellLabel->"Out[30]=",
+ CellID->155917062,ExpressionUUID->"5d7375b2-5ecd-49ae-9262-53c000b24c43"]
+}, Open  ]],
+
+Cell["\<\
+The numeric inputs can be passed in as explicit quantities, as above, or \
+through the use of variables from other calculations.\
+\>", "Text",
+ CellID->355884447,ExpressionUUID->"83817569-d5a0-465e-a1f0-d6bca438c76a"],
+
+Cell["Properties of water at 150\[Degree]F - in the two-phase region", \
+"MathCaption",
+ CellID->128333610,ExpressionUUID->"f05bfb88-869c-4b50-9426-00e6338798f4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"T", "=", 
+   RowBox[{"150", "\[Degree]F"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    SubscriptBox["P", "sat"], ",", 
+    SubscriptBox["D", "L"], ",", 
+    SubscriptBox["D", "V"]}], "}"}], "=", 
+  RowBox[{
+   RowBox[{"RefProp", "[", 
+    RowBox[{"\"\<Tsat\>\"", ",", "\"\<P Dliq Dvap\>\"", ",", "T", ",", "0"}], 
+    "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", "2"}], "]"}], "]"}]}]}], "Input",
+ CellLabel->"In[31]:=",
+ CellID->666810498,ExpressionUUID->"0ea5c436-1cf8-47a9-a3d1-30c9d522f6b2"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "partd", 
+   "\"Part specification \\!\\(\\*RowBox[{RowBox[{\\\"RefProp\\\", \\\"[\\\", \
+RowBox[{\\\"\\\\\\\"Tsat\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"P Dliq \
+Dvap\\\\\\\"\\\", \\\",\\\", RowBox[{\\\"150\\\", \\\" \\\", \\\"\[Degree]F\\\
+\"}], \\\",\\\", \\\"0\\\"}], \\\"]\\\"}], \\\"\[LeftDoubleBracket]\\\", \
+RowBox[{\\\"All\\\", \\\",\\\", \\\"2\\\"}], \
+\\\"\[RightDoubleBracket]\\\"}]\\) is longer than depth of object.\"", 2, 32, 
+   5, 33616104989503615583, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[31]:=",
+ CellID->459199134,ExpressionUUID->"3a1d647b-fc70-434a-9c5d-3dbedba3ebe9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Set", "shape", 
+   "\"Lists \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{SubscriptBox[\\\"P\\\", \
+\\\"sat\\\"], \\\",\\\", SubscriptBox[\\\"D\\\", \\\"L\\\"], \\\",\\\", \
+SubscriptBox[\\\"D\\\", \\\"V\\\"]}], \\\"}\\\"}]\\) and \
+\\!\\(\\*RowBox[{RowBox[{\\\"RefProp\\\", \\\"[\\\", RowBox[{\\\"\\\\\\\"Tsat\
+\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"P Dliq Dvap\\\\\\\"\\\", \\\",\\\", \
+RowBox[{\\\"150\\\", \\\" \\\", \\\"\[Degree]F\\\"}], \\\",\\\", \\\"0\\\"}], \
+\\\"]\\\"}], \\\"\[LeftDoubleBracket]\\\", RowBox[{\\\"All\\\", \\\",\\\", \\\
+\"2\\\"}], \\\"\[RightDoubleBracket]\\\"}]\\) are not the same shape.\"", 2, 
+   32, 6, 33616104989503615583, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[31]:=",
+ CellID->40404627,ExpressionUUID->"885cc0d0-94a7-4913-956f-b3ec150a07ca"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RefProp", "[", 
+   RowBox[{"\<\"Tsat\"\>", ",", "\<\"P Dliq Dvap\"\>", ",", 
+    RowBox[{"150", " ", "\[Degree]F"}], ",", "0"}], "]"}], 
+  "\[LeftDoubleBracket]", 
+  RowBox[{"All", ",", "2"}], "\[RightDoubleBracket]"}]], "Output",
+ CellLabel->"Out[32]=",
+ CellID->301935855,ExpressionUUID->"32b19c5d-1eb5-4199-a746-45526e72fb2a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["D", 
+   RowBox[{"2", "\[Phi]"}]], "=", 
+  RowBox[{"1", "/", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"0.5", "/", 
+      SubscriptBox["D", "L"]}], "+", 
+     RowBox[{"0.5", "/", 
+      SubscriptBox["D", "V"]}]}], ")"}]}]}]], "Input",
+ CellLabel->"In[33]:=",
+ CellID->540729299,ExpressionUUID->"07afcf17-de27-4921-9ec7-5cbfeeb4f486"],
+
+Cell[BoxData[
+ FractionBox["1", 
+  RowBox[{
+   FractionBox["0.5`", 
+    SubscriptBox["D", "L"]], "+", 
+   FractionBox["0.5`", 
+    SubscriptBox["D", "V"]]}]]], "Output",
+ CellLabel->"Out[33]=",
+ CellID->148436603,ExpressionUUID->"7fe6188c-0337-48af-a9ef-ae9b8379a1da"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<TD\>\"", ",", "\"\<P H S Cp W QMOLE\>\"", ",", "T", ",", 
+   SubscriptBox["D", 
+    RowBox[{"2", "\[Phi]"}]]}], "]"}]], "Input",
+ CellLabel->"In[34]:=",
+ CellID->705540555,ExpressionUUID->"d095404e-49df-490b-a33d-87ca164877c3"],
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\<\"TD\"\>", ",", "\<\"P H S Cp W QMOLE\"\>", ",", 
+   RowBox[{"150", " ", "\[Degree]F"}], ",", 
+   FractionBox["1", 
+    RowBox[{
+     FractionBox["0.5`", 
+      SubscriptBox["D", "L"]], "+", 
+     FractionBox["0.5`", 
+      SubscriptBox["D", "V"]]}]]}], "]"}]], "Output",
+ CellLabel->"Out[34]=",
+ CellID->233850251,ExpressionUUID->"45ff4154-4d7c-41c9-b9d9-494190f1680b"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Consult the ",
+ StyleBox[ButtonBox["RefProp",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/ref/RefProp"],
+  FontWeight->"Bold"],
+ ButtonBox[" reference page",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/ref/RefProp"],
+ " for many more options that affect units, mixture behavior, and outputs."
+}], "Text",
+ CellID->327181305,ExpressionUUID->"00f0dd55-1f64-43cc-889a-986fd86f5733"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Saturation Properties", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->670941316,ExpressionUUID->"9f99f2e0-65e4-4d5c-b40d-987382ce79c3"],
+
+Cell[TextData[{
+ "When the fluid properties at the saturated liquid (bubble point) or \
+saturated vapor (dew point) states along the boundaries of the two phase \
+region are needed, the ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " function can be used to calculate the vapor/liquid densities at a given \
+saturation pressure or temperature.   "
+}], "Text",
+ CellID->67387048,ExpressionUUID->"09eb9049-04bf-421d-bd01-eab9e4352e59"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"RefProp", "[", 
+     RowBox[{
+      StyleBox["hFld", "TI"], ",", 
+      StyleBox["hIn", "TI"], ",", 
+      StyleBox["hOut", "TI"], ",", 
+      StyleBox["a", "TI"], ",", 
+      StyleBox["b", "TI"]}], "]"}], Cell["\<\
+Perform a Refprop calculation after loading the fluid file specified in the \
+hFLD string parameter \
+\>", "TableText",ExpressionUUID->"9571ca12-d78d-4dde-be42-a4937d8d48fc"]}
+  }]], "DefinitionBox",
+ CellID->397827467,ExpressionUUID->"b39783cb-a3c1-4b8f-8aa5-d36af9a25c47"],
+
+Cell["RefProp for calculating saturation properties.", "Caption",
+ CellID->176994474,ExpressionUUID->"c58dca3c-c16c-4c26-b996-75dfd373c7e1"],
+
+Cell["\<\
+There are two ways to get the saturation properties.  The first is to use \
+input pairs that include the vapor quality, Q.  Setting Q to 0 will return \
+values along the saturated liquid curve (no vapor).  Conversely, setting Q to \
+1 will return values along the saturated vapor curve (100% vapor).\
+\>", "Text",
+ CellID->307684685,ExpressionUUID->"7e4094e8-453d-4a1c-bab0-6520876507e0"],
+
+Cell["\<\
+Q can be paired with either temperature, T, or pressure, P, and either value \
+must be between the triple point and the critical point.\
+\>", "Text",
+ CellID->156526136,ExpressionUUID->"ada206ca-f4c1-43c2-a157-1d777e2cd74b"],
+
+Cell["Saturated Liquid properties using TQ inputs with Q = 0", "MathCaption",
+ CellID->45396662,ExpressionUUID->"b7c3cae4-49e3-44a3-ba58-c78d6bc163a9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<TQ\>\"", ",", "\"\<P D H S Cp W\>\"", ",", 
+   RowBox[{"72", "\[Degree]F"}], ",", "0"}], "]"}]], "Input",
+ CellLabel->"In[44]:=",
+ CellID->426401788,ExpressionUUID->"82d0ba7f-298b-49f6-8bad-ea76b0ba138c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"P\"\>", "\[Rule]", 
+    TemplateBox[{
+     "2.6814149720049305`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"D\"\>", "\[Rule]", 
+    TemplateBox[{"55.37957643495781`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"H\"\>", "\[Rule]", 
+    TemplateBox[{"1679.2288268248424`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"mol\""}], "joules per mole", 
+      FractionBox["\"Joules\"", "\"Moles\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"S\"\>", "\[Rule]", 
+    TemplateBox[{"5.910407226482988`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"CP\"\>", "\[Rule]", 
+    TemplateBox[{"75.35706147142979`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"W\"\>", "\[Rule]", 
+    TemplateBox[{"1488.806722913783`", 
+      RowBox[{
+       "\"m\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"s\""}], 
+      "meters per second", 
+      FractionBox["\"Meters\"", "\"Seconds\""]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellLabel->"Out[44]=",
+ CellID->90383662,ExpressionUUID->"fda5025b-e841-4c3b-9ea4-127cffe156ac"]
+}, Open  ]],
+
+Cell["Saturated Vapor properties using TQ inputs with Q = 1", "MathCaption",
+ CellID->412271278,ExpressionUUID->"8386a1a5-069b-454b-a893-65f0658406ca"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<TQ\>\"", ",", "\"\<P D H S Cp W\>\"", ",", 
+   RowBox[{"72", "\[Degree]F"}], ",", "1"}], "]"}]], "Input",
+ CellLabel->"In[45]:=",
+ CellID->32593211,ExpressionUUID->"a183a1fd-8517-49f6-aff9-4fb6fcf718ba"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"P\"\>", "\[Rule]", 
+    TemplateBox[{
+     "2.6814148481958044`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"D\"\>", "\[Rule]", 
+    TemplateBox[{"0.0010934653025912293`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"H\"\>", "\[Rule]", 
+    TemplateBox[{"45785.2471535246`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"mol\""}], "joules per mole", 
+      FractionBox["\"Joules\"", "\"Moles\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"S\"\>", "\[Rule]", 
+    TemplateBox[{"155.23392179014274`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"CP\"\>", "\[Rule]", 
+    TemplateBox[{"34.382189799421155`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"W\"\>", "\[Rule]", 
+    TemplateBox[{"424.7160512574923`", 
+      RowBox[{
+       "\"m\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"s\""}], 
+      "meters per second", 
+      FractionBox["\"Meters\"", "\"Seconds\""]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellLabel->"Out[45]=",
+ CellID->41495060,ExpressionUUID->"eb4b2aef-5fec-4396-8e88-3ab26b661b1e"]
+}, Open  ]],
+
+Cell["\<\
+Calculating the saturation pressure (as above) and using it for PQ inputs \
+will yield the same results. \
+\>", "Text",
+ CellID->883401183,ExpressionUUID->"0c23a688-b73d-4674-a750-a52c680d4d3f"],
+
+Cell["\<\
+Saturated Liquid and Vapor properties using PQ inputs at the saturation \
+pressure\
+\>", "MathCaption",
+ CellID->321684491,ExpressionUUID->"7115b622-01e7-48f1-bd35-74cd6c904aee"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Psat", "=", 
+  RowBox[{
+   RowBox[{"RefProp", "[", 
+    RowBox[{"\"\<TQ\>\"", ",", "\"\<P\>\"", ",", 
+     RowBox[{"72", "\[Degree]F"}], ",", "0"}], "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "2"}], "]"}], "]"}]}]], "Input",
+ CellLabel->"In[46]:=",
+ CellID->170853062,ExpressionUUID->"8c0ec963-4ce4-444c-923d-a66dcb0309b9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "2.6814149720049305`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+  "Quantity"]], "Output",
+ CellLabel->"Out[46]=",
+ CellID->69438505,ExpressionUUID->"4705c02e-1bd0-42cc-8ae5-5ebfbd228fcb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<PQ\>\"", ",", "\"\<T D H S Cp W\>\"", ",", "Psat", ",", "0"}], 
+  "]"}]], "Input",
+ CellLabel->"In[47]:=",
+ CellID->135943329,ExpressionUUID->"a6b4e4bf-8c43-4192-b8f5-ee3569b3844e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"T\"\>", "\[Rule]", 
+    TemplateBox[{"295.3722229804787`", "\"K\"", "kelvins", "\"Kelvins\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"D\"\>", "\[Rule]", 
+    TemplateBox[{"55.37957642531289`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"H\"\>", "\[Rule]", 
+    TemplateBox[{"1679.2288839659482`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"mol\""}], "joules per mole", 
+      FractionBox["\"Joules\"", "\"Moles\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"S\"\>", "\[Rule]", 
+    TemplateBox[{"5.9104074199338426`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"CP\"\>", "\[Rule]", 
+    TemplateBox[{"75.35706146371209`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"W\"\>", "\[Rule]", 
+    TemplateBox[{"1488.806725106278`", 
+      RowBox[{
+       "\"m\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"s\""}], 
+      "meters per second", 
+      FractionBox["\"Meters\"", "\"Seconds\""]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellLabel->"Out[47]=",
+ CellID->4982075,ExpressionUUID->"d2a4163f-fba8-4083-9a6d-add59e64ed3f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<PQ\>\"", ",", "\"\<T D H S Cp W\>\"", ",", "Psat", ",", "1"}], 
+  "]"}]], "Input",
+ CellLabel->"In[48]:=",
+ CellID->291094404,ExpressionUUID->"f78b0be8-9f36-4731-959c-1df0e818faf4"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"T\"\>", "\[Rule]", 
+    TemplateBox[{"295.3722229804787`", "\"K\"", "kelvins", "\"Kelvins\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"D\"\>", "\[Rule]", 
+    TemplateBox[{"0.0010934653503200983`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"H\"\>", "\[Rule]", 
+    TemplateBox[{"45785.247178314654`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"mol\""}], "joules per mole", 
+      FractionBox["\"Joules\"", "\"Moles\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"S\"\>", "\[Rule]", 
+    TemplateBox[{"155.2339214907364`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"CP\"\>", "\[Rule]", 
+    TemplateBox[{"34.38218981556422`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"W\"\>", "\[Rule]", 
+    TemplateBox[{"424.71605178045417`", 
+      RowBox[{
+       "\"m\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"s\""}], 
+      "meters per second", 
+      FractionBox["\"Meters\"", "\"Seconds\""]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellLabel->"Out[48]=",
+ CellID->32733873,ExpressionUUID->"9b118aa3-1fcb-44e6-bed1-6902afd42e06"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Alternatively, there are shortcut input strings, \"Tsat\" and \"Psat\" that \
+allow the saturation Temperature or Pressure to be passed in numerical input ",
+ Cell[BoxData[
+  StyleBox["a", "TI"]], "InlineFormula",ExpressionUUID->
+  "fa637913-0153-422d-96fd-3c92ff251a4a"],
+ " only, and ignoring the value passed in ",
+ Cell[BoxData[
+  StyleBox["b", "TI"]], "InlineFormula",ExpressionUUID->
+  "43fb589a-ba0b-4624-9389-c58c2f0eaf2f"],
+ "."
+}], "Text",
+ CellID->754813309,ExpressionUUID->"3f939d36-6739-4d38-98b0-e650a43521df"],
+
+Cell["\<\
+Return properties can then use the suffix \"*vap\" or \"liq\" to specify the \
+desired state.\
+\>", "Text",
+ CellID->91718770,ExpressionUUID->"1d13cd7c-495a-4ff1-9fd6-494e50574d78"],
+
+Cell["Saturated Liquid properties using \"Tsat\" input.", "MathCaption",
+ CellID->130551063,ExpressionUUID->"6aedb194-c8e3-42a5-9bdc-fc1db7aedfa8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<Tsat\>\"", ",", "\"\<P Dliq Hliq Sliq Cpliq Wliq\>\"", ",", 
+   RowBox[{"72", "\[Degree]F"}], ",", "0"}], "]"}]], "Input",
+ CellLabel->"In[49]:=",
+ CellID->297921912,ExpressionUUID->"ef8a2060-a5b8-4768-be86-492022e43b26"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"P\"\>", "\[Rule]", 
+    TemplateBox[{
+     "2.6814149720049305`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"DLIQ\"\>", "\[Rule]", 
+    TemplateBox[{"55.37957643495781`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"HLIQ\"\>", "\[Rule]", 
+    TemplateBox[{"1679.2288268248424`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"mol\""}], "joules per mole", 
+      FractionBox["\"Joules\"", "\"Moles\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"SLIQ\"\>", "\[Rule]", 
+    TemplateBox[{"5.910407226482988`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"CPLIQ\"\>", "\[Rule]", 
+    TemplateBox[{"75.35706147142979`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"WLIQ\"\>", "\[Rule]", 
+    TemplateBox[{"1488.806722913783`", 
+      RowBox[{
+       "\"m\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"s\""}], 
+      "meters per second", 
+      FractionBox["\"Meters\"", "\"Seconds\""]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellLabel->"Out[49]=",
+ CellID->108081894,ExpressionUUID->"e5845e74-416e-4ce2-841c-d055a5daf5c8"]
+}, Open  ]],
+
+Cell["Saturated Vapor properties using \"Tsat\" input.", "MathCaption",
+ CellID->512203755,ExpressionUUID->"737f9866-f84f-4eda-8d3e-41cc86ee2f47"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<Tsat\>\"", ",", "\"\<P Dvap Hvap Svap Cpvap Wvap\>\"", ",", 
+   RowBox[{"72", "\[Degree]F"}], ",", "0"}], "]"}]], "Input",
+ CellLabel->"In[50]:=",
+ CellID->44449778,ExpressionUUID->"9f5ef3eb-27a6-425d-830f-8dde7b70bdf4"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"P\"\>", "\[Rule]", 
+    TemplateBox[{
+     "2.6814149720049305`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"DVAP\"\>", "\[Rule]", 
+    TemplateBox[{"0.0010934653025912293`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"HVAP\"\>", "\[Rule]", 
+    TemplateBox[{"45785.2471535246`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"mol\""}], "joules per mole", 
+      FractionBox["\"Joules\"", "\"Moles\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"SVAP\"\>", "\[Rule]", 
+    TemplateBox[{"155.23392179014274`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"CPVAP\"\>", "\[Rule]", 
+    TemplateBox[{"34.382189799421155`", 
+      RowBox[{
+       "\"J\"", "\[InvisibleSpace]", "\"/(\"", "\[InvisibleSpace]", "\"K\"", 
+        "\[ThinSpace]", "\"mol\"", "\[InvisibleSpace]", "\")\""}], 
+      "joules per kelvin mole", 
+      FractionBox["\"Joules\"", 
+       RowBox[{"\"Kelvins\"", " ", "\"Moles\""}]]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"WVAP\"\>", "\[Rule]", 
+    TemplateBox[{"424.7160512574923`", 
+      RowBox[{
+       "\"m\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"s\""}], 
+      "meters per second", 
+      FractionBox["\"Meters\"", "\"Seconds\""]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellLabel->"Out[50]=",
+ CellID->553083132,ExpressionUUID->"f360e609-6d43-4032-9810-442ba1295cb1"]
+}, Open  ]],
+
+Cell["\<\
+This shorthand notation can be very handy when needing both the saturated \
+liquid and saturated vapor quantities at the same time, from the same call.\
+\>", "Text",
+ CellID->88688607,ExpressionUUID->"81d03386-76a8-4ea5-afff-1c782134f683"],
+
+Cell["\<\
+Saturated Vapor and Liquid properties at the same time using Tsat input.\
+\>", "MathCaption",
+ CellID->467178884,ExpressionUUID->"f5b1ff7c-fdef-4091-8bc8-ff9df8558e4b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<Tsat\>\"", ",", "\"\<P Dliq Dvap\>\"", ",", 
+   RowBox[{"72", "\[Degree]F"}], ",", "0"}], "]"}]], "Input",
+ CellLabel->"In[51]:=",
+ CellID->161737654,ExpressionUUID->"80afaf01-7ec8-45fc-85d8-de43a393681a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"P\"\>", "\[Rule]", 
+    TemplateBox[{
+     "2.6814149720049305`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"DLIQ\"\>", "\[Rule]", 
+    TemplateBox[{"55.37957643495781`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}], ",", 
+   RowBox[{"\<\"DVAP\"\>", "\[Rule]", 
+    TemplateBox[{"0.0010934653025912293`", 
+      RowBox[{
+       "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+        "\"L\""}], "moles per liter", 
+      FractionBox["\"Moles\"", "\"Liters\""]},
+     "Quantity"]}]}], "}"}]], "Output",
+ CellLabel->"Out[51]=",
+ CellID->855045217,ExpressionUUID->"6bcec827-007f-41c1-9c5f-b67f7e548757"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Single Phase Properties", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->465795248,ExpressionUUID->"f82967f0-dd7c-4ce1-8aec-e4616810ee62"],
+
+Cell[TextData[{
+ "When it is known that the state point is in a single phase region (either \
+vapor or liquid), there are flags that can be placed on the input pair string \
+to ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " to speed up the calculations and/or improve convergence."
+}], "Text",
+ CellID->258668859,ExpressionUUID->"39800329-1199-43dd-8dd0-0869d2ffef7c"],
+
+Cell["\<\
+Normally, the ABFLSH routine is called internally to determine the phase of \
+the inputs (liquid, vapor, or 2-phase), and then the appropriate iterative \
+routine will be called to obtain the independent properties of the equations \
+of state: temperature and density.  For subsequent calculations for \
+properties that are in the single phase, use the code AB&, where the symbol & \
+indicates the single phase state. The time required with the use of AB& is \
+negligible, compared to that required for the iterative solution called by \
+ABFLSH.\
+\>", "Text",
+ CellID->133424027,ExpressionUUID->"53f247e7-05cd-4736-b320-c1b8348320f1"],
+
+Cell["\<\
+Unfortunately, while this convention still works, speed tests of the \
+RefpropLink implementation show no difference in speed from using the general \
+call parameter.\
+\>", "Text",
+ CellID->395914649,ExpressionUUID->"dccaad6d-ff77-4098-996d-0c5dd14c1942"],
+
+Cell["Known liquid state for water", "MathCaption",
+ CellID->98122627,ExpressionUUID->"6ed616b2-f042-4014-a39c-f7849cf54ffc"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"T", "=", 
+   RowBox[{"72", "\[Degree]F"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", "=", 
+   RowBox[{"1", "atm"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["D", "1"], "=", 
+  RowBox[{
+   RowBox[{"RefProp", "[", 
+    RowBox[{"\"\<TP&\>\"", ",", "\"\<D\>\"", ",", "T", ",", "P"}], "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "2"}], "]"}], "]"}]}]}], "Input",
+ CellLabel->"In[57]:=",
+ CellID->112997547,ExpressionUUID->"c66f41b8-52fa-4194-bdb0-ba26c18add3b"],
+
+Cell[BoxData[
+ TemplateBox[{"55.38206688848727`", 
+   RowBox[{
+    "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}], 
+   "moles per liter", 
+   FractionBox["\"Moles\"", "\"Liters\""]},
+  "Quantity"]], "Output",
+ CellLabel->"Out[59]=",
+ CellID->148549893,ExpressionUUID->"9f3a2d07-655c-4c0d-9fc2-9f62907873b6"]
+}, Open  ]],
+
+Cell["\<\
+There are two flags, however, that are more useful in RefpropLink.\
+\>", "Text",
+ CellID->455957052,ExpressionUUID->"b8964562-9cc4-41d2-9894-b6052592fb26"],
+
+Cell[TextData[{
+ StyleBox["**>", "BulletedText",
+  FontWeight->"Bold"],
+ StyleBox[" or ", "BulletedText"],
+ StyleBox["**L", "BulletedText",
+  FontWeight->"Bold"],
+ StyleBox[" : When the greater than \">\" character or the letter \"L\" is \
+appended to the two letters that specify the input properties (such as \
+\"TP\"), the routine will assume that the input properties are in the single \
+phase ", "BulletedText"],
+ StyleBox["liquid", "BulletedText",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[" region, or are within the two-phase area as a ", "BulletedText"],
+ StyleBox["metastable state", "BulletedText",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[". For example: \"TP>\", \"PH>\", \"HSL\".  To remember the greater \
+than symbol, \">\", think \"above the T-P saturation curve\", which is the \
+liquid region.", "BulletedText"]
+}], "BulletedText",
+ CellID->132058655,ExpressionUUID->"fd1df168-aff2-4a74-bdd0-af9d7106985f"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["**<", "BulletedText",
+  FontWeight->"Bold"],
+ StyleBox[" or ", "BulletedText"],
+ StyleBox["**V", "BulletedText",
+  FontWeight->"Bold"],
+ StyleBox[" : When the less than \"<\" character or the letter \"V\" is \
+appended to the two letters that specify the input properties (such as \
+\"TP\"), the routine will assume that the input properties are in the single \
+phase ", "BulletedText"],
+ StyleBox["vapor", "BulletedText",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[" region, or are within the two-phase area as a ", "BulletedText"],
+ StyleBox["metastable state", "BulletedText",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[". For example: TP>, PH>, HSL.  For example: \"TP<\", \"PH<\", \
+\"HSV\".  To remember the less than symbol, \"<\", think \"below the T-P \
+saturation curve\", which is the vapor region.", "BulletedText"]
+}], "BulletedText",
+ CellID->983206561,ExpressionUUID->"d5efe7e9-7655-4445-a9fc-ee5d6f4513db"],
+
+Cell["Grab a state point that is just below the bubble point.", "MathCaption",
+ CellID->678569810,ExpressionUUID->"6d92873d-ccbf-444b-bd6f-bdca2dcba81e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"Psat", ",", 
+     SubscriptBox["D", "L"], ",", 
+     SubscriptBox["D", "V"]}], "}"}], "=", 
+   RowBox[{
+    RowBox[{"RefProp", "[", 
+     RowBox[{"\"\<Tsat\>\"", ",", "\"\<P Dliq Dvap\>\"", ",", "T", ",", "0"}],
+      "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["D", "ms"], "=", 
+  RowBox[{"1", "/", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"0.99", "/", 
+      SubscriptBox["D", "V"]}], "+", 
+     RowBox[{"0.01", "/", 
+      SubscriptBox["D", "L"]}]}], ")"}]}]}]}], "Input",
+ CellLabel->"In[62]:=",
+ CellID->1002380,ExpressionUUID->"48b2d79a-72df-4a59-85b3-7e9cd3e72c5a"],
+
+Cell[BoxData[
+ TemplateBox[{"0.00110451018637028`", 
+   RowBox[{
+    "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}], 
+   "moles per liter", 
+   FractionBox["\"Moles\"", "\"Liters\""]},
+  "Quantity"]], "Output",
+ CellLabel->"Out[63]=",
+ CellID->97484319,ExpressionUUID->"b6c9a40f-a353-4838-88ce-7f9248d6b82d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["D", "L"], ",", 
+   SubscriptBox["D", "V"]}], "}"}]], "Input",
+ CellLabel->"In[64]:=",
+ CellID->300542000,ExpressionUUID->"c6dfa862-c9d8-4505-852a-12b338b0b2b4"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{"55.37957643495781`", 
+     RowBox[{
+      "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}],
+      "moles per liter", 
+     FractionBox["\"Moles\"", "\"Liters\""]},
+    "Quantity"], ",", 
+   TemplateBox[{"0.0010934653025912293`", 
+     RowBox[{
+      "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}],
+      "moles per liter", 
+     FractionBox["\"Moles\"", "\"Liters\""]},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[64]=",
+ CellID->153016544,ExpressionUUID->"da4f5742-c741-458b-bef5-870de9a50b1d"]
+}, Open  ]],
+
+Cell["Calculate the Saturation Enthalpy", "MathCaption",
+ CellID->206987323,ExpressionUUID->"067e39c5-da75-4002-b3d9-7f525066ebc8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<Tsat\>\"", ",", "\"\<Hvap\>\"", ",", "T", ",", "0"}], 
+  "]"}]], "Input",
+ CellLabel->"In[67]:=",
+ CellID->182923923,ExpressionUUID->"2f596c2b-53d4-4aa5-9a8f-f9123d0ea7c2"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"HVAP\"\>", "\[Rule]", 
+   TemplateBox[{"45785.2471535246`", 
+     RowBox[{
+      "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"mol\""}],
+      "joules per mole", 
+     FractionBox["\"Joules\"", "\"Moles\""]},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[67]=",
+ CellID->696014133,ExpressionUUID->"31d9feab-e1ca-4a80-879a-e4d0a3079a35"]
+}, Open  ]],
+
+Cell["\<\
+Calculate the two-phase Enthalpy (noticeably lower than Hvap).\
+\>", "MathCaption",
+ CellID->6463533,ExpressionUUID->"36afeb03-f732-46ba-bd21-29644c5bc9e0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<TD\>\"", ",", "\"\<H\>\"", ",", "T", ",", 
+   SubscriptBox["D", "ms"]}], "]"}]], "Input",
+ CellLabel->"In[68]:=",
+ CellID->254967951,ExpressionUUID->"8ccc316b-a277-4430-bafd-aa4f84d143a3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"H\"\>", "\[Rule]", 
+   TemplateBox[{"45344.18697025761`", 
+     RowBox[{
+      "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"mol\""}],
+      "joules per mole", 
+     FractionBox["\"Joules\"", "\"Moles\""]},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[68]=",
+ CellID->42467757,ExpressionUUID->"5976ba58-a9b5-4004-9d34-e0ed39008063"]
+}, Open  ]],
+
+Cell["\<\
+Calculate the meta-stable Vapor Enthalpy (Still up near the saturated \
+enthalpy)\
+\>", "MathCaption",
+ CellID->230626192,ExpressionUUID->"62cdd66c-cf4f-48ca-be13-3e3ac32e8a2e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<TD<\>\"", ",", "\"\<H\>\"", ",", "T", ",", 
+   SubscriptBox["D", "ms"]}], "]"}]], "Input",
+ CellLabel->"In[69]:=",
+ CellID->126311549,ExpressionUUID->"7e31c4d6-f88d-4714-a877-9d874f8e9d19"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"H\"\>", "\[Rule]", 
+   TemplateBox[{"45784.966922564854`", 
+     RowBox[{
+      "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"mol\""}],
+      "joules per mole", 
+     FractionBox["\"Joules\"", "\"Moles\""]},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[69]=",
+ CellID->753715069,ExpressionUUID->"7d74f39d-cddf-48c3-9a98-c0afce0972a8"]
+}, Open  ]],
+
+Cell["\<\
+This flag has special meaning for the input pair TH and TE.  Inputs of \
+Temperature and Enthalpy (or occasionally temperature and internal energy) \
+generally have two valid states.  To obtain the root with the higher pressure \
+(typically in the liquid region), use TH> or TE>, and for the lower pressure \
+(typically in the two-phase region) use TH< or TE<.\
+\>", "Text",
+ CellID->3029519,ExpressionUUID->"e1376f1d-315b-4540-977b-16996c9454f5"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Two Phase Properties", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->328677578,ExpressionUUID->"485298ea-d112-4e88-b77b-f6e015a5ec5a"],
+
+Cell[TextData[{
+ "Unlike the Legacy API and single-phase ",
+ StyleBox["RefProp",
+  FontWeight->"Bold"],
+ " input parameter flags, there are no specialized commands or parameters \
+dedicated for use when the state point is known to be in the two-phase (",
+ StyleBox["2\[Phi]",
+  FontWeight->"Bold"],
+ ") region.  These calls are simply made using RefProp as specified above for \
+general state-point property calculations, with a few exceptions."
+}], "Text",
+ CellID->284819056,ExpressionUUID->"ea5edeee-d2dc-4f65-af53-664aa8a19cfd"],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"RefProp", "[", 
+     RowBox[{
+      StyleBox["hFld", "TI"], ",", 
+      StyleBox["hIn", "TI"], ",", 
+      StyleBox["hOut", "TI"], ",", 
+      StyleBox["a", "TI"], ",", 
+      StyleBox["b", "TI"]}], "]"}], Cell["\<\
+Perform a Refprop calculation after loading the fluid file specified in the \
+hFLD string parameter \
+\>", "TableText",ExpressionUUID->"bd02b7dd-2a34-46c9-baf6-33d61b16c579"]}
+  }]], "DefinitionBox",
+ CellID->399493404,ExpressionUUID->"70c422ae-5fb1-415d-a4c3-fa30336286bc"],
+
+Cell["RefProp for calculating state point properties.", "Caption",
+ CellID->12475860,ExpressionUUID->"a0e4f171-f9b6-4e43-87ed-55a50a60bc60"],
+
+Cell["\<\
+As already mentioned, temperature-enthalpy state points can be dual valued, \
+with one state point in the 2\[Phi] region.  Inputs of Temperature and \
+Enthalpy (or occasionally temperature and internal energy) generally have two \
+valid states.  To obtain the root with the higher pressure (typically in the \
+liquid region), use TH> or TE>, and for the lower pressure (typically in the \
+two-phase region) use TH< or TE<.\
+\>", "Text",
+ CellID->299353750,ExpressionUUID->"557194af-1237-4919-87c9-999f8459ae87"],
+
+Cell["\<\
+In the two phase region, it is often desirable to return the vapor quality, \
+Q.  This quantity can be returned on a mole basis using \"QMOLE\" as the \
+output string or on a mass basis using the output string \"QMASS\".  This \
+quantity will report the fraction of vapor (Q) in equilibrium with the liquid \
+state (1-Q).\
+\>", "Text",
+ CellID->7577440,ExpressionUUID->"bafe35af-f0e5-451b-b621-b5732fb21520"],
+
+Cell["\<\
+Calculate the vapor quality half way between the saturated liquid and vapor \
+molar volumes (1/D).\
+\>", "MathCaption",
+ CellID->28876996,ExpressionUUID->"61dee4ca-8d9c-474c-82c7-88ab5bb44598"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["D", 
+   RowBox[{"2", "\[Phi]"}]], "=", 
+  SuperscriptBox[
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "2"], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"1", "/", 
+        SubscriptBox["D", "L"]}], "+", 
+       RowBox[{"1", "/", 
+        SubscriptBox["D", "V"]}]}], ")"}]}], ")"}], 
+   RowBox[{"-", "1"}]]}]], "Input",
+ CellLabel->"In[65]:=",
+ CellID->130019471,ExpressionUUID->"7867fd48-67e7-4d15-916a-ad972bf194ae"],
+
+Cell[BoxData[
+ TemplateBox[{"0.0021868874252653457`", 
+   RowBox[{
+    "\"mol\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"L\""}], 
+   "moles per liter", 
+   FractionBox["\"Moles\"", "\"Liters\""]},
+  "Quantity"]], "Output",
+ CellLabel->"Out[65]=",
+ CellID->457416220,ExpressionUUID->"2b7025a7-229c-4160-99bf-c27474c7ad5f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RefProp", "[", 
+  RowBox[{"\"\<TD\>\"", ",", "\"\<QMOLE QMASS\>\"", ",", "T", ",", 
+   SubscriptBox["D", 
+    RowBox[{"2", "\[Phi]"}]]}], "]"}]], "Input",
+ CellLabel->"In[66]:=",
+ CellID->2877668,ExpressionUUID->"5ebdeebf-dc6d-434d-99ba-eeb56c45dc3c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"QMOLE\"\>", "\[Rule]", "0.5`"}], ",", 
+   RowBox[{"\<\"QMASS\"\>", "\[Rule]", "0.5`"}]}], "}"}]], "Output",
+ CellLabel->"Out[66]=",
+ CellID->432025238,ExpressionUUID->"e266114d-8806-4e43-b17b-fbc7abe7ee58"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Note that ",
+ StyleBox["for pure fluids, the mass-based and mole-based vapor qualities are \
+identical",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " and can be used interchangeably; for fluid mixtures, this is not the case. \
+ In the single-phase regions, \"QMASS\" and \"QMOLE\" will return very large \
+negative numbers, which are meaningless."
+}], "Text",
+ CellID->2519180,ExpressionUUID->"92455a77-221a-4b0f-beed-c93da870fe53"],
+
+Cell[TextData[{
+ "NOTE: For mixtures in the 2\[Phi] region, there is an additional option on \
+RefProp to return the equilibrium molar compositions in the vapor and liquid \
+phase.  For pure fluids, the composition is always {1.0}, so this option will \
+be discussed in the ",
+ StyleBox[ButtonBox["Mixtures",
+  BaseStyle->"Link",
+  ButtonData->"paclet:RefpropLink/tutorial/Mixtures"],
+  FontWeight->"Bold"],
+ " tutorial."
+}], "Text",
+ Background->RGBColor[0.87, 0.94, 1],
+ CellID->401191305,ExpressionUUID->"005913a1-13d9-47a8-99be-174386099553"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["References", "Section",
+ CellFrame->{{0, 0}, {0, 2}},
+ CellID->776680,ExpressionUUID->"1ed9aafc-9213-4094-b3cb-2b7482c2bdb8"],
+
+Cell["\<\
+1. Eric W. Lemmon, Ian H. Bell, Marcia L. Huber, and Mark O. McLinden, \
+REFPROP Documentation, Release 10.0, NIST, May 21, 2018.\
+\>", "Text",
+ CellID->645428874,ExpressionUUID->"52c54004-6336-47fe-a557-58c9de7cb31a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"38205185-ce0b-427b-bef6-870e04efc1a7"],
+ "Related Guides"
+}], "TutorialMoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->23220180,ExpressionUUID->"6f671051-bb44-462e-b4f1-7f1a9d6b1f15"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"5548c5aa-f82b-4990-b8cc-f728780cfa52"],
+
+Cell[TextData[ButtonBox["RefpropLink Guide",
+ BaseStyle->"Link",
+ ButtonData->"paclet:RefpropLink/guide/RefpropLink"]], "TutorialMoreAbout",
+ CellID->1567025153,ExpressionUUID->"1b9ff538-44de-4c36-be97-46c23ec016d3"],
+
+Cell["", "SectionFooterSpacer",ExpressionUUID->"9411e644-59c9-4f49-8e56-4b16655f050f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"afb58a7c-0f85-4f64-880a-7270dc8e328a"],
+ "Related Tutorials"
+}], "RelatedTutorialsSection",
+ WholeCellGroupOpener->True,
+ CellID->415694126,ExpressionUUID->"567fa6eb-7830-4a11-823b-3f8874afbf31"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"2a6ae14e-ac3e-485f-ac22-03fa6441a790"],
+
+Cell[TextData[ButtonBox["RefpropLink Overview",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/RefpropLinkOverview"]], "RelatedTutorials",
+ CellID->90776795,ExpressionUUID->"59ee5f81-b5ad-4b46-a1d6-36fb894b4a2b"],
+
+Cell[TextData[ButtonBox["RefpropLink Implementation",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/Implementation"]], "RelatedTutorials",
+ CellID->478075264,ExpressionUUID->"a04ad6fa-3d99-4d7e-b37a-bae0fd2dc976"],
+
+Cell[TextData[ButtonBox["RefpropLink Units",
+ BaseStyle->"Link",
+ ButtonData->"paclet:RefpropLink/tutorial/Units"]], "RelatedTutorials",
+ CellID->279695321,ExpressionUUID->"0be4a3f4-a1a0-4dec-b6c5-4fd821b1aed3"],
+
+Cell[TextData[ButtonBox["Mixtures",
+ BaseStyle->"Link",
+ ButtonData->"paclet:RefpropLink/tutorial/Mixtures"]], "RelatedTutorials",
+ CellID->806871991,ExpressionUUID->"a91d43d5-c8f6-4f4a-b4bd-a2c06bc16675"],
+
+Cell[TextData[ButtonBox["Pure Fluids (Legacy API)",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/PureFluidsLegacyAPI"]], "RelatedTutorials",
+ CellID->49967596,ExpressionUUID->"8b130c50-de72-40fc-9cfd-41e3294221d8"],
+
+Cell[TextData[ButtonBox["Mixtures (Legacy API)",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/MixturesLegacyAPI"]], "RelatedTutorials",
+ CellID->92033378,ExpressionUUID->"0c50eb5c-6861-41ee-a2fd-63e1c063a1e4"],
+
+Cell["", "SectionFooterSpacer",ExpressionUUID->"b6992f03-c6dd-408d-8ea9-a76280fb91fb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"2f685a23-83a5-4b06-bdd2-e797ad107118"],
+ "Related Online REFPROP Documentation"
+}], "TutorialRelatedLinksSection",
+ WholeCellGroupOpener->True,
+ CellID->415694148,ExpressionUUID->"1677f774-f233-4dc2-9637-b5e47a9aeca4"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"45801693-1ad0-4852-822f-7f2939d75bc2"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["NIST REFPROP Online DLL Documentation"]], 
+    "https://refprop-docs.readthedocs.io/en/latest/DLL/index.html"},
+   "WebLink",
+   BaseStyle->{"TutorialRelatedLinks"}]],ExpressionUUID->
+  "12895f86-2562-4c09-9e6f-800149dd1dad"],
+ " (Latest)"
+}], "TutorialRelatedLinks",
+ CellID->415694149,ExpressionUUID->"f8813e78-2d7b-4f87-a348-4c1261b8f4cb"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["NIST REFPROP PDF Documentation"]], 
+    "https://trc.nist.gov/refprop/REFPROP.PDF"},
+   "WebLink",
+   BaseStyle->{"TutorialRelatedLinks"}]],ExpressionUUID->
+  "60d59acb-23f3-4c1f-85b3-f7a934a540c8"],
+ " (Latest)"
+}], "TutorialRelatedLinks",
+ CellID->648377487,ExpressionUUID->"967a2a8d-3213-460f-b231-1112b9c9d78f"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"4f8d67a1-be8e-4ca4-847a-812304f2bd57"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{726, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Pure Fluids",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "TutorialColor", 
+  "LinkTrails" -> GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "RefpropLink", ButtonData -> "paclet:RefpropLink/guide/RefpropLink", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "ExampleCounter" -> 1, "NeedPlatMsgIn" -> None, "RootCaptions" -> 
+  "", "Metadata" -> {
+   "built" -> "{2021, 10, 11, 17, 53, 11.9343419}", 
+    "history" -> {"1.0", "", "", ""}, "context" -> "RefpropLink`", 
+    "keywords" -> {
+     "RefpropLink", "REFPROP", "Pure Fluids", "Properties", "Physical", 
+      "Thermodynamic", "Transport"}, "specialkeywords" -> {}, 
+    "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
+    "Refprop Link Tutorial", "language" -> "en", "paclet" -> "RefpropLink", 
+    "status" -> "None", "summary" -> 
+    "This tutorial demonstrates how to use RefpropLink to access pure fluid \
+material properties using the High-Level Application Program Interface (API) \
+functions introduced with NIST REFPROP 10. These functions can be generally \
+slower than the Legacy API functions because, while simpler and more \
+convenient, they require a fair amount text string processing in the \
+underlying, Fortran-based Dynamic Linked Library (DLL), which is slow at \
+handling string manipulations and comparisons. Benchmarks of RefpropLink \
+implementation show that the Legacy API functions can be up to 2X faster than \
+performing the same calculations through the High-Level API with the same \
+DLL. That said, the High-Level API consists of basically one single function \
+(RefProp) through which all of the NIST REFPROP features can be accessed. \
+This makes the High-Level API both simple and versatile, since there is \
+really just one function, but it has many parameters and options that allow \
+it to access most, if not all of the NIST REFPROP features. An attempt is \
+made to make this tutorial mirror the Pure Fluids (Legacy API) tutorial as \
+closely as possible so that the difference between these APIs is clearly \
+visible.", "synonyms" -> {}, "tabletags" -> 
+    DocumentationBuild`Make`Private`tabletaggingrules$51444, "title" -> 
+    "Pure Fluids", "titlemodifier" -> "", "windowtitle" -> "Pure Fluids", 
+    "type" -> "Tutorial", "uri" -> "RefpropLink/tutorial/PureFluids", 
+    "WorkflowDockedCell" -> ""}, "SearchTextTranslated" -> ""},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> Notebook], 
+   Cell[
+    StyleData["Output"], CellContext -> Notebook], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "12.1 for Microsoft Windows (64-bit) (June 19, 2020)", 
+  StyleDefinitions -> "Default.nb"],
+ExpressionUUID->"02c60b35-83de-486f-a180-d42d4b7146b1"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[583, 21, 4761, 104, 53, "AnchorBarGrid",ExpressionUUID->"bad63e99-411d-4a9f-9501-10e7cf8382d6",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[5369, 129, 103, 1, 63, "Title",ExpressionUUID->"bf24d7fd-590e-48c3-a385-10415dbed039",
+ CellID->509267359],
+Cell[5475, 132, 59015, 1046, 142, "TutorialJumpBox",ExpressionUUID->"405758e5-952d-4679-9917-70af35dc6413"],
+Cell[64493, 1180, 959, 19, 173, "Text",ExpressionUUID->"944de537-a4a9-40d0-9189-b67d7ad652f4",
+ CellID->1534169418],
+Cell[65455, 1201, 587, 11, 104, "Text",ExpressionUUID->"91ba4114-02f5-4129-ba00-83dcae0f51f1",
+ CellID->72059017],
+Cell[66045, 1214, 416, 9, 58, "Text",ExpressionUUID->"95ad17d9-befc-464b-a5c0-f27f5a534f51",
+ CellID->36100660],
+Cell[66464, 1225, 523, 14, 58, "Text",ExpressionUUID->"b0057339-dd29-4d4f-957b-0557ff15617f",
+ CellID->189076469],
+Cell[66990, 1241, 509, 13, 59, "Text",ExpressionUUID->"4247f8b4-5549-4054-bc6c-5a62c98d39e7",
+ CellID->203927537],
+Cell[CellGroupData[{
+Cell[67524, 1258, 147, 2, 71, "Section",ExpressionUUID->"446855ec-2294-4053-af6d-b664debb148e",
+ CellID->43322749],
+Cell[67674, 1262, 756, 21, 70, "Text",ExpressionUUID->"7d66f9b4-c360-40d0-a6ff-32fd06dda91a",
+ CellID->573431709],
+Cell[68433, 1285, 116, 1, 70, "MathCaption",ExpressionUUID->"96aed69d-5d86-4e5e-96dd-0d4150774653",
+ CellID->279625114],
+Cell[68552, 1288, 129, 2, 70, "Input",ExpressionUUID->"1ca234e3-523f-4b70-ab91-8d57f53b8940",
+ CellID->713385182],
+Cell[68684, 1292, 240, 6, 70, "MathCaption",ExpressionUUID->"6ad0cd35-aa2f-497c-a972-0f16bc0c144f",
+ CellID->872464924],
+Cell[CellGroupData[{
+Cell[68949, 1302, 174, 3, 70, "Input",ExpressionUUID->"513534e0-8fae-4a15-b52c-6437ff2b9474",
+ CellID->68619680],
+Cell[69126, 1307, 283, 6, 70, "Print",ExpressionUUID->"1a052188-d561-4f56-b918-41a46def85dc",
+ CellID->305347762]
+}, Open  ]],
+Cell[69424, 1316, 446, 9, 70, "Text",ExpressionUUID->"e4450b58-9363-4aa6-893e-463714532d33",
+ CellID->86903750],
+Cell[69873, 1327, 584, 11, 70, "Text",ExpressionUUID->"16f29a8e-31b9-43fc-9bfc-925ca0fd795b",
+ CellID->159972398]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70494, 1343, 141, 2, 70, "Section",ExpressionUUID->"79552c8f-497f-4776-ba58-6a324d960ce6",
+ CellID->44087500],
+Cell[70638, 1347, 760, 18, 70, "DefinitionBox",ExpressionUUID->"3724ed61-98bc-4078-bdbd-c3c9577b181b",
+ CellID->2096742444],
+Cell[71401, 1367, 143, 1, 70, "Caption",ExpressionUUID->"7b4500fb-8a80-41c7-ad24-3eeb735c8e49",
+ CellID->1891092685],
+Cell[71547, 1370, 750, 15, 70, "Text",ExpressionUUID->"c95fe574-5682-41d0-b277-5b132223c1e9",
+ CellID->9367822],
+Cell[72300, 1387, 148, 1, 70, "MathCaption",ExpressionUUID->"b2732365-8678-49c7-a3cc-84e83d6e8524",
+ CellID->836781195],
+Cell[72451, 1390, 699, 19, 70, "Input",ExpressionUUID->"bb1f64ee-b488-4802-bae8-98002ee5c395",
+ CellID->2058623809],
+Cell[73153, 1411, 547, 13, 70, "Text",ExpressionUUID->"b52f8538-fe67-4701-8ff7-4966ebab1f5d",
+ CellID->31667136],
+Cell[73703, 1426, 133, 1, 70, "MathCaption",ExpressionUUID->"6af4ab8e-d223-47b7-9de3-5c6fa7f13f6e",
+ CellID->745559432],
+Cell[73839, 1429, 184, 4, 70, "Input",ExpressionUUID->"91a41a29-9ce5-4ae6-8bf6-4c006cb938ad",
+ CellID->625027908],
+Cell[74026, 1435, 169, 3, 70, "MathCaption",ExpressionUUID->"f44ad4c4-2471-41f8-bc2e-a6f04a7a10eb",
+ CellID->1992131],
+Cell[CellGroupData[{
+Cell[74220, 1442, 163, 3, 70, "Input",ExpressionUUID->"4c6bcdb8-894b-488d-a091-ee09b39b72ee",
+ CellID->602888993],
+Cell[74386, 1447, 126, 2, 35, "Output",ExpressionUUID->"bd398038-3dd5-4e16-87fa-94cf1904d48a",
+ CellID->865316893]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74549, 1454, 172, 3, 70, "Input",ExpressionUUID->"3d941fd2-5d85-49e9-ba8c-9ecbd188e9d6",
+ CellID->550005453],
+Cell[74724, 1459, 125, 2, 35, "Output",ExpressionUUID->"76eaa35a-7f6a-43c6-940b-239b5a48ef12",
+ CellID->60422796]
+}, Open  ]],
+Cell[74864, 1464, 591, 15, 70, "Text",ExpressionUUID->"c008bf71-2429-41fa-a6f9-8af13061c788",
+ CellID->191796628],
+Cell[75458, 1481, 140, 1, 70, "MathCaption",ExpressionUUID->"f2b5d98e-8117-4d4b-a401-caec7beb80b3",
+ CellID->147634239],
+Cell[CellGroupData[{
+Cell[75623, 1486, 174, 3, 70, "Input",ExpressionUUID->"e1cd92c5-4f8e-455d-9c74-35987994125b",
+ CellID->209108873],
+Cell[75800, 1491, 499, 9, 70, "Message",ExpressionUUID->"7b969e84-a82e-4e13-b072-cf50a4a98540",
+ CellID->329427531],
+Cell[76302, 1502, 127, 2, 35, "Output",ExpressionUUID->"0623f7eb-e192-4704-b528-9e76891a0d69",
+ CellID->10643477]
+}, Open  ]],
+Cell[76444, 1507, 457, 9, 70, "Text",ExpressionUUID->"e7b8c2b2-e92d-47e0-a44e-bba3d61eeca8",
+ CellID->24003802],
+Cell[76904, 1518, 150, 1, 70, "MathCaption",ExpressionUUID->"6bc48adb-fbe1-451e-99e0-9be04126aa63",
+ CellID->50496077],
+Cell[CellGroupData[{
+Cell[77079, 1523, 192, 4, 70, "Input",ExpressionUUID->"7950c2c6-0d0b-4e2e-9ef5-d98afb16ef83",
+ CellID->257827635],
+Cell[77274, 1529, 499, 9, 70, "Message",ExpressionUUID->"2de9c84b-165d-4473-9fdc-b47ae9d0593d",
+ CellID->661059401]
+}, Open  ]],
+Cell[77788, 1541, 191, 4, 70, "Input",ExpressionUUID->"7e3777f7-6e0b-4aa8-9b65-157fbaa4cfec",
+ CellID->102645484],
+Cell[77982, 1547, 154, 2, 70, "Text",ExpressionUUID->"593bd07a-c4f0-42c1-93a9-2bc78fbceaf8",
+ CellID->457182272],
+Cell[CellGroupData[{
+Cell[78161, 1553, 152, 1, 70, "Subsection",ExpressionUUID->"61ef9288-17d6-4808-bfa2-2f4c3e257ff9",
+ CellID->147952826],
+Cell[78316, 1556, 626, 14, 70, "Text",ExpressionUUID->"95e39684-cfaa-4aa9-8b63-a70fbc6a7bb4",
+ CellID->438536369],
+Cell[78945, 1572, 156, 2, 70, "MathCaption",ExpressionUUID->"08c4e3a3-ff83-4d24-b73c-02244e921c88",
+ CellID->4312122],
+Cell[CellGroupData[{
+Cell[79126, 1578, 294, 6, 70, "Input",ExpressionUUID->"2d16c7ca-7076-41d4-91ba-249da6bd9c52",
+ CellID->161902410],
+Cell[79423, 1586, 403, 10, 46, "Output",ExpressionUUID->"ee909102-131a-4cc5-935e-f912438db941",
+ CellID->20757527]
+}, Open  ]],
+Cell[79841, 1599, 527, 11, 70, "Text",ExpressionUUID->"3423377f-ff87-423c-a422-8ce64b85229b",
+ CellID->529267541],
+Cell[80371, 1612, 171, 3, 70, "MathCaption",ExpressionUUID->"695b673c-6e8c-4d7d-a2ef-276f3926e27e",
+ CellID->478095006],
+Cell[CellGroupData[{
+Cell[80567, 1619, 272, 6, 70, "Input",ExpressionUUID->"61cbe9e4-6a96-4d30-bdc5-25a3daa8b2d7",
+ CellID->260241142],
+Cell[80842, 1627, 404, 10, 46, "Output",ExpressionUUID->"b9a32786-8823-4182-9d19-de984f397a6f",
+ CellID->696739875]
+}, Open  ]],
+Cell[81261, 1640, 487, 11, 70, "Text",ExpressionUUID->"c360f53e-2de4-4704-9907-0192b05ad7ae",
+ CellID->207435388]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[81797, 1657, 157, 2, 70, "Section",ExpressionUUID->"87a0ce7e-3778-454a-ad4d-7105fa6ef9ae",
+ CellID->168967793],
+Cell[81957, 1661, 1379, 32, 70, "Text",ExpressionUUID->"5fea5f69-a829-4a24-b681-4d590c4ef419",
+ CellID->777290077],
+Cell[83339, 1695, 466, 10, 70, "DefinitionBox",ExpressionUUID->"e4f8e866-9217-4683-8bed-fb583391261a",
+ CellID->43206102],
+Cell[83808, 1707, 147, 1, 70, "Caption",ExpressionUUID->"843c043c-d835-4fe2-b48f-1e8e2df600c0",
+ CellID->735775108],
+Cell[83958, 1710, 658, 17, 70, "Text",ExpressionUUID->"19d5f4ca-c57b-406c-90b7-912111e29bff",
+ CellID->442086200],
+Cell[84619, 1729, 233, 6, 70, "Text",ExpressionUUID->"eccb81a8-5bb9-44a1-a34c-1f327310ad11",
+ CellID->329574969],
+Cell[84855, 1737, 901, 25, 70, "Text",ExpressionUUID->"7c81065b-274b-49d3-b7ee-cc8f231f4912",
+ CellID->134133454],
+Cell[85759, 1764, 1317, 29, 70, "DefinitionBox",ExpressionUUID->"384fcfa3-5b79-4062-a711-b9870e745cf9",
+ CellID->248133496],
+Cell[87079, 1795, 204, 4, 70, "Caption",ExpressionUUID->"8caaeaf1-fe47-4666-9e3f-7f9ec3af67ce",
+ CellID->475182523],
+Cell[87286, 1801, 147, 1, 70, "MathCaption",ExpressionUUID->"f36941ee-8e56-4b9c-bdf7-d4fbcb10f7e6",
+ CellID->214308626],
+Cell[CellGroupData[{
+Cell[87458, 1806, 383, 10, 70, "Input",ExpressionUUID->"dd3fe161-cc78-4c12-b550-46e9132a366f",
+ CellID->859327599],
+Cell[87844, 1818, 137, 2, 35, "Output",ExpressionUUID->"56741453-1e27-4ff5-ad3b-475d9db02054",
+ CellID->100225071]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[88018, 1825, 335, 8, 70, "Input",ExpressionUUID->"84757fcd-8f73-48b8-abbb-f0e164aec055",
+ CellID->145434806],
+Cell[88356, 1835, 157, 2, 35, "Output",ExpressionUUID->"64a47759-028e-4d07-8285-e126abddc318",
+ CellID->587136245]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[88550, 1842, 401, 10, 70, "Input",ExpressionUUID->"ec579f3c-b9dd-47cd-81e3-268d2e30b383",
+ CellID->350921121],
+Cell[88954, 1854, 140, 2, 35, "Output",ExpressionUUID->"3fbb8416-b18a-440d-8fbe-3e39b5b20566",
+ CellID->85943562]
+}, Open  ]],
+Cell[89109, 1859, 184, 4, 70, "Text",ExpressionUUID->"880699a7-83a8-411c-b770-e59b03feea93",
+ CellID->65466232],
+Cell[89296, 1865, 219, 4, 70, "MathCaption",ExpressionUUID->"43d553b4-1db0-472f-aa69-0a7964aec395",
+ CellID->69051426],
+Cell[CellGroupData[{
+Cell[89540, 1873, 237, 5, 70, "Input",ExpressionUUID->"a9872f26-56f1-4e55-a970-2c7d5be088b2",
+ CellID->529151913],
+Cell[89780, 1880, 137, 2, 35, "Output",ExpressionUUID->"6ecff0d4-fdbe-468a-a57a-51fbdea91170",
+ CellID->467831935]
+}, Open  ]],
+Cell[89932, 1885, 147, 1, 70, "MathCaption",ExpressionUUID->"578baf87-36ef-4d09-a31a-e77e1b53aa22",
+ CellID->132293235],
+Cell[CellGroupData[{
+Cell[90104, 1890, 247, 6, 70, "Input",ExpressionUUID->"da25958f-05d7-4d44-b7d6-5f0e4f7f2e54",
+ CellID->32351803],
+Cell[90354, 1898, 140, 2, 35, "Output",ExpressionUUID->"5b03dbd2-280c-4faf-965d-ccea95f75ec7",
+ CellID->149626786]
+}, Open  ]],
+Cell[90509, 1903, 144, 1, 70, "MathCaption",ExpressionUUID->"f0456d1d-ed32-41a3-a199-e72d62745a6f",
+ CellID->16667521],
+Cell[CellGroupData[{
+Cell[90678, 1908, 224, 5, 70, "Input",ExpressionUUID->"3047b263-b398-4e6f-b666-c83221875201",
+ CellID->571050780],
+Cell[90905, 1915, 154, 2, 35, "Output",ExpressionUUID->"9d56a382-90de-4198-b6f0-e70ac967a0e1",
+ CellID->187492022]
+}, Open  ]],
+Cell[91074, 1920, 124, 1, 70, "MathCaption",ExpressionUUID->"4a393a03-78ca-4174-916b-7a0626bf36fc",
+ CellID->925534222],
+Cell[CellGroupData[{
+Cell[91223, 1925, 225, 5, 70, "Input",ExpressionUUID->"da56dc65-88fc-456a-bcfa-63d42c4a8a41",
+ CellID->726611780],
+Cell[91451, 1932, 136, 2, 35, "Output",ExpressionUUID->"376f6c9f-43b2-4b1d-ab3f-3e0768e5b3da",
+ CellID->426563230]
+}, Open  ]],
+Cell[91602, 1937, 129, 1, 70, "MathCaption",ExpressionUUID->"81df5a16-4a97-4122-8108-817419c4dd18",
+ CellID->372873216],
+Cell[CellGroupData[{
+Cell[91756, 1942, 223, 5, 70, "Input",ExpressionUUID->"cdc17103-8801-4812-b7e4-6ebae65b28f2",
+ CellID->100613727],
+Cell[91982, 1949, 143, 2, 35, "Output",ExpressionUUID->"5e4a10ba-67aa-459a-9726-daddb107f646",
+ CellID->322628945]
+}, Open  ]],
+Cell[92140, 1954, 420, 8, 70, "Text",ExpressionUUID->"b5e23ae8-f3f2-4993-934f-125cdec70fa4",
+ CellID->822504919]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[92597, 1967, 151, 2, 70, "Section",ExpressionUUID->"6eef46b0-3390-4f12-8ebc-d2f1a5822697",
+ CellID->217680659],
+Cell[92751, 1971, 813, 20, 70, "Text",ExpressionUUID->"61a43ac0-9634-40e4-925d-09d9b0451651",
+ CellID->309768251],
+Cell[93567, 1993, 428, 9, 70, "DefinitionBox",ExpressionUUID->"44b3e478-8979-403a-a05f-8f59cde2d71c",
+ CellID->400179512],
+Cell[93998, 2004, 134, 1, 70, "Caption",ExpressionUUID->"0e58de96-c064-4103-82cd-49e5588573ed",
+ CellID->531457254],
+Cell[94135, 2007, 805, 18, 70, "Text",ExpressionUUID->"73ebb41a-40de-4ff5-ac1c-41546191611c",
+ CellID->26859345],
+Cell[94943, 2027, 149, 1, 70, "MathCaption",ExpressionUUID->"ae587db6-21e0-49fd-9181-3b677b67d0fd",
+ CellID->297053278],
+Cell[CellGroupData[{
+Cell[95117, 2032, 252, 6, 70, "Input",ExpressionUUID->"b7ac6cd3-6237-456a-9173-77bc58dba227",
+ CellID->438876674],
+Cell[95372, 2040, 267, 6, 45, "Output",ExpressionUUID->"e9678ca3-3acd-46fb-8a95-63780db4adff",
+ CellID->364096811]
+}, Open  ]],
+Cell[95654, 2049, 223, 4, 70, "MathCaption",ExpressionUUID->"a08e2ef7-855e-4251-88ba-6d11723f48cc",
+ CellID->141653994],
+Cell[CellGroupData[{
+Cell[95902, 2057, 287, 7, 70, "Input",ExpressionUUID->"070a8474-3eeb-4d93-b2ec-95d53c2dff99",
+ CellID->7620002],
+Cell[96192, 2066, 1793, 43, 72, "Output",ExpressionUUID->"ec4d6f83-c5c8-4bf2-8635-4772198f8d60",
+ CellID->189798443]
+}, Open  ]],
+Cell[98000, 2112, 167, 3, 70, "MathCaption",ExpressionUUID->"3fdb8fec-321f-4910-b37c-3dead3f8504c",
+ CellID->132103409],
+Cell[CellGroupData[{
+Cell[98192, 2119, 259, 6, 70, "Input",ExpressionUUID->"544da4d8-752c-410e-b036-b8eea8d884f9",
+ CellID->428491342],
+Cell[98454, 2127, 1966, 53, 248, "Output",ExpressionUUID->"48056a38-7fa0-4db8-a264-e3118c1a107e",
+ CellID->139208044]
+}, Open  ]],
+Cell[100435, 2183, 202, 4, 70, "MathCaption",ExpressionUUID->"5a092571-2c40-434a-a934-dca9d389fefe",
+ CellID->234012741],
+Cell[CellGroupData[{
+Cell[100662, 2191, 386, 10, 70, "Input",ExpressionUUID->"8997ec89-a1af-4a87-ac20-fa0d14377a15",
+ CellID->18320211],
+Cell[101051, 2203, 1400, 34, 72, "Output",ExpressionUUID->"e2608957-9f56-4b94-a719-c75b74694733",
+ CellID->584020064]
+}, Open  ]],
+Cell[102466, 2240, 174, 3, 70, "MathCaption",ExpressionUUID->"eb2bcd93-2611-4774-8888-c58c9385d64a",
+ CellID->284021356],
+Cell[CellGroupData[{
+Cell[102665, 2247, 128, 2, 70, "Input",ExpressionUUID->"8b3fb31f-7955-43ff-aec7-25e54abb012a",
+ CellID->3044338],
+Cell[102796, 2251, 340, 8, 47, "Output",ExpressionUUID->"b80801f4-3530-463c-82c2-78d72af146a7",
+ CellID->327464765]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[103173, 2264, 129, 2, 70, "Input",ExpressionUUID->"b732ca73-58e5-4286-b848-14e7be2343d9",
+ CellID->83767176],
+Cell[103305, 2268, 200, 4, 44, "Output",ExpressionUUID->"de895b7a-0176-42df-b89c-6cd49fd5d589",
+ CellID->291330739]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[103542, 2277, 129, 2, 70, "Input",ExpressionUUID->"5e249230-0e4b-4a19-aed4-fc16789d3bfb",
+ CellID->369442671],
+Cell[103674, 2281, 433, 10, 47, "Output",ExpressionUUID->"8e445f56-0adf-49f3-b799-3e5575125e40",
+ CellID->288882511]
+}, Open  ]],
+Cell[104122, 2294, 249, 4, 70, "MathCaption",ExpressionUUID->"37be1ae0-24f7-4a5a-a804-d5876c8d17af",
+ CellID->126272510],
+Cell[CellGroupData[{
+Cell[104396, 2302, 179, 4, 70, "Input",ExpressionUUID->"8c28bde7-4ef3-416b-b0ac-bb648a4758e6",
+ CellID->343623176],
+Cell[104578, 2308, 333, 8, 45, "Output",ExpressionUUID->"cac670ad-5ca3-4c09-8561-2ae2f874e542",
+ CellID->258221495]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[104948, 2321, 235, 6, 70, "Input",ExpressionUUID->"94f90244-4c72-4310-bc89-964254efd084",
+ CellID->14690021],
+Cell[105186, 2329, 145, 2, 35, "Output",ExpressionUUID->"2bf27e15-b8d8-4f88-ae6b-d24bae170e6f",
+ CellID->84931282]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[105380, 2337, 145, 2, 70, "Section",ExpressionUUID->"8c37b6f3-d4c1-42cf-8715-c989bfd6172f",
+ CellID->254897833],
+Cell[105528, 2341, 319, 5, 70, "Text",ExpressionUUID->"ee8a739e-4c36-4a7a-95c7-67795fe54b9e",
+ CellID->594464066],
+Cell[105850, 2348, 376, 6, 70, "Text",ExpressionUUID->"04b27a8e-7516-4c05-89f7-16faaaa008f1",
+ CellID->92632341],
+Cell[106229, 2356, 699, 17, 70, "Text",ExpressionUUID->"3cb92313-f031-436c-9103-d6103b8fc232",
+ CellID->395169496],
+Cell[106931, 2375, 209, 6, 70, "Text",ExpressionUUID->"76e40096-65ad-4e5e-b977-9d0db9b9a3dd",
+ CellID->6091344],
+Cell[107143, 2383, 468, 10, 70, "DefinitionBox",ExpressionUUID->"95f606e7-021b-45f8-80ff-de1dc7de3895",
+ CellID->83391216],
+Cell[107614, 2395, 133, 1, 70, "Caption",ExpressionUUID->"f1c901ce-14d7-4ca2-8de8-6a856d210c13",
+ CellID->79998218],
+Cell[107750, 2398, 261, 5, 70, "Text",ExpressionUUID->"346cfe21-ccec-40af-8152-e8f4a5e4a2c9",
+ CellID->171995161],
+Cell[108014, 2405, 219, 4, 70, "Text",ExpressionUUID->"ad21bb7a-5e0b-41b7-aaca-53641c8f5585",
+ CellID->533644],
+Cell[108236, 2411, 145, 1, 70, "MathCaption",ExpressionUUID->"665094d5-f391-4bcb-a5a3-0cc7264c4c7d",
+ CellID->562879126],
+Cell[CellGroupData[{
+Cell[108406, 2416, 521, 16, 70, "Input",ExpressionUUID->"e092ffe6-bd2e-4545-9c8c-de20bc3c40df",
+ CellID->171360131],
+Cell[108930, 2434, 634, 16, 49, "Output",ExpressionUUID->"8670b060-6bf2-4e10-843d-46d8d866a02c",
+ CellID->121436709]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[109613, 2456, 145, 2, 70, "Section",ExpressionUUID->"1513b838-564a-4e8c-a07c-e2be4356aa9e",
+ CellID->95238974],
+Cell[109761, 2460, 531, 13, 70, "DefinitionBox",ExpressionUUID->"0b57aa9c-6311-4ece-a256-3b6c7fbffc9a",
+ CellID->446905933],
+Cell[110295, 2475, 141, 1, 70, "Caption",ExpressionUUID->"9624ca90-873e-402f-a78e-9b40cbd44e9c",
+ CellID->221740640],
+Cell[110439, 2478, 674, 17, 70, "Text",ExpressionUUID->"ac479c17-e5f3-4e00-8301-e0aea96599eb",
+ CellID->9962670],
+Cell[111116, 2497, 982, 20, 70, "Text",ExpressionUUID->"80c1bec0-3dfe-413b-ba1a-1baa0fe617a3",
+ CellID->174857264],
+Cell[112101, 2519, 1058, 29, 70, "Text",ExpressionUUID->"222e6d28-79c5-4327-b9b0-fc94b7214590",
+ CellID->569057450],
+Cell[113162, 2550, 752, 20, 70, "Text",ExpressionUUID->"3a40f4bb-5520-4896-a70f-b3cd4bd6dbf4",
+ CellID->632653306],
+Cell[113917, 2572, 143, 1, 70, "MathCaption",ExpressionUUID->"a33f8fe1-510c-4634-beae-ac425310c95d",
+ CellID->148081773],
+Cell[CellGroupData[{
+Cell[114085, 2577, 300, 6, 70, "Input",ExpressionUUID->"cd5f314c-c5b2-4f2e-96df-2bd0923d2aad",
+ CellID->209953228],
+Cell[114388, 2585, 287, 5, 35, "Output",ExpressionUUID->"23ea8748-bb04-4b74-9507-c2e1e4db4413",
+ CellID->467002382]
+}, Open  ]],
+Cell[114690, 2593, 258, 4, 70, "MathCaption",ExpressionUUID->"95c16630-7ef3-4f9f-8db9-c019600f78c8",
+ CellID->717828542],
+Cell[CellGroupData[{
+Cell[114973, 2601, 278, 6, 70, "Input",ExpressionUUID->"036df9ea-1c06-40d7-b6bb-f29d5662288a",
+ CellID->23378095],
+Cell[115254, 2609, 266, 5, 35, "Output",ExpressionUUID->"5d7375b2-5ecd-49ae-9262-53c000b24c43",
+ CellID->155917062]
+}, Open  ]],
+Cell[115535, 2617, 227, 4, 70, "Text",ExpressionUUID->"83817569-d5a0-465e-a1f0-d6bca438c76a",
+ CellID->355884447],
+Cell[115765, 2623, 162, 2, 70, "MathCaption",ExpressionUUID->"f05bfb88-869c-4b50-9426-00e6338798f4",
+ CellID->128333610],
+Cell[CellGroupData[{
+Cell[115952, 2629, 572, 17, 70, "Input",ExpressionUUID->"0ea5c436-1cf8-47a9-a3d1-30c9d522f6b2",
+ CellID->666810498],
+Cell[116527, 2648, 677, 12, 70, "Message",ExpressionUUID->"3a1d647b-fc70-434a-9c5d-3dbedba3ebe9",
+ CellID->459199134],
+Cell[117207, 2662, 847, 14, 70, "Message",ExpressionUUID->"885cc0d0-94a7-4913-956f-b3ec150a07ca",
+ CellID->40404627],
+Cell[118057, 2678, 364, 8, 35, "Output",ExpressionUUID->"32b19c5d-1eb5-4199-a746-45526e72fb2a",
+ CellID->301935855]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[118458, 2691, 374, 12, 70, "Input",ExpressionUUID->"07afcf17-de27-4921-9ec7-5cbfeeb4f486",
+ CellID->540729299],
+Cell[118835, 2705, 268, 8, 62, "Output",ExpressionUUID->"7fe6188c-0337-48af-a9ef-ae9b8379a1da",
+ CellID->148436603]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[119140, 2718, 282, 6, 70, "Input",ExpressionUUID->"d095404e-49df-490b-a33d-87ca164877c3",
+ CellID->705540555],
+Cell[119425, 2726, 423, 11, 62, "Output",ExpressionUUID->"45ff4154-4d7c-41c9-b9d9-494190f1680b",
+ CellID->233850251]
+}, Open  ]],
+Cell[119863, 2740, 419, 11, 70, "Text",ExpressionUUID->"00f0dd55-1f64-43cc-889a-986fd86f5733",
+ CellID->327181305]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[120319, 2756, 145, 2, 70, "Section",ExpressionUUID->"9f99f2e0-65e4-4d5c-b40d-987382ce79c3",
+ CellID->670941316],
+Cell[120467, 2760, 435, 9, 70, "Text",ExpressionUUID->"09eb9049-04bf-421d-bd01-eab9e4352e59",
+ CellID->67387048],
+Cell[120905, 2771, 531, 13, 70, "DefinitionBox",ExpressionUUID->"b39783cb-a3c1-4b8f-8aa5-d36af9a25c47",
+ CellID->397827467],
+Cell[121439, 2786, 140, 1, 70, "Caption",ExpressionUUID->"c58dca3c-c16c-4c26-b996-75dfd373c7e1",
+ CellID->176994474],
+Cell[121582, 2789, 398, 6, 70, "Text",ExpressionUUID->"7e4094e8-453d-4a1c-bab0-6520876507e0",
+ CellID->307684685],
+Cell[121983, 2797, 234, 4, 70, "Text",ExpressionUUID->"ada206ca-f4c1-43c2-a157-1d777e2cd74b",
+ CellID->156526136],
+Cell[122220, 2803, 151, 1, 70, "MathCaption",ExpressionUUID->"b7c3cae4-49e3-44a3-ba58-c78d6bc163a9",
+ CellID->45396662],
+Cell[CellGroupData[{
+Cell[122396, 2808, 259, 5, 70, "Input",ExpressionUUID->"82d0ba7f-298b-49f6-8bad-ea76b0ba138c",
+ CellID->426401788],
+Cell[122658, 2815, 1888, 47, 71, "Output",ExpressionUUID->"fda5025b-e841-4c3b-9ea4-127cffe156ac",
+ CellID->90383662]
+}, Open  ]],
+Cell[124561, 2865, 151, 1, 70, "MathCaption",ExpressionUUID->"8386a1a5-069b-454b-a893-65f0658406ca",
+ CellID->412271278],
+Cell[CellGroupData[{
+Cell[124737, 2870, 258, 5, 70, "Input",ExpressionUUID->"a183a1fd-8517-49f6-aff9-4fb6fcf718ba",
+ CellID->32593211],
+Cell[124998, 2877, 1892, 47, 71, "Output",ExpressionUUID->"eb4b2aef-5fec-4396-8e88-3ab26b661b1e",
+ CellID->41495060]
+}, Open  ]],
+Cell[126905, 2927, 204, 4, 70, "Text",ExpressionUUID->"0c23a688-b73d-4674-a750-a52c680d4d3f",
+ CellID->883401183],
+Cell[127112, 2933, 188, 4, 70, "MathCaption",ExpressionUUID->"7115b622-01e7-48f1-bd35-74cd6c904aee",
+ CellID->321684491],
+Cell[CellGroupData[{
+Cell[127325, 2941, 356, 9, 70, "Input",ExpressionUUID->"8c0ec963-4ce4-444c-923d-a66dcb0309b9",
+ CellID->170853062],
+Cell[127684, 2952, 223, 5, 45, "Output",ExpressionUUID->"4705c02e-1bd0-42cc-8ae5-5ebfbd228fcb",
+ CellID->69438505]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[127944, 2962, 236, 5, 70, "Input",ExpressionUUID->"a6b4e4bf-8c43-4192-b8f5-ee3569b3844e",
+ CellID->135943329],
+Cell[128183, 2969, 1871, 46, 71, "Output",ExpressionUUID->"d2a4163f-fba8-4083-9a6d-add59e64ed3f",
+ CellID->4982075]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[130091, 3020, 236, 5, 70, "Input",ExpressionUUID->"f78b0be8-9f36-4731-959c-1df0e818faf4",
+ CellID->291094404],
+Cell[130330, 3027, 1876, 46, 71, "Output",ExpressionUUID->"9b118aa3-1fcb-44e6-bed1-6902afd42e06",
+ CellID->32733873]
+}, Open  ]],
+Cell[132221, 3076, 542, 12, 70, "Text",ExpressionUUID->"3f939d36-6739-4d38-98b0-e650a43521df",
+ CellID->754813309],
+Cell[132766, 3090, 191, 4, 70, "Text",ExpressionUUID->"1d13cd7c-495a-4ff1-9fd6-494e50574d78",
+ CellID->91718770],
+Cell[132960, 3096, 147, 1, 70, "MathCaption",ExpressionUUID->"6aedb194-c8e3-42a5-9bdc-fc1db7aedfa8",
+ CellID->130551063],
+Cell[CellGroupData[{
+Cell[133132, 3101, 276, 5, 70, "Input",ExpressionUUID->"ef8a2060-a5b8-4768-be86-492022e43b26",
+ CellID->297921912],
+Cell[133411, 3108, 1904, 47, 71, "Output",ExpressionUUID->"e5845e74-416e-4ce2-841c-d055a5daf5c8",
+ CellID->108081894]
+}, Open  ]],
+Cell[135330, 3158, 146, 1, 70, "MathCaption",ExpressionUUID->"737f9866-f84f-4eda-8d3e-41cc86ee2f47",
+ CellID->512203755],
+Cell[CellGroupData[{
+Cell[135501, 3163, 275, 5, 70, "Input",ExpressionUUID->"9f5ef3eb-27a6-425d-830f-8dde7b70bdf4",
+ CellID->44449778],
+Cell[135779, 3170, 1908, 47, 71, "Output",ExpressionUUID->"f360e609-6d43-4032-9810-442ba1295cb1",
+ CellID->553083132]
+}, Open  ]],
+Cell[137702, 3220, 249, 4, 70, "Text",ExpressionUUID->"81d03386-76a8-4ea5-afff-1c782134f683",
+ CellID->88688607],
+Cell[137954, 3226, 178, 3, 70, "MathCaption",ExpressionUUID->"f5b1ff7c-fdef-4091-8bc8-ff9df8558e4b",
+ CellID->467178884],
+Cell[CellGroupData[{
+Cell[138157, 3233, 260, 5, 70, "Input",ExpressionUUID->"80afaf01-7ec8-45fc-85d8-de43a393681a",
+ CellID->161737654],
+Cell[138420, 3240, 862, 22, 46, "Output",ExpressionUUID->"6bcec827-007f-41c1-9c5f-b67f7e548757",
+ CellID->855045217]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[139331, 3268, 147, 2, 70, "Section",ExpressionUUID->"f82967f0-dd7c-4ce1-8aec-e4616810ee62",
+ CellID->465795248],
+Cell[139481, 3272, 371, 8, 70, "Text",ExpressionUUID->"39800329-1199-43dd-8dd0-0869d2ffef7c",
+ CellID->258668859],
+Cell[139855, 3282, 644, 10, 70, "Text",ExpressionUUID->"53f247e7-05cd-4736-b320-c1b8348320f1",
+ CellID->133424027],
+Cell[140502, 3294, 265, 5, 70, "Text",ExpressionUUID->"dccaad6d-ff77-4098-996d-0c5dd14c1942",
+ CellID->395914649],
+Cell[140770, 3301, 125, 1, 70, "MathCaption",ExpressionUUID->"6ed616b2-f042-4014-a39c-f7849cf54ffc",
+ CellID->98122627],
+Cell[CellGroupData[{
+Cell[140920, 3306, 533, 15, 70, "Input",ExpressionUUID->"c66f41b8-52fa-4194-bdb0-ba26c18add3b",
+ CellID->112997547],
+Cell[141456, 3323, 332, 8, 45, "Output",ExpressionUUID->"9f3a2d07-655c-4c0d-9fc2-9f62907873b6",
+ CellID->148549893]
+}, Open  ]],
+Cell[141803, 3334, 165, 3, 70, "Text",ExpressionUUID->"b8964562-9cc4-41d2-9894-b6052592fb26",
+ CellID->455957052],
+Cell[141971, 3339, 954, 21, 70, "BulletedText",ExpressionUUID->"fd1df168-aff2-4a74-bdd0-af9d7106985f",
+ CellID->132058655],
+Cell[CellGroupData[{
+Cell[142950, 3364, 975, 21, 70, "BulletedText",ExpressionUUID->"d5efe7e9-7655-4445-a9fc-ee5d6f4513db",
+ CellID->983206561],
+Cell[143928, 3387, 153, 1, 70, "MathCaption",ExpressionUUID->"6d92873d-ccbf-444b-bd6f-bdca2dcba81e",
+ CellID->678569810],
+Cell[CellGroupData[{
+Cell[144106, 3392, 732, 23, 70, "Input",ExpressionUUID->"48b2d79a-72df-4a59-85b3-7e9cd3e72c5a",
+ CellID->1002380],
+Cell[144841, 3417, 333, 8, 45, "Output",ExpressionUUID->"b6c9a40f-a353-4838-88ce-7f9248d6b82d",
+ CellID->97484319]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[145211, 3430, 217, 6, 70, "Input",ExpressionUUID->"c6dfa862-c9d8-4505-852a-12b338b0b2b4",
+ CellID->300542000],
+Cell[145431, 3438, 610, 16, 46, "Output",ExpressionUUID->"da4f5742-c741-458b-bef5-870de9a50b1d",
+ CellID->153016544]
+}, Open  ]],
+Cell[146056, 3457, 131, 1, 70, "MathCaption",ExpressionUUID->"067e39c5-da75-4002-b3d9-7f525066ebc8",
+ CellID->206987323],
+Cell[CellGroupData[{
+Cell[146212, 3462, 227, 5, 70, "Input",ExpressionUUID->"2f596c2b-53d4-4aa5-9a8f-f9123d0ea7c2",
+ CellID->182923923],
+Cell[146442, 3469, 405, 10, 46, "Output",ExpressionUUID->"31d9feab-e1ca-4a80-879a-e4d0a3079a35",
+ CellID->696014133]
+}, Open  ]],
+Cell[146862, 3482, 166, 3, 70, "MathCaption",ExpressionUUID->"36afeb03-f732-46ba-bd21-29644c5bc9e0",
+ CellID->6463533],
+Cell[CellGroupData[{
+Cell[147053, 3489, 243, 5, 70, "Input",ExpressionUUID->"8ccc316b-a277-4430-bafd-aa4f84d143a3",
+ CellID->254967951],
+Cell[147299, 3496, 402, 10, 46, "Output",ExpressionUUID->"5976ba58-a9b5-4004-9d34-e0ed39008063",
+ CellID->42467757]
+}, Open  ]],
+Cell[147716, 3509, 187, 4, 70, "MathCaption",ExpressionUUID->"62cdd66c-cf4f-48ca-be13-3e3ac32e8a2e",
+ CellID->230626192],
+Cell[CellGroupData[{
+Cell[147928, 3517, 244, 5, 70, "Input",ExpressionUUID->"7e31c4d6-f88d-4714-a877-9d874f8e9d19",
+ CellID->126311549],
+Cell[148175, 3524, 404, 10, 46, "Output",ExpressionUUID->"7d74f39d-cddf-48c3-9a98-c0afce0972a8",
+ CellID->753715069]
+}, Open  ]],
+Cell[148594, 3537, 457, 7, 70, "Text",ExpressionUUID->"e1376f1d-315b-4540-977b-16996c9454f5",
+ CellID->3029519]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[149100, 3550, 144, 2, 70, "Section",ExpressionUUID->"485298ea-d112-4e88-b77b-f6e015a5ec5a",
+ CellID->328677578],
+Cell[149247, 3554, 532, 11, 70, "Text",ExpressionUUID->"ea5edeee-d2dc-4f65-af53-664aa8a19cfd",
+ CellID->284819056],
+Cell[149782, 3567, 531, 13, 70, "DefinitionBox",ExpressionUUID->"70c422ae-5fb1-415d-a4c3-fa30336286bc",
+ CellID->399493404],
+Cell[150316, 3582, 140, 1, 70, "Caption",ExpressionUUID->"a0e4f171-f9b6-4e43-87ed-55a50a60bc60",
+ CellID->12475860],
+Cell[150459, 3585, 521, 8, 70, "Text",ExpressionUUID->"557194af-1237-4919-87c9-999f8459ae87",
+ CellID->299353750],
+Cell[150983, 3595, 418, 7, 70, "Text",ExpressionUUID->"bafe35af-f0e5-451b-b621-b5732fb21520",
+ CellID->7577440],
+Cell[151404, 3604, 203, 4, 70, "MathCaption",ExpressionUUID->"61dee4ca-8d9c-474c-82c7-88ab5bb44598",
+ CellID->28876996],
+Cell[CellGroupData[{
+Cell[151632, 3612, 470, 16, 70, "Input",ExpressionUUID->"7867fd48-67e7-4d15-916a-ad972bf194ae",
+ CellID->130019471],
+Cell[152105, 3630, 336, 8, 45, "Output",ExpressionUUID->"2b7025a7-229c-4160-99bf-c27474c7ad5f",
+ CellID->457416220]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[152478, 3643, 275, 6, 70, "Input",ExpressionUUID->"5ebdeebf-dc6d-434d-99ba-eeb56c45dc3c",
+ CellID->2877668],
+Cell[152756, 3651, 262, 6, 35, "Output",ExpressionUUID->"e266114d-8806-4e43-b17b-fbc7abe7ee58",
+ CellID->432025238]
+}, Open  ]],
+Cell[153033, 3660, 454, 10, 70, "Text",ExpressionUUID->"92455a77-221a-4b0f-beed-c93da870fe53",
+ CellID->2519180],
+Cell[153490, 3672, 546, 12, 70, "Text",ExpressionUUID->"005913a1-13d9-47a8-99be-174386099553",
+ CellID->401191305]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[154073, 3689, 131, 2, 70, "Section",ExpressionUUID->"1ed9aafc-9213-4094-b3cb-2b7482c2bdb8",
+ CellID->776680],
+Cell[154207, 3693, 228, 4, 70, "Text",ExpressionUUID->"52c54004-6336-47fe-a557-58c9de7cb31a",
+ CellID->645428874]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[154472, 3702, 274, 7, 70, "TutorialMoreAboutSection",ExpressionUUID->"6f671051-bb44-462e-b4f1-7f1a9d6b1f15",
+ CellID->23220180],
+Cell[154749, 3711, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"5548c5aa-f82b-4990-b8cc-f728780cfa52"],
+Cell[154838, 3713, 216, 3, 70, "TutorialMoreAbout",ExpressionUUID->"1b9ff538-44de-4c36-be97-46c23ec016d3",
+ CellID->1567025153],
+Cell[155057, 3718, 86, 0, 70, "SectionFooterSpacer",ExpressionUUID->"9411e644-59c9-4f49-8e56-4b16655f050f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[155180, 3723, 277, 7, 70, "RelatedTutorialsSection",ExpressionUUID->"567fa6eb-7830-4a11-823b-3f8874afbf31",
+ CellID->415694126],
+Cell[155460, 3732, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"2a6ae14e-ac3e-485f-ac22-03fa6441a790"],
+Cell[155549, 3734, 230, 4, 70, "RelatedTutorials",ExpressionUUID->"59ee5f81-b5ad-4b46-a1d6-36fb894b4a2b",
+ CellID->90776795],
+Cell[155782, 3740, 232, 4, 70, "RelatedTutorials",ExpressionUUID->"a04ad6fa-3d99-4d7e-b37a-bae0fd2dc976",
+ CellID->478075264],
+Cell[156017, 3746, 211, 3, 70, "RelatedTutorials",ExpressionUUID->"0be4a3f4-a1a0-4dec-b6c5-4fd821b1aed3",
+ CellID->279695321],
+Cell[156231, 3751, 205, 3, 70, "RelatedTutorials",ExpressionUUID->"a91d43d5-c8f6-4f4a-b4bd-a2c06bc16675",
+ CellID->806871991],
+Cell[156439, 3756, 234, 4, 70, "RelatedTutorials",ExpressionUUID->"8b130c50-de72-40fc-9cfd-41e3294221d8",
+ CellID->49967596],
+Cell[156676, 3762, 229, 4, 70, "RelatedTutorials",ExpressionUUID->"0c50eb5c-6861-41ee-a2fd-63e1c063a1e4",
+ CellID->92033378],
+Cell[156908, 3768, 86, 0, 70, "SectionFooterSpacer",ExpressionUUID->"b6992f03-c6dd-408d-8ea9-a76280fb91fb"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[157031, 3773, 300, 7, 70, "TutorialRelatedLinksSection",ExpressionUUID->"1677f774-f233-4dc2-9637-b5e47a9aeca4",
+ CellID->415694148],
+Cell[157334, 3782, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"45801693-1ad0-4852-822f-7f2939d75bc2"],
+Cell[157423, 3784, 414, 11, 70, "TutorialRelatedLinks",ExpressionUUID->"f8813e78-2d7b-4f87-a348-4c1261b8f4cb",
+ CellID->415694149],
+Cell[157840, 3797, 387, 11, 70, "TutorialRelatedLinks",ExpressionUUID->"967a2a8d-3213-460f-b231-1112b9c9d78f",
+ CellID->648377487]
+}, Open  ]]
+}, Open  ]],
+Cell[158254, 3812, 78, 0, 70, "FooterCell",ExpressionUUID->"4f8d67a1-be8e-4ca4-847a-812304f2bd57"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
