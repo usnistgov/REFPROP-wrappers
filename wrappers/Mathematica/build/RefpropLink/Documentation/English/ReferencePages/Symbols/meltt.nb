@@ -1,0 +1,566 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20881,        556]
+NotebookOptionsPosition[     14600,        420]
+NotebookOutlinePosition[     17038,        480]
+CellTagsIndexPosition[     16953,        475]
+WindowTitle->meltt
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["REFPROP LINK PACKAGE SYMBOL", "PacletNameCell",ExpressionUUID->
+     "51dbbd87-5791-4221-a080-cf57b6088bc3"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Tutorials",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"8cda243a-87db-4613-8567-265bcd6577e1"],
+         TextCell[
+          Row[{"Tutorials", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"Pure Fluids (Legacy API)\"\>":>
+       Documentation`HelpLookup[
+       "paclet:RefpropLink/tutorial/PureFluidsLegacyAPI"], "\<\"Mixtures \
+(Legacy API)\"\>":>Documentation`HelpLookup[
+       "paclet:RefpropLink/tutorial/MixturesLegacyAPI"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"Tutorials"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "cb44da28-3ee9-4a30-b9dc-cc35209c0f5f"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "See Also",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"ec7039b2-2698-4ca9-8d53-04a0dfdfeb42"],
+         TextCell[
+          Row[{"See Also", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"meltp\"\>":>Documentation`HelpLookup[
+       "paclet:RefpropLink/ref/meltp"], "\<\"satt\"\>":>
+       Documentation`HelpLookup[
+       "paclet:RefpropLink/ref/satt"], "\<\"satp\"\>":>
+       Documentation`HelpLookup["paclet:RefpropLink/ref/satp"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"SeeAlso"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "60c66a31-0a5f-426f-aa68-08a783c382fd"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"9c747ce3-b5fb-4d56-b72a-2d219059fb74"],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink/ref/meltt\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["RefpropLink/ref/meltt"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/RefpropLink/ref/meltt.\
+html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
+            False]]; SelectionMove[
+         DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$21558], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "RefpropLink/ref/meltt", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "70fb1af3-dccb-4811-94b8-66c02ab3f93d"]
+    }], "AnchorBar",ExpressionUUID->"043927d5-2077-4d77-a4ff-538a7e422b68"]}
+  }]], "AnchorBarGrid",
+ CellID->1,ExpressionUUID->"7a58e296-9037-48c0-a73a-c5dba8918d2d"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell["meltt", "ObjectName",ExpressionUUID->
+  "50ab48c3-c211-493f-86f8-4fe2b04a9005"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]],ExpressionUUID->"fa143204-0c8f-4730-aee9-e19565948821"],
+ Cell[BoxData[
+ ""], "ObjectNameTranslation",ExpressionUUID->
+  "e72a5d54-128e-408a-80f3-e373cf1827c5"]
+}], "ObjectNameGrid",ExpressionUUID->"9fbd1712-22fa-411d-9f70-ab9c9ff8f023"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"meltt", "[", 
+       StyleBox["t", "TI"], "]"}]], "InlineFormula",ExpressionUUID->
+      "3b069643-f6d8-4da6-9f6d-18bf622f1430"],
+     "\[LineSeparator]computes the melting pressure [kPa] as a function of \
+temperature [K] for a pure fluid. "
+    }],ExpressionUUID->"939c4ecc-c4b7-456d-ba02-eba2ce2f8f78"]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"meltt", "[", 
+       RowBox[{
+        StyleBox["t", "TI"], ",", 
+        StyleBox["z", "TI"]}], "]"}]], "InlineFormula",ExpressionUUID->
+      "c64e6bc5-e964-446a-a02b-f15b850a76a2"],
+     "\[LineSeparator]computes the melting pressure [kPa] as a function of \
+temperature [K] and mixture composition."
+    }],ExpressionUUID->"14aada5b-59a9-4999-b47f-7c2aa6d73195"]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, 
+   "Rows" -> {
+    None, {None}}}},ExpressionUUID->"b5adecb2-dd13-4ba5-a23b-d12bd378f829"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]],ExpressionUUID->"919bb162-7c07-46c1-8cc4-d811e6c4a313"],
+   "Details"
+  }], "NotesFrameText",ExpressionUUID->"36c760fa-a741-4cd0-be5a-710a6c0489ed"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"440765fa-b534-4613-98be-db1c7ea5513b"]], \
+"NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->84799910,ExpressionUUID->"ad8ea0c7-c61c-44b2-ac10-822da7ebdfdb"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"5905476b-7c1b-4c39-b604-66b3db70f374"],
+
+Cell["\<\
+The melting/freezing line extends nearly vertically upward from the triple \
+point on the temperature-pressure phase diagram.  This routine will, given a \
+temperature along that curve, return the corresponding melting pressure at \
+the same point.\
+\>", "Notes",
+ CellID->1067943069,ExpressionUUID->"db50ee22-e669-4ca5-9e3d-26359dfe3fa5"],
+
+Cell["", "SectionFooterSpacer",ExpressionUUID->"9628e4e9-b155-4fdb-ac22-4712ca349eb0"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"24f4658b-6e7f-4cdc-98c2-c8754fed4f5a"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "c53b77d6-ad36-485f-9627-fbeaa55844a1"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CellTags->"PrimaryExamplesSection",
+ CellID->317513494,ExpressionUUID->"a3549905-ffb8-4a7f-a645-d81ba8d68e47"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "8f828fa3-ed6b-46d6-8e51-e0abcd210cdc"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CellID->274426880,ExpressionUUID->"e167d77a-1456-4ed2-b620-66492b306aaa"],
+
+Cell["Load water as a pure fluid.", "ExampleText",
+ CellID->11598135,ExpressionUUID->"5a17861a-92b6-4af7-84c0-b592458890bf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"setup", "[", 
+  RowBox[{"{", "\"\<Water\>\"", "}"}], "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->312990974,ExpressionUUID->"5b2592cc-197e-4ced-b58f-59c99bd93e8e"],
+
+Cell[BoxData["0"], "Output",
+ CellLabel->"Out[1]=",
+ CellID->502716806,ExpressionUUID->"8c755003-5dc2-4cde-9522-d5b09ca493c1"]
+}, Open  ]],
+
+Cell["\<\
+Calculate the melting pressure at a temperature of 272.4 K, 273.0 K, 274 K \
+and 280 K.\
+\>", "ExampleText",
+ CellID->250619902,ExpressionUUID->"2940b473-9a90-4a3a-8f42-b84de7eac5a3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"meltt", "[", 
+  RowBox[{"272.4", " ", "K"}], "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->13899743,ExpressionUUID->"6c95fcfc-8f36-4f71-a5c7-03cc024c9c5e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"P\"\>", "\[Rule]", 
+   TemplateBox[{
+    "614023.8909154822`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[2]=",
+ CellID->421397699,ExpressionUUID->"17912b37-ffd5-42a7-bc3c-2c4148ddd24c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"meltt", "[", 
+  RowBox[{"273.0", "K"}], "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->257365899,ExpressionUUID->"e5ae31d2-d9c5-43d3-8d0f-0e5ab902904b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"P\"\>", "\[Rule]", 
+   TemplateBox[{
+    "626091.3481916821`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[3]=",
+ CellID->287646730,ExpressionUUID->"2625e68f-fce1-4dcc-a8e0-20b7f614d3b9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"meltt", "[", 
+  RowBox[{"274.0", "K"}], "]"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->114630982,ExpressionUUID->"fe52d431-a471-467e-9647-d0fb6f408a6c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"P\"\>", "\[Rule]", 
+   TemplateBox[{
+    "640329.1776590856`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[4]=",
+ CellID->132845147,ExpressionUUID->"0735c426-ac2d-4b32-8f2c-e81ec4421c12"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"meltt", "[", 
+  RowBox[{"280", " ", "K"}], "]"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->453540037,ExpressionUUID->"d78029b4-df4a-4974-8a45-1329de24c02e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"P\"\>", "\[Rule]", 
+   TemplateBox[{
+    "712374.1478119837`", "\"kPa\"", "kilopascals", "\"Kilopascals\""},
+    "Quantity"]}], "}"}]], "Output",
+ CellLabel->"Out[5]=",
+ CellID->422514376,ExpressionUUID->"8bb152f6-62f7-4491-97b3-22e6e5238e90"]
+}, Open  ]],
+
+Cell["\<\
+Note that, for water, the melting/freezing line extends very nearly \
+vertically to very high pressures, around 10 MPa and then bends deviates to \
+lower temperatures down to 251.165 K before bending back to higher \
+temperatures at extremely high pressures, on the order of 1 GPa.  For this \
+reason, this function is double valued at temperatures just below the triple \
+point and will return the upper root, nearer to 600 MPa.\
+\>", "ExampleText",
+ CellID->520040809,ExpressionUUID->"fa71f870-0b8a-4d20-b4d1-e03c97b23ae7"],
+
+Cell["\<\
+Care should be taken with any fluid to ensure that the expected root is being \
+returned where the freezing line may be double-valued at a specific \
+temperature.\
+\>", "ExampleText",
+ CellID->312568277,ExpressionUUID->"636d877b-c71f-4ec4-948d-1e8c0bd4ffff"]
+}, Open  ]],
+
+Cell["", "SectionFooterSpacer",ExpressionUUID->"cc6c7717-8d2a-437a-9ae2-974d667191bc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"52479ee5-e55c-4992-94d2-f0ca553c714e"],
+ "See Also"
+}], "SeeAlsoSection",
+ WholeCellGroupOpener->True,
+ CellID->1255426704,ExpressionUUID->"7f4c7389-3651-431c-b844-e1fbbb56a890"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["meltp"]], "paclet:RefpropLink/ref/meltp"},
+   "RefLink",
+   BaseStyle->{"InlineFormula", FontFamily -> "Verdana"}]], "InlineFormula",
+  ExpressionUUID->"df13ee9a-38f9-4687-816e-af8007cddf82"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["satt"]], "paclet:RefpropLink/ref/satt"},
+   "RefLink",
+   BaseStyle->{"InlineFormula", FontFamily -> "Verdana"}]], "InlineFormula",
+  ExpressionUUID->"fa673c68-095f-4c2b-b3a1-e14f485d6a6b"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["satp"]], "paclet:RefpropLink/ref/satp"},
+   "RefLink",
+   BaseStyle->{"InlineFormula", FontFamily -> "Verdana"}]], "InlineFormula",
+  ExpressionUUID->"178c8981-c2e2-400f-aa18-096ae3fdab82"]
+}], "SeeAlso",
+ CellID->929782353,ExpressionUUID->"916971d6-de8b-4860-99c8-f7d547cd74d0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"7825a4a0-6f31-4cc3-b02c-591de2e67278"],
+ "Tutorials"
+}], "TutorialsSection",
+ WholeCellGroupOpener->True,
+ CellID->250839057,ExpressionUUID->"83797b27-908e-41f7-8fef-1d956b60c780"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"41ab98ce-e759-4ed0-a418-600d0b976339"],
+
+Cell[BoxData[
+ TemplateBox[{
+   Cell[
+    TextData["Pure Fluids (Legacy API)"]], 
+   "paclet:RefpropLink/tutorial/PureFluidsLegacyAPI"},
+  "RefLink",
+  BaseStyle->"Tutorials"]], "Tutorials",
+ CellID->341631938,ExpressionUUID->"1d5855db-2821-4c0e-a91f-4200eaca6f0e"],
+
+Cell[BoxData[
+ TemplateBox[{
+   Cell[
+    TextData["Mixtures (Legacy API)"]], 
+   "paclet:RefpropLink/tutorial/MixturesLegacyAPI"},
+  "RefLink",
+  BaseStyle->"Tutorials"]], "Tutorials",
+ CellID->339404089,ExpressionUUID->"9479bd0c-debb-400a-b9e6-33883116f712"]
+}, Open  ]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"c996976d-3955-49ab-a7af-e4a529a7cc2f"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{726, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"meltt",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "RefpropLink", ButtonData -> "paclet:RefpropLink/guide/RefpropLink", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2021, 10, 11, 17, 50, 51.0360294}", 
+    "history" -> {"1.0", "", "", ""}, "context" -> "RefpropLink`", 
+    "keywords" -> {"phase", "solid", "melting", "freezing"}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "Refprop Link Package Symbol", "language" -> "en", "paclet" -> 
+    "RefpropLink Package", "status" -> "None", "summary" -> 
+    "meltt[t] computes the melting pressure [kPa] as a function of \
+temperature [K] for a pure fluid. meltt[t, z] computes the melting pressure \
+[kPa] as a function of temperature [K] and mixture composition.", 
+    "synonyms" -> {}, "tabletags" -> {}, "title" -> "meltt", "titlemodifier" -> 
+    "", "windowtitle" -> "meltt", "type" -> "Symbol", "uri" -> 
+    "RefpropLink/ref/meltt", "WorkflowDockedCell" -> ""}, 
+  "SearchTextTranslated" -> "", "NewStyles" -> False},
+CellContext->"Global`",
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  TaggingRules -> {"NewStyles" -> False}, FrontEndVersion -> 
+  "12.1 for Microsoft Windows (64-bit) (June 19, 2020)", StyleDefinitions -> 
+  "Default.nb"],
+ExpressionUUID->"c6ffacc0-bc9b-4516-833e-9891e59c2d58"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[7814, 202, 435, 11, 35, "PrimaryExamplesSection",ExpressionUUID->"a3549905-ffb8-4a7f-a645-d81ba8d68e47",
+   CellTags->"PrimaryExamplesSection",
+   CellID->317513494]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 16755, 468}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[577, 21, 4374, 99, 53, "AnchorBarGrid",ExpressionUUID->"7a58e296-9037-48c0-a73a-c5dba8918d2d",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[4976, 124, 390, 9, 52, "ObjectNameGrid",ExpressionUUID->"9fbd1712-22fa-411d-9f70-ab9c9ff8f023"],
+Cell[5369, 135, 987, 24, 182, "Usage",ExpressionUUID->"b5adecb2-dd13-4ba5-a23b-d12bd378f829"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6393, 164, 854, 21, 37, "NotesSection",ExpressionUUID->"ad8ea0c7-c61c-44b2-ac10-822da7ebdfdb",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->84799910],
+Cell[7250, 187, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"5905476b-7c1b-4c39-b604-66b3db70f374"],
+Cell[7339, 189, 349, 6, 70, "Notes",ExpressionUUID->"db50ee22-e669-4ca5-9e3d-26359dfe3fa5",
+ CellID->1067943069],
+Cell[7691, 197, 86, 0, 70, "SectionFooterSpacer",ExpressionUUID->"9628e4e9-b155-4fdb-ac22-4712ca349eb0"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[7814, 202, 435, 11, 35, "PrimaryExamplesSection",ExpressionUUID->"a3549905-ffb8-4a7f-a645-d81ba8d68e47",
+ CellTags->"PrimaryExamplesSection",
+ CellID->317513494],
+Cell[CellGroupData[{
+Cell[8274, 217, 308, 7, 29, "ExampleSection",ExpressionUUID->"e167d77a-1456-4ed2-b620-66492b306aaa",
+ CellID->274426880],
+Cell[8585, 226, 124, 1, 38, "ExampleText",ExpressionUUID->"5a17861a-92b6-4af7-84c0-b592458890bf",
+ CellID->11598135],
+Cell[CellGroupData[{
+Cell[8734, 231, 191, 4, 26, "Input",ExpressionUUID->"5b2592cc-197e-4ced-b58f-59c99bd93e8e",
+ CellID->312990974],
+Cell[8928, 237, 126, 2, 35, "Output",ExpressionUUID->"8c755003-5dc2-4cde-9522-d5b09ca493c1",
+ CellID->502716806]
+}, Open  ]],
+Cell[9069, 242, 193, 4, 38, "ExampleText",ExpressionUUID->"2940b473-9a90-4a3a-8f42-b84de7eac5a3",
+ CellID->250619902],
+Cell[CellGroupData[{
+Cell[9287, 250, 182, 4, 26, "Input",ExpressionUUID->"6c95fcfc-8f36-4f71-a5c7-03cc024c9c5e",
+ CellID->13899743],
+Cell[9472, 256, 287, 7, 44, "Output",ExpressionUUID->"17912b37-ffd5-42a7-bc3c-2c4148ddd24c",
+ CellID->421397699]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9796, 268, 178, 4, 26, "Input",ExpressionUUID->"e5ae31d2-d9c5-43d3-8d0f-0e5ab902904b",
+ CellID->257365899],
+Cell[9977, 274, 287, 7, 44, "Output",ExpressionUUID->"2625e68f-fce1-4dcc-a8e0-20b7f614d3b9",
+ CellID->287646730]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10301, 286, 178, 4, 26, "Input",ExpressionUUID->"fe52d431-a471-467e-9647-d0fb6f408a6c",
+ CellID->114630982],
+Cell[10482, 292, 287, 7, 44, "Output",ExpressionUUID->"0735c426-ac2d-4b32-8f2c-e81ec4421c12",
+ CellID->132845147]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10806, 304, 181, 4, 70, "Input",ExpressionUUID->"d78029b4-df4a-4974-8a45-1329de24c02e",
+ CellID->453540037],
+Cell[10990, 310, 287, 7, 46, "Output",ExpressionUUID->"8bb152f6-62f7-4491-97b3-22e6e5238e90",
+ CellID->422514376]
+}, Open  ]],
+Cell[11292, 320, 535, 8, 70, "ExampleText",ExpressionUUID->"fa71f870-0b8a-4d20-b4d1-e03c97b23ae7",
+ CellID->520040809],
+Cell[11830, 330, 268, 5, 70, "ExampleText",ExpressionUUID->"636d877b-c71f-4ec4-948d-1e8c0bd4ffff",
+ CellID->312568277]
+}, Open  ]],
+Cell[12113, 338, 86, 0, 70, "SectionFooterSpacer",ExpressionUUID->"cc6c7717-8d2a-437a-9ae2-974d667191bc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12236, 343, 260, 7, 70, "SeeAlsoSection",ExpressionUUID->"7f4c7389-3651-431c-b844-e1fbbb56a890",
+ CellID->1255426704],
+Cell[12499, 352, 1085, 31, 70, "SeeAlso",ExpressionUUID->"916971d6-de8b-4860-99c8-f7d547cd74d0",
+ CellID->929782353]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13621, 388, 262, 7, 70, "TutorialsSection",ExpressionUUID->"83797b27-908e-41f7-8fef-1d956b60c780",
+ CellID->250839057],
+Cell[13886, 397, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"41ab98ce-e759-4ed0-a418-600d0b976339"],
+Cell[13975, 399, 265, 7, 70, "Tutorials",ExpressionUUID->"1d5855db-2821-4c0e-a91f-4200eaca6f0e",
+ CellID->341631938],
+Cell[14243, 408, 260, 7, 70, "Tutorials",ExpressionUUID->"9479bd0c-debb-400a-b9e6-33883116f712",
+ CellID->339404089]
+}, Open  ]],
+Cell[14518, 418, 78, 0, 70, "FooterCell",ExpressionUUID->"c996976d-3955-49ab-a7af-e4a529a7cc2f"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

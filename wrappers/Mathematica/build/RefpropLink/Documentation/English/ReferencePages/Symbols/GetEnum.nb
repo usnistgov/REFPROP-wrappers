@@ -1,0 +1,785 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     29179,        775]
+NotebookOptionsPosition[     20672,        592]
+NotebookOutlinePosition[     23197,        653]
+CellTagsIndexPosition[     23112,        648]
+WindowTitle->GetEnum
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["REFPROP LINK PACKAGE SYMBOL", "PacletNameCell",ExpressionUUID->
+     "8b6ee03c-3e32-44a5-b581-90cd2bf6a68c"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"1358c0f9-753c-4c22-a795-e61aa44c6bd6"],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink\"\>":>
+       Documentation`HelpLookup["paclet:RefpropLink/guide/RefpropLink"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"MoreAbout"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "5c7ce241-e0ea-4907-bb15-c7a47ca60a37"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }],ExpressionUUID->"805e4d8e-7233-494d-ba73-54670a51a9c4"],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink/ref/GetEnum\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["RefpropLink/ref/GetEnum"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/RefpropLink/ref/\
+GetEnum.html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, 
+            Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$16116], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "RefpropLink/ref/GetEnum", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "0cfe3a56-28c5-4d23-a0bd-b365ee21591a"]
+    }], "AnchorBar",ExpressionUUID->"f4039415-8017-47e9-adbc-984e0d4f7c9e"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1,ExpressionUUID->"8ce79f17-63bc-4d10-beb9-f748983a9eeb"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell["GetEnum", "ObjectName",ExpressionUUID->
+  "08149ffa-1d41-440a-b477-bac62a8285de"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]],ExpressionUUID->"2cfda29a-4321-4b01-a8b3-e74ff56ed9d5"],
+ Cell[BoxData[
+ ""], "ObjectNameTranslation",ExpressionUUID->
+  "cb57e4f7-1d03-4b71-8036-3999e95a0ceb"]
+}], "ObjectNameGrid",ExpressionUUID->"40f6a9b3-4a36-4aa4-907c-1ba7635d97f7"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"GetEnum", "[", 
+       StyleBox["hEnum", "TI"], "]"}]], "InlineFormula",ExpressionUUID->
+      "3c443c1f-7a90-460f-ad27-d320408a75dc"],
+     "\[LineSeparator]translate a character string, ",
+     Cell[BoxData[
+      StyleBox["hEnum", "TI"]], "InlineFormula",ExpressionUUID->
+      "38b64e71-f4a8-4cb1-b986-e10889c3c6f8"],
+     ", into an enumerated integer value. "
+    }],ExpressionUUID->"eca963d5-d211-4582-b89d-e86eb9ae5450"]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"GetEnum", "[", 
+       RowBox[{
+        StyleBox["iFlag", "TI"], ",", " ", 
+        StyleBox["hEnum", "TI"]}], "]"}]], "InlineFormula",ExpressionUUID->
+      "b3833656-d41b-4b3b-9486-0509d1acfd85"],
+     "\[LineSeparator]translate a character string, ",
+     Cell[BoxData[
+      StyleBox["hEnum", "TI"]], "InlineFormula",ExpressionUUID->
+      "75c92f5a-13b7-42a2-84a7-ecb24148e450"],
+     ", into an enumerated integer value. The optional first parameter, ",
+     Cell[BoxData[
+      StyleBox["iFlag", "TI"]], "InlineFormula",ExpressionUUID->
+      "878effab-f07d-46b4-b07b-70979f4de08a"],
+     ", specifies which type of enumerated value to return (see help for \
+iFlag options)."
+    }],ExpressionUUID->"e6186029-08d2-4b16-93b4-7048058933dc"]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, 
+   "Rows" -> {
+    None, {None}}}},ExpressionUUID->"fd2fca77-9e6c-418e-9063-536130277463"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]],ExpressionUUID->"54b80b36-3138-4d9d-9c04-f02ee2034568"],
+   "Details"
+  }], "NotesFrameText",ExpressionUUID->"7e64089f-ea68-42a3-967f-a3c2f701bce6"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"b69e247c-e9f1-40ef-af57-fc15344bb471"]], \
+"NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->73318113,ExpressionUUID->"e5fd2952-7b24-4545-9e94-d93846ecdf0d"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"11ee9499-c50a-4d68-be88-584db870a7f3"],
+
+Cell["\<\
+Translate a character string into an enumerated integer value that can be \
+used in calls to AllProps0 and RefProp to increase the speed of property \
+calculations by eliminating string comparisons (which are time expensive in \
+the underlying REFPROP Fortran).  This can be done once at the beginning of a \
+program for all properties that will be used, and stored for later use as \
+needed.\
+\>", "Notes",
+ CellID->1067943069,ExpressionUUID->"149298b8-38c3-4212-a34c-86d51f4d458f"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox["hEnum", "TI"]], "InlineFormula",ExpressionUUID->
+  "dc2c7cf3-1f7c-46a1-b289-8adc0dc01cd9"],
+ " is the property, variable, or unit string for which the enumerated index \
+is required.  Contrary to the NIST REFPROP manual, these strings are case \
+insensitive."
+}], "Notes",
+ CellID->116389891,ExpressionUUID->"5d9ff24b-2de1-4670-b752-8a627f9aa4b7"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox["iFlag", "TI"]], "InlineFormula",ExpressionUUID->
+  "15877bcb-750e-4652-8d53-c00181c505cb"],
+ " is an optional first parameter that specifies which type of enumerated \
+value to return.  If omitted, the default value of 0 is assumed.  Valid ",
+ Cell[BoxData[
+  StyleBox["iFlag", "TI"]], "InlineFormula",ExpressionUUID->
+  "9720a4a0-beec-4660-ade3-09aa32a02416"],
+ " options are:"
+}], "Notes",
+ CellID->130103387,ExpressionUUID->"82dd463e-ec68-4f88-b0ab-b9aeaa200b6c"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "f5b5175d-c32e-43a5-91d7-e16928810a92"], 
+    StyleBox[Cell[TextData[StyleBox["iFlag",
+      FontSize->11,
+      FontVariations->{"Underline"->True}]], "TableText",
+      FontWeight->"Bold",ExpressionUUID->
+      "d50cf567-f83e-4837-8c68-43a56d2505d3"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"], 
+    StyleBox[Cell[TextData[StyleBox["Description",
+      FontSize->11,
+      FontWeight->"Bold",
+      FontVariations->{"Underline"->True}]], "TableText",ExpressionUUID->
+      "1d1fc37e-de9c-4832-8ef1-685834e429c9"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"]},
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "683c38e9-8e0f-4805-b61b-bb6c60767a07"], 
+    StyleBox[Cell[TextData[StyleBox["0",
+      FontSize->11]], "TableText",ExpressionUUID->
+      "d12f4b92-9c23-4d1b-a800-c00761ef366c"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"], 
+    StyleBox[Cell[TextData[StyleBox["Check all strings possible.",
+      FontSize->11]], "TableText",ExpressionUUID->
+      "05935caa-6d8c-4df6-9c98-811ab8132400"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"]},
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "4fb43640-00a0-4928-96a9-431c286b21c6"], 
+    StyleBox[Cell[TextData[StyleBox["1",
+      FontSize->11]], "TableText",ExpressionUUID->
+      "bebcdba0-0f5e-446b-b650-85d043b3049c"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"], 
+    StyleBox[Cell[TextData[StyleBox[
+     "Check strings for property units only (e.g., SI, English, etc.).",
+      FontSize->11]], "TableText",ExpressionUUID->
+      "54eea6cb-c5f4-4c4c-aee8-d33e27fed92e"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"]},
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "011e8571-7250-4f8c-93c8-4ee0200a414f"], 
+    StyleBox[Cell[TextData[StyleBox["2",
+      FontSize->11]], "TableText",ExpressionUUID->
+      "a12e61ce-9b24-4359-91c9-7314f3279df2"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"], 
+    StyleBox[Cell[TextData[{
+      StyleBox["Check property strings and those in ",
+       FontSize->11],
+      StyleBox["#3",
+       FontFamily->"Calibri",
+       FontSize->11,
+       FontSlant->"Italic"],
+      StyleBox[" only.",
+       FontSize->11]
+     }], "TableText",ExpressionUUID->"5752a042-06ac-43cc-9333-3752503340bb"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"]},
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "4976d35f-994d-473e-9326-e96204b404ce"], 
+    StyleBox[Cell[TextData[StyleBox["3",
+      FontSize->11]], "TableText",ExpressionUUID->
+      "c30794be-eb93-4ffd-b275-1cd8cf52e066"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"], 
+    StyleBox[Cell[TextData[StyleBox[
+     "Check property strings only that are not functions of T and D (for \
+example, the critical point, acentric factor, limits of the EOS, etc.).",
+      FontSize->11]], "TableText",ExpressionUUID->
+      "ee20f9af-3d58-4218-8cb7-e0f9ec23a9f5"],
+     FontFamily->"Verdana",
+     FontWeight->"Normal"]}
+  }]], "2ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "Rows" -> {None, None, None, None, {None}}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True}}}},
+ CellID->35231128,ExpressionUUID->"5d93cbd1-983d-4516-97a4-16d0975ea626"],
+
+Cell[TextData[{
+ "The returned value is either the enumerated value or an error code with its \
+corresponding REFPROP error string output through the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["Message"]], "paclet:ref/Message"},
+   "RefLink",
+   BaseStyle->{"InlineFormula"}]], "InlineFormula",ExpressionUUID->
+  "ba9de13f-82d2-4e1f-b20b-d2f3e7fa2d24"],
+ " system."
+}], "Notes",
+ CellID->313621346,ExpressionUUID->"a50de868-ec74-4d0a-bd98-0b4b8d04be29"],
+
+Cell["", "SectionFooterSpacer",ExpressionUUID->"c8b1fdd9-2e40-40ab-a920-7ccd1ef55469"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"2693ba32-f297-45dd-8369-cf44a2ee780f"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "0a9337e0-a2fa-4643-a788-b32020f1b520"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CellTags->"PrimaryExamplesSection",
+ CellID->95808490,ExpressionUUID->"81b9ceef-ce7e-4379-9089-ba93fea3c1bc"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "4283bc2a-6846-466d-aa5a-bd40113b39e9"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CellID->247647820,ExpressionUUID->"2369bb12-9371-44f8-94ac-5046ea378728"],
+
+Cell["\<\
+Get enumerated values for a number of input/output property names.\
+\>", "ExampleText",
+ CellID->180543307,ExpressionUUID->"d9f4b537-e530-469f-8a25-3b6dd05a101c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"iT", "=", 
+  RowBox[{"GetEnum", "[", "\"\<T\>\"", "]"}]}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->197355202,ExpressionUUID->"a9e7e6fe-9776-48dc-9604-6503cbed14ea"],
+
+Cell[BoxData["1"], "Output",
+ CellLabel->"Out[1]=",
+ CellID->54390223,ExpressionUUID->"ca56b98e-ee54-43e9-894f-f4af76cdac5e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"iP", "=", 
+  RowBox[{"GetEnum", "[", "\"\<P\>\"", "]"}]}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->19694200,ExpressionUUID->"324ebf76-5099-478f-9f2f-87c5f6486df8"],
+
+Cell[BoxData["2"], "Output",
+ CellLabel->"Out[2]=",
+ CellID->291141981,ExpressionUUID->"66dc7c54-f862-4599-a743-2cb44c715cc4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"iCV", "=", 
+  RowBox[{"GetEnum", "[", "\"\<CV\>\"", "]"}]}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->3627337,ExpressionUUID->"b56d3658-32e8-46a8-bbcf-e49143f4ad04"],
+
+Cell[BoxData["11"], "Output",
+ CellLabel->"Out[3]=",
+ CellID->3191380,ExpressionUUID->"971a2532-fdf4-4c4a-9179-9ddc3cf13d0a"]
+}, Open  ]],
+
+Cell["\<\
+Get enumerations for variables that do not depend on a state point\
+\>", "ExampleText",
+ CellID->11469068,ExpressionUUID->"6c7afbe2-a918-4614-8961-a668a3b68d53"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["iT", "Crit"], "=", 
+  RowBox[{"GetEnum", "[", 
+   RowBox[{"3", ",", "\"\<TC\>\""}], "]"}], "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Critical", " ", "Temperature", " ", "of", " ", "pure", " ", "fluid"}], 
+   " ", "*)"}]}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->18232918,ExpressionUUID->"720b1ab9-a4d2-44a7-9169-fc636a53dd74"],
+
+Cell[BoxData["241"], "Output",
+ CellLabel->"Out[4]=",
+ CellID->698690958,ExpressionUUID->"df15f34e-c520-4c45-98c6-0f7795496b26"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["iT", "Ci"], "=", 
+  RowBox[{"GetEnum", "[", 
+   RowBox[{"3", ",", "\"\<Tcrit\>\""}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Critical", " ", "Temperature", " ", "of", " ", "component", " ", "i"}], 
+   " ", "*)"}]}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->531463152,ExpressionUUID->"3c73ac64-a923-493e-996f-2d24ec05981b"],
+
+Cell[BoxData["421"], "Output",
+ CellLabel->"Out[5]=",
+ CellID->381551684,ExpressionUUID->"dfec2972-0d24-4587-a5b1-f1117ff88263"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"iTmax", "=", 
+  RowBox[{"GetEnum", "[", 
+   RowBox[{"3", ",", "\"\<Tmax\>\""}], "]"}]}]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->346924744,ExpressionUUID->"10e39705-f933-4751-a833-803c7e541155"],
+
+Cell[BoxData["272"], "Output",
+ CellLabel->"Out[6]=",
+ CellID->338791050,ExpressionUUID->"bc59074c-61cb-4eac-8ef1-933911a422c3"]
+}, Open  ]],
+
+Cell["Unknown strings will return an error.", "ExampleText",
+ CellID->640276557,ExpressionUUID->"5cb48bd6-34cc-4d2e-857b-994529856755"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"GetEnum", "[", "\"\<T_unknown\>\"", "]"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->435896744,ExpressionUUID->"b65d3963-9d49-49ea-a728-7012200a31ae"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "GetEnum", "refprop", 
+   "\"\\!\\(\\*RowBox[{\\\"\\\\\\\"[GETENUM error 811] Input string not \
+recognized: T_UNKNOWN\\\\\\\"\\\"}]\\)\"", 2, 10, 2, 33559440512788108031, 
+   "Local", "RefpropLink`GetEnum"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[7]:=",
+ CellID->357728251,ExpressionUUID->"4be36c11-e6df-4f1b-9c10-662722debf8a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"ierr\"\>", "\[Rule]", "811"}], "}"}]], "Output",
+ CellLabel->"Out[7]=",
+ CellID->49405303,ExpressionUUID->"1aaab3fe-23c2-426f-bbc1-d2c23d21398f"]
+}, Open  ]],
+
+Cell["Get many property enumerations at once", "ExampleText",
+ CellID->2335932,ExpressionUUID->"307bcc74-45d1-411f-8eec-a3051d69c131"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+   "iT", ",", "iP", ",", "iD", ",", "iH", ",", "iS", ",", "iCP", ",", "iW"}], 
+   "}"}], "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"GetEnum", "[", "\"\<T\>\"", "]"}], ",", 
+    RowBox[{"GetEnum", "[", "\"\<P\>\"", "]"}], ",", 
+    RowBox[{"GetEnum", "[", "\"\<D\>\"", "]"}], ",", 
+    RowBox[{"GetEnum", "[", "\"\<H\>\"", "]"}], ",", 
+    RowBox[{"GetEnum", "[", "\"\<S\>\"", "]"}], ",", 
+    RowBox[{"GetEnum", "[", "\"\<CP\>\"", "]"}], ",", 
+    RowBox[{"GetEnum", "[", "\"\<W\>\"", "]"}]}], "}"}]}]], "Input",
+ CellLabel->"In[8]:=",
+ CellID->334470287,ExpressionUUID->"66bc72ab-bd65-4d6b-ba97-11e720fa4733"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "2", ",", "3", ",", "6", ",", "7", ",", "12", ",", "14"}],
+   "}"}]], "Output",
+ CellLabel->"Out[8]=",
+ CellID->24871318,ExpressionUUID->"f4627da6-e3a9-4f88-b188-ed180e63d956"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Get enumeration for unit systems (although RefpropLink ",
+ StyleBox["always",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " uses \"DEFAULT\")."
+}], "ExampleText",
+ CellID->92629802,ExpressionUUID->"42a6b94d-b87d-4cd2-a83b-4787b4598d31"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["iUnits", "DEF"], "=", 
+  RowBox[{"GetEnum", "[", 
+   RowBox[{"1", ",", "\"\<DEFAULT\>\""}], "]"}]}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->5614750,ExpressionUUID->"2eefc2ee-7370-4b0a-9096-8ebea3ef579a"],
+
+Cell[BoxData["0"], "Output",
+ CellLabel->"Out[9]=",
+ CellID->36860189,ExpressionUUID->"54d02faa-c0c1-4078-b5f0-aa04db8eea1f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["iUnits", "DEF"], "=", 
+  RowBox[{"GetEnum", "[", 
+   RowBox[{"1", ",", "\"\<MOLAR SI\>\""}], "]"}]}]], "Input",
+ CellLabel->"In[10]:=",
+ CellID->664968134,ExpressionUUID->"273bc702-dafe-4586-8791-0068790e4a74"],
+
+Cell[BoxData["1"], "Output",
+ CellLabel->"Out[10]=",
+ CellID->21299978,ExpressionUUID->"2833abbc-0fae-414a-8411-428fcdf9e2c4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["iUnits", "DEF"], "=", 
+  RowBox[{"GetEnum", "[", 
+   RowBox[{"1", ",", "\"\<ENGLISH\>\""}], "]"}]}]], "Input",
+ CellLabel->"In[11]:=",
+ CellID->10102182,ExpressionUUID->"b1bff555-c105-4304-b85a-4e0a019db2f0"],
+
+Cell[BoxData["5"], "Output",
+ CellLabel->"Out[11]=",
+ CellID->138918387,ExpressionUUID->"9260240f-9e8b-466b-967f-3bb6954e9a97"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["iUnits", "DEF"], "=", 
+  RowBox[{"GetEnum", "[", 
+   RowBox[{"1", ",", "\"\<MOLAR ENGLISH\>\""}], "]"}]}]], "Input",
+ CellLabel->"In[12]:=",
+ CellID->35777886,ExpressionUUID->"bc53d3a7-4dcb-4d1d-945e-2767268ebd70"],
+
+Cell[BoxData["6"], "Output",
+ CellLabel->"Out[12]=",
+ CellID->100572594,ExpressionUUID->"7c78d866-eed8-40eb-8c41-4294d7425254"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["", "SectionFooterSpacer",ExpressionUUID->"1ff155ab-4dab-4cca-9392-b5bbacf10801"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]],ExpressionUUID->"a028ae94-e16b-40cd-9af3-4e918fc5b003"],
+ "Related Guides"
+}], "MoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->38303248,ExpressionUUID->"f98c09c2-3215-4533-8893-4ee070835cd3"],
+
+Cell["", "SectionHeaderSpacer",ExpressionUUID->"b219bf66-2011-41a0-846b-2c505bdfabdf"],
+
+Cell[BoxData[
+ TemplateBox[{
+   Cell[
+    TextData["RefpropLink"]], "paclet:RefpropLink/guide/RefpropLink"},
+  "RefLink",
+  BaseStyle->"MoreAbout"]], "MoreAbout",
+ CellID->913270368,ExpressionUUID->"95ee9a80-da00-42c2-ab44-ea88f972d5d8"]
+}, Open  ]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"4eecdece-26b7-49e7-8583-2ce1f99ea463"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{726, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"GetEnum",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "RefpropLink", ButtonData -> "paclet:RefpropLink/guide/RefpropLink", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2021, 10, 11, 17, 50, 30.9077815}", 
+    "history" -> {"1.0", "", "", ""}, "context" -> "RefpropLink`", 
+    "keywords" -> {"REFPROP", "Enumeration"}, "specialkeywords" -> {}, 
+    "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
+    "Refprop Link Package Symbol", "language" -> "en", "paclet" -> 
+    "RefpropLink Package", "status" -> "None", "summary" -> 
+    "GetEnum[hEnum] translate a character string, hEnum, into an enumerated \
+integer value. GetEnum[iFlag, hEnum] translate a character string, hEnum, \
+into an enumerated integer value. The optional first parameter, iFlag, \
+specifies which type of enumerated value to return (see help for iFlag \
+options).", "synonyms" -> {}, "tabletags" -> {}, "title" -> "GetEnum", 
+    "titlemodifier" -> "", "windowtitle" -> "GetEnum", "type" -> "Symbol", 
+    "uri" -> "RefpropLink/ref/GetEnum", "WorkflowDockedCell" -> ""}, 
+  "SearchTextTranslated" -> "", "NewStyles" -> False},
+CellContext->"Global`",
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  TaggingRules -> {"NewStyles" -> False}, FrontEndVersion -> 
+  "12.1 for Microsoft Windows (64-bit) (June 19, 2020)", StyleDefinitions -> 
+  "Default.nb"],
+ExpressionUUID->"5d5bfae9-d09c-403a-b0b6-5a194cb1406c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[12256, 312, 434, 11, 35, "PrimaryExamplesSection",ExpressionUUID->"81b9ceef-ce7e-4379-9089-ba93fea3c1bc",
+   CellTags->"PrimaryExamplesSection",
+   CellID->95808490]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 22914, 641}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[579, 21, 3449, 77, 53, "AnchorBarGrid",ExpressionUUID->"8ce79f17-63bc-4d10-beb9-f748983a9eeb",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[4053, 102, 392, 9, 52, "ObjectNameGrid",ExpressionUUID->"40f6a9b3-4a36-4aa4-907c-1ba7635d97f7"],
+Cell[4448, 113, 1490, 35, 203, "Usage",ExpressionUUID->"fd2fca77-9e6c-418e-9063-536130277463"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5975, 153, 854, 21, 37, "NotesSection",ExpressionUUID->"e5fd2952-7b24-4545-9e94-d93846ecdf0d",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->73318113],
+Cell[6832, 176, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"11ee9499-c50a-4d68-be88-584db870a7f3"],
+Cell[6921, 178, 493, 8, 70, "Notes",ExpressionUUID->"149298b8-38c3-4212-a34c-86d51f4d458f",
+ CellID->1067943069],
+Cell[7417, 188, 390, 8, 70, "Notes",ExpressionUUID->"5d9ff24b-2de1-4670-b752-8a627f9aa4b7",
+ CellID->116389891],
+Cell[7810, 198, 509, 11, 70, "Notes",ExpressionUUID->"82dd463e-ec68-4f88-b0ab-b9aeaa200b6c",
+ CellID->130103387],
+Cell[8322, 211, 3337, 80, 70, "2ColumnTableMod",ExpressionUUID->"5d93cbd1-983d-4516-97a4-16d0975ea626",
+ CellID->35231128],
+Cell[11662, 293, 468, 12, 70, "Notes",ExpressionUUID->"a50de868-ec74-4d0a-bd98-0b4b8d04be29",
+ CellID->313621346],
+Cell[12133, 307, 86, 0, 70, "SectionFooterSpacer",ExpressionUUID->"c8b1fdd9-2e40-40ab-a920-7ccd1ef55469"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[12256, 312, 434, 11, 35, "PrimaryExamplesSection",ExpressionUUID->"81b9ceef-ce7e-4379-9089-ba93fea3c1bc",
+ CellTags->"PrimaryExamplesSection",
+ CellID->95808490],
+Cell[CellGroupData[{
+Cell[12715, 327, 308, 7, 29, "ExampleSection",ExpressionUUID->"2369bb12-9371-44f8-94ac-5046ea378728",
+ CellID->247647820],
+Cell[13026, 336, 172, 3, 38, "ExampleText",ExpressionUUID->"d9f4b537-e530-469f-8a25-3b6dd05a101c",
+ CellID->180543307],
+Cell[CellGroupData[{
+Cell[13223, 343, 190, 4, 26, "Input",ExpressionUUID->"a9e7e6fe-9776-48dc-9604-6503cbed14ea",
+ CellID->197355202],
+Cell[13416, 349, 125, 2, 35, "Output",ExpressionUUID->"ca56b98e-ee54-43e9-894f-f4af76cdac5e",
+ CellID->54390223]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13578, 356, 189, 4, 26, "Input",ExpressionUUID->"324ebf76-5099-478f-9f2f-87c5f6486df8",
+ CellID->19694200],
+Cell[13770, 362, 126, 2, 35, "Output",ExpressionUUID->"66dc7c54-f862-4599-a743-2cb44c715cc4",
+ CellID->291141981]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13933, 369, 190, 4, 26, "Input",ExpressionUUID->"b56d3658-32e8-46a8-bbcf-e49143f4ad04",
+ CellID->3627337],
+Cell[14126, 375, 125, 2, 35, "Output",ExpressionUUID->"971a2532-fdf4-4c4a-9179-9ddc3cf13d0a",
+ CellID->3191380]
+}, Open  ]],
+Cell[14266, 380, 171, 3, 38, "ExampleText",ExpressionUUID->"6c7afbe2-a918-4614-8961-a668a3b68d53",
+ CellID->11469068],
+Cell[CellGroupData[{
+Cell[14462, 387, 372, 10, 26, "Input",ExpressionUUID->"720b1ab9-a4d2-44a7-9169-fc636a53dd74",
+ CellID->18232918],
+Cell[14837, 399, 128, 2, 35, "Output",ExpressionUUID->"df15f34e-c520-4c45-98c6-0f7795496b26",
+ CellID->698690958]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15002, 406, 374, 10, 70, "Input",ExpressionUUID->"3c73ac64-a923-493e-996f-2d24ec05981b",
+ CellID->531463152],
+Cell[15379, 418, 128, 2, 35, "Output",ExpressionUUID->"dfec2972-0d24-4587-a5b1-f1117ff88263",
+ CellID->381551684]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15544, 425, 220, 5, 70, "Input",ExpressionUUID->"10e39705-f933-4751-a833-803c7e541155",
+ CellID->346924744],
+Cell[15767, 432, 128, 2, 35, "Output",ExpressionUUID->"bc59074c-61cb-4eac-8ef1-933911a422c3",
+ CellID->338791050]
+}, Open  ]],
+Cell[15910, 437, 135, 1, 70, "ExampleText",ExpressionUUID->"5cb48bd6-34cc-4d2e-857b-994529856755",
+ CellID->640276557],
+Cell[CellGroupData[{
+Cell[16070, 442, 174, 3, 70, "Input",ExpressionUUID->"b65d3963-9d49-49ea-a728-7012200a31ae",
+ CellID->435896744],
+Cell[16247, 447, 400, 8, 70, "Message",ExpressionUUID->"4be36c11-e6df-4f1b-9c10-662722debf8a",
+ CellID->357728251],
+Cell[16650, 457, 189, 4, 35, "Output",ExpressionUUID->"1aaab3fe-23c2-426f-bbc1-d2c23d21398f",
+ CellID->49405303]
+}, Open  ]],
+Cell[16854, 464, 134, 1, 70, "ExampleText",ExpressionUUID->"307bcc74-45d1-411f-8eec-a3051d69c131",
+ CellID->2335932],
+Cell[CellGroupData[{
+Cell[17013, 469, 666, 16, 70, "Input",ExpressionUUID->"66bc72ab-bd65-4d6b-ba97-11e720fa4733",
+ CellID->334470287],
+Cell[17682, 487, 225, 5, 35, "Output",ExpressionUUID->"f4627da6-e3a9-4f88-b188-ed180e63d956",
+ CellID->24871318]
+}, Open  ]],
+Cell[17922, 495, 257, 7, 70, "ExampleText",ExpressionUUID->"42a6b94d-b87d-4cd2-a83b-4787b4598d31",
+ CellID->92629802],
+Cell[CellGroupData[{
+Cell[18204, 506, 246, 6, 70, "Input",ExpressionUUID->"2eefc2ee-7370-4b0a-9096-8ebea3ef579a",
+ CellID->5614750],
+Cell[18453, 514, 125, 2, 35, "Output",ExpressionUUID->"54d02faa-c0c1-4078-b5f0-aa04db8eea1f",
+ CellID->36860189]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18615, 521, 250, 6, 70, "Input",ExpressionUUID->"273bc702-dafe-4586-8791-0068790e4a74",
+ CellID->664968134],
+Cell[18868, 529, 126, 2, 35, "Output",ExpressionUUID->"2833abbc-0fae-414a-8411-428fcdf9e2c4",
+ CellID->21299978]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19031, 536, 248, 6, 70, "Input",ExpressionUUID->"b1bff555-c105-4304-b85a-4e0a019db2f0",
+ CellID->10102182],
+Cell[19282, 544, 127, 2, 35, "Output",ExpressionUUID->"9260240f-9e8b-466b-967f-3bb6954e9a97",
+ CellID->138918387]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19446, 551, 254, 6, 70, "Input",ExpressionUUID->"bc53d3a7-4dcb-4d1d-945e-2767268ebd70",
+ CellID->35777886],
+Cell[19703, 559, 127, 2, 35, "Output",ExpressionUUID->"7c78d866-eed8-40eb-8c41-4294d7425254",
+ CellID->100572594]
+}, Open  ]]
+}, Open  ]],
+Cell[19857, 565, 86, 0, 70, "SectionFooterSpacer",ExpressionUUID->"1ff155ab-4dab-4cca-9392-b5bbacf10801"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19980, 570, 266, 7, 70, "MoreAboutSection",ExpressionUUID->"f98c09c2-3215-4533-8893-4ee070835cd3",
+ CellID->38303248],
+Cell[20249, 579, 86, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"b219bf66-2011-41a0-846b-2c505bdfabdf"],
+Cell[20338, 581, 237, 6, 70, "MoreAbout",ExpressionUUID->"95ee9a80-da00-42c2-ab44-ea88f972d5d8",
+ CellID->913270368]
+}, Open  ]],
+Cell[20590, 590, 78, 0, 70, "FooterCell",ExpressionUUID->"4eecdece-26b7-49e7-8583-2ce1f99ea463"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

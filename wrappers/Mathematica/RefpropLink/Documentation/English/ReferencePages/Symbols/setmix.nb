@@ -1,0 +1,1128 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     44130,       1120]
+NotebookOptionsPosition[     32883,        886]
+NotebookOutlinePosition[     34036,        919]
+CellTagsIndexPosition[     33957,        914]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "New in: ",
+ Cell["1.0", "HistoryData",
+  CellTags->"New",ExpressionUUID->"398ad18e-cfea-4747-bb91-a17c4f64e00f"],
+ " | Modified in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Modified",ExpressionUUID->"ce5a4b7f-621b-4caf-a2ff-064013f66f26"],
+ " | Obsolete in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Obsolete",ExpressionUUID->"fa52d9a7-eccc-4f18-99e8-06f68a05e673"],
+ " | Excised in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Excised",ExpressionUUID->"207b1aed-df4e-48c8-a9ed-0fd41181d6de"]
+}], "History",
+ CellID->1247902091,ExpressionUUID->"4871488b-f8d7-4c5c-a187-2988ad0edcb2"],
+
+Cell[CellGroupData[{
+
+Cell["Categorization", "CategorizationSection",
+ CellID->1122911449,ExpressionUUID->"5aae55c6-5eed-4932-88b8-b487b99d6a15"],
+
+Cell["Symbol", "Categorization",
+ CellLabel->"Entity Type",
+ CellID->686433507,ExpressionUUID->"c94425a3-e6e5-4feb-9bca-7cbece9f3b72"],
+
+Cell["RefpropLink", "Categorization",
+ CellLabel->"Paclet Name",
+ CellID->605800465,ExpressionUUID->"ad506220-b758-4b44-a016-36cca3d6c84c"],
+
+Cell["RefpropLink`", "Categorization",
+ CellLabel->"Context",
+ CellID->468444828,ExpressionUUID->"4fce7c12-fc90-4a5d-8cb1-733dfad0441d"],
+
+Cell["RefpropLink/ref/setmix", "Categorization",
+ CellLabel->"URI",ExpressionUUID->"803bc2a7-6bf8-4af6-8527-766d6bf9f2dd"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Keywords", "KeywordsSection",
+ CellID->477174294,ExpressionUUID->"8b1773f0-1b06-4e83-a5e5-dc4ce08ff07e"],
+
+Cell["setup", "Keywords",
+ CellChangeTimes->{{3.8193675404009*^9, 3.81936754177423*^9}},
+ CellID->1164421360,ExpressionUUID->"52b5f70f-c6a4-4125-b831-2d98f24d3f97"],
+
+Cell["files", "Keywords",
+ CellChangeTimes->{{3.8193675404009*^9, 3.8193675557258987`*^9}},
+ CellID->169902475,ExpressionUUID->"ee396193-b6a7-4939-b2e1-67d2330ec42c"],
+
+Cell["mixture", "Keywords",
+ CellChangeTimes->{{3.8193675404009*^9, 3.8193675597331786`*^9}},
+ CellID->469926332,ExpressionUUID->"d860a9d3-b183-448e-bbec-07992fa33911"],
+
+Cell["mixtures", "Keywords",
+ CellChangeTimes->{{3.8193675404009*^9, 3.8193675612172394`*^9}},
+ CellID->40539664,ExpressionUUID->"8a3b9643-4202-47f7-a403-6a58586f1b05"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Syntax Templates", "TemplatesSection",
+ CellID->1872225408,ExpressionUUID->"80a7aec7-bfef-4f70-98c2-1e14c6d99f94"],
+
+Cell[BoxData[""], "Template",
+ CellLabel->"Additional Function Template",
+ CellID->1562036412,ExpressionUUID->"692e9628-7908-4691-a05d-c08052f682f0"],
+
+Cell[BoxData[""], "Template",
+ CellLabel->"Arguments Pattern",
+ CellID->158391909,ExpressionUUID->"d7809969-daf5-44df-9aab-560f1c328aaf"],
+
+Cell[BoxData[""], "Template",
+ CellLabel->"Local Variables",
+ CellID->1360575930,ExpressionUUID->"e66576a6-5762-4d1f-90bc-6fbb8b24c64d"],
+
+Cell[BoxData[""], "Template",
+ CellLabel->"Color Equal Signs",
+ CellID->793782254,ExpressionUUID->"e6db45f5-08ef-4734-8923-83c9b01dbb2c"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Details", "DetailsSection",
+ CellID->307771771,ExpressionUUID->"cfee5360-31af-4ae2-9adb-6b576fbe1337"],
+
+Cell["Patrick Fourspring", "Details",
+ CellChangeTimes->{{3.8193675109456596`*^9, 3.8193675141550503`*^9}},
+ CellLabel->"Lead",
+ CellID->670882175,ExpressionUUID->"955801c3-d4cd-4822-a9f1-5ba414f68e4c"],
+
+Cell["Jeff Henning", "Details",
+ CellChangeTimes->{{3.819367518489492*^9, 3.8193675200333605`*^9}},
+ CellLabel->"Developers",
+ CellID->350963985,ExpressionUUID->"bdf24fc1-954f-491b-813b-7ea45e9daab2"],
+
+Cell["Jeff Henning", "Details",
+ CellChangeTimes->{{3.8193675237613926`*^9, 3.819367525402008*^9}},
+ CellLabel->"Authors",
+ CellID->8391405,ExpressionUUID->"9696e9a8-1d89-4a47-999b-6a4a05c85781"],
+
+Cell["XXXX", "Details",
+ CellLabel->"Feature Name",
+ CellID->3610269,ExpressionUUID->"d658cd0c-d19f-4827-88cc-63bae1eda160"],
+
+Cell["XXXX", "Details",
+ CellLabel->"QA",
+ CellID->401364205,ExpressionUUID->"490bfe5e-be54-408f-b9cf-1f392bcecc3b"],
+
+Cell["XXXX", "Details",
+ CellLabel->"DA",
+ CellID->350204745,ExpressionUUID->"c65e1cbd-9234-4345-afdc-2be5843919b8"],
+
+Cell["XXXX", "Details",
+ CellLabel->"Docs",
+ CellID->732958810,ExpressionUUID->"58c73e36-af5e-4b47-9be0-861c565fdf62"],
+
+Cell["XXXX", "Details",
+ CellLabel->"Features Page Notes",
+ CellID->222905350,ExpressionUUID->"7f38083b-b2fc-4a72-857a-4983f4fbf983"],
+
+Cell["XXXX", "Details",
+ CellLabel->"Comments",
+ CellID->240026365,ExpressionUUID->"f3cc9081-d179-47a2-a0e7-2f66f5eb8933"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["setmix", "ObjectName",
+ CellID->1224892054,ExpressionUUID->"95d4bd8d-c00e-4c22-a091-155d983e68e9"],
+
+Cell[TextData[{
+ Cell["   ", "ModInfo",ExpressionUUID->"feebfe1c-d08e-4e84-b8d6-f1e701fff116"],
+ Cell[BoxData[
+  RowBox[{"setmix", "[", 
+   RowBox[{"hMixNme", ",", " ", "hRef"}], "]"}]], "InlineFormula",
+  ExpressionUUID->"3f5152b1-086d-4908-8136-541614ce2e16"],
+ " \[LineSeparator]loads a mixture file (.mix) specified in ",
+ Cell[BoxData[
+  StyleBox["hMixNme", "TI"]], "InlineFormula",ExpressionUUID->
+  "fd931cfd-3f16-4551-9bdc-3625fc9836da"],
+ " (string) using reference state specified in ",
+ Cell[BoxData[
+  StyleBox["hRef", "TI"]], "InlineFormula",ExpressionUUID->
+  "9599ae31-ed71-44c4-b9a8-31c5b3a9a976"],
+ " (string).\n",
+ Cell["      ", "ModInfo",ExpressionUUID->
+  "88d3b9a6-fca9-4741-a792-dbf5eb197c79"],
+ Cell[BoxData[
+  RowBox[{"setmix", "[", "hMixNme", "]"}]], "InlineFormula",ExpressionUUID->
+  "2e795c1d-0b48-4c67-b7bf-ebc52a5dc3a1"],
+ "\[LineSeparator]loads a mixture file (.mix) specified in ",
+ Cell[BoxData[
+  StyleBox["hMixNme", "TI"]], "InlineFormula",ExpressionUUID->
+  "9f20f18c-f41f-46a6-9479-41911d65e762"],
+ " (string) using default reference state."
+}], "Usage",
+ CellChangeTimes->{{3.8193676411105833`*^9, 3.8193676654599824`*^9}, 
+   3.8193676995318785`*^9, {3.8193677412254057`*^9, 3.8193678322170897`*^9}, {
+   3.819368332380726*^9, 3.8193683509071903`*^9}},
+ CellID->982511436,ExpressionUUID->"9f97b969-7843-42be-a49b-89d12d21f93b"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"001b46a3-c64f-4715-a38e-37c782f3326d"],
+ " loads a mixture file (.mix) from the NIST RefProp mixtures directory.  \
+Once read, ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"29506cbc-14a4-4d2d-9662-9d3808db3f51"],
+ " calls ",
+ Cell[BoxData[
+  ButtonBox["setup",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setup"]], "InlineFormula",
+  ExpressionUUID->"c1d03d4c-b2ff-4807-a25c-d83181de0250"],
+ " to load each pure fluid (.fld) listed in the mixture file an sets the \
+molar composition of the mixture.  When using ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"eb850b1c-7906-4509-b942-49ecdef73dca"],
+ " to load a mixture, it is not necessary to call ",
+ Cell[BoxData[
+  ButtonBox["setup",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setup"]], "InlineFormula",
+  ExpressionUUID->"7a21def9-89d5-4763-9b88-81944ce911f8"],
+ " manually."
+}], "Notes",
+ CellChangeTimes->{{3.819367852154806*^9, 3.819367891682113*^9}, {
+  3.819367940439749*^9, 3.8193681082011657`*^9}, {3.8193685539392996`*^9, 
+  3.819368677609619*^9}},
+ CellID->1067943069,ExpressionUUID->"458c54c3-252a-4c55-aa05-2be6c7b33ad0"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox["hMixNme", "TI"]], "InlineFormula",ExpressionUUID->
+  "b39a3b37-d043-4c51-90cc-639c793eee46"],
+ " is the mixture file name string.  It ",
+ StyleBox["must",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " contain the ",
+ StyleBox[".mix", "InlineCode"],
+ "|",
+ StyleBox[".MIX", "InlineCode"],
+ " file extension, and may be prefixed by the full directory path, but this \
+is not required.  ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"9d92fdfb-6ebf-4f8a-b203-cfe6dfd2473f"],
+ " will look for a matching ",
+ StyleBox[".mix", "InlineCode"],
+ " file in the /mixtures directory of the NIST RefProp installation if a path \
+and extension are not provided."
+}], "Notes",
+ CellChangeTimes->{{3.819368134136812*^9, 3.819368309256559*^9}, {
+  3.8194418359456797`*^9, 3.8194418695298767`*^9}},
+ CellID->406783678,ExpressionUUID->"d51f28f6-61b9-4da4-8d80-67b27a97093f"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox["hRef", "TI"]], "InlineFormula",ExpressionUUID->
+  "74b6e8d8-3661-43f3-a7be-b3f77ca03829"],
+ " is a 3-character string that identifies the reference state for \
+thermodynamic calculations.  If not provided, it will default (",
+ Cell[BoxData[
+  StyleBox["hRef", "TI"]], "InlineFormula",ExpressionUUID->
+  "a447c066-9484-45c9-a808-b8eefe6b72c9"],
+ " = \"DEF\") to the reference state provided in the mixture file.   Other \
+reference states than the ones below are possible (see setref)."
+}], "Notes",
+ CellChangeTimes->{{3.8193683556894035`*^9, 3.819368432282571*^9}, {
+  3.8193687828651743`*^9, 3.819368797817194*^9}, {3.819368849705448*^9, 
+  3.8193688505402117`*^9}, {3.819368882435902*^9, 3.819368935827166*^9}},
+ CellID->38513520,ExpressionUUID->"22f57aa0-979f-41b9-a880-95695b772b12"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "ModInfo",ExpressionUUID->
+     "d06afdee-3ac4-49c5-982e-ab492efa89f9"], Cell[
+    "\"DEF\"", "TableText",ExpressionUUID->
+     "ea5ec09f-3cc8-445d-9750-1447d905d5d8"], Cell[
+    "Default", "TableText",ExpressionUUID->
+     "a5672391-8a0c-4102-b27f-d656c04c1c59"], Cell[
+    "Specified in fluid file.", "TableText",ExpressionUUID->
+     "725cd65a-56d9-4466-9b09-d88b2884f2eb"]},
+   {Cell["      ", "ModInfo",ExpressionUUID->
+     "845c4a07-3cb2-4af1-99a6-8bacea709523"], Cell[
+    "\"NBP\"", "TableText",ExpressionUUID->
+     "a14029fc-18c0-48f1-88dc-1821670d92ba"], Cell[
+    "Normal Boiling Point", "TableText",ExpressionUUID->
+     "74413254-20c2-4c38-a7b7-efb00cc13839"], Cell[
+    "h, s = 0 at pure component normal boiling point", "TableText",
+     ExpressionUUID->"86f65ee5-c40c-4e8e-bf15-c0fc0be9ec8c"]},
+   {Cell["      ", "ModInfo",ExpressionUUID->
+     "114a8ec0-a234-4042-8978-b29ed360c8f1"], Cell[
+    "\"ASH\"", "TableText",ExpressionUUID->
+     "72a20fda-66be-4bc4-94c8-99fd0eba113c"], Cell[
+    "ASHREA", "TableText",ExpressionUUID->
+     "edc74bfb-a94f-416d-86cc-798a3ed99cf2"], Cell[
+    "h, s = 0 for sat. liquid @ -40\[Degree]C", "TableText",ExpressionUUID->
+     "502c3dbc-bf67-44bc-a722-097a19c68ade"]},
+   {Cell["      ", "ModInfo",ExpressionUUID->
+     "4c4fe21d-f9cd-402a-bbff-c1e6ce6ab895"], Cell[
+    "\"IIR\"", "TableText",ExpressionUUID->
+     "112a2cd5-9ab0-4c24-8c04-4350481be3fe"], Cell[
+    "Int'l Inst. of Refrig.", "TableText",ExpressionUUID->
+     "ac731cda-d0a8-4227-8c84-c55119b612cf"], Cell[
+    "h = 200 kJ/kg, s = 1 kJ/kg-K for sat. liquid at 0\[Degree]C", 
+     "TableText",ExpressionUUID->"57c018ff-5ec7-4e8e-bfa3-d39b4e44493d"]}
+  }]], "3ColumnTableMod",
+ CellChangeTimes->{{3.818150939295529*^9, 3.818151189678029*^9}},
+ CellID->450279320,ExpressionUUID->"cec10a5c-73d6-464c-9c2f-44ce90a2ce43"],
+
+Cell[TextData[{
+ "If no errors occur, ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"6bfa56fa-05bc-4948-a330-62bfe34d1336"],
+ " will return the pure fluid files loaded in the mixture as well as the \
+molar composition, which should be captured and used for calls to the \
+property functions."
+}], "Notes",
+ CellChangeTimes->{{3.8193684413872256`*^9, 3.819368530178827*^9}},
+ CellID->17555319,ExpressionUUID->"dc6637b0-27ee-4573-90df-c55e6ed5c758"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Tutorials", "TutorialsSection",
+ CellID->250839057,ExpressionUUID->"29ee58fc-dd2e-446a-98a4-01f8d55fbb5c"],
+
+Cell[TextData[ButtonBox["Mixtures (Legacy API)",
+ BaseStyle->"Link",
+ ButtonData->"paclet:RefpropLink/tutorial/MixturesLegacyAPI"]], "Tutorials",
+ CellChangeTimes->{{3.8193687101296606`*^9, 3.819368711369318*^9}, {
+  3.829563054459533*^9, 3.829563069890278*^9}},
+ CellID->341631938,ExpressionUUID->"cfb2cc33-919c-4356-8289-93b76b59f3a9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related Demonstrations", "RelatedDemonstrationsSection",
+ CellID->1268215905,ExpressionUUID->"6ae7ccf6-41a8-4e54-a0fe-d294ee642451"],
+
+Cell["XXXX", "RelatedDemonstrations",
+ CellID->1129518860,ExpressionUUID->"4bf0b038-174a-4093-a201-17c8b250d010"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related Links", "RelatedLinksSection",
+ CellID->1584193535,ExpressionUUID->"627c6b84-8a4a-4f51-bbb2-402b689223cf"],
+
+Cell["XXXX", "RelatedLinks",
+ CellID->1038487239,ExpressionUUID->"1c15b408-4805-4791-afd8-e9224820da34"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["See Also", "SeeAlsoSection",
+ CellID->1255426704,ExpressionUUID->"8ff05f3c-9261-4cf5-b255-ece96bddf266"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["setup",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/setup"]], "InlineFormula",
+  ExpressionUUID->"1fe67df3-e494-48e0-8c9d-9fcc70d8b889"],
+ " \[EmptyVerySmallSquare] ",
+ Cell[BoxData[
+  ButtonBox["RefProp",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/RefProp"]], "InlineFormula",
+  ExpressionUUID->"a8dfa83c-5ecc-49c5-a507-3fe92a7d1d07"],
+ " \[EmptyVerySmallSquare] ",
+ Cell[BoxData[
+  ButtonBox["SetMixture",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/SetMixture"]], "InlineFormula",
+  ExpressionUUID->"721a261d-4be4-42cd-9757-28329ecce6c5"]
+}], "SeeAlso",
+ CellChangeTimes->{{3.8295630765634656`*^9, 3.8295630855314903`*^9}},
+ CellID->929782353,ExpressionUUID->"908a3a99-802c-45a1-8df2-cc0da42a6cd7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["More About", "MoreAboutSection",
+ CellID->38303248,ExpressionUUID->"0c55bbf5-f4eb-4b4c-957f-e3b061cd838a"],
+
+Cell["XXXX", "MoreAbout",
+ CellID->1665078683,ExpressionUUID->"92602079-0dce-412a-91e1-788cd831876d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {
+     StyleBox["Examples", "PrimaryExamplesSection"], 
+     ButtonBox[
+      RowBox[{
+       RowBox[{"More", " ", "Examples"}], " ", "\[RightTriangle]"}],
+      BaseStyle->"ExtendedExamplesLink",
+      ButtonData:>"ExtendedExamples"]}
+   }],
+  $Line = 0; Null]], "PrimaryExamplesSection",
+ CellID->880084151,ExpressionUUID->"cfe1b0be-cbdd-4dd5-869a-919ab26023d0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Load AIR Mixture", "ExampleSubsection",ExpressionUUID->
+   "fb33f1ce-6b5c-4f14-839d-726198bf18ff"],
+  $Line = 0; Null]], "ExampleSubsection",
+ CellChangeTimes->{{3.8194416863471622`*^9, 3.8194416924029703`*^9}},
+ CellID->13310775,ExpressionUUID->"cdc1f33b-2bec-4c42-a1f4-7bbd79e4548e"],
+
+Cell[TextData[{
+ "Call ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"a4edf47f-d1c3-4ea8-a693-96c4c7cc5e61"],
+ " to load a mixture file (.mix).  Assign the output to a two element list \
+that will hold the Fluid Names and the component mole fractions to be used in \
+later property calls."
+}], "ExampleText",
+ CellChangeTimes->{{3.8193692224986057`*^9, 3.8193692373868036`*^9}, {
+  3.8194419852644157`*^9, 3.819442043920603*^9}},
+ CellID->44706077,ExpressionUUID->"cabfea85-6cf7-4df8-b3de-233cce24fdc8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    SubscriptBox["hFluids", "Air"], ",", 
+    SubscriptBox["z", "Air"]}], "}"}], "=", 
+  RowBox[{
+   RowBox[{"setmix", "[", "\"\<AIR.MIX\>\"", "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", "2"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8193692499332485`*^9, 3.819369265393936*^9}, {
+  3.81936997358829*^9, 3.8193699973058715`*^9}, {3.8193714064349923`*^9, 
+  3.8193714202505083`*^9}, {3.819438996330527*^9, 3.8194390142097187`*^9}, {
+  3.8194390620497975`*^9, 3.8194390681454997`*^9}, {3.8194391433872805`*^9, 
+  3.819439144273913*^9}, {3.819439999010975*^9, 3.819440000129983*^9}, {
+  3.8194420556432285`*^9, 3.819442064105628*^9}},
+ CellLabel->"In[8]:=",
+ CellID->8141322,ExpressionUUID->"9205eab5-bb2f-4414-9332-94f3085e3d30"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"NITROGEN\"\>", ",", "\<\"ARGON\"\>", ",", "\<\"OXYGEN\"\>"}],
+     "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.7812`", ",", "0.0092`", ",", "0.2096`"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.8193692731392255`*^9, 3.819369923808401*^9, {3.8193699804100485`*^9, 
+   3.819370000152232*^9}, 3.819370219052913*^9, 3.8193714452077475`*^9, 
+   3.8193715570107965`*^9, 3.819372316389795*^9, 3.8193748880548925`*^9, 
+   3.8193758501180344`*^9, 3.819376139202052*^9, 3.819376574006425*^9, 
+   3.819376951433241*^9, 3.8193771177475114`*^9, 3.8193772760592284`*^9, 
+   3.8193773683244934`*^9, 3.8194107408844624`*^9, 3.8194390208958397`*^9, 
+   3.8194390697601805`*^9, 3.819439150422495*^9, 3.819439251537098*^9, 
+   3.8194400018364215`*^9, 3.8194420678785114`*^9},
+ CellLabel->"Out[8]=",
+ CellID->130789087,ExpressionUUID->"d905e1e9-8eee-40ec-aeda-775f9c7c90af"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Transpose the two output lists for viewing in ",
+ Cell[BoxData[
+  ButtonBox["TableForm",
+   BaseStyle->"Link"]], "InlineFormula",ExpressionUUID->
+  "6f96959f-e5f7-4778-80d3-2d7edb6f2652"],
+ " format, clearly displaying each mixture component and its associated mole \
+fraction."
+}], "ExampleText",
+ CellChangeTimes->{{3.819442221266366*^9, 3.819442331752968*^9}},
+ CellID->246497881,ExpressionUUID->"7511b078-807c-4e4d-ace3-964678ed412b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TableForm", "[", 
+  RowBox[{"Transpose", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["hFluids", "Air"], ",", 
+     SubscriptBox["z", "Air"]}], "}"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.819440163458259*^9, 3.8194401718897142`*^9}, {
+  3.8194403061935987`*^9, 3.8194403142011867`*^9}, {3.819442075730544*^9, 
+  3.8194420828335514`*^9}},
+ NumberMarks->False,
+ CellLabel->"In[9]:=",
+ CellID->249283937,ExpressionUUID->"683b9d42-b9fa-415d-9288-35bc89ba6f41"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"NITROGEN\"\>", "0.7812`"},
+    {"\<\"ARGON\"\>", "0.0092`"},
+    {"\<\"OXYGEN\"\>", "0.2096`"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.819440019478219*^9, 3.819440174765025*^9, 
+  3.8194403165149703`*^9, 3.819442086430904*^9},
+ CellLabel->"Out[9]//TableForm=",
+ CellID->231754268,ExpressionUUID->"cafbc637-21e3-4bb1-b90b-7cada684b79c"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The mole fraction captured in ",
+ Cell[BoxData[
+  SubscriptBox["z", "Air"]],
+  FormatType->"StandardForm",ExpressionUUID->
+  "95322540-00f5-4d85-b7f3-aa6eb7753bbb"],
+ " can now be used in property calls that require the mole fraction input.  \
+If needed, the number of components can be calculated from the length of this \
+list."
+}], "ExampleText",
+ CellChangeTimes->{{3.819442445426043*^9, 3.819442498482176*^9}, {
+  3.8194425318409796`*^9, 3.819442558385002*^9}},
+ CellID->152969847,ExpressionUUID->"0da0bc81-935b-4823-9dc8-0185b11c937d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ncomp", "=", 
+  RowBox[{"Length", "[", 
+   SubscriptBox["z", "Air"], "]"}]}]], "Input",
+ CellChangeTimes->{{3.819442560479374*^9, 3.8194425783456116`*^9}},
+ CellLabel->"In[13]:=",
+ CellID->1016432661,ExpressionUUID->"27bbd763-94c3-4ebe-b6f5-17cab9e751e9"],
+
+Cell[BoxData["3"], "Output",
+ CellChangeTimes->{3.8194425801188593`*^9},
+ CellLabel->"Out[13]=",
+ CellID->104542029,ExpressionUUID->"5e1f4dda-d2d5-4a4e-a965-13b1f9ab55c2"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Load AMARILLO Gas Mixture", "ExampleSubsection",ExpressionUUID->
+   "c4f42e47-73d4-4a22-a53b-173fac175275"],
+  $Line = 0; Null]], "ExampleSubsection",
+ CellChangeTimes->{{3.8194419550183225`*^9, 3.8194419700920076`*^9}},
+ CellID->273981190,ExpressionUUID->"9cc22721-f82b-4a65-9037-93a1f707d1b9"],
+
+Cell[TextData[{
+ "Call ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"dd05dabb-a8ef-43fc-8714-b001f14e5f53"],
+ " to load a mixture file (.mix).  Assign the output to a two element list \
+that will hold the Fluid Names and the component mole fractions to be used in \
+later property calls."
+}], "ExampleText",
+ CellChangeTimes->{{3.8193692224986057`*^9, 3.8193692373868036`*^9}, {
+  3.8194419852644157`*^9, 3.819442043920603*^9}},
+ CellID->130983313,ExpressionUUID->"41cb6cb4-49dc-4181-a95b-1c9ccd9d83e4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    SubscriptBox["hFluids", "Am"], ",", 
+    SubscriptBox["z", "Am"]}], "}"}], "=", 
+  RowBox[{
+   RowBox[{"setmix", "[", "\"\<AMARILLO.MIX\>\"", "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", "2"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8193692499332485`*^9, 3.819369265393936*^9}, {
+  3.81936997358829*^9, 3.8193699973058715`*^9}, {3.8193714064349923`*^9, 
+  3.8193714202505083`*^9}, {3.819438996330527*^9, 3.8194390142097187`*^9}, {
+  3.8194390620497975`*^9, 3.8194390681454997`*^9}, {3.8194391433872805`*^9, 
+  3.819439144273913*^9}, {3.819439999010975*^9, 3.819440000129983*^9}, {
+  3.8194420556432285`*^9, 3.819442064105628*^9}, {3.819442117561692*^9, 
+  3.8194421395049877`*^9}, {3.819442361688922*^9, 3.819442369745349*^9}},
+ CellLabel->"In[11]:=",
+ CellID->766175178,ExpressionUUID->"77bdfc95-6c01-401f-bdfc-fefc892b5380"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"METHANE\"\>", ",", "\<\"NITROGEN\"\>", ",", "\<\"CO2\"\>", 
+     ",", "\<\"ETHANE\"\>", ",", "\<\"PROPANE\"\>", ",", "\<\"ISOBUTAN\"\>", 
+     ",", "\<\"BUTANE\"\>", ",", "\<\"IPENTANE\"\>", ",", "\<\"PENTANE\"\>", 
+     ",", "\<\"HEXANE\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.906724`", ",", "0.031284`", ",", "0.004676`", ",", "0.045279`", ",", 
+     "0.00828`", ",", "0.001037`", ",", "0.001563`", ",", "0.000321`", ",", 
+     "0.000443`", ",", "0.000393`"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.819442141572494*^9, 3.8194423746801805`*^9},
+ CellLabel->"Out[11]=",
+ CellID->26475679,ExpressionUUID->"f5bef117-48d8-45e8-94ab-9227ef85f6d9"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Transpose the two output lists for viewing in ",
+ Cell[BoxData[
+  ButtonBox["TableForm",
+   BaseStyle->"Link"]], "InlineFormula",ExpressionUUID->
+  "980fcab3-7dc7-4ee4-a377-24593d895670"],
+ " format, clearly displaying each mixture component and its associated mole \
+fraction."
+}], "ExampleText",
+ CellChangeTimes->{{3.819442221266366*^9, 3.819442331752968*^9}},
+ CellID->1064590153,ExpressionUUID->"af14b8af-edd4-4d3f-bc6d-704278d6a009"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TableForm", "[", 
+  RowBox[{"Transpose", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["hFluids", "Am"], ",", 
+     SubscriptBox["z", "Am"]}], "}"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.819440163458259*^9, 3.8194401718897142`*^9}, {
+  3.8194403061935987`*^9, 3.8194403142011867`*^9}, {3.819442075730544*^9, 
+  3.8194420828335514`*^9}, {3.819442351385464*^9, 3.8194423857935038`*^9}},
+ NumberMarks->False,
+ CellLabel->"In[12]:=",
+ CellID->608811625,ExpressionUUID->"e36473ff-6808-4964-bec8-ecd2114a8b95"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"METHANE\"\>", "0.906724`"},
+    {"\<\"NITROGEN\"\>", "0.031284`"},
+    {"\<\"CO2\"\>", "0.004676`"},
+    {"\<\"ETHANE\"\>", "0.045279`"},
+    {"\<\"PROPANE\"\>", "0.00828`"},
+    {"\<\"ISOBUTAN\"\>", "0.001037`"},
+    {"\<\"BUTANE\"\>", "0.001563`"},
+    {"\<\"IPENTANE\"\>", "0.000321`"},
+    {"\<\"PENTANE\"\>", "0.000443`"},
+    {"\<\"HEXANE\"\>", "0.000393`"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.819442390148821*^9},
+ CellLabel->"Out[12]//TableForm=",
+ CellID->270187901,ExpressionUUID->"688add9d-1b1c-4d0f-92b0-140f895e14e9"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The mole fraction captured in ",
+ Cell[BoxData[
+  SubscriptBox["z", "Air"]],
+  FormatType->"StandardForm",ExpressionUUID->
+  "d30e0ce2-a3c5-4ea2-bcd3-d3b9f33367c9"],
+ " can now be used in property calls that require the mole fraction input.  \
+If needed, the number of components can be calculated from the length of this \
+list."
+}], "ExampleText",
+ CellChangeTimes->{{3.819442445426043*^9, 3.819442498482176*^9}, {
+  3.8194425318409796`*^9, 3.819442558385002*^9}},
+ CellID->1062591,ExpressionUUID->"c4e05653-83c8-4850-9c72-822a0094cdae"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ncomp", "=", 
+  RowBox[{"Length", "[", 
+   SubscriptBox["z", "Am"], "]"}]}]], "Input",
+ CellChangeTimes->{{3.819442560479374*^9, 3.8194425783456116`*^9}, {
+  3.819442617953723*^9, 3.81944261997731*^9}},
+ CellLabel->"In[14]:=",
+ CellID->577223594,ExpressionUUID->"f82dfaf2-dabd-4b47-9517-8ab424a50f7a"],
+
+Cell[BoxData["10"], "Output",
+ CellChangeTimes->{3.8194426226820774`*^9},
+ CellLabel->"Out[14]=",
+ CellID->162600484,ExpressionUUID->"81910492-c36b-4468-9233-9c9e6464b055"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["More Examples", "ExtendedExamplesSection",
+ CellTags->"ExtendedExamples",
+ CellID->1854448968,ExpressionUUID->"72250829-351a-4215-93c8-81744dcc5a6d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Scope", "ExampleSection",ExpressionUUID->
+   "daad630f-18a7-4251-a0d0-33af06f47c5d"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->1293636265,ExpressionUUID->"e59a31d3-41d6-4b68-8b45-ff5f74a1c424"],
+
+Cell[TextData[{
+ "There is only ever one instance of the RefProp DLL loaded into Mathematica. \
+ This means that a fluid(s) list loaded by ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"1579e2a3-8ce7-42da-b212-ac204f14ccbe"],
+ " or ",
+ Cell[BoxData[
+  ButtonBox["setup",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setup"]], "InlineFormula",
+  ExpressionUUID->"e9166d6a-dd0f-4c40-b5d5-05a1eeabfda8"],
+ " into the DLL will be used across all active / open notebooks and help \
+files.  Care should be exercised when calling setup out of sequence or in \
+multiple open notebooks."
+}], "ExampleText",
+ CellChangeTimes->{{3.8181537888631835`*^9, 3.818153872479603*^9}, {
+   3.818153986914585*^9, 3.8181540293421755`*^9}, 3.818154525587225*^9, {
+   3.8193691058734508`*^9, 3.819369111553294*^9}, 3.8194529786834106`*^9},
+ CellID->180608076,ExpressionUUID->"ca8ba5ce-84d3-4200-84e9-de704829c2c3"],
+
+Cell[TextData[{
+ "Best practice s to use RefpropLink in only one open notebook at a time and \
+to call ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"cb65462b-480d-46c6-992c-5384ab463c18"],
+ " or ",
+ Cell[BoxData[
+  ButtonBox["setup",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setup"]], "InlineFormula",
+  ExpressionUUID->"2a033868-9710-441b-9f85-94d724ea451d"],
+ " to load a single fluids list at the beginning of the notebook.  If ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"43fc1712-3c02-4fb7-9a0c-578299806252"],
+ " or ",
+ Cell[BoxData[
+  ButtonBox["setup",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setup"]], "InlineFormula",
+  ExpressionUUID->"f1152f17-5281-4797-8699-f8d774666dab"],
+ " is called multiple times, with different fluids lists, all calculations \
+should be re-evaluated, in page order, to ensure that the correct fluids are \
+loaded at the appropriate time."
+}], "ExampleText",
+ CellChangeTimes->{{3.8181540511518493`*^9, 3.8181541315508633`*^9}, {
+  3.8181542520227394`*^9, 3.818154337735552*^9}, {3.81815454126733*^9, 
+  3.8181545574560113`*^9}, {3.8193691217610025`*^9, 3.81936913769237*^9}, {
+  3.8194529859130793`*^9, 3.819452992865518*^9}},
+ CellID->119064406,ExpressionUUID->"be076487-fd4e-4ad2-b36b-1f6bd7521618"],
+
+Cell[TextData[{
+ "Fortunately, Help pages are not evaluated dynamically, so they may be \
+browsed and viewed without impacting the state of the loaded fluids in any \
+open notebooks.  Help examples ",
+ StyleBox["should not be evaluated",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ ", as it can have adverse and unexpected affects on subsequent open notebook \
+evaluations."
+}], "ExampleText",
+ CellChangeTimes->{{3.8181543523304973`*^9, 3.8181544884874554`*^9}},
+ CellID->119521226,ExpressionUUID->"5de08911-766a-44d1-9eb7-47e1eb5f57cf"]
+}, Open  ]],
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Generalizations & Extensions", "ExampleSection",ExpressionUUID->
+   "5beee0f9-526a-4336-9a3d-d0ba126b4b15"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->1020263627,ExpressionUUID->"61fe8b04-0512-411a-a17b-d6b1f85fbc46"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Options", "ExampleSection",ExpressionUUID->
+   "b132eb3e-f670-4f93-a47b-46b727eb37f8"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->2061341341,ExpressionUUID->"d581e571-52d3-471f-aaed-44ce85f29616"],
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "XXXX", "ExampleSubsection",ExpressionUUID->
+   "9763a0ef-0ec9-4c9d-98e2-5d1fd7c7153d"],
+  $Line = 0; Null]], "ExampleSubsection",
+ CellID->1757724783,ExpressionUUID->"ff7d02e3-630c-4f2a-9387-d53262d510ce"],
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "XXXX", "ExampleSubsection",ExpressionUUID->
+   "4d773bfb-5ec3-4c24-9c51-812e2c78519e"],
+  $Line = 0; Null]], "ExampleSubsection",
+ CellID->1295379749,ExpressionUUID->"aa5c65aa-7e50-40a3-9e57-42b570d387d1"]
+}, Closed]],
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Applications", "ExampleSection",ExpressionUUID->
+   "b7bf81b2-cf5e-4605-97ad-6b9d22883f35"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->258228157,ExpressionUUID->"9ba394f2-6fcb-4b7e-a070-8e71d5165148"],
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Properties & Relations", "ExampleSection",ExpressionUUID->
+   "46bd603d-9427-48f7-9daa-0b234926d123"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->2123667759,ExpressionUUID->"38dd63b6-6880-4dae-a658-3ddc81edaef6"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Possible Issues", "ExampleSection",ExpressionUUID->
+   "3bee717c-fe5e-460f-b8e1-b8cbfb20164a"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->1305812373,ExpressionUUID->"b57e3049-c423-4d06-b773-8ee3e2610422"],
+
+Cell[TextData[{
+ "Loading a fluids list with ",
+ Cell[BoxData[
+  ButtonBox["setmix",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setmix"]], "InlineFormula",
+  ExpressionUUID->"1f06baae-79a8-4a75-9db5-75e3aece62c8"],
+ " or ",
+ Cell[BoxData[
+  ButtonBox["setup",
+   BaseStyle->"Link",
+   ButtonData->"paclet:RefpropLink/ref/Setup"]], "InlineFormula",
+  ExpressionUUID->"986a4389-6633-4e8b-948b-836557cb58b3"],
+ " in one notebook will affect the fluids list currently loaded in all other \
+open notebooks.  See notes under ",
+ StyleBox["Scope",
+  FontWeight->"Bold"],
+ " above."
+}], "ExampleText",
+ CellChangeTimes->{{3.8181545880272665`*^9, 3.8181546908473644`*^9}, {
+   3.81936903145747*^9, 3.8193690717766547`*^9}, 3.8193691467402053`*^9, 
+   3.8194530003365135`*^9},
+ CellID->490768203,ExpressionUUID->"e8469742-9a91-449e-89a6-f3f9345d94fc"]
+}, Open  ]],
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Interactive Examples", "ExampleSection",ExpressionUUID->
+   "f1b0c509-66bd-438b-96cd-72c99de3157e"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->1653164318,ExpressionUUID->"809d69c4-a0dc-4809-89ed-5d8a8a770153"],
+
+Cell[BoxData[
+ InterpretationBox[Cell[
+  "Neat Examples", "ExampleSection",ExpressionUUID->
+   "14c9ba2c-13a8-4ac0-a218-bd7d5e0e54d3"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->589267740,ExpressionUUID->"15b97027-3d86-40af-a101-a9274ed52e1a"]
+}, Open  ]]
+},
+WindowSize->{700, 770},
+WindowMargins->{{-825, Automatic}, {Automatic, 36}},
+TaggingRules->{
+ "DocuToolsSettings" -> {
+   "$ApplicationName" -> "RefpropLink", "$LinkBase" -> "RefpropLink", 
+    "$DocumentationDirectory" -> 
+    "C:\\Users\\jeffp\\eclipse-workspace\\RefpropLink\\RefpropLink\\\
+Documentation\\English\\", "$ApplicationDirectory" -> 
+    "C:\\Users\\jeffp\\eclipse-workspace\\RefpropLink\\RefpropLink"}, 
+  "WelcomeScreenSettings" -> {"FEStarting" -> False}, "TryRealOnly" -> False},
+CellContext->"Global`",
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "FunctionPageStyles.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"09c8493a-de42-46a1-ae91-9d1c1b48c7a0"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ExtendedExamples"->{
+  Cell[26167, 706, 155, 2, 54, "ExtendedExamplesSection",ExpressionUUID->"72250829-351a-4215-93c8-81744dcc5a6d",
+   CellTags->"ExtendedExamples",
+   CellID->1854448968]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ExtendedExamples", 33763, 907}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 600, 14, 22, "History",ExpressionUUID->"4871488b-f8d7-4c5c-a187-2988ad0edcb2",
+ CellID->1247902091],
+Cell[CellGroupData[{
+Cell[1183, 38, 123, 1, 27, "CategorizationSection",ExpressionUUID->"5aae55c6-5eed-4932-88b8-b487b99d6a15",
+ CellID->1122911449],
+Cell[1309, 41, 134, 2, 31, "Categorization",ExpressionUUID->"c94425a3-e6e5-4feb-9bca-7cbece9f3b72",
+ CellID->686433507],
+Cell[1446, 45, 139, 2, 31, "Categorization",ExpressionUUID->"ad506220-b758-4b44-a016-36cca3d6c84c",
+ CellID->605800465],
+Cell[1588, 49, 136, 2, 31, "Categorization",ExpressionUUID->"4fce7c12-fc90-4a5d-8cb1-733dfad0441d",
+ CellID->468444828],
+Cell[1727, 53, 122, 1, 31, "Categorization",ExpressionUUID->"803bc2a7-6bf8-4af6-8527-766d6bf9f2dd"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[1886, 59, 110, 1, 17, "KeywordsSection",ExpressionUUID->"8b1773f0-1b06-4e83-a5e5-dc4ce08ff07e",
+ CellID->477174294],
+Cell[1999, 62, 164, 2, 17, "Keywords",ExpressionUUID->"52b5f70f-c6a4-4125-b831-2d98f24d3f97",
+ CellID->1164421360],
+Cell[2166, 66, 166, 2, 17, "Keywords",ExpressionUUID->"ee396193-b6a7-4939-b2e1-67d2330ec42c",
+ CellID->169902475],
+Cell[2335, 70, 168, 2, 17, "Keywords",ExpressionUUID->"d860a9d3-b183-448e-bbec-07992fa33911",
+ CellID->469926332],
+Cell[2506, 74, 168, 2, 17, "Keywords",ExpressionUUID->"8a3b9643-4202-47f7-a403-6a58586f1b05",
+ CellID->40539664]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[2711, 81, 120, 1, 17, "TemplatesSection",ExpressionUUID->"80a7aec7-bfef-4f70-98c2-1e14c6d99f94",
+ CellID->1872225408],
+Cell[2834, 84, 149, 2, 70, "Template",ExpressionUUID->"692e9628-7908-4691-a05d-c08052f682f0",
+ CellID->1562036412],
+Cell[2986, 88, 137, 2, 70, "Template",ExpressionUUID->"d7809969-daf5-44df-9aab-560f1c328aaf",
+ CellID->158391909],
+Cell[3126, 92, 136, 2, 70, "Template",ExpressionUUID->"e66576a6-5762-4d1f-90bc-6fbb8b24c64d",
+ CellID->1360575930],
+Cell[3265, 96, 137, 2, 70, "Template",ExpressionUUID->"e6db45f5-08ef-4734-8923-83c9b01dbb2c",
+ CellID->793782254]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3439, 103, 108, 1, 17, "DetailsSection",ExpressionUUID->"cfee5360-31af-4ae2-9adb-6b576fbe1337",
+ CellID->307771771],
+Cell[3550, 106, 202, 3, 31, "Details",ExpressionUUID->"955801c3-d4cd-4822-a9f1-5ba414f68e4c",
+ CellID->670882175],
+Cell[3755, 111, 200, 3, 31, "Details",ExpressionUUID->"bdf24fc1-954f-491b-813b-7ea45e9daab2",
+ CellID->350963985],
+Cell[3958, 116, 195, 3, 31, "Details",ExpressionUUID->"9696e9a8-1d89-4a47-999b-6a4a05c85781",
+ CellID->8391405],
+Cell[4156, 121, 124, 2, 31, "Details",ExpressionUUID->"d658cd0c-d19f-4827-88cc-63bae1eda160",
+ CellID->3610269],
+Cell[4283, 125, 116, 2, 31, "Details",ExpressionUUID->"490bfe5e-be54-408f-b9cf-1f392bcecc3b",
+ CellID->401364205],
+Cell[4402, 129, 116, 2, 31, "Details",ExpressionUUID->"c65e1cbd-9234-4345-afdc-2be5843919b8",
+ CellID->350204745],
+Cell[4521, 133, 118, 2, 31, "Details",ExpressionUUID->"58c73e36-af5e-4b47-9be0-861c565fdf62",
+ CellID->732958810],
+Cell[4642, 137, 133, 2, 31, "Details",ExpressionUUID->"7f38083b-b2fc-4a72-857a-4983f4fbf983",
+ CellID->222905350],
+Cell[4778, 141, 122, 2, 31, "Details",ExpressionUUID->"f3cc9081-d179-47a2-a0e7-2f66f5eb8933",
+ CellID->240026365]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4937, 148, 104, 1, 62, "ObjectName",ExpressionUUID->"95d4bd8d-c00e-4c22-a091-155d983e68e9",
+ CellID->1224892054],
+Cell[5044, 151, 1367, 29, 124, "Usage",ExpressionUUID->"9f97b969-7843-42be-a49b-89d12d21f93b",
+ CellID->982511436],
+Cell[6414, 182, 1486, 37, 54, "Notes",ExpressionUUID->"458c54c3-252a-4c55-aa05-2be6c7b33ad0",
+ CellID->1067943069],
+Cell[7903, 221, 1001, 26, 55, "Notes",ExpressionUUID->"d51f28f6-61b9-4da4-8d80-67b27a97093f",
+ CellID->406783678],
+Cell[8907, 249, 831, 15, 55, "Notes",ExpressionUUID->"22f57aa0-979f-41b9-a880-95695b772b12",
+ CellID->38513520],
+Cell[9741, 266, 1881, 35, 98, "3ColumnTableMod",ExpressionUUID->"cec10a5c-73d6-464c-9c2f-44ce90a2ce43",
+ CellID->450279320],
+Cell[11625, 303, 548, 12, 38, "Notes",ExpressionUUID->"dc6637b0-27ee-4573-90df-c55e6ed5c758",
+ CellID->17555319]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12210, 320, 112, 1, 44, "TutorialsSection",ExpressionUUID->"29ee58fc-dd2e-446a-98a4-01f8d55fbb5c",
+ CellID->250839057],
+Cell[12325, 323, 337, 5, 16, "Tutorials",ExpressionUUID->"cfb2cc33-919c-4356-8289-93b76b59f3a9",
+ CellID->341631938]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12699, 333, 138, 1, 31, "RelatedDemonstrationsSection",ExpressionUUID->"6ae7ccf6-41a8-4e54-a0fe-d294ee642451",
+ CellID->1268215905],
+Cell[12840, 336, 113, 1, 16, "RelatedDemonstrations",ExpressionUUID->"4bf0b038-174a-4093-a201-17c8b250d010",
+ CellID->1129518860]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12990, 342, 120, 1, 31, "RelatedLinksSection",ExpressionUUID->"627c6b84-8a4a-4f51-bbb2-402b689223cf",
+ CellID->1584193535],
+Cell[13113, 345, 104, 1, 16, "RelatedLinks",ExpressionUUID->"1c15b408-4805-4791-afd8-e9224820da34",
+ CellID->1038487239]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13254, 351, 110, 1, 31, "SeeAlsoSection",ExpressionUUID->"8ff05f3c-9261-4cf5-b255-ece96bddf266",
+ CellID->1255426704],
+Cell[13367, 354, 797, 20, 18, "SeeAlso",ExpressionUUID->"908a3a99-802c-45a1-8df2-cc0da42a6cd7",
+ CellID->929782353]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14201, 379, 112, 1, 31, "MoreAboutSection",ExpressionUUID->"0c55bbf5-f4eb-4b4c-957f-e3b061cd838a",
+ CellID->38303248],
+Cell[14316, 382, 101, 1, 16, "MoreAbout",ExpressionUUID->"92602079-0dce-412a-91e1-788cd831876d",
+ CellID->1665078683]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14454, 388, 411, 11, 68, "PrimaryExamplesSection",ExpressionUUID->"cfe1b0be-cbdd-4dd5-869a-919ab26023d0",
+ CellID->880084151],
+Cell[CellGroupData[{
+Cell[14890, 403, 327, 6, 22, "ExampleSubsection",ExpressionUUID->"cdc1f33b-2bec-4c42-a1f4-7bbd79e4548e",
+ CellID->13310775],
+Cell[15220, 411, 604, 13, 35, "ExampleText",ExpressionUUID->"cabfea85-6cf7-4df8-b3de-233cce24fdc8",
+ CellID->44706077],
+Cell[CellGroupData[{
+Cell[15849, 428, 797, 17, 25, "Input",ExpressionUUID->"9205eab5-bb2f-4414-9332-94f3085e3d30",
+ CellID->8141322],
+Cell[16649, 447, 942, 19, 24, "Output",ExpressionUUID->"d905e1e9-8eee-40ec-aeda-775f9c7c90af",
+ CellID->130789087]
+}, Open  ]],
+Cell[17606, 469, 456, 10, 35, "ExampleText",ExpressionUUID->"7511b078-807c-4e4d-ace3-964678ed412b",
+ CellID->246497881],
+Cell[CellGroupData[{
+Cell[18087, 483, 498, 12, 25, "Input",ExpressionUUID->"683b9d42-b9fa-415d-9288-35bc89ba6f41",
+ CellID->249283937],
+Cell[18588, 497, 729, 19, 52, "Output",ExpressionUUID->"cafbc637-21e3-4bb1-b90b-7cada684b79c",
+ CellID->231754268]
+}, Open  ]],
+Cell[19332, 519, 559, 12, 47, "ExampleText",ExpressionUUID->"0da0bc81-935b-4823-9dc8-0185b11c937d",
+ CellID->152969847],
+Cell[CellGroupData[{
+Cell[19916, 535, 279, 6, 25, "Input",ExpressionUUID->"27bbd763-94c3-4ebe-b6f5-17cab9e751e9",
+ CellID->1016432661],
+Cell[20198, 543, 171, 3, 24, "Output",ExpressionUUID->"5e1f4dda-d2d5-4a4e-a965-13b1f9ab55c2",
+ CellID->104542029]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20418, 552, 337, 6, 22, "ExampleSubsection",ExpressionUUID->"9cc22721-f82b-4a65-9037-93a1f707d1b9",
+ CellID->273981190],
+Cell[20758, 560, 605, 13, 35, "ExampleText",ExpressionUUID->"41cb6cb4-49dc-4181-a95b-1c9ccd9d83e4",
+ CellID->130983313],
+Cell[CellGroupData[{
+Cell[21388, 577, 900, 18, 25, "Input",ExpressionUUID->"77bdfc95-6c01-401f-bdfc-fefc892b5380",
+ CellID->766175178],
+Cell[22291, 597, 745, 15, 61, "Output",ExpressionUUID->"f5bef117-48d8-45e8-94ab-9227ef85f6d9",
+ CellID->26475679]
+}, Open  ]],
+Cell[23051, 615, 457, 10, 35, "ExampleText",ExpressionUUID->"af14b8af-edd4-4d3f-bc6d-704278d6a009",
+ CellID->1064590153],
+Cell[CellGroupData[{
+Cell[23533, 629, 545, 12, 25, "Input",ExpressionUUID->"e36473ff-6808-4964-bec8-ecd2114a8b95",
+ CellID->608811625],
+Cell[24081, 643, 928, 25, 157, "Output",ExpressionUUID->"688add9d-1b1c-4d0f-92b0-140f895e14e9",
+ CellID->270187901]
+}, Open  ]],
+Cell[25024, 671, 557, 12, 47, "ExampleText",ExpressionUUID->"c4e05653-83c8-4850-9c72-822a0094cdae",
+ CellID->1062591],
+Cell[CellGroupData[{
+Cell[25606, 687, 325, 7, 25, "Input",ExpressionUUID->"f82dfaf2-dabd-4b47-9517-8ab424a50f7a",
+ CellID->577223594],
+Cell[25934, 696, 172, 3, 24, "Output",ExpressionUUID->"81910492-c36b-4468-9233-9c9e6464b055",
+ CellID->162600484]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26167, 706, 155, 2, 54, "ExtendedExamplesSection",ExpressionUUID->"72250829-351a-4215-93c8-81744dcc5a6d",
+ CellTags->"ExtendedExamples",
+ CellID->1854448968],
+Cell[CellGroupData[{
+Cell[26347, 712, 242, 5, 31, "ExampleSection",ExpressionUUID->"e59a31d3-41d6-4b68-8b45-ff5f74a1c424",
+ CellID->1293636265],
+Cell[26592, 719, 1007, 21, 61, "ExampleText",ExpressionUUID->"ca8ba5ce-84d3-4200-84e9-de704829c2c3",
+ CellID->180608076],
+Cell[27602, 742, 1484, 34, 63, "ExampleText",ExpressionUUID->"be076487-fd4e-4ad2-b36b-1f6bd7521618",
+ CellID->119064406],
+Cell[29089, 778, 541, 11, 59, "ExampleText",ExpressionUUID->"5de08911-766a-44d1-9eb7-47e1eb5f57cf",
+ CellID->119521226]
+}, Open  ]],
+Cell[29645, 792, 265, 5, 31, "ExampleSection",ExpressionUUID->"61fe8b04-0512-411a-a17b-d6b1f85fbc46",
+ CellID->1020263627],
+Cell[CellGroupData[{
+Cell[29935, 801, 244, 5, 19, "ExampleSection",ExpressionUUID->"d581e571-52d3-471f-aaed-44ce85f29616",
+ CellID->2061341341],
+Cell[30182, 808, 247, 5, 70, "ExampleSubsection",ExpressionUUID->"ff7d02e3-630c-4f2a-9387-d53262d510ce",
+ CellID->1757724783],
+Cell[30432, 815, 247, 5, 70, "ExampleSubsection",ExpressionUUID->"aa5c65aa-7e50-40a3-9e57-42b570d387d1",
+ CellID->1295379749]
+}, Closed]],
+Cell[30694, 823, 248, 5, 19, "ExampleSection",ExpressionUUID->"9ba394f2-6fcb-4b7e-a070-8e71d5165148",
+ CellID->258228157],
+Cell[30945, 830, 259, 5, 19, "ExampleSection",ExpressionUUID->"38dd63b6-6880-4dae-a658-3ddc81edaef6",
+ CellID->2123667759],
+Cell[CellGroupData[{
+Cell[31229, 839, 252, 5, 19, "ExampleSection",ExpressionUUID->"b57e3049-c423-4d06-b773-8ee3e2610422",
+ CellID->1305812373],
+Cell[31484, 846, 859, 22, 35, "ExampleText",ExpressionUUID->"e8469742-9a91-449e-89a6-f3f9345d94fc",
+ CellID->490768203]
+}, Open  ]],
+Cell[32358, 871, 257, 5, 31, "ExampleSection",ExpressionUUID->"809d69c4-a0dc-4809-89ed-5d8a8a770153",
+ CellID->1653164318],
+Cell[32618, 878, 249, 5, 19, "ExampleSection",ExpressionUUID->"15b97027-3d86-40af-a101-a9274ed52e1a",
+ CellID->589267740]
+}, Open  ]]
+}
+]
+*)
+

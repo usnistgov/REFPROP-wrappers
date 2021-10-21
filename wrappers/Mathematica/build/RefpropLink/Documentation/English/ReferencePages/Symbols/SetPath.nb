@@ -1,0 +1,1032 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     43328,       1023]
+NotebookOptionsPosition[     35777,        866]
+NotebookOutlinePosition[     38216,        925]
+CellTagsIndexPosition[     38131,        920]
+WindowTitle->SetPath
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["REFPROP LINK PACKAGE SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "See Also",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"See Also", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"SetDLL\"\>":>Documentation`HelpLookup[
+       "paclet:RefpropLink/ref/SetDLL"], "\<\"setup\"\>":>
+       Documentation`HelpLookup[
+       "paclet:RefpropLink/ref/setup"], "\<\"RefProp\"\>":>
+       Documentation`HelpLookup["paclet:RefpropLink/ref/RefProp"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"SeeAlso"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink\"\>":>
+       Documentation`HelpLookup["paclet:RefpropLink/guide/RefpropLink"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"MoreAbout"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"RefpropLink/ref/SetPath\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["RefpropLink/ref/SetPath"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/RefpropLink/ref/\
+SetPath.html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, 
+            Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$34761], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "RefpropLink/ref/SetPath", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[TextData[{
+ Cell["SetPath", "ObjectName"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]]],
+ Cell[BoxData[""], "ObjectNameTranslation"]
+}], "ObjectNameGrid"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"SetPath", "[", "]"}]], "InlineFormula"],
+     "\[LineSeparator]Set the fluids files directory, for the current \
+session, using the standard System File Dialog. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"SetPath", "[", 
+       RowBox[{
+        StyleBox["hPth", "TI"], ",", 
+        StyleBox["permSet", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]Set fluids files directory with one or two optional \
+parameters.  If ",
+     Cell[BoxData[
+      StyleBox["hPth", "TI"]], "InlineFormula"],
+     " string input is specified, the File Dialog is not presented.  If ",
+     Cell[BoxData[
+      StyleBox["permSet", "TI"]], "InlineFormula"],
+     " is omitted or zero (0), setting is temporary; permSet = 1+ saves \
+setting for future sessions."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {None, {None}}}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[TextData[{
+ "By default, REFPROP looks for the fluids files in the ",
+ StyleBox["FLUIDS\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " sub-folder, just under the default REFPROP installation directory (",
+ StyleBox["C:\\Program Files (x86)\\REFPROP\\REFPRP64.DLL",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ ").  Similarly, pre-defined mixture files (*.mix) are expected to be in the ",
+ StyleBox["MIXTURES\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " sub-folder just under the same default installation directory. "
+}], "Notes",
+ CellID->1067943069],
+
+Cell[TextData[{
+ "It may be necessary at times to search alternate ",
+ StyleBox["FLUIDS\\MIXTURES",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " directories."
+}], "Notes",
+ CellID->526237795],
+
+Cell["\<\
+1. When REFPROP is installed in the non-default location\[LineSeparator]2. \
+When company IT policies lock down the desktop's C:\\ drive and custom \
+mixture files\[LineSeparator]    have to be created in an alternate or shared \
+location.\
+\>", "Notes",
+ CellID->45235239],
+
+Cell[TextData[{
+ "Calling ",
+ Cell[BoxData[
+  RowBox[{"SetPath", "[", "]"}]], "InlineFormula"],
+ " with no parameters will generate a standard System FileOpen Dialog to \
+allow browsing to the new ",
+ StyleBox["FLUIDS\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " folder location.  The directory just above the new ",
+ StyleBox["FLUIDS\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " folder can be selected.  If the actual ",
+ StyleBox["FLUIDS\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " folder is selected, it will be stripped from the end of the path, pointing \
+to the parent directory.  The parent directory should include both a ",
+ StyleBox["FLUIDS\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " and a ",
+ StyleBox["MIXTURES\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " sub-folder; since mixture files will be searched from this same path."
+}], "Notes",
+ CellID->166109123],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox["hPth", "TI"]], "InlineFormula"],
+ " is an optional path string (be sure to use double back-slashes, \
+\"parentDir",
+ StyleBox["\\\\",
+  FontWeight->"Bold"],
+ "childDir\" in Windows path strings).  If ",
+ Cell[BoxData[
+  StyleBox["hPth", "TI"]], "InlineFormula"],
+ " is provided, the System FileOpen dialog will be bypassed (quiet mode), \
+taking ",
+ Cell[BoxData[
+  StyleBox["hPth", "TI"]], "InlineFormula"],
+ " as the location and treating it as though it was selected from the \
+FileOpen dialog."
+}], "Notes",
+ CellID->325589237],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox["permSet", "TI"]], "InlineFormula"],
+ " is an optional parameter that, if omitted or set to 0, will cause the ",
+ StyleBox["FLUIDS\\",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " location to be set temporarily; for this session only.  If set to 1, the \
+setting will be written to a RefpropLink resource file, making it the default \
+location for future RefpropLink sessions."
+}], "Notes",
+ CellID->569073670],
+
+Cell["\<\
+Nothing is returned from this function after successfully setting the fluids \
+directory path.\
+\>", "Notes",
+ CellID->117920165],
+
+Cell[TextData[{
+ "NOTE: RefpropLink expects that the mixture binary interactions file \
+compatible with the currently loaded REFPROP DLL will be located in this \
+fluids directory (\"",
+ StyleBox["..\\FLUIDS\\HMX.BNC",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ "\") as well as the fluids files."
+}], "Notes",
+ Background->RGBColor[1, 1, 0.85],
+ CellID->428436231],
+
+Cell["", "SectionFooterSpacer"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]]],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(4)", "ExampleCount"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CellTags->"PrimaryExamplesSection",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(4)", "ExampleCount"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CellID->1],
+
+Cell["\<\
+Call SetDLL with no parameter to select the location of REFPRP64.DLL using \
+the FileOpen dialog.\
+\>", "ExampleText",
+ CellID->456168726],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetPath", "[", "]"}], ";"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->301866692],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetPath", "goodDIR", 
+   "\"INFO: Valid fluids directory found under \
+[\\!\\(\\*RowBox[{\\\"\\\\\\\"C:\\\\\\\\\\\\\\\\Program Files (x86)\\\\\\\\\\\
+\\\\\\REFPROP\\\\\\\"\\\"}]\\)].\"", 2, 13, 3, 33610983680637210755, "Local", 
+   "RefpropLink`SetPath"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->48509437]
+}, Open  ]],
+
+Cell["FileOpen dialog appears...", "ExampleText",
+ CellID->116396848],
+
+Cell[BoxData[
+ GraphicsBox[
+  TagBox[RasterBox[CompressedData["
+1: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
+ebD+sqytaYcmH10f/sbrpLhIbFOpfBOdK82Phc7MpBazKn7e/eN2G5mf2hIx
+VdErQLQ4Od3K3560SbNQKQmak0uS9q2t6UukvbE20li6pzSJzzz77LPieUd7
+l8/KykqvrEZojPCZ8E9eWE1uX412qteOb8rwGW/poZWD1ShN6C3hc/EeLt7J
+k3f4BwOKN9UNpRGtXX311eHZC3cvuTCJH3/0ox8lNUUdUbPCrcuHI86DZlA9
+IeMMd3by5dPralBuWXOYrp5z8YsWgnE2QDu07JLkl2VtLXyeGEsoyeFB9eFv
+vE6Ki8Ts7Oz3v//9J5544vOf/3w/Kc3qjCkwtrIsWtOTiQi0pqereWnnKk28
+1PeLcOvmKlkl/l5HT62thc+T1aXq9kYaS5eUph6fCenYan7xi18cPnw4+fHI
+kSOipOC6ss8UtBqb0jh9xlvcka008v+esv8nJV/UxNv43XffvXXrVq+jq1U3
+lCbRqvDSI/9H20TWMxeinenp6bfeeit30/LhdKkDql0qV5oMa5VfGGFXntjE
+5s2btZdxDee8XaWxrpg8N19IolAs0typT37jdVJcJE6ePBnKzL333pu8txTR
+v+4qzerM7hlznKlNp8m2jw4prDTp8/aUxrFi8lwWtYC0wFq/sXRDaer0mZDO
+rEb4jNjJsB9g79694rlsOBkkPpNYzSOPPJJrNbrSHNuU4TPe4gMrB8ZcTRX3
+GU9Sl/CJONIrrrgifHtPnsgXCOE8Wnd92HkiSm6//fbkKpAUJh3+yQiXfLEQ
+j8Kg5OEk+Voja1Vy3dH2X9RP/jed0eeQIP53KU7IV77yldwrbMZV8pprrgn/
+y28epvWEaGuFYzeCUAbCpc8880y4lmhHnFtzxMfLvJRrZzVsKtxc7umVeyqS
+85ksTV4JYtH4+Hg4NFPDOU/2pBKlSVozX0jykTZAaY4ePaqNdIsfRWHuigXf
+7VutlvCZv/qrvxL19+/fH769/MM//IPQm9z32AFQGrU7I8IXAGUkxxib8mVg
+amoy/llbIVCF+ajMkAa1X8XsbDGrWUpsSuM2mqAoQ4EaS+VKk/hMNp3t7U/y
+aNdqhM+InXnooYcSt8lF9hnxPDyc1157LddqtFN9/ujGDJ+5tDC5PDt26Zev
+me205TMh2v/BhWOId/Lkf9/yBUJczsJCeVBAPAkvlOKaGPbny4XJZI+kQfFk
+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
++lWRb86ff+dnj438ydzITXPCakS1dlsuqzQ/3PXu9Or5T3/9yS5YzSDFd4kN
+n7xm6w+VkhJ24TuS1Jp9iygNIYQMTwa6l+YHh0+9Y+zP5f4ZcRTCZ04uvO4/
+eemi8BmRyz697x2jt7U7r6ac0vgOo1xw/U6VXd/r9RnrXQKX+OHuDWmnSnml
+yV4dpSGEkOHKQM+luW7yK5dvfkoeb/rQl14a2XJ45E8On3zFtxpfaW48NPKZ
+Q5f/4ZOicluNl1Iai8AIyQkvpv5Vdesdt707rODXDEemdidX2+/dEQ1XxSM1
+wYX4yV3qGFZ0dT715G3J8FZUP27z3TaJeumfXknqyxHl3fxlRXsrDk3bf3OH
+RZ3YBtU66biV30WjnI24hd/8gGNd4yQbZyn9vdT/SiaEEFI+FfbS1H+t/K3N
+25P5wMn8GeEz77z12NobbwmrCX1m5DMH33bdHlG5rcbLKo0+xyPpt/Evx9Jl
+PboECzN5t96BkFyUpYko/nhWegmW6osfjfIf7rKOdv2vg89rvyNR0qXfke1Y
+XE/iHRbHGB/shk/eFh6COD/qsciHLw1CpVOMlLNnnGTzLMm/F0IIIYOXUGm2
+fPVSJXNpar5W/urv32L1mbCL5vceOhX6zMin/YjKbTXe1V6atKPAOhATzyu2
+XH+tJiD3bEj9Fb+pz8i1/6a67zP60QV7FZeYOxyflu/dkYxVJWfP1qB6tuNT
+IbVvnmTLWWJMihBCBjuVz6Wp81oZKI3iMyN/MvfN+fNrb7yl+czIpw7UqjRZ
+c2nylCatabMgR+dGqi6FJ+2Ev6lafEY7hPDkmMcrnz2x6ODWSGZ2fc/S61Ve
+abSNojSEEDLY6cZcmtqulf7A08QPZJ8ZuWlu70sXnzq0ovnM266td+DpDXmE
+6GfGYJNlxCQdExErhpdgyxjKz2xKkww5mdvKSZfnz8hRhSHoJJH6oPQd9oeZ
+pCGnrXeYI2gZA0+aOroGnq5xj2QRQggZvHTpE0/1XCv96cGf+LLsM8l8YNln
+RC7/2BO1Tg8OI30vjfPDyz9MJv0mM1f9TozgG1d2bS3QS5PMJU6/pEUaVXEN
+PNUeXRiUuUPmDsvfumP/Bh6LI0lDdT/TerGMk2xuFKUhhJDBTqg0p/7Dvx/E
+76UJPsR922U3zso+E+qZ7DOXXb+39g9xt59h/5Q3IYQQUioD/b00r4dftfeh
+HXL/TKo0gc+MTMy+/eoHevBVe23me3dkfBEuIYQQQnIy0N9L83pyQ4QP7bjs
+0/vM8abLrt8rfKZnN0TITzTG5PoOGUIIIYQMT6LbVo7edvkfPvm26/Yk84Ev
+/9gTopDbVhJCCCFkgPKDw6eum/zKb23e/qu/f4uIeCJ+bHf+jByUhhBCCCEN
+CEpDCCGEkAYEpSGEEEJIA4LSEEIIIaQBQWkIIYQQ0oCgNIQQQghpQFAaQggh
+hDQgodK0llcIIYQQQgY3odJ40Pe8+uqrd955p3js9Y4MO2fOnOn1LgwFnOd6
+GLbzPGzHO2ygNAOBMJlPfOITjz/++A033IDV9BbeEuuB81wPw3aeh+14hw2U
+pv8Jfebb3/62eP7iiy9iNb2Ft8R64DzXw7Cd52E73mEDpelzZJ8JwWp6C2+J
+9cB5rodhO8/DdrzDBkrT5wh12bt3r1b4YkAvdgd4S6wJznM9DNt5HrbjHTZQ
+GoC24C2xHjjP9TBs53nYjnfYQGkA2oK3xHrgPNfDsJ3nYTveYQOlAWgL3hLr
+gfNcD8N2nofteIeNEkpz6sFrbx9//JRa8vBzS9XsGEB/4nhLDP4c4tz8nZW6
+d8tC/Pe4tPfm5A/z+LP+Hn5u7ytyYZFGasd6nuceT09yP53qAcZ5iQ9fKn6e
+nfPUV9Egg9I0m3JK8/DNn7v9weNKSQNe8wAZuJUmefGbtu+q2VXMDfk7Jv3B
+dtZITWReenirqQz7efYFJjCZ4Plz7b1m+hqUptmUVJrnju+9WfyPTy7hfQYa
+TQGlUa8I2TW7iFVp2t00StNw7Of5+LPj6Rt7o0Bpmk1ZpVnyu4Ljvt/0fSbt
+H47+rxr7T1Ao/p/4ynce1vuNl6Kl485rAUDvKaQ03spzcQem+rcgjU+FfxrO
+l31bfzJS30tcePN39sa7FO5buumgBWmHzX2wNFI3BZQmPck+0VVYOW+8veSS
+MZCqDupFL5jkdVjgNdyPoDTNprzS2J5Y69weaX8wRBv9sfjPw78Cad3jzzI+
+Dn1Lu0pjVNCGqFwv+yJ/MvEm0nkOaWFw6cn4C7UVRvtgbaRuCvXSiLMRD/AJ
+dQz2WTpvymnh7cWO+zz7r2HJlrVXuPhxIN+6UZpmU4XSJG8saknk7Zlv48oM
+xtt1+QfoPworTYG/hayXfZE/mfQ/xdEFfck6EJypNOY+2Bupm2IDT9KFNdpn
+ZYfT08Lbi4OcS3xw6mJXNE6sN3jnFqVpNtUoTfR/UvPNNnljb+/9GaBvaW8u
+TfbfQtEpN91WGnUfBklp/H6km7+zEj5qi9K+Mt5e3ORe4v2eOvN/rIm6DNq5
+RWmaTUVKk7h63Buc0fHr7P3m85gwABT8xFP0f9j8vwXXy77Qn4z0P2V9NKqd
+gSdz1sSADDx5oYA9++DnbKdUPS28vVhxTA/eK2uhOvkq6RkLGbBzi9I0m8qU
+Rnn3iwZhx9O3mtz3Z7UDs+97L2FoKfC9NPqkGvVvIZ4wrE+tbHPgSVlX2mI8
+zmVMDy7STrwPlkbqpvgnnvzzmZ46f9GDjz/smjXN24tG/utZ/ojHkvrVQKmu
+D8y5RWmaDd8eDNAWvCXWQ/HznM7r8OHz3e0xbK/nYTveYQOlAWgL3hLroeh5
+Vmb+eChNuwzb63nYjnfYQGkA2oK3xHoocJ7DQb3yXyc41Azb63nYjnfYQGkA
+2oK3xHrgPNfDsJ3nYTveYQOlAWgL3hLrgfNcD8N2nofteIcNlAagLXhLrAfO
+cz0M23ketuMdNlAagLbgLbEeOM/1MGznediOd9hAaQDagrfEeuA818Ownedh
+O95hA6UBAACABoDSAAAAQANAaQAAAKABoDQAAADQAFAaAAAAaAAoDQAAADSA
+dpXm8XlCCCFkkAJDQgdKc6xFCCGEDEZQmuGhvNK8On/VxefHL54cvyByYnzt
++CY/xzadP7pR5NyRjYsnb+r5S5oQQshwBqUZHsorjfAZb/UZb/Vpb3XKW3nK
+W3nSW3nCW/6it/y413rUa33h7OENPX9JE0IIGc6gNMNDBUpzcjzDZ7zWI2fn
+UBpCCCG9CUozPJRXmgu+0jh9xlvatYrSEEII6VFQmuGhAqU5MZ7hM97Sw6uH
+1tteZns+MpLy258/HZSsu2VOqyOXJD+KJxMP2xuJK39tIi4OaxLS/cxMbdky
+9Y3skrDwsfkiFb7x2JaQO3a3pPpqidmItU5nlVve3+2e3LJ9+u+yj6g1v2NL
+wuSXT0mFyZHKDaZ12o28oWCfT03fEbUmFhVoNjxe+Yj09s1GirVM+jUozfBQ
+XmnWjm/K8Blv6aGVgy6lyRYYs8SqNEmFQG8+ucd/PrfztxOTmdt5y9d6/zdF
+mp7Wl7eLy/fUjvRyb5Yk5eH1Ma/Cqekvz4QlySV1Pq6clJiNyJW1C7G1stag
+lkAhIgFw7bCyuqRAfuEd27VmQycpozSudYuIh7/1HTPtto/SDHZQmuGhIqVx
++oy3uKMupZFM5msTI7+z85u9/jsiw5d543JvlJyavkPpuMit4KWSI3XvCHOQ
++lWkRsTqcRfENx6zXr6lys4GvaRwx+60QccxeupFX3GqHY9N6h1KvhT1UGmy
+66A0DQxKMzxUoDTHNmX4jLf4wMqBMdvLrAtK0zp9y++MfORrYbk6DkVIHclX
+Gl8SZtqqkNZRrEMevVIaSXqBrO6hlFsaFI+JwIRydaqU0nz5lLlvZQzBXNfW
+K+WPRoXIu5oOWkVHnVZL3M/SyB27p90tR9pmG4wj/RKUZngorzTnj27M8JlL
+C5PLs2MnzrxmvMyUaTCxh1SlNNHzuGVC6kmu0nRQwe9sCS/BxZQmvew6RlgK
+Kk06/tWW0mgDT6Iw7SyKmiqpNClBs6bSSO3PTKldT5p6STtmaSRaKk3+MVv2
+q7mmIZE+CUozPFSjNA6f8RbvXzv28bNzV//z8VuNl1mXemnUFvyhKKyG1JY8
+Y9GvsLkV/OkrSUkhpWln4MndoLSoqNIkGLN64hbi/elyL43U97JFn5+sdcKk
+B6Lvm3LUGS0zJjUAQWmGh/JKc+7IRpfPeGfuW54de+vlu8Sj8TIrojSqoqST
+fvPm0kj55ufXRXOGCel6spUmGRIqWMGoX2AuTYalWLaY1aCKcn3PHngyC4MD
+mUkkoQalcQ0DlVca8/eL0vR7UJrhoQKlObzB5TPemXtb+0fDR+NlVkRpvIc/
+OZJM9PWfR3Li/MRT1CHztZ1xoT/8xKQaUlcylcYy7zezgikk6SVVu5KqliL1
+0tjGRNQtag3Kc2mSOu3NpbEVBh+djnem23NpMgaDMgaetBPrGnja4h7JIn0a
+lGZ4KK80Z4XSOHzGW7intW80fDReZlalMb9kJpoS45N+iMn6vTTaEFUMXTSk
+vmQpjW3eb1aF4EqqfgdLK/0amYw5xumKFoMydlJrsEtK43fUmB8z7+wMtzU9
+2D3wpFQz5zbL39hjnR7MwNPABKUZHipQmrkNLp/xFu5e8pXGf+z5q5qQnmZ+
+h/Pr3QpWIIR0EpRmeCivNKu+0th9xlvYvjQzGj72/FVNCCFkCIPSDA8VKM2h
+9SsHgxwYW57109o/2to3uiQyM7o4c6V4PDP74Z6/qgkhhAxhUJrhobzSEEII
+IX0blGZ4QGkIIYQ0OCjN8IDSEEIIaXBQmuGhA6UhhBBCBigwJLSrNAAAAAB9
+SHmleXX+qovPj188OX5B5MT42vFNfo5tOn90o8i5IxsvvHBTVXsLAAAAYKW8
+0gif8Vaf8Vaf9lanvJWnvJUnvZUnvOUvJrfn9r9eGAAAAKCbVKA0J8czfMZr
+PeJ/vTAAAABANymvNBd8pXH6jLe0axWlAQAAgC5TgdKcGM/wGW/p4dVD623r
+7ZmQblK5budpszgtVCtP7FF/jirv1OroG1OKggb0EmmDAB0wP7Vly9R8dklY
+mJRlVpifiu+qON2S6qslZiPWOp1V9rzW9KSyzLrD6Z7KLQWFRl2/QefWcpE3
+FLSS7p9YVKDZsAFnRWsjxVoGgF5TXmnWjm/K8Blv6aGVgy6lMRTCF42k8PTO
+dckPUmXFTuRGXHWCltZNTKyTN+dXXrdOroTSQBmCC/XUlCQrZklSHl4f8yq0
+pqejBcklNZGhpMRsRK6sXYitlbUGNQIDiJa4dlhZXVIgv3ByUms2RynyyLCL
+IuJhF7K8RlAagMGgIqVx+oy3uKOw0vgOo3ScpAUOdSn0PDCanafDR2Xre+Qi
+lAbKM29c7o0ScclXCnIreKnkSHUTMdIbkRaYe6MXOxuU9mVaW2BtVb7oK041
+NWWuPVXCEMorTXYdlAZggKlAaY5tyvAZb/GBlQNjtvUMhTCMJpYRT++BsXuI
+q07cyGmLwLjWAeiIfKUxhCW3QlpHsQ5lvXm1d0jr0nHupKVB+eod7oruOu0p
+zXTL3LcyhmCua+uVCvqTAuRdTQet5G4ntZ6lkcnpaXfLkbbl9P0AQC2UV5rz
+Rzdm+Mylhcnl2bFLv3zNWE+fHqMqR0hiOVJl5wQYR520WXkDyYrmE4COyVWa
+Dioog0wFlCa97DqusgWVJh3/aktptIEn8czYXkmlSYknHGlKI7U/P6VuSVMv
+accsjURLpck/Zst+NXpwAPqEapTG4TPe4v1rxz5+du7qtRduNdbrqJdGr2Pr
+pVHryB4jLVG7Z/xClAbKk2cs+hU2t4IyObeQ0rQz8ORuUFpUVGm26B0eiQDo
+42Zd7qWR+l4MsdM6YcwzqO+zfiB6y4xJAfQR5ZXm3JGNLp/xzty3PDv21st3
+iUdjvQ7n0limxBgDT1Id86NR5uSccDMoDZQnW2ms01UyKhj1C8ylybAUSytZ
+DarkNJo9BSVoez7ZQA1K4xoGKq805u8XpQHoFypQmsMbXD7jnbm3tX80etRx
+feJJ/jSTdaJLO8/1jcgjWdICv1j91DhAJ2QqjW2WTFYFs7H0kqpdSVVLkXpp
+bJdbdYtag+Y6bc+lsRXOSx+c6rbSZA0GZQw8aSfWNfCktYzSAPQR5ZXGv9+B
+w2e8hXta+0ajRx1Hr4h9Row+3zf+KetTTuFX1Th6gmyug9JAWbKUxm407gra
+KEfaw2GZJ6Ns1z431rWTWoNdUhrl4OqcHuweeFKqmXOb0zPjmB7MwBNA31GB
+0sxtcPmMt3D3kq80wSPAUGOZRtNmBQAAyKK80vj3O3D4jLewfWlmNHoEAAAA
+6BoVKM2h9SsHgxwYW57109o/2to3uiQyM7o4c6V4bB34cFU7DAAAAGBSXmkA
+AAAAeg5KAwAAAA0ApQEAAIAGgNIAAABAA0BpAAAAoAGUV5pX56+6+Pz4xZPj
+F0ROjK8d3+Tn2KbzRzeKnDuy8cILN1W1twAAAABWyiuN8Blv9Rlv9Wlvdcpb
+ecpbedJbecJb/mJye27/64UBAAAAukkFSnNyPMNnvNYj/tcLAwAAAHST8kpz
+wVcap894S7tWURoAAADoMhUozYnxDJ/xlh5ePbTetl5wf0rpzpQh0u0jRQXL
+TbPDn6SbW0YY96hMVlPqxhu0FaZlxm4BFEG6t7OzxJNu/JjeGLFlrRAvlyoY
+qxSpk7OT9rXy7n5paSlowqgt3cm6PMnhxrvqt27ctjK3AWfF3PtvAkD/Ul5p
+1o5vyvAZb+mhlYMupVknUG9+HVqFqjTyM2E8yhrOO3GrShOX+82HLRn3AY9v
+0R0+34nTQHsE1+2pKeku1WZJUq5dgrUrZlyhNT0drSnXTGSocJ2snUww15qf
+T24QbpUafzenppS7dPvrTk5qG81xiDbJsIsi4uHyuexGUBqAwaAipXH6jLe4
+I0NpJiYMQ5mYmDCUJjEZqShtpA2lsRfa1gbohHnDFowSYQJhQaI2WqWkgrJO
+UFWqJ61dvI5rJ7PXstWPq6mV/Uu/ZjnB2lPVKUF5pcmug9IADDAVKM2xTRk+
+4y0+sHJgzLZeMoKUSEooLnssShMuW7fOGBFqv5cmemoajN+Dg9RAOfKVRhIW
+ubsm02jiCoo/6A0XqWOUpp097rWyjMZcU/wwr3ZVhSXdUxpbZ5d90CwdtIrq
+pdWMMyItnZyedrccWVxO3w8A1EJ5pTl/dGOGz1xamFyeHbv0y9eM9SKpMAaV
+7Erj6EYpqDTmHBl5Lo3sVMykgTLkKo36Y3x9lIosApFcZTPEo0gdyyYylSba
+O+u1Ol1BXjVqLt1AtLBapUmJJxy5B/Lmp4weJ2UWUrqflka2JN1pW5wt+9Xo
+wQHoE6pRGofPeIv3rx37+Nm5q9deuNVYL1YOfVDJrjTKkJTZiP7cs/TSyLNl
+MsaZAq/BaqAj8pRGvsJaB570S3B6rfWculKkTvZO5vXSGBdtub4010Y3JGma
+c429NFLfi6FkWidMukzfVUvvk7VlxqQA+ojySnPuyEaXz3hn7lueHXvr5bvE
+o7FeIhWB0+xJ5v3alCYqU6REbcTTpw6nddM6Uo2sqTPmZgCKka00ymXSZhHa
+NJasWS3WgR9HndydzFnLWEHpKtFGYdK+ovmkofqVJuNDWiWVxvz9ojQA/UIF
+SnN4g8tnvDP3tvaPRo862geRzPkuidJIJqLbhmIm8myY9LNNRacH75TUiEk1
+0BmZSqPNklEGMeLPI2dPYkkvqfHKRepk7KTsIHrL8/OeVsmy5+om1UPaoh9f
+FRSZS5MxGJQx8KR/4Msx8JRzLgCgh5RXGv9+Bw6f8Rbuae0bjR51tA4Wc0go
+UhpJTqLF6niUbB/RZJiRkRHVdNIfYl9RvpcmHvjia2mgJFlKY8771aaaahW0
+UY60w0PqFilSJ2sn9Su8tJZl6qxnrpTuqj4KIx9ND6cHuweelGr6dKDoadb0
+YAaeAPqOCpRmboPLZ7yFu5d8pQkeAYYafZZM+xUAACCL8krj3+/A4TPewval
+mdHoEQAAAKBrVKA0h9avHAxyYGx51k9r/2hr3+iSyMzo4syV4rF14MNV7TAA
+AACASXmlAQAAAOg5KA0AAAA0AJQGAAAAGgBKAwAAAA0ApQEAAIAGUF5pXp2/
+6uLz4xdPjl8QOTG+dnyTn2Obzh/dKHLuyMYLL9xU1d4CAAAAWCmvNMJnvNVn
+vNWnvdUpb+Upb+VJb+UJb/mLye25/a8XBgAAAOgmFSjNyfEMn/Faj/hfLwwA
+AADQTcorzQVfaZw+4y3tWkVpAAAAoMtUoDQnxjN8xlt6ePXQeufK0r0i7Te/
+zrkttnn3yaRcW8ssAaga6d7OzhIvvW9kfF9E6W7YCtKKjlU8T767onb/yaw6
+6h5aF2k31VQXuG90bdwm0nICpHtbt0tycPE+p3tT7A6SYQPOitZGuDclwGBQ
+XmnWjm/K8Blv6aGVgw6l8X1Evhl3B84hi0qgN9FNtFEaqJngKj01Jd2J2yxJ
+yoPrY2t62nI/bK1S7irJbbXjkiJ1lL12LPLm5+e1OkmzDiXwd3NqSt7xoNnJ
+Sb3lbKvIJMMuioiHVTFzG0FpAAaDipTG6TPe4g6H0vgOEwmIo6AAqqikLaA0
+0BPmDYExSsR1X7+mqv5irpWxilTRaCW/jvyjuRPWnfH3ZdpeNWxBbceXAc1y
+gvamOpWE8kqTXQelARhgKlCaY5syfMZbfGDlwJhlNYvAiKLQOnz9mJhYF/S5
+SCrirxIOMO2MCzVRSRotojRxcyNtixSAg3ylseiJudb8lCYerlUUf9Cbya9j
+URpLb43a8ySe2+0n7UpStyd+0JoIS6pSGrkzKl5kHzRLB62ietJQ35TZYxYv
+nZyedrccOVtO3w8A1EJ5pTl/dGOGz1xamFyeHbv0y9f01RJ/UYoSIUn8Y49k
+L5F7BC5SWmlEASoDFZOrNGYF62iQNnbjXCVDV4rUkcZh4ikp5iVd6aExpcXc
+a3lx1Fy6Wac5FUSZSxNPL9KURmpclUP1ZEuDUJYJOeqpcbbsV6MHB6BPqEZp
+HD7jLd6/duzjZ+euXnvhVn21vF4aaYZM8FxRoD3uXhprua1EEiOAishTGv0K
+a5tpq3XKZK7i0JUidaTmgq4IfXhIPoJ4Hq7FWaR25C3GW0ln+KiDYN3spdGm
+Wes9V7Kxpcv0HbP0NVlbZkwKoI8orzTnjmx0+Yx35r7l2bG3Xr5LPBrrZcyl
+6VRp2p9LEw4+0VsDFZGtNBkzWTy51DE0ZFvFMk+mSJ1Cu64uUrpHjOm9xlJ9
+1nGw5flk891WmoxDKak05u8XpQHoFypQmsMbXD7jnbm3tX80ejRJh5I8x2CT
+187Ak9xcG9ODLSNgAB2SqTRG94vtwmt81Cl7FfMjS0XqWHdcH3iZn9eX2ffR
+ViXZpDJSI3lQV+fSZAwGZQw8aafINfC0xfBFlAagXyivNP79Dhw+4y3c09o3
+Gj1akb5XRuoqsSpNWlmdHmz9Yhvz+2qMkrSAThqoiiyl0fREG8SQrvXqx4ty
+V4k7SKTrb04ddfcc02MtU2el/ci7rseOIC+Rj6a26cHugSelmj75J3oaLbNO
+D2bgCaDvqEBp5ja4fMZbuHvJV5rgsUI6+bg3QG/R58R0ZxUAgOGlvNL49ztw
++Iy3sH1pZjR6rA7lK/oAAAAAKlGaQ+tXDgY5MLY866e1f7S1b3RJZGZ0ceZK
+8dg68OHSe5p+jQxDRQAAAKBRXmkAAAAAeg5KAwAAAA0ApQEAAIAGgNIAAABA
+A0BpAAAAoAGUV5pX56+6+Pz4xZPjF0ROjK8d3+Tn2KbzRzeKnDuy8cILN1W1
+twAAAABWyiuN8Blv9Rlv9WlvdcpbecpbedJbecJb/mJye27/64UBAAAAukkF
+SnNyPMNnvNYj/tcLAwAAAHST8kpzwVcap894S7tWURoAAADoMhUozYnxDJ/x
+lh5ePbTetp5yH0npDtpaYfYNKJXbcNu/XFhaIt1FwXW/S+3+4PK9MrU7MLhb
+aAPn/cFhIJHu7ews8dJbUyb3jDRuFGnccNGxiufJd1dsqQVZddQ9tC5Kd8dy
+Z2/3ja6N20RaToB0b+t2SQ4u3ud0b4rdQTJswFnR2gj3pgQYDMorzdrxTRk+
+4y09tHLQpTTyLbZDizAv8Vkl/j0SoqfW1rTbQUnV7Y0E91yYmJhIlWbPRIEd
+k9vNOsy2l8IAEVylp6ak+2ibJUl5cH1sTU/rd782K+Wukty5Oy4pUkfZa8ci
+b35+XquTNOtQAn83p6aUu3T7zU5O6i1nW0UmGXZRRDysipnbCEoDMBhUpDRO
+n/EWd+QrTfq8PaVxrJg8N+7YnRZY6yc/SkYUPxWrGr05rhay97/4Uhg45g2B
+MUrEdV+/pqr+Yq6VsYpU0Wglv478o7kT1p3x92XaXjVsQW3HlwHNcoL2pjqV
+hPJKk10HpQEYYCpQmmObMnzGW3xg5cCYbT21X8XsbDGrWUpsSuM2GklMCimN
+ojGS3rh3QxqO8itLg1Npk9qw2rqde6Iy5GbwyVcai56Ya81PaeLhWkXxB72Z
+/DoWpbH01qg9T+K53X7SriR1e+IHrYmwpCqlkTuj4kX2QbN00CqqJw31TZk9
+ZvHSyelpd8uRs+X0/QBALZRXmvNHN2b4zKWFyeXZsUu/fM1Yz7zcq4Vpd4o5
+u8Y68GS0ZnSsSJaTMWzUttLYBp6s3UdmxWC3k4rcYXzgyVUas4J1NEgbu3Gu
+kqErRepI4zDxlBTzkq700JjSYu61vDhqLt2s05wKosyliacXaUojNa7KoXqy
+pUEoy4Qc9dQ4W/ar0YMD0CdUozQOn/EW71879vGzc1evvXCrsV58rVf6Ugr2
+0pj6Ymstp5fGPpu4HaWxtZAWG0pj2Z+Co1cwKOQpjX6Ftc201TplMldx6EqR
+OlJzQVeEPjwkH0E8D9fiLFI78hbjraQzfNRBsG720mjTrPWeK9nY0mX6jln6
+mqwtMyYF0EeUV5pzRza6fMY7c9/y7NhbL98lHo31lF4OcwjKrOYucbVWcC6N
+2VS7c2nM9m0jXChN88lWmoyZLJ5c6hgasq1imSdTpE6hXVcXKd0jxvReY6k+
+6zjY8nyy+W4rTcahlFQa8/eL0gD0CxUozeENLp/xztzb2j8aPepUMj04uzVt
+NEf++FMxpclSIFsLyjSeggNPKE2TyFQao/vFduE1PuqUvYr5kaUidaw7rg+8
+zM/ry+z7aKuSbFIZqZE8qKtzaTIGgzIGnrRT5Bp42mL4IkoD0C+UVxr/fgcO
+n/EW7mntG40edZQreHyxt34LTbtKo6qDdc5OQaWRVjemuVhbiGf/rpuYiDt1
+ogai9dXpwyhN08hSGk1PtEEM6Vqvfrwod5W4g0S6/ubUUXfPMT3WMnVW2o+8
+63rsCPIS+Whqmx7sHnhSqumTf6Kn0TLr9GAGngD6jgqUZm6Dy2e8hbuXfKUJ
+HgGGGn1OTHdWAQAYXsorjX+/A4fPeAvbl2ZGo0cAAACArlGB0hxav3IwyIGx
+5Vk/rf2jrX2jSyIzo4szV4rH1oEPV7XDAAAAACbllQYAAACg56A0AAAA0ABQ
+GgAAAGgAKA0AAAA0AJQGAAAAGgBKAwAAAA0ApQEAAIAGgNIAAABAA0BpAAAA
+oAGgNAAAANAAUBoAAABoACgNAAAANACUBgAAABoASgMAAAANAKUBAACABoDS
+AAAAQAMIleYCAAAAwCCD0gAAAEADQGkAAACgAaA0AAAA0ABQGgAAAGgAKA0A
+AAA0AJQGAAAAGgBKAwAAAA0ApQEAAIAGgNKA4HYAAIB+ooNrGUoDFwKl6fX3
+WAMAAESgNNAxKA0AAPQPKA10DEoDAAD9A0oDHYPSAABA/4DSQMegNAAA0D+g
+NNAxNqXZMzGSsm7n6aAk+FepI5ckP4onE3vsjZjNhzUBAAAiUJrB57lrJQF4
+3z0n3NXMhdbCojiUJltgzBKr0iQVAokJi0/vXJeYzOmdO3EaAACQQGkGn4Ja
+MqBKI5mM2RIAAEAMSjP4NF1pFKdBagAAwA5KM/jYtOTEPe+Lh6Kufc6oFi99
+3z33mIXxGn79a699n/+jQ3xy59I4+lY6VproOTNpAADABKUZfJS5NIGO+CWR
+yfiiEupI4iXp0sBitKX+0+CZXy0qak9putFLo7YQeA1WAwAAMijN4GMIh28q
+cd9MsDj2nKCaWJpWlwpHNDHKH5PqVGlURUn7YPLm0qhN4DQAACCD0gw+VSlN
+uoq9WYNOlUaZE+M/j+TE+YmnePnOuNA3GibVAACADEoz+JjuoQ08pXNjMgee
+tFaUoahyA0/ml8xEU2LU752xfi+NNkTF19IAAIAdlGbwyZ4enCxSFSVrerAx
+8NSG0gAAAPQGlAY6BqUBAID+AaWBjkFpAACgf0BpoGNQGgAA6B9QGugYlAYA
+APoHlAY6BqUBAID+AaWBjkFpAACgf0BpoGNuBwAA6Cc6uJahNAAAANAAUBoA
+AABoACgNAAAANACUBgAAABoASgMAAAANAKUBAACABoDSAABAcUZu+zHpLMVP
+8u6hp7MXJ0oDAADF6bkYDG6Kn2RxTX95iEFpAACgBsKrc68vegMGStMWKA0A
+ANQAStMBKE1boDQAAFADKE0HoDRtgdIAAEANoDQdgNK0BUoDAAA1gNJ0AErT
+FigNAADUQCmlmdo8ErF5ylnjijtnOr0WqtsQuNuybqj81u30gdLM3HlF/knp
+lIrPG0oDAAA10LnS+BfV2GRm7rzT7jRtXRzLaMkwKU2gM6lEOk9+x6A0AAAw
+eHSuNIWueyiNT6VKI6tkl0BpAABg8Cgx8OQPCelXvnQ8JLzqShdHfZFWJA0w
+KRds2+VVGnWJ61o2dMWdd7q37tffvPkK95BZFr1UGrfRGMOAwTm5c7MxPGX8
+JjJ+a1WA0gAAQA2Umx4cXQstXjG1OXiWlJiL/HXVC6erpyUl2JBfIl2LtfbT
+pcHOubZu87HC9FhpcvZbORWppEhnxXna9d9aNaA0AABQAxV84imZ2iF1nsT+
+EV8czUWW3oZig0fqimJx7DnxhtLq7q2Xu2r3Zy+NZH+GyCmnQl296pNjgtIA
+AEANVPIh7ug6mWEp9itpnUpTZFtF6ce5NGlxcgqKK02VJ8cEpQEAgBooMT34
+zviql4xlmKM5yiCIqSbFBp60Qm3gSZv+4Rp4KrKtovT4E0/SgJJP+Imn5IAs
+g3EvWxfLzVV4ckxQGgAAqIGS04PdE36NIQx9kdJCOuOjvenB5iU7bdUxPXjA
+B55C5MOJjiOZFb15c0YvTfTcNT2YgScAABhU+PbgDui90gwUKA0AANQAStMB
+KE1boDQAAFADKE0HoDRtgdIAAEANoDQdgNK0BUoDAAA1gNJ0AErTFigNAADU
+AErTAShNW6A0AABQA+HVmXSQ4icZpensxYnSAABAcXouBoOb4id599DT2YsT
+pQEAAIAGgNIAAABAA0BpAAAAoAGgNAAAADCI7A1IfkRpAAAAYBBBaQAAAKB5
+oDQAAAAwQCSdM/TSAAAAwOCC0gAAAECDQWkAAACg/zE7Z+ilAQAAgIEDpQEA
+AIBhAKUBAACABhAqDSGEEELIoOf/A8RCOJg=
+    "], {{0, 246.75}, {564.75, 0}}, {0, 
+    255},
+    ColorFunction->RGBColor,
+    ImageResolution->96],
+   BoxForm`ImageTag["Byte", ColorSpace -> "RGB", Interleaving -> True],
+   Selectable->False],
+  DefaultBaseStyle->"ImageGraphics",
+  ImageSize->Automatic,
+  ImageSizeRaw->{564.75, 246.75},
+  PlotRange->{{0, 564.75}, {0, 246.75}}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->151498556],
+
+Cell["\<\
+\[LineSeparator]Nothing is returned from this function after successfully \
+setting the fluids directory path.\[LineSeparator]\
+\>", "ExampleText",
+ CellID->54522394],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell["\t", "ExampleDelimiter"],
+  $Line = 0; Null]], "ExampleDelimiter",
+ CellID->652580355],
+
+Cell["\<\
+Set path permanently, storing path strings in the users resource file.\
+\>", "ExampleText",
+ CellID->17544201],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetPath", "[", "1", "]"}], ";"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->494801597],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetPath", "goodDIR", 
+   "\"INFO: Valid fluids directory found under \
+[\\!\\(\\*RowBox[{\\\"\\\\\\\"C:\\\\\\\\\\\\\\\\Program Files (x86)\\\\\\\\\\\
+\\\\\\REFPROP\\\\\\\"\\\"}]\\)].\"", 2, 15, 6, 33610983680637210755, "Local", 
+   "RefpropLink`SetPath"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->160052180],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetPath", "saveDIR", "\"INFO: Fluids directory saved.\"", 2, 15, 7, 
+   33610983680637210755, "Local", "RefpropLink`SetPath"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->380645024]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell["\t", "ExampleDelimiter"],
+  $Line = 0; Null]], "ExampleDelimiter",
+ CellID->67982763],
+
+Cell["Set path without the interactive window.", "ExampleText",
+ CellID->221236628],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetPath", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<C:\>\"", ",", "\"\<Program Files (x86)\>\"", ",", 
+      "\"\<REFPROP\>\""}], "}"}], "]"}], "]"}], ";"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->491421931],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetPath", "goodDIR", 
+   "\"INFO: Valid fluids directory found under \
+[\\!\\(\\*RowBox[{\\\"\\\\\\\"C:\\\\\\\\\\\\\\\\Program Files (x86)\\\\\\\\\\\
+\\\\\\REFPROP\\\\\\\"\\\"}]\\)].\"", 2, 16, 8, 33610983680637210755, "Local", 
+   "RefpropLink`SetPath"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->860335059]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell["\t", "ExampleDelimiter"],
+  $Line = 0; Null]], "ExampleDelimiter",
+ CellID->691310678],
+
+Cell["\<\
+Suppress information messages when paths are known to be valid.\
+\>", "ExampleText",
+ CellID->89537566],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetPath", "[", "]"}], "//", "Quiet"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->551797317],
+
+Cell[BoxData[
+ RowBox[{"Quiet", "[", 
+  RowBox[{"SetPath", "[", "]"}], "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->225150821]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SectionFooterSpacer"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]]],
+ "See Also"
+}], "SeeAlsoSection",
+ WholeCellGroupOpener->True,
+ CellID->1255426704],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["SetDLL"]], "paclet:RefpropLink/ref/SetDLL"},
+   "RefLink",
+   BaseStyle->{"InlineFormula", FontFamily -> "Verdana"}]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["setup"]], "paclet:RefpropLink/ref/setup"},
+   "RefLink",
+   BaseStyle->{"InlineFormula", FontFamily -> "Verdana"}]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["RefProp"]], "paclet:RefpropLink/ref/RefProp"},
+   "RefLink",
+   BaseStyle->{"InlineFormula", FontFamily -> "Verdana"}]], "InlineFormula"]
+}], "SeeAlso",
+ CellID->929782353]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]]],
+ "Related Guides"
+}], "MoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->38303248],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[BoxData[
+ TemplateBox[{
+   Cell[
+    TextData["RefpropLink"]], "paclet:RefpropLink/guide/RefpropLink"},
+  "RefLink",
+  BaseStyle->"MoreAbout"]], "MoreAbout",
+ CellID->1]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"SetPath",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "RefpropLink", ButtonData -> "paclet:RefpropLink/guide/RefpropLink", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2021, 10, 11, 17, 51, 45.5771539}", 
+    "history" -> {"1.0", "", "", ""}, "context" -> "RefpropLink`", 
+    "keywords" -> {"REFPROP", "Fluids", "Files", "Location", "Directory"}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "Refprop Link Package Symbol", "language" -> "en", "paclet" -> 
+    "RefpropLink Package", "status" -> "None", "summary" -> 
+    "SetPath[] Set the fluids files directory, for the current session, using \
+the standard System File Dialog. SetPath[hPth, permSet] Set fluids files \
+directory with one or two optional parameters. If hPth string input is \
+specified, the File Dialog is not presented. If permSet is omitted or zero \
+(0), setting is temporary; permSet = 1+ saves setting for future sessions.", 
+    "synonyms" -> {}, "tabletags" -> {}, "title" -> "SetPath", 
+    "titlemodifier" -> "", "windowtitle" -> "SetPath", "type" -> "Symbol", 
+    "uri" -> "RefpropLink/ref/SetPath"}},
+CellContext->"Global`",
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "12.1 for Microsoft Windows (64-bit) (June 19, 2020)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[9816, 294, 259, 10, 70, "PrimaryExamplesSection",ExpressionUUID->"6f9bdcdd-5cd4-418f-81fc-c986ccf72ceb",
+   CellTags->"PrimaryExamplesSection",
+   CellID->1]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 37941, 913}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[579, 21, 3729, 92, 70, "AnchorBarGrid",ExpressionUUID->"4b68098f-c9ee-4a14-9a38-31876df76d0d",
+ CellID->1],
+Cell[4311, 115, 164, 6, 70, "ObjectNameGrid",ExpressionUUID->"8f92c813-bda0-4b2a-a40c-79ee3528cb34"],
+Cell[4478, 123, 973, 25, 70, "Usage",ExpressionUUID->"8b309120-2f15-4d87-8760-da2e7968eaee"],
+Cell[CellGroupData[{
+Cell[5476, 152, 621, 19, 70, "NotesSection",ExpressionUUID->"b4dd2b18-cd53-4fa5-ad76-0bb4a0641a7e",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+Cell[6100, 173, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"247c1cf3-aa92-4279-b641-5fd1a1206c60"],
+Cell[6134, 175, 597, 15, 70, "Notes",ExpressionUUID->"1e8e2b43-681f-4045-841c-83b67b4c4cbd",
+ CellID->1067943069],
+Cell[6734, 192, 203, 7, 70, "Notes",ExpressionUUID->"205473d5-6ade-4e0f-8482-0f8a3409ab12",
+ CellID->526237795],
+Cell[6940, 201, 283, 6, 70, "Notes",ExpressionUUID->"7457874e-c634-46d3-8eda-12272d934f82",
+ CellID->45235239],
+Cell[7226, 209, 954, 28, 70, "Notes",ExpressionUUID->"98201d68-fe30-476f-944b-dfe3d18d6081",
+ CellID->166109123],
+Cell[8183, 239, 574, 17, 70, "Notes",ExpressionUUID->"6ea77c62-ed4b-49ba-b25b-9bd979e2ab7f",
+ CellID->325589237],
+Cell[8760, 258, 464, 11, 70, "Notes",ExpressionUUID->"29bbf21e-8e04-4eb7-9874-df3de01fc4fe",
+ CellID->569073670],
+Cell[9227, 271, 139, 4, 70, "Notes",ExpressionUUID->"a0dd673d-c261-4c6c-b377-c4c9d7298986",
+ CellID->117920165],
+Cell[9369, 277, 376, 10, 70, "Notes",ExpressionUUID->"123156ca-0a93-4a3d-8072-c1bb3e442ee0",
+ CellID->428436231],
+Cell[9748, 289, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"c71b59e1-5b8f-434a-9e68-25035cbdcbda"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[9816, 294, 259, 10, 70, "PrimaryExamplesSection",ExpressionUUID->"6f9bdcdd-5cd4-418f-81fc-c986ccf72ceb",
+ CellTags->"PrimaryExamplesSection",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[10100, 308, 187, 6, 70, "ExampleSection",ExpressionUUID->"3291a373-5241-4823-8c22-ae4a2992ddf7",
+ CellID->1],
+Cell[10290, 316, 148, 4, 70, "ExampleText",ExpressionUUID->"757feb6b-526c-4ad3-af26-a7b5a4f79e54",
+ CellID->456168726],
+Cell[CellGroupData[{
+Cell[10463, 324, 116, 4, 70, "Input",ExpressionUUID->"d89f4305-65e7-44b7-bdc3-042be7c8b7da",
+ CellID->301866692],
+Cell[10582, 330, 392, 9, 70, "Message",ExpressionUUID->"44207eee-a7e7-4490-8a0e-b7a7e468eaa6",
+ CellID->48509437]
+}, Open  ]],
+Cell[10989, 342, 69, 1, 70, "ExampleText",ExpressionUUID->"3d182529-d368-4db3-8a87-be7bb8b0b1a1",
+ CellID->116396848],
+Cell[11061, 345, 20379, 341, 70, "Input",ExpressionUUID->"fe4b3a24-b51a-4064-9ddd-b56af4ea0e26",
+ CellID->151498556],
+Cell[31443, 688, 176, 4, 70, "ExampleText",ExpressionUUID->"d4f57f3f-6b00-4249-9986-ecdd39e7b264",
+ CellID->54522394],
+Cell[CellGroupData[{
+Cell[31644, 696, 125, 3, 70, "ExampleDelimiter",ExpressionUUID->"b5804a62-469b-4811-a1b3-8782304603b2",
+ CellID->652580355],
+Cell[31772, 701, 120, 3, 70, "ExampleText",ExpressionUUID->"8d6aed8f-326b-4ca8-8766-a475c2da7b3d",
+ CellID->17544201],
+Cell[CellGroupData[{
+Cell[31917, 708, 121, 4, 70, "Input",ExpressionUUID->"5d2d4e6d-b774-4735-99b8-0dc24f52a631",
+ CellID->494801597],
+Cell[32041, 714, 393, 9, 70, "Message",ExpressionUUID->"96581fa4-5965-4360-8930-f54c3cf4c9f5",
+ CellID->160052180],
+Cell[32437, 725, 264, 6, 70, "Message",ExpressionUUID->"235c64dd-ece8-49e0-bf9e-a2d65c1d41ac",
+ CellID->380645024]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32750, 737, 124, 3, 70, "ExampleDelimiter",ExpressionUUID->"6c3e58a2-ea8c-40ba-9adb-d52ceec8a684",
+ CellID->67982763],
+Cell[32877, 742, 83, 1, 70, "ExampleText",ExpressionUUID->"61dd2724-f690-4056-85a8-af2ac54c8d03",
+ CellID->221236628],
+Cell[CellGroupData[{
+Cell[32985, 747, 284, 9, 70, "Input",ExpressionUUID->"31778ce5-85d7-42e5-824a-bdea56b2fcae",
+ CellID->491421931],
+Cell[33272, 758, 393, 9, 70, "Message",ExpressionUUID->"9235564d-2df7-4275-8b0d-ae84c59c763f",
+ CellID->860335059]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33714, 773, 125, 3, 70, "ExampleDelimiter",ExpressionUUID->"a08a6e84-c6b0-4de0-b508-5fcac1c1ee75",
+ CellID->691310678],
+Cell[33842, 778, 113, 3, 70, "ExampleText",ExpressionUUID->"ed97dad5-2f71-454e-9e20-9a95e2dfcdd1",
+ CellID->89537566],
+Cell[33958, 783, 126, 4, 70, "Input",ExpressionUUID->"6d1a2ecc-9fbb-4c26-ae13-5ddc4bc61ff7",
+ CellID->551797317],
+Cell[34087, 789, 130, 4, 70, "Input",ExpressionUUID->"883ebd43-d747-4c17-ae8f-56c0b3eb9112",
+ CellID->225150821]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34278, 800, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"2b973ab0-5491-47b5-bb40-2e5576a67414"],
+Cell[34312, 802, 150, 7, 70, "SeeAlsoSection",ExpressionUUID->"cd8e9454-09b3-4971-a5bf-1513349317a3",
+ CellID->1255426704],
+Cell[34465, 811, 866, 28, 70, "SeeAlso",ExpressionUUID->"da3e6f53-c930-4b29-99c2-104a9d3f662f",
+ CellID->929782353]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35368, 844, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"d917bd86-591d-4281-ad5f-8029f3d873e9",
+ CellID->38303248],
+Cell[35527, 853, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"cf802883-cb55-4ec5-99ee-0a37c406823a"],
+Cell[35561, 855, 174, 6, 70, "MoreAbout",ExpressionUUID->"7bdb8945-14f5-43f8-8083-197a6799841c",
+ CellID->1]
+}, Open  ]],
+Cell[35750, 864, 23, 0, 70, "FooterCell",ExpressionUUID->"eadd51d6-c298-48d1-a5ed-4dbbc6147f58"]
+}
+]
+*)
+
+(* End of internal cache information *)
