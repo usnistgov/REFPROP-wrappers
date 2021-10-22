@@ -4,15 +4,15 @@ The initial, Mathematica wrapper package was created as an example framework by 
 
 ## Overview
 
-The Wolfram Language (WL) Paclet, **RefpropLink**, provides a diverse range of WL wrapper functions that call the individual public subroutines in REFPROP64.DLL of the local NIST REFPROP installation.  The file `Installation.nb` is a Wolfram Language Notebook that provides the required installation steps.  Opening this file directly in Mathematica, the user can easily follow along with the steps to:
+The Wolfram Language (WL) Paclet, **_RefpropLink_**, provides a diverse range of WL wrapper functions that call the individual public subroutines in REFPROP64.DLL of the local NIST REFPROP installation.  The file `Installation.nb` is a Wolfram Language Notebook that provides the required installation steps.  Opening this file directly in Mathematica, the user can easily follow along with the steps to:
 
-   - Uninstall any and all existing **RefpropLink** paclets if they exist.
+   - Uninstall any and all existing **_RefpropLink_** paclets if they exist.
    - Install the paclet in the user's local Mathematica environment (only required once for each user)
-   - Verify that RefpropLink is properly installed
+   - Verify that **_RefpropLink_** is properly installed
 
 This instructions file is extremely useful for initial installation and providing examples of loading and using the RefProp wrapper functions.
 
-## Pre-Requisites
+## Prerequisites
 
    - **NIST REFPROP** 9.1 or later **_must_** be installed to make use of the wrapper functions provided here.  However, **NIST REFPROP 10.x** is recommended.  See [NIST.gov](https://www.nist.gov/srd/refprop) for licensing.
    - **Wolfram Mathematica 12.1** or later (paclet will not install in earlier versions)
@@ -38,31 +38,33 @@ These installation steps are included in the instructions file, noted above, but
 
 3. Follow the instructions, evaluating each installation step in the file by pressing `<Shift><Enter>`. 
     
-That's it! The `RefpropLink` paclet is now installed and can be used from any Mathematica notebook or script.  In addition, the installation steps automatically create a paclet archive file (.paclet) that can be used directly by other users to install RefpropLink, or it can be placed on a local paclet server for remote installation by users in the organization or community.
+That's it! The **_RefpropLink_** paclet is now installed and can be used from any Mathematica notebook or script.  In addition, the installation steps automatically create a paclet archive file (`/.archive/RefpropLink-x.x.x.paclet`) that can be used directly by other users to install **_RefpropLink_**, or it can be placed on a local paclet server for remote installation by users in the organization or community.
 
-Wolfram (both the man and the company) have been hinting of a Public Wolfram Paclet Repository since 2019.  This has not yet come to fruition.  When and if it does, RefpropLink developers can place a .paclet file there to greatly facilitate User Installation for the entire Wolfram Community.
+Wolfram (both the man and the company) have been hinting of a Public Wolfram Paclet Repository since 2019.  This has not yet come to fruition.  When and if it does, **_RefpropLink_** developers can place a .paclet file there to greatly facilitate User Installation for the entire Wolfram Community.
 
 ------
 
 # Usage Help
 
-Extensive documentation is provided with the paclet on usage of the RefpropLink functions.  Simply open the Mathematica help system and search for Refprop to open the Overview, Function Guide pages, Tutorials, and Symbol pages for each of the RefpropLink functions.  The majority of the legacy API functions are implemented as well as most of the High-Level API functions introduced in REFPROP 10.
+Extensive documentation is provided with the paclet on usage of the **_RefpropLink_** functions.  Simply open the Mathematica help system and search for Refprop to open the Overview, Function Guide pages, Tutorials, and Symbol pages for each of the **_RefpropLink_** functions.  The majority of the legacy API functions are implemented as well as most of the High-Level API functions introduced in REFPROP 10.
 
 NOTE: The `ALLPROPSdll` routines are not implemented; only `REFPROPdll`.
 
 ## Loading RefpropLink from within Mathematica
 
-To call any of the RefProp functions in a Mathematica notebook, RefpropLink must first be loaded from the paclet directory.  In any Mathematica session or script, the **NIST RefProp** functions are evaluated by pressing `<Shift><Enter>` following the command.  To load RefpropLink, evaluate the following command.
+To call any of the RefProp functions in a Mathematica notebook, **_RefpropLink_** must first be loaded from the paclet directory.  In any Mathematica session or script, the **NIST RefProp** functions are evaluated by pressing `<Shift><Enter>` following the command.  To load **_RefpropLink_**, evaluate the following command.
    ```Mathematica
    Needs["RefpropLink`"]
 
    Found NIST REFPROP Version: 10.0.0.2
    ```
-This command loads the RefpropLink context if it has not already been loaded and returns the version of NIST REFPROP link found on the machine. Note the back-quote at the end of the context string.
+> _Note the back-quote at the end of the context string._
+
+This command loads the **_RefpropLink_** context if it has not already been loaded and returns the version of NIST REFPROP link found on the machine. Note the back-quote at the end of the context string.
 
 ## Fluid Property Calculation Example (High-Level API)
 
-Fluid properties can be calculated using the **_RefProp_[ ]** function (which calls `REFPRRP64dll` in the REFPROP library).  This is a Swiss army knife function that will return one or multiple fluid properties for any of the library fluids at a specified reference state.  The simple example below returns the molar density [D] and enthalpy [H] of carbon dioxide (CO2) at room temperature and pressure (after RefpropLink is loaded as shown above).
+Fluid properties can be calculated using the **_RefProp_[ ]** function (which calls `REFPRRP64dll` in the REFPROP library).  This is a Swiss army knife function that will return one or multiple fluid properties for any of the library fluids at a specified reference state.  The simple example below returns the molar density [D] and enthalpy [H] of carbon dioxide (CO2) at room temperature and pressure (after **_RefpropLink_** is loaded as shown above).
 
    ```Mathematica
    T = 72 °F;
@@ -85,6 +87,8 @@ The installed documentation contains extensive tutorials and examples on the usa
 
 Development of integrated documentation has been problematic since the release of Mathematica 12.  Wolfram has provided mature paclet management functions, but has not provided native tools for creating Mathematica 12-styled documentation pages and assembling them.  The existing tool, Wolfram Workbench 3, has not kept up with the newer releases of Mathematica, but does still function and generates passable documentation pages that can be indexed into the help system.  Wolfram has been hinting at creating native Documentation Tools right within Mathematica, but these tools have not yet been released as of Mathematica 12.3.  Until they do, we're stuck with Wolfram Workbench, which is a free plug-in for the Eclipse IDE.
 
-RefpropLink and the associated documentation is developed entirely in Wolfram Workbench.  To contribute to RefpropLink development, one should download the entire [**usnistgov/REFPROP-wrappers**](https://github.com/usnistgov/REFPROP-wrappers) repository from GitHub and import the `wrappers\Mathematica` directory into a project in an installation of Eclipse that includes the Wolfram Workbench 3 plug-in.  RefpropLink is currently developed in Eclipse 2021-09 with Wolfram Workbench version 10.1.1087 and Mathematica 12.1 for current working compatibility.
+**_RefpropLink_** and the associated documentation is developed entirely in Wolfram Workbench ( _see [**Prerequisites**](#prerequisites)_ ).  To contribute to **_RefpropLink_** development, one should download the entire [**usnistgov/REFPROP-wrappers**](https://github.com/usnistgov/REFPROP-wrappers) repository from GitHub and import the `wrappers\Mathematica` directory into a project in an installation of Eclipse that includes the Wolfram Workbench 3 plug-in.  **_RefpropLink_** is currently developed in Eclipse 2021-09 with Wolfram Workbench version 10.1.1087 and Mathematica 12.1 for current working compatibility.
 
-Contributions to RefpropLink are encouraged through pull requests to the [**usnistgov/REFPROP-wrappers**](https://github.com/usnistgov/REFPROP-wrappers) GitHub repository.  Documentation should be rebuilt consistent with any changes to the code and updating the version number in the `PacletInfo.m` file.
+Contributions to **_RefpropLink_** are encouraged through pull requests to the [**usnistgov/REFPROP-wrappers**](https://github.com/usnistgov/REFPROP-wrappers) GitHub repository.  Documentation should be rebuilt consistent with any changes to the code as well as updating the version number in the `PacletInfo.m` file.
+
+> **Developer Note:** There are some Git warnings regarding LF and CRLF line endings when placing Mathematica notebooks and scripts in git repos and pulling and pushing them from GitHub.  Limited testing demonstrates that Mathematica is impervious to the line endings (see [Wolfram Notebook Technology](https://www.wolfram.com/technologies/nb/)) and these Git warnings can be ignored.  If issues occur in the Eclipse editor when importing the project, this may be the cause and can easily be corrected. 
