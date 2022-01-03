@@ -4,10 +4,11 @@
 
 Paclet[
     Name -> "RefpropLink",
-    Version -> "1.0.4",
+    Version -> "1.0.5",
     WolframVersion -> "12.1+",
     Description -> "Provides wrapper functions for the NIST REFPROP materials library functions.",
     Creator -> "J. P. Henning",
+    URL -> "https://github.com/usnistgov/REFPROP-wrappers",
     SystemID -> 
         {"Windows-x86-64"}
 ,

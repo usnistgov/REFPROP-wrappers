@@ -1,0 +1,2264 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     97091,       2256]
+NotebookOptionsPosition[     96631,       2238]
+NotebookOutlinePosition[     97077,       2256]
+CellTagsIndexPosition[     97034,       2253]
+WindowTitle->RefpropLink
+WindowFrame->Palette*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ TabViewBox[{{1,
+  StyleBox["\<\"v10+ API\"\>",
+   StripOnInput->False,
+   LineColor->RGBColor[0, 0, 
+     Rational[2, 3]],
+   FrontFaceColor->RGBColor[0, 0, 
+     Rational[2, 3]],
+   BackFaceColor->RGBColor[0, 0, 
+     Rational[2, 3]],
+   GraphicsColor->RGBColor[0, 0, 
+     Rational[2, 3]],
+   FontSize->10,
+   FontColor->RGBColor[0, 0, 
+     Rational[2, 3]]]->
+  TagBox[GridBox[{
+     {
+      StyleBox[
+       InterpretationBox[Cell[
+        "Setup",ExpressionUUID->"141c618b-ffc9-4d7b-8e7a-9cc692378fe7"],
+        TextCell["Setup"]],
+       StripOnInput->False,
+       LineColor->GrayLevel[0],
+       FrontFaceColor->GrayLevel[0],
+       BackFaceColor->GrayLevel[0],
+       GraphicsColor->GrayLevel[0],
+       FontSize->12,
+       FontWeight->Bold,
+       FontColor->GrayLevel[0],
+       Background->GrayLevel[1]]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"Load RefpropLink\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"Needs", "[", "\"RefpropLink`\"", "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Load the RefpropLink context.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, "Load the RefpropLink context.", "Tooltip"]& ]},
+     {
+      StyleBox[
+       InterpretationBox[Cell[
+        "Property Calcs",ExpressionUUID->
+         "7b8e3433-f94e-473d-a5f7-569bcf4971b6"],
+        TextCell["Property Calcs"]],
+       StripOnInput->False,
+       LineColor->GrayLevel[0],
+       FrontFaceColor->GrayLevel[0],
+       BackFaceColor->GrayLevel[0],
+       GraphicsColor->GrayLevel[0],
+       FontSize->12,
+       FontWeight->Bold,
+       FontColor->GrayLevel[0],
+       Background->GrayLevel[1]]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"RefProp\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"RefProp", "[", 
+             
+             RowBox[{"\"hFld\"", ",", "\"hIn\"", ",", "\"hOut\"", ",", "a", 
+               ",", "b", ",", "z"}], "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Set fluid/mixture and calculate properties.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, "Set fluid/mixture and calculate properties.", 
+        "Tooltip"]& ]},
+     {
+      TagBox[
+       DynamicModuleBox[{Typeset`var$$ = False}, 
+        InterpretationBox[
+         StyleBox[
+          PaneSelectorBox[{False->GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Options...   \"\>",
+               StripOnInput->False,
+               FontWeight->Bold]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->
+           GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Options...   \"\>",
+               StripOnInput->False,
+               FontWeight->Bold]},
+             {"", 
+              PaneBox[
+               TagBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"iUnits\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"iUnits", "\[Rule]", "0"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Specify units system to use. Use GetEnum to get the \
+enumerated iUnits value (0 = default).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Specify units system to use. Use GetEnum to get the \
+enumerated iUnits value (0 = default).", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"iMass\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"iMass", "\[Rule]", "1"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Specify if the input composition is mole based (0, \
+default) or mass based (1).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Specify if the input composition is mole based (0, \
+default) or mass based (1).", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"iFlag\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"iFlag", "\[Rule]", "1"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Specify if SATSPLN should be called for current \
+mixture composition.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Specify if SATSPLN should be called for current mixture \
+composition.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"SatComp\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"SatComp", "\[Rule]", "True"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Specify if the saturation compositions should be \
+output.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Specify if the saturation compositions should be \
+output.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"SuppressUnits\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"SuppressUnits", "\[Rule]", "True"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Specify if the output should be returned without units \
+applied (non-Quantity values).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Specify if the output should be returned without units \
+applied (non-Quantity values).", "Tooltip"]& ]}
+                 },
+                 DefaultBaseStyle->"Column",
+                 GridBoxAlignment->{"Columns" -> {{Left}}},
+                 
+                 GridBoxItemSize->{
+                  "Columns" -> {{13}}, "Rows" -> {{Automatic}}}],
+                "Column"],
+               ImageMargins->0]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+           Dynamic[Typeset`var$$],
+           Alignment->Automatic,
+           BaseStyle->{},
+           BaselinePosition->Baseline,
+           DefaultBaseStyle->"OpenerView",
+           ImageMargins->0,
+           ImageSize->Automatic],
+          Deployed->False,
+          StripOnInput->False],
+         OpenerView[{
+           Style["Options...   ", Bold], 
+           Column[{
+             Tooltip[
+              Style[
+               PasteButton["iUnits", 
+                Defer[$CellContext`iUnits -> 0], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Specify units system to use. Use GetEnum to get the enumerated \
+iUnits value (0 = default)."], 
+             Tooltip[
+              Style[
+               PasteButton["iMass", 
+                Defer[$CellContext`iMass -> 1], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Specify if the input composition is mole based (0, default) or \
+mass based (1)."], 
+             Tooltip[
+              Style[
+               PasteButton["iFlag", 
+                Defer[$CellContext`iFlag -> 1], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Specify if SATSPLN should be called for current mixture \
+composition."], 
+             Tooltip[
+              Style[
+               PasteButton["SatComp", 
+                Defer[$CellContext`SatComp -> True], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Specify if the saturation compositions should be output."], 
+             Tooltip[
+              Style[
+               PasteButton["SuppressUnits", 
+                Defer[$CellContext`SuppressUnits -> True], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Specify if the output should be returned without units applied \
+(non-Quantity values)."]}, ItemSize -> {13, Automatic}]}, False]],
+        DynamicModuleValues:>{}],
+       Setting[#, {0}]& ]},
+     {
+      StyleBox[
+       InterpretationBox[Cell[
+        "Setup Functions",ExpressionUUID->
+         "60653693-e1cc-4283-b3be-ac1123ffd14b"],
+        TextCell["Setup Functions"]],
+       StripOnInput->False,
+       LineColor->GrayLevel[0],
+       FrontFaceColor->GrayLevel[0],
+       BackFaceColor->GrayLevel[0],
+       GraphicsColor->GrayLevel[0],
+       FontSize->12,
+       FontWeight->Bold,
+       FontColor->GrayLevel[0],
+       Background->GrayLevel[1]]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"SetFluids\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"SetFluids", "[", "\"hFld\"", "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Just set pure fluid.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, "Just set pure fluid.", "Tooltip"]& ]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"SetMixture\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"SetMixture", "[", "\"hMixName.mix\"", "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Set a pre-defined mixture.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, "Set a pre-defined mixture.", "Tooltip"]& ]},
+     {
+      StyleBox[
+       InterpretationBox[Cell[
+        "Utility Functions",ExpressionUUID->
+         "488278e6-c5ae-4b61-aeba-d718099d8d1a"],
+        TextCell["Utility Functions"]],
+       StripOnInput->False,
+       LineColor->GrayLevel[0],
+       FrontFaceColor->GrayLevel[0],
+       BackFaceColor->GrayLevel[0],
+       GraphicsColor->GrayLevel[0],
+       FontSize->12,
+       FontWeight->Bold,
+       FontColor->GrayLevel[0],
+       Background->GrayLevel[1]]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"Flags\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"Flags", "[", 
+             RowBox[{"\"hFlag\"", ",", "jFlag"}], "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Set/get flags for desired REFPROP behavior.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, "Set/get flags for desired REFPROP behavior.", 
+        "Tooltip"]& ]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"GetEnum\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"GetEnum", "[", 
+             RowBox[{"iFlag", ",", "\"hEnum\""}], "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Get the enumerated value for a REFPROP flag, variable, or unit \
+string. iFlag can be omitted or passed as 1, 2, or 3 to search string \
+subsets.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, 
+        "Get the enumerated value for a REFPROP flag, variable, or unit \
+string. iFlag can be omitted or passed as 1, 2, or 3 to search string \
+subsets.", "Tooltip"]& ]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"SetDLL\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"SetDLL", "[", "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Pops a window to browse for the REFPRP64.DLL file. Pass a \
+parameter of 1 to make the setting permanent.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, 
+        "Pops a window to browse for the REFPRP64.DLL file. Pass a parameter \
+of 1 to make the setting permanent.", "Tooltip"]& ]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"SetPath\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"SetPath", "[", "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Pops a window to browse for an alternate REFPROP\\\\FLUIDS \
+directory. Pass a parameter of 1 to make the setting permanent.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, 
+        "Pops a window to browse for an alternate REFPROP\\FLUIDS directory. \
+Pass a parameter of 1 to make the setting permanent.", "Tooltip"]& ]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxDividers->{"Columns" -> {{None}}, "RowsIndexed" -> {1 -> {
+          RGBColor[0, 0, 
+           Rational[2, 3]], 
+          Thickness[Large]}, -1 -> {
+          RGBColor[0, 0, 
+           Rational[2, 3]], 
+          Thickness[Large]}}},
+    GridBoxItemSize->{"Columns" -> {{15}}, "Rows" -> {{Automatic}}}],
+   "Column"]}, {2,
+  StyleBox["\<\"Legacy API\"\>",
+   StripOnInput->False,
+   LineColor->RGBColor[0, 
+     Rational[2, 3], 0],
+   FrontFaceColor->RGBColor[0, 
+     Rational[2, 3], 0],
+   BackFaceColor->RGBColor[0, 
+     Rational[2, 3], 0],
+   GraphicsColor->RGBColor[0, 
+     Rational[2, 3], 0],
+   FontSize->10,
+   FontColor->RGBColor[0, 
+     Rational[2, 3], 0]]->
+  TagBox[GridBox[{
+     {
+      StyleBox[
+       InterpretationBox[Cell[
+        "Setup",ExpressionUUID->"75b99b72-8c48-425d-9856-3c7d083ca73e"],
+        TextCell["Setup"]],
+       StripOnInput->False,
+       LineColor->GrayLevel[0],
+       FrontFaceColor->GrayLevel[0],
+       BackFaceColor->GrayLevel[0],
+       GraphicsColor->GrayLevel[0],
+       FontSize->12,
+       FontWeight->Bold,
+       FontColor->GrayLevel[0],
+       Background->GrayLevel[1]]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"Load RefpropLink\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"Needs", "[", "\"RefpropLink`\"", "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Load the RefpropLink context.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, "Load the RefpropLink context.", "Tooltip"]& ]},
+     {
+      StyleBox[
+       InterpretationBox[Cell[
+        "Load Fluids",ExpressionUUID->"84d8bbf3-013e-4d2a-88e6-efbdb7e4bdfa"],
+        TextCell["Load Fluids"]],
+       StripOnInput->False,
+       LineColor->GrayLevel[0],
+       FrontFaceColor->GrayLevel[0],
+       BackFaceColor->GrayLevel[0],
+       GraphicsColor->GrayLevel[0],
+       FontSize->12,
+       FontWeight->Bold,
+       FontColor->GrayLevel[0],
+       Background->GrayLevel[1]]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"setup\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"setup", "[", 
+             RowBox[{"{", "\"hFluidName\"", "}"}], "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Load pure fluid file or set of fluid files from library.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, 
+        "Load pure fluid file or set of fluid files from library.", 
+        "Tooltip"]& ]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"setmix\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{
+             RowBox[{"{", 
+               RowBox[{"hFluids", ",", "z"}], "}"}], "=", 
+             RowBox[{
+               RowBox[{"setmix", "[", "\"hMixName.mix\"", "]"}], 
+               "\[LeftDoubleBracket]", 
+               RowBox[{"All", ",", "2"}], "\[RightDoubleBracket]"}]}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Load pre-defined mixture.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, "Load pre-defined mixture.", "Tooltip"]& ]},
+     {
+      TagBox[
+       TooltipBox[
+        StyleBox[
+         ButtonBox["\<\"setref\"\>",
+          Background->RGBColor[0.87, 0.94, 1],
+          BaseStyle->"Paste",
+          ButtonData->RowBox[{"setref", "[", "\"???\"", "]"}],
+          ImageMargins->{{5, 5}, {Automatic, Automatic}}],
+         StripOnInput->False,
+         FontWeight->Bold],
+        "\"Set reference state for loaded fluid(s)/mixture.\"",
+        TooltipStyle->"TextStyling"],
+       Annotation[#, "Set reference state for loaded fluid(s)/mixture.", 
+        "Tooltip"]& ]},
+     {
+      TagBox[
+       DynamicModuleBox[{Typeset`var$$ = False}, 
+        InterpretationBox[
+         StyleBox[
+          PaneSelectorBox[{False->GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Fluid Information\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->
+           GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Fluid Information\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]},
+             {"", 
+              PaneBox[
+               TagBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"info\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"info", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get the fluid constants for a pure fluid or an \
+individual component.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the fluid constants for a pure fluid or an \
+individual component.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"wmoli\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"wmoli", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get the molar mass (molecular weight) of a pure fluid \
+or component.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the molar mass (molecular weight) of a pure fluid or \
+component.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"wmol\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"wmol", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    "\"Get the molar mass (molecular weight) of a mixture.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the molar mass (molecular weight) of a mixture.", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"limits\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"limits", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get the property model limits of temperature, \
+pressure, and density.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the property model limits of temperature, pressure, \
+and density.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"name\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"name", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    "\"Get the molar mass (molecular weight) of a mixture.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the molar mass (molecular weight) of a mixture.", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"longname\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"longname", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    "\"Get the molar mass (molecular weight) of a mixture.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the molar mass (molecular weight) of a mixture.", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"casn\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"casn", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    "\"Get the molar mass (molecular weight) of a mixture.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the molar mass (molecular weight) of a mixture.", 
+                    "Tooltip"]& ]}
+                 },
+                 DefaultBaseStyle->"Column",
+                 GridBoxAlignment->{"Columns" -> {{Left}}},
+                 
+                 GridBoxItemSize->{
+                  "Columns" -> {{13}}, "Rows" -> {{Automatic}}}],
+                "Column"],
+               ImageMargins->0]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+           Dynamic[Typeset`var$$],
+           Alignment->Automatic,
+           BaseStyle->{},
+           BaselinePosition->Baseline,
+           DefaultBaseStyle->"OpenerView",
+           ImageMargins->0,
+           ImageSize->Automatic],
+          Deployed->False,
+          StripOnInput->False],
+         OpenerView[{
+           Style["Fluid Information", Bold, 12], 
+           Column[{
+             Tooltip[
+              Style[
+               PasteButton["info", 
+                Defer[
+                 RefpropLink`info[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the fluid constants for a pure fluid or an individual \
+component."], 
+             Tooltip[
+              Style[
+               PasteButton["wmoli", 
+                Defer[
+                 RefpropLink`wmoli[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the molar mass (molecular weight) of a pure fluid or \
+component."], 
+             Tooltip[
+              Style[
+               PasteButton["wmol", 
+                Defer[
+                 RefpropLink`wmol[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the molar mass (molecular weight) of a mixture."], 
+             Tooltip[
+              Style[
+               PasteButton["limits", 
+                Defer[
+                 RefpropLink`limits[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the property model limits of temperature, pressure, and \
+density."], 
+             Tooltip[
+              Style[
+               PasteButton["name", 
+                Defer[
+                 RefpropLink`name[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the molar mass (molecular weight) of a mixture."], 
+             Tooltip[
+              Style[
+               PasteButton["longname", 
+                Defer[
+                 RefpropLink`longname[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the molar mass (molecular weight) of a mixture."], 
+             Tooltip[
+              Style[
+               PasteButton["casn", 
+                Defer[
+                 RefpropLink`casn[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the molar mass (molecular weight) of a mixture."]}, 
+            ItemSize -> {13, Automatic}]}, False]],
+        DynamicModuleValues:>{}],
+       Setting[#, {0}]& ]},
+     {
+      TagBox[
+       DynamicModuleBox[{Typeset`var$$ = False}, 
+        InterpretationBox[
+         StyleBox[
+          PaneSelectorBox[{False->GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"1\[Phi] Properties\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->
+           GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"1\[Phi] Properties\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]},
+             {"", 
+              PaneBox[
+               TagBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"tprho\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"tprho", "[", 
+                    RowBox[{"T", ",", "P", ",", "z", ",", "kph", ",", "D"}], 
+                    "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get fluid/mixture density @ Temperature, \
+\\!\\(\\*StyleBox[\\\"T\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"K\\\", \
+\\\"InlineCode\\\"]\\)], and Pressure, \\!\\(\\*StyleBox[\\\"P\\\", \
+\\\"TI\\\"]\\) [kPa], for specified phase.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get fluid/mixture density @ Temperature, \!\(\*StyleBox[\
+\"T\", \"TI\"]\) [\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], and Pressure, \
+\!\(\*StyleBox[\"P\", \"TI\"]\) [kPa], for specified phase.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"therm\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"therm", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get fluid/mixture thermal quantities as a function of \
+temperature, \\!\\(\\*StyleBox[\\\"T\\\", \\\"TI\\\"]\\) \
+[\\!\\(\\*StyleBox[\\\"K\\\", \\\"InlineCode\\\"]\\)], molar density, \
+\\!\\(\\*StyleBox[\\\"D\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"mol\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"L\\\", \\\"InlineCode\\\"]\\)], \
+and molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\), using \
+core functions.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get fluid/mixture thermal quantities as a function of \
+temperature, \!\(\*StyleBox[\"T\", \"TI\"]\) [\!\(\*StyleBox[\"K\", \
+\"InlineCode\"]\)], molar density, \!\(\*StyleBox[\"D\", \"TI\"]\) \
+[\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"L\", \"InlineCode\"]\)], and molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\), using core functions.", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"press\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"press", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get fluid/mixture pressure, \
+\\!\\(\\*StyleBox[\\\"P\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"kPa\\\", \
+\\\"InlineCode\\\"]\\)] as a function of temperature, \\!\\(\\*StyleBox[\\\"T\
+\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"K\\\", \\\"InlineCode\\\"]\\)], \
+molar density, \\!\\(\\*StyleBox[\\\"D\\\", \\\"TI\\\"]\\) \
+[\\!\\(\\*StyleBox[\\\"mol\\\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\
+\\\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"L\\\", \
+\\\"InlineCode\\\"]\\)], and molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \
+\\\"TI\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get fluid/mixture pressure, \!\(\*StyleBox[\"P\", \
+\"TI\"]\) [\!\(\*StyleBox[\"kPa\", \"InlineCode\"]\)] as a function of \
+temperature, \!\(\*StyleBox[\"T\", \"TI\"]\) [\!\(\*StyleBox[\"K\", \
+\"InlineCode\"]\)], molar density, \!\(\*StyleBox[\"D\", \"TI\"]\) \
+[\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"L\", \"InlineCode\"]\)], and molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\).", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"enthal\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"enthal", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get fluid/mixture enthalpy \
+[\\!\\(\\*StyleBox[\\\"J\\\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\\\
+\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"mol\\\", \
+\\\"InlineCode\\\"]\\)] as a function of temperature, \\!\\(\\*StyleBox[\\\"T\
+\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"K\\\", \\\"InlineCode\\\"]\\)], \
+molar density, \\!\\(\\*StyleBox[\\\"D\\\", \\\"TI\\\"]\\) \
+[\\!\\(\\*StyleBox[\\\"mol\\\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\
+\\\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"L\\\", \
+\\\"InlineCode\\\"]\\)], and molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \
+\\\"TI\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get fluid/mixture enthalpy [\!\(\*StyleBox[\"J\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)] as a function of \
+temperature, \!\(\*StyleBox[\"T\", \"TI\"]\) [\!\(\*StyleBox[\"K\", \
+\"InlineCode\"]\)], molar density, \!\(\*StyleBox[\"D\", \"TI\"]\) \
+[\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"L\", \"InlineCode\"]\)], and molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\).", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"entro\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"entro", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get fluid/mixture entropy \
+[\\!\\(\\*StyleBox[\\\"J\\\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\\\
+\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"mol\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"-\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"K\\\", \\\"InlineCode\\\"]\\)] as \
+a function of temperature, \\!\\(\\*StyleBox[\\\"T\\\", \\\"TI\\\"]\\) \
+[\\!\\(\\*StyleBox[\\\"K\\\", \\\"InlineCode\\\"]\\)], molar density, \
+\\!\\(\\*StyleBox[\\\"D\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"mol\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"L\\\", \\\"InlineCode\\\"]\\)], \
+and molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get fluid/mixture entropy [\!\(\*StyleBox[\"J\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"-\", \"InlineCode\"]\)\!\(\*StyleBox[\"K\", \
+\"InlineCode\"]\)] as a function of temperature, \!\(\*StyleBox[\"T\", \
+\"TI\"]\) [\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], molar density, \
+\!\(\*StyleBox[\"D\", \"TI\"]\) [\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \"InlineCode\"]\)\!\(\*StyleBox[\"L\", \
+\"InlineCode\"]\)], and molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\).", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"cvcp\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"cvcp", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get fluid/mixture heat capacities \
+[\\!\\(\\*StyleBox[\\\"J\\\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\\\
+\", \\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"mol\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"-\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"K\\\", \\\"InlineCode\\\"]\\)] as \
+a function of temperature, \\!\\(\\*StyleBox[\\\"T\\\", \\\"TI\\\"]\\) \
+[\\!\\(\\*StyleBox[\\\"K\\\", \\\"InlineCode\\\"]\\)], molar density, \
+\\!\\(\\*StyleBox[\\\"D\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"mol\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"L\\\", \\\"InlineCode\\\"]\\)], \
+and molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get fluid/mixture heat capacities [\!\(\*StyleBox[\"J\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"-\", \"InlineCode\"]\)\!\(\*StyleBox[\"K\", \
+\"InlineCode\"]\)] as a function of temperature, \!\(\*StyleBox[\"T\", \
+\"TI\"]\) [\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], molar density, \
+\!\(\*StyleBox[\"D\", \"TI\"]\) [\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \"InlineCode\"]\)\!\(\*StyleBox[\"L\", \
+\"InlineCode\"]\)], and molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\).", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"virial\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"virial", "[", 
+                    RowBox[{"T", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get fluid/mixture virial coefficients of a mixture as \
+a function of temperature, \\!\\(\\*StyleBox[\\\"T\\\", \\\"TI\\\"]\\) \
+[\\!\\(\\*StyleBox[\\\"K\\\", \\\"InlineCode\\\"]\\)], and molar composition, \
+\\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, 
+                    "Get fluid/mixture virial coefficients of a mixture as a \
+function of temperature, \!\(\*StyleBox[\"T\", \"TI\"]\) \
+[\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], and molar composition, \
+\!\(\*StyleBox[\"z\", \"TI\"]\).", "Tooltip"]& ]}
+                 },
+                 DefaultBaseStyle->"Column",
+                 GridBoxAlignment->{"Columns" -> {{Left}}},
+                 
+                 GridBoxItemSize->{
+                  "Columns" -> {{13}}, "Rows" -> {{Automatic}}}],
+                "Column"],
+               ImageMargins->0]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+           Dynamic[Typeset`var$$],
+           Alignment->Automatic,
+           BaseStyle->{},
+           BaselinePosition->Baseline,
+           DefaultBaseStyle->"OpenerView",
+           ImageMargins->0,
+           ImageSize->Automatic],
+          Deployed->False,
+          StripOnInput->False],
+         OpenerView[{
+           Style["1\[Phi] Properties", Bold, 12], 
+           Column[{
+             Tooltip[
+              Style[
+               PasteButton["tprho", 
+                Defer[
+                 
+                 RefpropLink`tprho[$CellContext`T, $CellContext`P, \
+$CellContext`z, RefpropLink`RefpropUnits`kph, D]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get fluid/mixture density @ Temperature, \!\(\*StyleBox[\"T\", \
+\"TI\"]\) [\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], and Pressure, \
+\!\(\*StyleBox[\"P\", \"TI\"]\) [kPa], for specified phase."], 
+             Tooltip[
+              Style[
+               PasteButton["therm", 
+                Defer[
+                 RefpropLink`therm[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get fluid/mixture thermal quantities as a function of \
+temperature, \!\(\*StyleBox[\"T\", \"TI\"]\) [\!\(\*StyleBox[\"K\", \
+\"InlineCode\"]\)], molar density, \!\(\*StyleBox[\"D\", \"TI\"]\) \
+[\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"L\", \"InlineCode\"]\)], and molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\), using core functions."], 
+             Tooltip[
+              Style[
+               PasteButton["press", 
+                Defer[
+                 RefpropLink`press[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get fluid/mixture pressure, \!\(\*StyleBox[\"P\", \"TI\"]\) \
+[\!\(\*StyleBox[\"kPa\", \"InlineCode\"]\)] as a function of temperature, \
+\!\(\*StyleBox[\"T\", \"TI\"]\) [\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], \
+molar density, \!\(\*StyleBox[\"D\", \"TI\"]\) [\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \"InlineCode\"]\)\!\(\*StyleBox[\"L\", \
+\"InlineCode\"]\)], and molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\)."], 
+             Tooltip[
+              Style[
+               PasteButton["enthal", 
+                Defer[
+                 RefpropLink`enthal[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get fluid/mixture enthalpy [\!\(\*StyleBox[\"J\", \"InlineCode\
+\"]\)\!\(\*StyleBox[\"/\", \"InlineCode\"]\)\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)] as a function of temperature, \!\(\*StyleBox[\"T\", \
+\"TI\"]\) [\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], molar density, \
+\!\(\*StyleBox[\"D\", \"TI\"]\) [\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \"InlineCode\"]\)\!\(\*StyleBox[\"L\", \
+\"InlineCode\"]\)], and molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\)."], 
+             Tooltip[
+              Style[
+               PasteButton["entro", 
+                Defer[
+                 RefpropLink`entro[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get fluid/mixture entropy [\!\(\*StyleBox[\"J\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"-\", \"InlineCode\"]\)\!\(\*StyleBox[\"K\", \
+\"InlineCode\"]\)] as a function of temperature, \!\(\*StyleBox[\"T\", \
+\"TI\"]\) [\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], molar density, \
+\!\(\*StyleBox[\"D\", \"TI\"]\) [\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \"InlineCode\"]\)\!\(\*StyleBox[\"L\", \
+\"InlineCode\"]\)], and molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\)."], 
+             Tooltip[
+              Style[
+               PasteButton["cvcp", 
+                Defer[
+                 RefpropLink`cvcp[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get fluid/mixture heat capacities [\!\(\*StyleBox[\"J\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"-\", \"InlineCode\"]\)\!\(\*StyleBox[\"K\", \
+\"InlineCode\"]\)] as a function of temperature, \!\(\*StyleBox[\"T\", \
+\"TI\"]\) [\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], molar density, \
+\!\(\*StyleBox[\"D\", \"TI\"]\) [\!\(\*StyleBox[\"mol\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"/\", \"InlineCode\"]\)\!\(\*StyleBox[\"L\", \
+\"InlineCode\"]\)], and molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\)."], 
+             Tooltip[
+              Style[
+               PasteButton["virial", 
+                Defer[
+                 RefpropLink`virial[$CellContext`T, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get fluid/mixture virial coefficients of a mixture as a \
+function of temperature, \!\(\*StyleBox[\"T\", \"TI\"]\) \
+[\!\(\*StyleBox[\"K\", \"InlineCode\"]\)], and molar composition, \
+\!\(\*StyleBox[\"z\", \"TI\"]\)."]}, ItemSize -> {13, Automatic}]}, False]],
+        DynamicModuleValues:>{}],
+       Setting[#, {0}]& ]},
+     {
+      TagBox[
+       DynamicModuleBox[{Typeset`var$$ = False}, 
+        InterpretationBox[
+         StyleBox[
+          PaneSelectorBox[{False->GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Saturation Props\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->
+           GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Saturation Props\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]},
+             {"", 
+              PaneBox[
+               TagBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"satspln\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"satspln", "[", "z", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Calculate the saturation curve splines for specified \
+mixture composition for better mixture saturation convergence.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Calculate the saturation curve splines for specified \
+mixture composition for better mixture saturation convergence.", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"critp\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"critp", "[", "z", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Return the mixture critical point (requires satspln \
+call) at the specified molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\
+\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Return the mixture critical point (requires satspln \
+call) at the specified molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\).", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"maxp\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"maxp", "[", "z", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Return the mixture state values at maximum saturation \
+pressure (cricondenbar), calculated from last call to SATSPLN at the molar \
+composition, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Return the mixture state values at maximum saturation \
+pressure (cricondenbar), calculated from last call to SATSPLN at the molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\).", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"maxt\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"maxt", "[", "z", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Return the mixture state values at maximum saturation \
+temperature (cricondentherm), calculated from last call to SATSPLN at the \
+molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Return the mixture state values at maximum saturation \
+temperature (cricondentherm), calculated from last call to SATSPLN at the \
+molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\).", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"satt\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"satt", "[", 
+                    RowBox[{"T", ",", "z", ",", "kph"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Return the fluid/mixture saturation properties at a \
+given temperature, \\!\\(\\*StyleBox[\\\"T\\\", \\\"TI\\\"]\\) [K], and mole \
+fraction, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\), in the liquid \
+(\\!\\(\\*StyleBox[\\\"kph\\\", \\\"TI\\\"]\\)=1) or vapor \
+(\\!\\(\\*StyleBox[\\\"kph\\\", \\\"TI\\\"]\\)=2) phase.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Return the fluid/mixture saturation properties at a \
+given temperature, \!\(\*StyleBox[\"T\", \"TI\"]\) [K], and mole fraction, \!\
+\(\*StyleBox[\"z\", \"TI\"]\), in the liquid (\!\(\*StyleBox[\"kph\", \"TI\"]\
+\)=1) or vapor (\!\(\*StyleBox[\"kph\", \"TI\"]\)=2) phase.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"satp\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"satp", "[", 
+                    RowBox[{"P", ",", "z", ",", "kph"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Return the fluid/mixture saturation properties at a \
+given pressure, \\!\\(\\*StyleBox[\\\"P\\\", \\\"TI\\\"]\\) [kPa], and mole \
+fraction, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\), in the liquid \
+(\\!\\(\\*StyleBox[\\\"kph\\\", \\\"TI\\\"]\\)=1) or vapor \
+(\\!\\(\\*StyleBox[\\\"kph\\\", \\\"TI\\\"]\\)=2) phase.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Return the fluid/mixture saturation properties at a \
+given pressure, \!\(\*StyleBox[\"P\", \"TI\"]\) [kPa], and mole fraction, \
+\!\(\*StyleBox[\"z\", \"TI\"]\), in the liquid (\!\(\*StyleBox[\"kph\", \
+\"TI\"]\)=1) or vapor (\!\(\*StyleBox[\"kph\", \"TI\"]\)=2) phase.", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"sath\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"sath", "[", 
+                    RowBox[{"h", ",", "z", ",", "kph"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Return the fluid/mixture saturation properties at a \
+given enthalpy, \\!\\(\\*StyleBox[\\\"h\\\", \\\"TI\\\"]\\) [J/mol], and mole \
+fraction, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\), in the liquid \
+(\\!\\(\\*StyleBox[\\\"kph\\\", \\\"TI\\\"]\\)=1) or vapor \
+(\\!\\(\\*StyleBox[\\\"kph\\\", \\\"TI\\\"]\\)=2) phase.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Return the fluid/mixture saturation properties at a \
+given enthalpy, \!\(\*StyleBox[\"h\", \"TI\"]\) [J/mol], and mole fraction, \
+\!\(\*StyleBox[\"z\", \"TI\"]\), in the liquid (\!\(\*StyleBox[\"kph\", \
+\"TI\"]\)=1) or vapor (\!\(\*StyleBox[\"kph\", \"TI\"]\)=2) phase.", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"sats\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"sats", "[", 
+                    RowBox[{"s", ",", "z", ",", "kph"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Return the fluid/mixture saturation properties at a \
+given entropy, \\!\\(\\*StyleBox[\\\"s\\\", \\\"TI\\\"]\\) [J/mol-K], and \
+mole fraction, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\), in the liquid \
+(\\!\\(\\*StyleBox[\\\"kph\\\", \\\"TI\\\"]\\)=1) or vapor \
+(\\!\\(\\*StyleBox[\\\"kph\\\", \\\"TI\\\"]\\)=2) phase.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Return the fluid/mixture saturation properties at a \
+given entropy, \!\(\*StyleBox[\"s\", \"TI\"]\) [J/mol-K], and mole fraction, \
+\!\(\*StyleBox[\"z\", \"TI\"]\), in the liquid (\!\(\*StyleBox[\"kph\", \
+\"TI\"]\)=1) or vapor (\!\(\*StyleBox[\"kph\", \"TI\"]\)=2) phase.", 
+                    "Tooltip"]& ]}
+                 },
+                 DefaultBaseStyle->"Column",
+                 GridBoxAlignment->{"Columns" -> {{Left}}},
+                 
+                 GridBoxItemSize->{
+                  "Columns" -> {{13}}, "Rows" -> {{Automatic}}}],
+                "Column"],
+               ImageMargins->0]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+           Dynamic[Typeset`var$$],
+           Alignment->Automatic,
+           BaseStyle->{},
+           BaselinePosition->Baseline,
+           DefaultBaseStyle->"OpenerView",
+           ImageMargins->0,
+           ImageSize->Automatic],
+          Deployed->False,
+          StripOnInput->False],
+         OpenerView[{
+           Style["Saturation Props", Bold, 12], 
+           Column[{
+             Tooltip[
+              Style[
+               PasteButton["satspln", 
+                Defer[
+                 RefpropLink`satspln[$CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Calculate the saturation curve splines for specified mixture \
+composition for better mixture saturation convergence."], 
+             Tooltip[
+              Style[
+               PasteButton["critp", 
+                Defer[
+                 RefpropLink`critp[$CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Return the mixture critical point (requires satspln call) at \
+the specified molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\)."], 
+             Tooltip[
+              Style[
+               PasteButton["maxp", 
+                Defer[
+                 RefpropLink`maxp[$CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Return the mixture state values at maximum saturation pressure \
+(cricondenbar), calculated from last call to SATSPLN at the molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\)."], 
+             Tooltip[
+              Style[
+               PasteButton["maxt", 
+                Defer[
+                 RefpropLink`maxt[$CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              
+              "Return the mixture state values at maximum saturation \
+temperature (cricondentherm), calculated from last call to SATSPLN at the \
+molar composition, \!\(\*StyleBox[\"z\", \"TI\"]\)."], 
+             Tooltip[
+              Style[
+               PasteButton["satt", 
+                Defer[
+                 
+                 RefpropLink`satt[$CellContext`T, $CellContext`z, 
+                  RefpropLink`RefpropUnits`kph]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Return the fluid/mixture saturation properties at a given \
+temperature, \!\(\*StyleBox[\"T\", \"TI\"]\) [K], and mole fraction, \
+\!\(\*StyleBox[\"z\", \"TI\"]\), in the liquid (\!\(\*StyleBox[\"kph\", \
+\"TI\"]\)=1) or vapor (\!\(\*StyleBox[\"kph\", \"TI\"]\)=2) phase."], 
+             Tooltip[
+              Style[
+               PasteButton["satp", 
+                Defer[
+                 
+                 RefpropLink`satp[$CellContext`P, $CellContext`z, 
+                  RefpropLink`RefpropUnits`kph]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Return the fluid/mixture saturation properties at a given \
+pressure, \!\(\*StyleBox[\"P\", \"TI\"]\) [kPa], and mole fraction, \
+\!\(\*StyleBox[\"z\", \"TI\"]\), in the liquid (\!\(\*StyleBox[\"kph\", \
+\"TI\"]\)=1) or vapor (\!\(\*StyleBox[\"kph\", \"TI\"]\)=2) phase."], 
+             Tooltip[
+              Style[
+               PasteButton["sath", 
+                Defer[
+                 
+                 RefpropLink`sath[$CellContext`h, $CellContext`z, 
+                  RefpropLink`RefpropUnits`kph]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Return the fluid/mixture saturation properties at a given \
+enthalpy, \!\(\*StyleBox[\"h\", \"TI\"]\) [J/mol], and mole fraction, \
+\!\(\*StyleBox[\"z\", \"TI\"]\), in the liquid (\!\(\*StyleBox[\"kph\", \
+\"TI\"]\)=1) or vapor (\!\(\*StyleBox[\"kph\", \"TI\"]\)=2) phase."], 
+             Tooltip[
+              Style[
+               PasteButton["sats", 
+                Defer[
+                 RefpropLink`sats[
+                 RefpropLink`RefpropUnits`s, $CellContext`z, 
+                  RefpropLink`RefpropUnits`kph]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Return the fluid/mixture saturation properties at a given \
+entropy, \!\(\*StyleBox[\"s\", \"TI\"]\) [J/mol-K], and mole fraction, \
+\!\(\*StyleBox[\"z\", \"TI\"]\), in the liquid (\!\(\*StyleBox[\"kph\", \
+\"TI\"]\)=1) or vapor (\!\(\*StyleBox[\"kph\", \"TI\"]\)=2) phase."]}, 
+            ItemSize -> {13, Automatic}]}, False]],
+        DynamicModuleValues:>{}],
+       Setting[#, {0}]& ]},
+     {
+      TagBox[
+       DynamicModuleBox[{Typeset`var$$ = False}, 
+        InterpretationBox[
+         StyleBox[
+          PaneSelectorBox[{False->GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"2\[Phi] Flash Calcs\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->
+           GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"2\[Phi] Flash Calcs\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]},
+             {"", 
+              PaneBox[
+               TagBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"tpflsh\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"tpflsh", "[", 
+                    RowBox[{"T", ",", "P", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get thermodynamic state properties at specified \
+temperature and pressure.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get thermodynamic state properties at specified \
+temperature and pressure.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"tdflsh\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"tdflsh", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get thermodynamic state properties at specified \
+temperature and density.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get thermodynamic state properties at specified \
+temperature and density.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"pdflsh\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"pdflsh", "[", 
+                    RowBox[{"P", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get thermodynamic state properties at specified \
+pressure and density.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get thermodynamic state properties at specified pressure \
+and density.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"thflsh\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"thflsh", "[", 
+                    RowBox[{"T", ",", "h", ",", "z", ",", "kr"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get thermodynamic state properties at specified \
+temperature and enthalpy.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get thermodynamic state properties at specified \
+temperature and enthalpy.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"phflsh\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"phflsh", "[", 
+                    RowBox[{"P", ",", "h", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get thermodynamic state properties at specified \
+pressure and enthalpy.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get thermodynamic state properties at specified pressure \
+and enthalpy.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"tsflsh\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"tsflsh", "[", 
+                    RowBox[{"T", ",", "s", ",", "z", ",", "kr"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get thermodynamic state properties at specified \
+temperature and entropy.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get thermodynamic state properties at specified \
+temperature and entropy.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"psflsh\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"psflsh", "[", 
+                    RowBox[{"P", ",", "s", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get thermodynamic state properties at specified \
+pressure and entropy.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get thermodynamic state properties at specified pressure \
+and entropy.", "Tooltip"]& ]}
+                 },
+                 DefaultBaseStyle->"Column",
+                 GridBoxAlignment->{"Columns" -> {{Left}}},
+                 
+                 GridBoxItemSize->{
+                  "Columns" -> {{13}}, "Rows" -> {{Automatic}}}],
+                "Column"],
+               ImageMargins->0]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+           Dynamic[Typeset`var$$],
+           Alignment->Automatic,
+           BaseStyle->{},
+           BaselinePosition->Baseline,
+           DefaultBaseStyle->"OpenerView",
+           ImageMargins->0,
+           ImageSize->Automatic],
+          Deployed->False,
+          StripOnInput->False],
+         OpenerView[{
+           Style["2\[Phi] Flash Calcs", Bold, 12], 
+           Column[{
+             Tooltip[
+              Style[
+               PasteButton["tpflsh", 
+                Defer[
+                 
+                 RefpropLink`tpflsh[$CellContext`T, $CellContext`P, \
+$CellContext`z]], ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get thermodynamic state properties at specified temperature \
+and pressure."], 
+             Tooltip[
+              Style[
+               PasteButton["tdflsh", 
+                Defer[
+                 RefpropLink`tdflsh[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get thermodynamic state properties at specified temperature \
+and density."], 
+             Tooltip[
+              Style[
+               PasteButton["pdflsh", 
+                Defer[
+                 RefpropLink`pdflsh[$CellContext`P, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get thermodynamic state properties at specified pressure and \
+density."], 
+             Tooltip[
+              Style[
+               PasteButton["thflsh", 
+                Defer[
+                 
+                 RefpropLink`thflsh[$CellContext`T, $CellContext`h, \
+$CellContext`z, $CellContext`kr]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get thermodynamic state properties at specified temperature \
+and enthalpy."], 
+             Tooltip[
+              Style[
+               PasteButton["phflsh", 
+                Defer[
+                 
+                 RefpropLink`phflsh[$CellContext`P, $CellContext`h, \
+$CellContext`z]], ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get thermodynamic state properties at specified pressure and \
+enthalpy."], 
+             Tooltip[
+              Style[
+               PasteButton["tsflsh", 
+                Defer[
+                 
+                 RefpropLink`tsflsh[$CellContext`T, 
+                  RefpropLink`RefpropUnits`s, $CellContext`z, \
+$CellContext`kr]], ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get thermodynamic state properties at specified temperature \
+and entropy."], 
+             Tooltip[
+              Style[
+               PasteButton["psflsh", 
+                Defer[
+                 
+                 RefpropLink`psflsh[$CellContext`P, 
+                  RefpropLink`RefpropUnits`s, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get thermodynamic state properties at specified pressure and \
+entropy."]}, ItemSize -> {13, Automatic}]}, False]],
+        DynamicModuleValues:>{}],
+       Setting[#, {0}]& ]},
+     {
+      TagBox[
+       DynamicModuleBox[{Typeset`var$$ = False}, 
+        InterpretationBox[
+         StyleBox[
+          PaneSelectorBox[{False->GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Transport Props\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->
+           GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Transport Props\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]},
+             {"", 
+              PaneBox[
+               TagBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"trnprp\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"trnprp", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get the fluid/mixture viscosity, \
+\\!\\(\\*StyleBox[\\\"\[Mu]\\\", \\\"TI\\\"]\\) [\[Mu]Pa], and thermal \
+conductivity, \\!\\(\\*StyleBox[\\\"k\\\", \\\"TI\\\"]\\) [W/m-K].\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the fluid/mixture viscosity, \
+\!\(\*StyleBox[\"\[Mu]\", \"TI\"]\) [\[Mu]Pa], and thermal conductivity, \!\(\
+\*StyleBox[\"k\", \"TI\"]\) [W/m-K].", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"dielec\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"dielec", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get the fluid/mixture dimensionless dielectric \
+constant, \\!\\(\\*StyleBox[\\\"\[Kappa]\\\", \\\"TI\\\"]\\), based on the \
+temperature, \\!\\(\\*StyleBox[\\\"T\\\", \\\"TI\\\"]\\) [K], molar density, \
+\\!\\(\\*StyleBox[\\\"D\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"mol\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"L\\\", \\\"InlineCode\\\"]\\)], \
+and molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\), if a \
+mixture.\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, 
+                    "Get the fluid/mixture dimensionless dielectric constant, \
+\!\(\*StyleBox[\"\[Kappa]\", \"TI\"]\), based on the temperature, \
+\!\(\*StyleBox[\"T\", \"TI\"]\) [K], molar density, \!\(\*StyleBox[\"D\", \
+\"TI\"]\) [\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"L\", \"InlineCode\"]\)], and molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\), if a mixture.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"fugacity\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"fugacity", "[", 
+                    RowBox[{"T", ",", "D", ",", "z"}], "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get the fluid/mixture fugacity, \
+\\!\\(\\*SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], \\\"i\\\"]\\), for \
+each of the nc components of a fluid/mixture, based on the temperature, \
+\\!\\(\\*StyleBox[\\\"T\\\", \\\"TI\\\"]\\) [K], molar density, \
+\\!\\(\\*StyleBox[\\\"D\\\", \\\"TI\\\"]\\) [\\!\\(\\*StyleBox[\\\"mol\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"/\\\", \
+\\\"InlineCode\\\"]\\)\\!\\(\\*StyleBox[\\\"L\\\", \\\"InlineCode\\\"]\\)], \
+and molar composition, \\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\).\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the fluid/mixture fugacity, \
+\!\(\*SubscriptBox[StyleBox[\"f\", \"TI\"], \"i\"]\), for each of the nc \
+components of a fluid/mixture, based on the temperature, \
+\!\(\*StyleBox[\"T\", \"TI\"]\) [K], molar density, \!\(\*StyleBox[\"D\", \
+\"TI\"]\) [\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"L\", \"InlineCode\"]\)], and molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\).", "Tooltip"]& ]}
+                 },
+                 DefaultBaseStyle->"Column",
+                 GridBoxAlignment->{"Columns" -> {{Left}}},
+                 
+                 GridBoxItemSize->{
+                  "Columns" -> {{13}}, "Rows" -> {{Automatic}}}],
+                "Column"],
+               ImageMargins->0]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+           Dynamic[Typeset`var$$],
+           Alignment->Automatic,
+           BaseStyle->{},
+           BaselinePosition->Baseline,
+           DefaultBaseStyle->"OpenerView",
+           ImageMargins->0,
+           ImageSize->Automatic],
+          Deployed->False,
+          StripOnInput->False],
+         OpenerView[{
+           Style["Transport Props", Bold, 12], 
+           Column[{
+             Tooltip[
+              Style[
+               PasteButton["trnprp", 
+                Defer[
+                 RefpropLink`trnprp[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the fluid/mixture viscosity, \!\(\*StyleBox[\"\[Mu]\", \
+\"TI\"]\) [\[Mu]Pa], and thermal conductivity, \!\(\*StyleBox[\"k\", \
+\"TI\"]\) [W/m-K]."], 
+             Tooltip[
+              Style[
+               PasteButton["dielec", 
+                Defer[
+                 RefpropLink`dielec[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the fluid/mixture dimensionless dielectric constant, \
+\!\(\*StyleBox[\"\[Kappa]\", \"TI\"]\), based on the temperature, \
+\!\(\*StyleBox[\"T\", \"TI\"]\) [K], molar density, \!\(\*StyleBox[\"D\", \
+\"TI\"]\) [\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"L\", \"InlineCode\"]\)], and molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\), if a mixture."], 
+             Tooltip[
+              Style[
+               PasteButton["fugacity", 
+                Defer[
+                 RefpropLink`fugacity[$CellContext`T, D, $CellContext`z]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the fluid/mixture fugacity, \
+\!\(\*SubscriptBox[StyleBox[\"f\", \"TI\"], \"i\"]\), for each of the nc \
+components of a fluid/mixture, based on the temperature, \
+\!\(\*StyleBox[\"T\", \"TI\"]\) [K], molar density, \!\(\*StyleBox[\"D\", \
+\"TI\"]\) [\!\(\*StyleBox[\"mol\", \"InlineCode\"]\)\!\(\*StyleBox[\"/\", \
+\"InlineCode\"]\)\!\(\*StyleBox[\"L\", \"InlineCode\"]\)], and molar \
+composition, \!\(\*StyleBox[\"z\", \"TI\"]\)."]}, 
+            ItemSize -> {13, Automatic}]}, False]],
+        DynamicModuleValues:>{}],
+       Setting[#, {0}]& ]},
+     {
+      TagBox[
+       DynamicModuleBox[{Typeset`var$$ = False}, 
+        InterpretationBox[
+         StyleBox[
+          PaneSelectorBox[{False->GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Utility Functions\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->
+           GridBox[{
+             {
+              OpenerBox[Dynamic[Typeset`var$$],
+               Appearance->Automatic,
+               AutoAction->False,
+               ContinuousAction->False,
+               Enabled->Automatic], 
+              StyleBox["\<\"Utility Functions\"\>",
+               StripOnInput->False,
+               FontSize->12,
+               FontWeight->Bold]},
+             {"", 
+              PaneBox[
+               TagBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"xmass\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"xmass", "[", "xMol", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    "\"Convert mole fractions to mass fractions.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "Convert mole fractions to mass fractions.",
+                     "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"xmole\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"xmole", "[", "xMass", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    "\"Convert mole fractions to mass fractions.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "Convert mole fractions to mass fractions.",
+                     "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"getversion\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"getversion", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Get the version number of the REFPROP DLL being \
+used.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Get the version number of the REFPROP DLL being used.", 
+                    "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"SetDLL\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"SetDLL", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Pops a window to browse for the REFPRP64.DLL file. \
+Pass a parameter of 1 to make the setting permanent.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Pops a window to browse for the REFPRP64.DLL file. Pass \
+a parameter of 1 to make the setting permanent.", "Tooltip"]& ]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox[
+                    ButtonBox["\<\"SetPath\"\>",
+                    Background->RGBColor[0.87, 0.94, 1],
+                    BaseStyle->"Paste",
+                    ButtonData->RowBox[{"SetPath", "[", "]"}],
+                    ImageMargins->{{10, 10}, {Automatic, Automatic}}],
+                    StripOnInput->False,
+                    FontWeight->Bold],
+                    
+                    "\"Pops a window to browse for an alternate \
+REFPROP\\\\FLUIDS directory. Pass a parameter of 1 to make the setting \
+permanent.\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, 
+                    "Pops a window to browse for an alternate REFPROP\\FLUIDS \
+directory. Pass a parameter of 1 to make the setting permanent.", 
+                    "Tooltip"]& ]}
+                 },
+                 DefaultBaseStyle->"Column",
+                 GridBoxAlignment->{"Columns" -> {{Left}}},
+                 
+                 GridBoxItemSize->{
+                  "Columns" -> {{13}}, "Rows" -> {{Automatic}}}],
+                "Column"],
+               ImageMargins->0]}
+            },
+            AutoDelete->False,
+            BaselinePosition->{1, 1},
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {{Automatic}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+           Dynamic[Typeset`var$$],
+           Alignment->Automatic,
+           BaseStyle->{},
+           BaselinePosition->Baseline,
+           DefaultBaseStyle->"OpenerView",
+           ImageMargins->0,
+           ImageSize->Automatic],
+          Deployed->False,
+          StripOnInput->False],
+         OpenerView[{
+           Style["Utility Functions", Bold, 12], 
+           Column[{
+             Tooltip[
+              Style[
+               PasteButton["xmass", 
+                Defer[
+                 RefpropLink`xmass[$CellContext`xMol]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Convert mole fractions to mass fractions."], 
+             Tooltip[
+              Style[
+               PasteButton["xmole", 
+                Defer[
+                 RefpropLink`xmole[$CellContext`xMass]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Convert mole fractions to mass fractions."], 
+             Tooltip[
+              Style[
+               PasteButton["getversion", 
+                Defer[
+                 RefpropLink`getversion[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Get the version number of the REFPROP DLL being used."], 
+             Tooltip[
+              Style[
+               PasteButton["SetDLL", 
+                Defer[
+                 RefpropLink`SetDLL[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Pops a window to browse for the REFPRP64.DLL file. Pass a \
+parameter of 1 to make the setting permanent."], 
+             Tooltip[
+              Style[
+               PasteButton["SetPath", 
+                Defer[
+                 RefpropLink`SetPath[]], 
+                ImageMargins -> {{10, 10}, {Automatic, Automatic}}, 
+                Background -> RGBColor[0.87, 0.94, 1]], Bold], 
+              "Pops a window to browse for an alternate REFPROP\\FLUIDS \
+directory. Pass a parameter of 1 to make the setting permanent."]}, 
+            ItemSize -> {13, Automatic}]}, False]],
+        DynamicModuleValues:>{}],
+       Setting[#, {0}]& ]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxDividers->{"Columns" -> {{None}}, "RowsIndexed" -> {1 -> {
+          RGBColor[0, 
+           Rational[2, 3], 0], 
+          Thickness[Large]}, -1 -> {
+          RGBColor[0, 
+           Rational[2, 3], 0], 
+          Thickness[Large]}}},
+    GridBoxItemSize->{"Columns" -> {{15}}, "Rows" -> {{Automatic}}}],
+   "Column"]}}, 1,
+  LabelStyle->{Bold}]],
+ CellMargins->{{0, 0}, {0, 0}},
+ CellBracketOptions->{"Color"->RGBColor[0.269993, 0.308507, 0.6]},
+ CellHorizontalScrolling->True,
+ PageBreakAbove->True,
+ PageBreakWithin->False,
+ CellChangeTimes->{
+  3.8502120679230146`*^9, {3.85021248440314*^9, 3.850212486309086*^9}, {
+   3.8502128111069345`*^9, 3.8502128119873524`*^9}},
+ ShowAutoStyles->True,
+ LineSpacing->{1.25, 0},
+ AutoItalicWords->{},
+ ScriptMinSize->9,
+ ShowStringCharacters->False,
+ FontFamily:>CurrentValue["PanelFontFamily"],
+ FontSize:>CurrentValue[
+  "PanelFontSize"],ExpressionUUID->"541efff3-f5df-4edb-91d7-2010a54b6b7c"]
+},
+WindowSize->All,
+WindowMargins->{{Automatic, 220.5}, {Automatic, 120}},
+WindowElements->{},
+WindowTitle->"RefpropLink",
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (December 2, 2021)",
+StyleDefinitions->"Palette.nb",
+ExpressionUUID->"0fed970b-a21a-493f-94f9-6f9ce7f6bfb2"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[584, 21, 96043, 2215, 365, InheritFromParent,ExpressionUUID->"541efff3-f5df-4edb-91d7-2010a54b6b7c",
+ PageBreakAbove->True,
+ PageBreakWithin->False]
+}
+]
+*)
+
