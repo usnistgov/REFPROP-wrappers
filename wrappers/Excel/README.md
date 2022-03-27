@@ -47,7 +47,8 @@ The following outlines the procedure for using REFPROP within any spreadsheet in
     hFld = "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/refprop/"
     ```
     replacing $USER with your username
-9.  Save and be amazed!
+9.  Additional step if you are running a non-Intel Mac (e.g. Macbook or Macbook Pro with M1 or newer processor).  Open a Finder window and navigate to Applications.  Find Microsoft Excel, right click on it and select Get Info.  About half way down the Get Info dialog box, select the option "Open using Rosetta". Close the dialog box and you are ready to go. (Please Note: Once a native FORTRAN compiler is released for M1, this step will become obsolete)
+10.  Save and be amazed!
 
 **REFPROP 9.1**
 
