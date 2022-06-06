@@ -53,7 +53,7 @@
     <ClInclude Include="..\includes\rp_kft.h" />
     <ClInclude Include="..\includes\rp_kgp.h" />
     <ClInclude Include="..\includes\rp_kgt.h" />
-    <ClInclude Include="..\includes\rp_ktp.h" />
+    <ClInclude Include="..\includes\rp_LIMITS.h" />
     <ClInclude Include="..\includes\rp_mufp.h" />
     <ClInclude Include="..\includes\rp_muft.h" />
     <ClInclude Include="..\includes\rp_mugp.h" />
@@ -91,6 +91,7 @@
     <ClInclude Include="..\includes\rp_tcrit.h" />
     <ClInclude Include="..\includes\rp_ths.h" />
     <ClInclude Include="..\includes\rp_tmax.h" />
+    <ClInclude Include="..\includes\rp_tmin.h" />
     <ClInclude Include="..\includes\rp_tph.h" />
     <ClInclude Include="..\includes\rp_tps.h" />
     <ClInclude Include="..\includes\rp_tsatp.h" />
@@ -198,20 +199,20 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\..\externals\fmtlib;..\..\..\externals\REFPROP-headers;..\includes;C:\Program Files\PTC\Mathcad Prime 6.0.0.0\Custom Functions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\externals\fmtlib;..\..\..\externals\REFPROP-headers;..\includes;C:\Program Files\PTC\Mathcad Prime 8.0.0.0\Custom Functions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Program Files\PTC\Mathcad Prime 6.0.0.0\Custom Functions;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\PTC\Mathcad Prime 8.0.0.0\Custom Functions;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>DllEntryPoint</EntryPointSymbol>
       <AdditionalDependencies>mcaduser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetPath)" "C:\Program Files\PTC\Mathcad Prime 6.0.0.0\Custom Functions" /rqky</Command>
+      <Command>xcopy "$(TargetPath)" "C:\Program Files\PTC\Mathcad Prime 8.0.0.0\Custom Functions" /rqky</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copy the DLL to the "PTC\Mathcad Prime 6.0.0.0\Custom Functions" folder</Message>
+      <Message>Copy the DLL to the "PTC\Mathcad Prime 8.0.0.0\Custom Functions" folder</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

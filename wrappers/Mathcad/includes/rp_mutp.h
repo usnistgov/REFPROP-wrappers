@@ -6,10 +6,13 @@ LRESULT rp_Mutp(
 {
 	double mu,cond;
     double tval, pval, Dval;
-    double Dl, Dv, Q, U, H, S, Cv, Cp, W;
+    double TminV, TmaxV, DmaxV, PmaxV;                          // Viscosity Limits
+    double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
+    double Dl, Dv, Q, U, H, S, Cv, Cp, W, Pdum, hjt;
     double xl[20], xv[20];
-    int ierr;
+    int ierr = 0, icomp = 1, kph = 1, kguess = 0;
     char herr[255];
+    char htype[] = "ETA";
 
     ierr = cSetup(fluid->str);
     if (ierr != 0)
@@ -20,27 +23,77 @@ LRESULT rp_Mutp(
     else
         tval = t->real;
 
-    if (tval > Tmax*(1 + 0.5*extr)) return MAKELRESULT(T_OUT_OF_RANGE, 2);
-
     if (p->imag != 0.0)
         return MAKELRESULT(MUST_BE_REAL, 3);
     else
         pval = p->real * 1000.0;   // Convert from MPa to kPa for REFPROP inputs
 
-    if (pval > Pmax*(1 + extr)) return MAKELRESULT(P_OUT_OF_RANGE, 3);
+                                   // Get Limits for TCX model
+    LIMITSdll(htype, &x[0], &TminV, &TmaxV, &DmaxV, &PmaxV, lengthofreference);
 
-    TPFLSHdll(&tval, &pval, &x[0], &Dval,   // [K], [kPa], [mol/L]
-        &Dl, &Dv, &xl[0], &xv[0],           // Saturation terms
-        &Q, &U, &H, &S, &Cv, &Cp, &W,       // Thermo properties
-        &ierr, herr, errormessagelength);   // error code and string
+    if ((tval > std::min(Tmax, TmaxV)*(1 + 0.5*extr)) ||   // if above Tmax for EOS or ETA, or
+        (tval < std::max(Tmin, TminV)))                    //    below Tmin for EOS or ETA,
+        return MAKELRESULT(T_OUT_OF_RANGE, 2);            //    throw error.
 
-    if (ierr > 0)
+    if (pval > std::min(Pmax, PmaxV)*(1 + extr))           // if above Pmax for EOS or ETA,
+        return MAKELRESULT(P_OUT_OF_RANGE, 3);            //    throw error.
+
+    //===============================================================================
+    // Mod 6/2/2022 to get all the way up to Pmax
+    //===============================================================================
+    // Get critical pressure
+    if (ncomp > 1)
+    {
+        CRITPdll(x, &tc, &pc, &Dc, &ierr, herr, errormessagelength);
+        if (ierr != 0)
+        {
+            return MAKELRESULT(UNCONVERGED, 2);
+        }
+    }
+    else
+    {
+        INFOdll(&icomp, &wmm, &ttrip, &tnbpt, &tc, &pc, &Dc, &Zc, &acf, &dip, &Rgas);
+    }
+
+    // If above critical pressure (Liquid) use TPRHO instead of TPFLSH
+    // TODO: Not sure what happens if above Tcrit.  Is this vapor or liquid?  Which flag to set?
+    //       May need to adjust initial guess depending on location.
+    //       Extend this logic to all other functions of TP once it is working.
+    if (tval > tc) kph = 2;
+    if (pval > pc) kph = 1;
+    if ((pval > pc) || (tval > tc))
+    {
+        // Get single-phase density
+        TPRHOdll(&tval, &pval, &x[0], &kph, &kguess, &Dval, &ierr, herr, errormessagelength);
+        // Have density, now call THERM to get Enthalpy
+        if (ierr <=0) THERMdll(&tval, &Dval, &x[0], &Pdum, &U, &H, &S, &Cv, &Cp, &W, &hjt);
+    }
+    else
+    {
+        TPFLSHdll(&tval, &pval, &x[0], &Dval,   // [K], [kPa], [mol/L]
+            &Dl, &Dv, &xl[0], &xv[0],           // Saturation terms
+            &Q, &U, &H, &S, &Cv, &Cp, &W,       // Thermo properties
+            &ierr, herr, errormessagelength);   // error code and string
+    }
+    //===============================================================================
+    // End Mod 6/2/2022 to get all the way up to Pmax
+    //===============================================================================
+
+    if (ierr > 0) {
+        // Use this pop-up window for debugging if needed
+        //===============================================================================
+        //msg = format("\n  ierr: %d",ierr);
+        //MessageBox(hwndDlg, msg.c_str(), "NIST RefProp Add-In", 0);
+        //===============================================================================
         if ((ierr == 1) || (ierr == 5) || (ierr == 9) || (ierr == 13))
             return MAKELRESULT(T_OUT_OF_RANGE, 2);  // Temperature out of bounds
         else if ((ierr == 4) || (ierr == 12))
             return MAKELRESULT(P_OUT_OF_RANGE, 3);  // Pressure out of bounds
+        else if (ierr == 8)
+            return MAKELRESULT(X_SUM_NONUNITY, 1);  // component and/or sum < 0 or > 1
         else
             return MAKELRESULT(UNCONVERGED, 2);     // one of many convergence errors
+    }
 
 	TRNPRPdll(&tval,&Dval,&x[0],&mu,&cond,&ierr,herr,errormessagelength);
 

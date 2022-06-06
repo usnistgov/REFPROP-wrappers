@@ -12,7 +12,7 @@ LRESULT rp_Extrap(
     if ((iset == 0) || (iset = 1))
         extr = iset;
     else
-        return MAKELRESULT(INVALID_FLAG, 1);
+        return MAKELRESULT(BAD_INPUT, 1);
 
 	// allocate memory for return string
 	pdest = MathcadAllocate(23);

@@ -5,9 +5,10 @@ LRESULT rp_Rhotp(
     LPCCOMPLEXSCALAR      p   )
 {
 	double tval,pval,Dval;
-    double Dl, Dv, Q, U, H, S, Cv, Cp, W;
+    double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
+    double Dl, Dv, Q, U, H, S, Cv, Cp, W, Pdum, hjt;
     double xl[20], xv[20];
-	int ierr;
+    int ierr = 0, icomp = 1, kph = 1, kguess = 0;
     char herr[255];
 
 	ierr = cSetup(fluid->str);
@@ -28,10 +29,44 @@ LRESULT rp_Rhotp(
 
     if (pval > Pmax*(1 + extr)) return MAKELRESULT(P_OUT_OF_RANGE, 3);
 
-    TPFLSHdll(&tval, &pval, &x[0], &Dval,   // [K], [kPa], [mol/L]
-        &Dl, &Dv, &xl[0], &xv[0],           // Saturation terms
-        &Q, &U, &H, &S, &Cv, &Cp, &W,       // Thermo properties
-        &ierr, herr, errormessagelength);   // error code and string
+    //===============================================================================
+    // Mod 6/2/2022 to get all the way up to Pmax
+    //===============================================================================
+    // Get critical pressure
+    if (ncomp > 1)
+    {
+        CRITPdll(x, &tc, &pc, &Dc, &ierr, herr, errormessagelength);
+        if (ierr != 0)
+        {
+            return MAKELRESULT(UNCONVERGED, 2);
+        }
+    }
+    else
+    {
+        INFOdll(&icomp, &wmm, &ttrip, &tnbpt, &tc, &pc, &Dc, &Zc, &acf, &dip, &Rgas);
+    }
+
+    // If above critical pressure (Liquid) use TPRHO instead of TPFLSH
+    // TODO: Not sure what happens if above Tcrit.  Is this vapor or liquid?  Which flag to set?
+    //       May need to adjust initial guess depending on location.
+    //       Extend this logic to all other functions of TP once it is working.
+    if (pval > pc)
+    {
+        // Get single-phase density
+        TPRHOdll(&tval, &pval, &x[0], &kph, &kguess, &Dval, &ierr, herr, errormessagelength);
+        // Have density, now call THERM to get Enthalpy
+        if (ierr <=0) THERMdll(&tval, &Dval, &x[0], &Pdum, &U, &H, &S, &Cv, &Cp, &W, &hjt);
+    }
+    else
+    {
+        TPFLSHdll(&tval, &pval, &x[0], &Dval,   // [K], [kPa], [mol/L]
+            &Dl, &Dv, &xl[0], &xv[0],           // Saturation terms
+            &Q, &U, &H, &S, &Cv, &Cp, &W,       // Thermo properties
+            &ierr, herr, errormessagelength);   // error code and string
+    }
+    //===============================================================================
+    // End Mod 6/2/2022 to get all the way up to Pmax
+    //===============================================================================
 
     if (ierr > 0) {
         // Use this pop-up window for debugging if needed
@@ -44,6 +79,8 @@ LRESULT rp_Rhotp(
 
         if ((ierr == 1) || (ierr == 5) || (ierr == 9) || (ierr == 13))
             return MAKELRESULT(T_OUT_OF_RANGE, 2);  // Temperature out of bounds
+        else if ((ierr == 4) || (ierr == 12))
+            return MAKELRESULT(P_OUT_OF_RANGE, 1);  // Pressure out of bounds
         else if (ierr == 8)
             return MAKELRESULT(X_SUM_NONUNITY, 1);  // component and/or sum < 0 or > 1
         else if ((ierr == 4) || (ierr == 12))

@@ -37,7 +37,7 @@ LRESULT rp_Hps(
 		return MAKELRESULT(UNCONVERGED,1);
 
 	if (pval < pc) // *** Below the Critical Point ***
-	{
+    {
 		// Below the critical pressure
 		SATPdll(&pval, x, &kph, &tsat, &rhol, &rhov, xliq, xvap, &ierr, herr, errormessagelength);
 		if (ierr != 0)
