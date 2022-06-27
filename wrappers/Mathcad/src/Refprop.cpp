@@ -53,17 +53,17 @@ enum { MC_STRING = STRING }; // Substitute enumeration variable MC_STRING for ST
 #include <fstream>
 
 // RefProp Mathcad Add-in Version
-std::string rpVersion = "2.0";       // Mathcad Add-in version number
+std::string rpVersion = "2.0.1";       // Mathcad Add-in version number
 
 // Setup Dialog Window for debugging
 HWND hwndDlg;  // Dialog handle for pop-up message boxes
 
 enum EC {MUST_BE_REAL = 1, INSUFFICIENT_MEMORY, INTERRUPTED,                  // Mathcad Error Codes
          T_OUT_OF_RANGE, P_OUT_OF_RANGE, SATURATED,                           // Refprop Error Codes
-         FLUID_NOT_FOUND, NO_MIX, UNCONVERGED,
+         FLUID_NOT_FOUND, NO_MIX, UNCONVERGED,INVALID_MODEL,
          BAD_COMPONENT, NO_TRANSPORT, INFINITE_K,
          NO_SURFTEN, H_OUT_OF_RANGE, S_OUT_OF_RANGE,
-         D_OUT_OF_RANGE, INVALID_FLAG, X_SUM_NONUNITY,
+         D_OUT_OF_RANGE, BAD_INPUT, INVALID_FLAG, X_SUM_NONUNITY,
          NO_UPPER_ROOT, TOO_MANY_COMPONENTS, BAD_MIX_STRING,
          BAD_MOLE_FRACTION, INDIV_COMPONENT, UNKNOWN,
          NUMBER_OF_ERRORS};                                                   // Dummy code for Error Count
@@ -81,6 +81,7 @@ char * RPErrorMessageTable[NUMBER_OF_ERRORS] =
     (char *)("Fluid/Mixture not found"),                    //  FLUID_NOT_FOUND
     (char *)("Pure Fluids or Predefined Mixtures Only!"),   //  NO_MIX
     (char *)("Algorithm did not converge"),                 //  UNCONVERGED
+    (char *)("Invalid model; must be \"EOS\". \"ETA\", or \"TCX\""),  //  INVALID_MODEL
     (char *)("Undefined Component Number"),                 //  BAD_COMPONENT
     (char *)("No transport equations for this fluid"),      //  NO_TRANSPORTPORT
     (char *)("At critical point; k is infinite"),           //  INFINITE_K
@@ -88,9 +89,10 @@ char * RPErrorMessageTable[NUMBER_OF_ERRORS] =
     (char *)("Enthalpy out of range"),                      //  H_OUT_OF_RANGE
     (char *)("Entropy out of range"),                       //  S_OUT_OF_RANGE
     (char *)("Density out of range"),                       //  D_OUT_OF_RANGE
-    (char *)("Invalid Input; Must be 0 or 1"),              //  INVALID_FLAG
+    (char *)("Invalid Input; Must be 0 or 1"),              //  BAD_INPUT
+    (char *)("Invalid Phase Flag; Must be 1 or 2"),         //  INVALID_FLAG
     (char *)("Mixture fractions don't sum to unity"),       //  X_SUM_NONUNITY
-    (char *)("Upper root not supported when T < Tc"),       //  NO_UPPER_ROOT
+    (char *)("Upper root not supported when T < Tc"),       //  NO_UPPER_ROOT - no longer used
     (char *)("Too many components. Max is 20."),            //  TOO_MANY_COMPONENTS
     (char *)("Bad mixture string format: c1[mf1]&c2[mf2]...&cX[mfX]"),   // BAD_MIX_STRING
     (char *)("Mole fraction can't be converted"),           //  BAD_MOLE_FRACTION
@@ -130,6 +132,7 @@ char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
 #include "rp_wmol.h"
 #include "rp_rgas.h"
 #include "rp_tmax.h"
+#include "rp_tmin.h"
 #include "rp_pmax.h"
 #include "rp_rhomax.h"
 #include "rp_ttrip.h"
@@ -137,6 +140,7 @@ char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
 #include "rp_rhocrit.h"
 #include "rp_ptrip.h"
 #include "rp_pcrit.h"
+#include "rp_LIMITS.h"
 // Saturation Curve Function headers
 #include "rp_tsatp.h"
 #include "rp_psatt.h"
@@ -338,10 +342,16 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
         if ( CreateUserFunction( hDLL, &rp_tmax ) == NULL )
             break;
 
+        if ( CreateUserFunction( hDLL, &rp_tmin ) == NULL )
+            break;
+
         if ( CreateUserFunction( hDLL, &rp_rhomax ) == NULL )
             break;
 
         if ( CreateUserFunction( hDLL, &rp_pmax ) == NULL )
+            break;
+
+        if ( CreateUserFunction( hDLL, &rp_limits) == NULL)
             break;
 
         // Saturation Curve Definition

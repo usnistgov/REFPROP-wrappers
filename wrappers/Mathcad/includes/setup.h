@@ -117,7 +117,7 @@ int cSetup(std::string strFluid)
         strcpy(MixName, "N/A");
         MixFileLast = "";
         // convert std::string to c-style string for DLL call
-        std::copy(fluid_string.begin(), fluid_string.end(), hfld);    // Copy string fluidPath into c_str mypath. 
+        std::copy(fluid_string.begin(), fluid_string.end(), hfld);    // Copy string fluidPath into c_str hfld. 
         // hfld[fluid_string.size()] = '\0';                          // Append with a null character (not sure if needed)
         // Pad the fluid string all the way to 10k characters with spaces to deal with string parsing bug in REFPROP in SETUPdll
         for (int j = static_cast<int>(fluid_string.size()); j < componentstringlength; ++j) {
@@ -214,7 +214,7 @@ int cSetup(std::string strFluid)
         }
         // convert std::string to c-style string for DLL call
         char hfld[10000];                                            // Initialize char array hfld
-        std::copy(strFluid.begin(), strFluid.end(), hfld);           // Copy string fluidPath into c_str mypath. 
+        std::copy(strFluid.begin(), strFluid.end(), hfld);           // Copy string fluidPath into c_str hfld. 
         hfld[strFluid.size()] = '\0';                                // Append with a null character (not sure if needed)
 
         SETUPdll(&ncomp,hfld,hhmx,href,&ierr,herr,

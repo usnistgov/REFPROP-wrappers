@@ -10,7 +10,7 @@ LRESULT rp_Pth(
 	double pval,hval,Dval,tval,qval;
 	double rhol,rhov,xliq[20],xvap[20];
     double U, S, Cv, Cp, W;
-    double tc, pc, Dc, hvap, psat;
+    double tc, pc, Dc;        //  , hvap, psat;    // no longer needed
 	int ierr;
 	int kph = 2;
 	int kr;
@@ -38,7 +38,8 @@ LRESULT rp_Pth(
 		if ((kr<1)||(kr>2)) return MAKELRESULT(INVALID_FLAG,4); 
 	}
 
-    // Upper root not supported for T < Tc and H > Hvap.  Find Tc and check if kr == 2
+    // Upper root not supported in REFPROP 9.1 for T < Tc and H > Hvap.  Find Tc and check if kr == 2
+    /* Fixed in REFPROP 10 *** Comment this section out ****
     if (kr == 2)
     {
         CRITPdll(&x[0], &tc, &pc, &Dc, &ierr, herr, errormessagelength);
@@ -60,6 +61,14 @@ LRESULT rp_Pth(
                 return MAKELRESULT(NO_UPPER_ROOT, 4);
         }
     }
+    */
+
+    // REFPROP 10 Issue: Single-phase root confusion when T = Tc exactly
+    // As a workaround, adjust tval slightly if Tc passed in
+    CRITPdll(&x[0], &tc, &pc, &Dc, &ierr, herr, errormessagelength);
+    if (ierr != 0)
+        return MAKELRESULT(UNCONVERGED, 1);
+    if (tval == tc) tval = tval + 0.0001;
 
     pval = 0.0;
 
@@ -75,10 +84,6 @@ LRESULT rp_Pth(
         else
             return MAKELRESULT(UNCONVERGED, 1);
     }
-
-	// If pval > Pmax, return error 4
-	if (pval > Pmax + extr*Pmax)
-		return MAKELRESULT(P_OUT_OF_RANGE,1);
 
 	// Otherwise...
 	ret->real = pval / 1000.0;       // Returned in MPa

@@ -44,18 +44,6 @@ LRESULT rp_Rhots(
             return MAKELRESULT(UNCONVERGED, 1);
     }
 
-    // If pval > Pmax, return error 4   ( * 2.0 Pmax)
-    if (pval > Pmax + extr * Pmax)
-        return MAKELRESULT(P_OUT_OF_RANGE,1);
-
-    // If rhol != rhov, two phase saturation region,
-    // calculate mixture density lever law on 1/rho using Q
-    // Is this needed, or does REFPROP do this calculation already?
-    if (rhol != rhov)
-    {
-        Dval = 1.0 / (qval*(1.0/rhov) + (1-qval)*(1.0/rhol));
-    }
-
     ret->real = Dval * wmm;       // Returned in kg/m³
 
     return 0;               // return 0 to indicate there was no error
