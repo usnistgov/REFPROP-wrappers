@@ -132,10 +132,37 @@ int cSetup(std::string strFluid)
         }
         else if (upper(strFluid).find(".MIX") != strFluid.npos)    // Does the file have a .MIX extension?
         {   // Read Mixture File
+            fluid_string = strFluid;
+            if (upper(strFluid).find("C\\") == strFluid.npos)      // If fluid string is NOT a full path string
+            {
+                // Check in Mixtures directory as well as the user's Virtual Store directory for the file
+                std::string MixFileFull = fluidPath + 
+                                          "\\mixtures\\" + 
+                                          strFluid;                //   Full path if in REFPROP\MIXTURES
+                std::ifstream mFile(MixFileFull);                  //   Open file if it exists
+                if (mFile.fail())                                  //   If not,
+                {
+                    char* localAppData = getenv("LOCALAPPDATA");   //     get user's AppData path
+                    std::string vStore = localAppData;             //     start with AppData path
+                    vStore.append("\\VirtualStore");               //     append virtual store folder
+                                                                   //     tack on full path sans "C:"
+                    vStore.append(MixFileFull.begin() + 2, MixFileFull.end());
+                    mFile.open(vStore);                            //     Open vStore file if it exists
+                    if (mFile.fail())
+                        return FLUID_NOT_FOUND;                    //     Not found in either location
+                    else
+                    {
+                        fluid_string = vStore;
+                        mFile.close();                               //     Found in Virtual Store, close it.
+                    }
+                }
+                else mFile.close();                                //   Found in MIXTURES directory, close it.
+            }                                                      // Otherwise, full path was given. Use it.
+
             // convert std::string to c-style string for DLL call
             char mix[filepathlength] = { 0 };                 // Initialize char array mix
-            std::copy(strFluid.begin(), strFluid.end(), mix); // Copy string strFluid into c_str mix. 
-            mix[strFluid.size()] = '\0';                      // Append with a null character (not sure if needed)
+            std::copy(fluid_string.begin(), fluid_string.end(), mix); // Copy string strFluid into c_str mix. 
+            mix[fluid_string.size()] = '\0';                      // Append with a null character (not sure if needed)
 
             SETMIXdll(mix,             // Mixture name
                 hhmx,                  // Mixture file
