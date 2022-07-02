@@ -13,7 +13,7 @@ LRESULT rp_Ttrip(
 	double tmax,Dmax,pmax;
 
 	ierr = cSetup(fluid->str);
-	if (ierr != 0 )
+	if (ierr > 0)
 		return MAKELRESULT(ierr,1);
 
     if( comp->imag != 0.0 )

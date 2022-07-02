@@ -12,7 +12,7 @@ LRESULT rp_Rhoph(
     int kph = 1;
 
     ierr = cSetup(fluid->str);
-    if (ierr != 0)
+    if (ierr > 0)
         return MAKELRESULT(ierr, 1);
 
     if (p->imag != 0.0)
@@ -29,14 +29,14 @@ LRESULT rp_Rhoph(
 
                                // Are we above the critical pressure?
     CRITPdll(&x[0], &tc, &pc, &Dc, &ierr, herr, errormessagelength);
-    if (ierr != 0)
+    if (ierr > 0)
         return MAKELRESULT(UNCONVERGED, 1);
 
     if (pval < pc)
     {
         // Below the critical pressure
         SATPdll(&pval, &x[0], &kph, &tsat, &rhol, &rhov, xliq, xvap, &ierr, herr, errormessagelength);
-        if (ierr != 0)
+        if (ierr > 0)
         {
             if ((ierr == 2) || (ierr == 4) || (ierr == 141))
                 return MAKELRESULT(P_OUT_OF_RANGE, 2); // Pressure too low | negative | > Pcrit
@@ -66,7 +66,7 @@ LRESULT rp_Rhoph(
             dval = rhov;                     //    saturation density
         }
         PHFL1dll(&pval, &hval, &x[0], &kph, &tval, &dval, &ierr, herr, errormessagelength);
-        if (ierr != 0)
+        if (ierr > 0)
             return MAKELRESULT(UNCONVERGED, 1);
         else
         {

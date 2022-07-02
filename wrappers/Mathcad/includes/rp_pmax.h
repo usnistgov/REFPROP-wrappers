@@ -6,7 +6,7 @@ LRESULT rp_Pmax(
 	int ierr = 0;
 
 	ierr = cSetup(fluid->str);
-	if (ierr != 0 )
+	if (ierr > 0)
 		return MAKELRESULT(ierr,1);
 
 	ret->real = Pmax/1000.0;  // convert from kPa to MPa

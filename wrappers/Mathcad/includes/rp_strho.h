@@ -8,7 +8,7 @@ LRESULT rp_Strho(
 	int ierr;
 
     ierr = cSetup(fluid->str);
-    if (ierr != 0)
+    if (ierr > 0)
         return MAKELRESULT(ierr, 1);
 
     if (t->imag != 0.0)

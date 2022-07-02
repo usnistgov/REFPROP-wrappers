@@ -53,7 +53,7 @@ enum { MC_STRING = STRING }; // Substitute enumeration variable MC_STRING for ST
 #include <fstream>
 
 // RefProp Mathcad Add-in Version
-std::string rpVersion = "2.0.1";       // Mathcad Add-in version number
+std::string rpVersion = "2.0.2";       // Mathcad Add-in version number
 
 // Setup Dialog Window for debugging
 HWND hwndDlg;  // Dialog handle for pop-up message boxes
@@ -65,7 +65,7 @@ enum EC {MUST_BE_REAL = 1, INSUFFICIENT_MEMORY, INTERRUPTED,                  //
          NO_SURFTEN, H_OUT_OF_RANGE, S_OUT_OF_RANGE,
          D_OUT_OF_RANGE, BAD_INPUT, INVALID_FLAG, X_SUM_NONUNITY,
          NO_UPPER_ROOT, TOO_MANY_COMPONENTS, BAD_MIX_STRING,
-         BAD_MOLE_FRACTION, INDIV_COMPONENT, UNKNOWN,
+         BAD_MOLE_FRACTION, INDIV_COMPONENT, SATSPLN_FAILED, UNKNOWN,
          NUMBER_OF_ERRORS};                                                   // Dummy code for Error Count
 
 // This is the list of errors that can be output if any of the functions fails.
@@ -97,6 +97,7 @@ char * RPErrorMessageTable[NUMBER_OF_ERRORS] =
     (char *)("Bad mixture string format: c1[mf1]&c2[mf2]...&cX[mfX]"),   // BAD_MIX_STRING
     (char *)("Mole fraction can't be converted"),           //  BAD_MOLE_FRACTION
     (char *)("Must specify individual component number"),   //  INDIV_COMPONENT
+    (char *)("Saturation routine failed for mixture"),      //  SATSPLN_FAILED
     (char *)("Unknown Error"),                              //  UNKNOWN
     (char *)("Error Count - Not Used")                      //  NUMBER_OF_ERRORS
 };
@@ -112,7 +113,7 @@ double Pmax;                          // Max Pressure
 double wmm;                           // Molar Mass
 std::string err;                      // error string from REFPROP load DLL
 std::string MixFileName;              // Mixture File Name Storage
-std::string MixFileLast = "";         // Mixture File Name Storage
+std::string LastFluid = "";           // Mixture File Name Storage
 std::string fluidPath;
 char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
 

@@ -9,7 +9,7 @@ LRESULT rp_Tsatp(
 	double psat,tsat,rhol,rhov,xliq[20],xvap[20];
 
 	ierr = cSetup(fluid->str);
-	if (ierr != 0 )
+	if (ierr > 0)
 		return MAKELRESULT(ierr,1);
 	
     if( p->imag != 0.0 )
@@ -19,7 +19,7 @@ LRESULT rp_Tsatp(
 		
 	SATPdll(&psat,&x[0],&kph,&tsat,&rhol,&rhov,&xliq[0],&xvap[0],&ierr,herr,errormessagelength);
 
-	if (ierr != 0)
+	if (ierr > 0)
 	{
 		if ((ierr == 2)||(ierr == 4)||(ierr == 12)||(ierr == 141)) 
 			return MAKELRESULT(P_OUT_OF_RANGE,2); // Pressure too low | negative | > Pcrit

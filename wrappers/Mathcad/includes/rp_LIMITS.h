@@ -8,7 +8,7 @@ LRESULT rp_LIMITS(
     unsigned int rows = 4, cols = 1;
 
     ierr = cSetup(fluid->str);
-    if (ierr != 0)
+    if (ierr > 0)
         return MAKELRESULT(ierr, 1);
 
     std::string strType = upper(htype->str);  // Extract to std::string for each compare

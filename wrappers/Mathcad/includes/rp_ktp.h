@@ -15,7 +15,7 @@ LRESULT rp_Ktp(
     char htype[] = "TCX";
 
     ierr = cSetup(fluid->str);
-    if (ierr != 0)
+    if (ierr > 0)
         return MAKELRESULT(ierr, 1);
 
     if (t->imag != 0.0)
@@ -44,8 +44,8 @@ LRESULT rp_Ktp(
     // Get critical pressure
     if (ncomp > 1)
     {
-        CRITPdll(x, &tc, &pc, &Dc, &ierr, herr, errormessagelength);
-        if (ierr != 0)
+        CRITPdll(&x[0], &tc, &pc, &Dc, &ierr, herr, errormessagelength);
+        if (ierr > 0)
         {
             return MAKELRESULT(UNCONVERGED, 2);
         }

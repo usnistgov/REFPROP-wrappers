@@ -79,165 +79,125 @@ int cSetup(std::string strFluid)
     char herr[errormessagelength], hhmx[] = "HMX.BNC", href[] = "DEF", hfld[componentstringlength];
     char htype[] = "EOS";
 
-    x[0] = 1.0;
-    for (int j = 1; j < 20; j++) { x[j] = 0.0; }  // initialize mole fractions to zero
-
-    // Custom mixtures can be supplied as in the following format:
-    // "fluid1[x1]&fluid2[x2]&......fluidN[xN]", parse it out, and then call
-    // SETUPdll with the string "fluid1|fluid2|...|fluidN" and initialize
-    // x[] with the extracted mole fractions.
-    std::vector<double> fractions(1, 1.0);
-    std::vector<std::string> name_vec;
-    std::string fluid_string = extract_fractions(strFluid, fractions);
-    if (fluid_string == "n>20") return TOO_MANY_COMPONENTS;
-    if (fluid_string == "bad_mix") return BAD_MIX_STRING;
-    if (fluid_string == "bad_num") return BAD_MOLE_FRACTION;
-
-    ncomp = static_cast<int>(fractions.size());
-    for (int i = 0; i < ncomp; i++) { 
-        comp_sum += fractions[i];
-        // initialize mole fraction array
-        x[i] = fractions[i];
-    }
-    if (std::fabs(comp_sum - 1.0) > 10 * DBL_EPSILON) return X_SUM_NONUNITY;
-
-    // Use this pop-up window for debugging if needed before processing the fluid string
-    //==================================================================================
-    //std::string msg;
-    //msg = "NIST RefProp DLL Version: " + RPVersion_loaded;
-    //msg.append("\n\nFluid String = [");
-    //msg.append(fluid_string);
-    //msg.append("]\n\nChar* String = [");
-    //msg.append(hfld); msg.append("]");
-    //MessageBox(hwndDlg, msg.c_str(), "NIST RefProp Add-In", 0);
-
-
-    if (fluid_string.find("|") != fluid_string.npos)
+    if (strFluid != LastFluid)
     {
-        strcpy(MixName, "N/A");
-        MixFileLast = "";
-        // convert std::string to c-style string for DLL call
-        std::copy(fluid_string.begin(), fluid_string.end(), hfld);    // Copy string fluidPath into c_str hfld. 
-        // hfld[fluid_string.size()] = '\0';                          // Append with a null character (not sure if needed)
-        // Pad the fluid string all the way to 10k characters with spaces to deal with string parsing bug in REFPROP in SETUPdll
-        for (int j = static_cast<int>(fluid_string.size()); j < componentstringlength; ++j) {
-            hfld[j] = ' ';
+
+        x[0] = 1.0;
+        for (int j = 1; j < 20; j++) { x[j] = 0.0; }  // initialize mole fractions to zero
+
+        // Custom mixtures can be supplied as in the following format:
+        // "fluid1[x1]&fluid2[x2]&......fluidN[xN]", parse it out, and then call
+        // SETUPdll with the string "fluid1|fluid2|...|fluidN" and initialize
+        // x[] with the extracted mole fractions.
+        std::vector<double> fractions(1, 1.0);
+        std::vector<std::string> name_vec;
+        std::string fluid_string = extract_fractions(strFluid, fractions);
+        if (fluid_string == "n>20") return TOO_MANY_COMPONENTS;
+        if (fluid_string == "bad_mix") return BAD_MIX_STRING;
+        if (fluid_string == "bad_num") return BAD_MOLE_FRACTION;
+
+        ncomp = static_cast<int>(fractions.size());
+        for (int i = 0; i < ncomp; i++) {
+            comp_sum += fractions[i];
+            // initialize mole fraction array
+            x[i] = fractions[i];
         }
+        if (std::fabs(comp_sum - 1.0) > 10 * DBL_EPSILON) return X_SUM_NONUNITY;
 
-        // Use this pop-up window for debugging if needed
-        //===============================================================================
-        //std::string msg;
-        //msg = "NIST RefProp DLL Version: " + RPVersion_loaded;
-        //msg.append("\n\nFluid String = [");
-        //msg.append(fluid_string);
-        //msg.append("]\n\nChar* String = [");
-        //msg.append(hfld); msg.append("]");
-        //MessageBox(hwndDlg, msg.c_str(), "NIST RefProp Add-In", 0);
-
-        SETUPdll(&ncomp, hfld, hhmx, href, &ierr, herr,
-            componentstringlength, refpropcharlength, lengthofreference, errormessagelength);
-
-        if (ierr != 0)
-            return FLUID_NOT_FOUND;
-    }
-    else if (ncomp == 1 && upper(strFluid).find(".MIX") != strFluid.npos)
-    {   // Read Mixture File
-        // convert std::string to c-style string for DLL call
-        char mix[255] = { 0 };                            // Initialize char array mypath
-        std::copy(strFluid.begin(), strFluid.end(), mix); // Copy string fluidPath into c_str mix. 
-        mix[strFluid.size()] = '\0';                      // Append with a null character (not sure if needed)
-    
-		SETMIXdll(mix,             // Mixture name
-            hhmx,                  // Mixture file
-            href,                  // Reference type
-            &ncomp,                // Number of components
-            hfld,                  // long string of mixture file names (returned)
-            &(x[0]),               // mixture mole fractions
-            &ierr,                 // returned error code
-            herr,                  // error message
-		    255,                   // Mixture name length
-            refpropcharlength,     // length of char string for mixture file 
-            lengthofreference,     // reference type length
-            componentstringlength, // returned component string length
-            errormessagelength);   // error message length
-
-        if (ierr == 101)
-            return FLUID_NOT_FOUND;
-        else if (ierr == -103)
-            return X_SUM_NONUNITY;
-        else 
-            ierr = 0;
-
-        MixFileName = mix;
-        if (MixFileName != MixFileLast)
+        if (fluid_string.find("|") != fluid_string.npos)                  // *** Ad-Hoc mixture String ***
         {
-            std::string MixFileFull;
-            MixFileFull = fluidPath + "\\" + MixFileName;
-            std::ifstream mFile(MixFileFull);
-            if (mFile.is_open())
-            {
-                mFile.getline(MixName, namelengthlong);
-                mFile.close();
-                MixFileLast = MixFileName;
+            // *** strcpy(MixName, "N/A");
+            // convert std::string to c-style string for DLL call
+            std::copy(fluid_string.begin(), fluid_string.end(), hfld);    // Copy string fluid_string into c_str hfld. 
+            // Pad the fluid string all the way to 10k characters with spaces to deal with string parsing bug in older REFPROP in SETUPdll
+            for (int j = static_cast<int>(fluid_string.size()); j < componentstringlength; ++j) {
+                hfld[j] = ' ';
             }
-            else
-            {
-                MixFileFull = fluidPath + "\\mixtures\\" + MixFileName;
-                std::ifstream mFile(MixFileFull);
-                if (mFile.is_open())
-                {
-                    mFile.getline(MixName, namelengthlong);
-                    mFile.close();
-                    MixFileLast = MixFileName;
-                }
-                else
-                {
-                    // Use this pop-up window for debugging if needed
-                    //===============================================================================
-                    //std::string msg;
-                    //msg = "Could not open file: " + fluidPath + "\\" + MixFileName;
-                    //msg.append("\n            or file: " + fluidPath + "\\mixtures\\" + MixFileName);
-                    //MessageBox(hwndDlg, msg.c_str(), "NIST RefProp Add-In", 0);
-                }
-           }
-        }
-	}
-    else // single fluid or pseudo-pure fluid
-    {
-        strcpy(MixName, "N/A");
-        MixFileLast = "";
 
-        if ((upper(strFluid).find(".FLD") == strFluid.npos) &&       // If fluid string doesn't end
-            (upper(strFluid).find(".PPF") == strFluid.npos))         // end with ".fld" or ".ppf" ...
-        {
-            strFluid.append(".fld");                                 //   ... assume it's a ".fld" file.
-        }
-        // convert std::string to c-style string for DLL call
-        char hfld[10000];                                            // Initialize char array hfld
-        std::copy(strFluid.begin(), strFluid.end(), hfld);           // Copy string fluidPath into c_str hfld. 
-        hfld[strFluid.size()] = '\0';                                // Append with a null character (not sure if needed)
-
-        SETUPdll(&ncomp,hfld,hhmx,href,&ierr,herr,
-            componentstringlength,refpropcharlength,lengthofreference,errormessagelength);
-
-        if (ierr != 0)
-        {
             // Use this pop-up window for debugging if needed
             //===============================================================================
-            //std::string msg;
-            //msg = "Could not open file: " + fluidPath + "\\" + strFluid;
-            //msg.append("\nhfld = [");
-            //msg.append(hfld); msg.append("]");
-            //msg.append(format("\n  ierr: %d",ierr));
-            //MessageBox(hwndDlg, msg.c_str(), "NIST RefProp Add-In", 0);
-            //===============================================================================
-            return FLUID_NOT_FOUND;
+            //std::string msg1;
+            // msg1 = "NIST RefProp DLL Version: " + RPVersion_loaded;
+            // msg1.append("\n\nFluid String = [");
+            // msg1.append(fluid_string);
+            // msg1.append("]\n\nChar* String = [");
+            // msg1.append(hfld); msg.append("]");
+            // MessageBox(hwndDlg, msg1.c_str(), "NIST RefProp Add-In", 0);
+
+            SETUPdll(&ncomp, hfld, hhmx, href, &ierr, herr,
+                componentstringlength, refpropcharlength, lengthofreference, errormessagelength);
+
+            if (ierr > 0)
+                return FLUID_NOT_FOUND;
         }
+        else if (upper(strFluid).find(".MIX") != strFluid.npos)    // Does the file have a .MIX extension?
+        {   // Read Mixture File
+            // convert std::string to c-style string for DLL call
+            char mix[filepathlength] = { 0 };                 // Initialize char array mix
+            std::copy(strFluid.begin(), strFluid.end(), mix); // Copy string strFluid into c_str mix. 
+            mix[strFluid.size()] = '\0';                      // Append with a null character (not sure if needed)
+
+            SETMIXdll(mix,             // Mixture name
+                hhmx,                  // Mixture file
+                href,                  // Reference type
+                &ncomp,                // Number of components
+                hfld,                  // long string of mixture file names (returned)
+                &x[0],                 // mixture mole fractions
+                &ierr,                 // returned error code
+                herr,                  // error message
+                255,                   // Mixture name length
+                refpropcharlength,     // length of char string for mixture file 
+                lengthofreference,     // reference type length
+                componentstringlength, // returned component string length
+                errormessagelength);   // error message length
+
+            if (ierr == 101)
+            {
+                return FLUID_NOT_FOUND;
+                // Use this pop-up window for debugging if needed
+                //===============================================================================
+                // std::string msg2;
+                // msg2 = "Could not open file: " + strFluid;
+                // MessageBox(hwndDlg, msg2.c_str(), "NIST RefProp Add-In", 0);
+            }
+            else if (ierr == -103)
+                return X_SUM_NONUNITY;
+            else 
+                ierr = 0;
+        }
+        else // single fluid or pseudo-pure fluid
+        {
+            if ((upper(strFluid).find(".FLD") == strFluid.npos) &&       // If fluid string doesn't end
+                (upper(strFluid).find(".PPF") == strFluid.npos))         // end with ".fld" or ".ppf" ...
+            {
+                strFluid.append(".fld");                                 //   ... assume it's a ".fld" file.
+            }
+            // convert std::string to c-style string for DLL call
+            std::copy(strFluid.begin(), strFluid.end(), hfld);           // Copy string strFluid into c_str hfld. 
+            hfld[strFluid.size()] = '\0';                                // Append with a null character (not sure if needed)
+
+            SETUPdll(&ncomp, hfld, hhmx, href, &ierr, herr,
+                componentstringlength, refpropcharlength, lengthofreference, errormessagelength);
+
+            if (ierr > 0)
+            {
+                return FLUID_NOT_FOUND;
+            }
+        }
+
+        LIMITSdll(htype, &x[0], &Tmin, &Tmax, &Dmax, &Pmax, lengthofreference);   // Get Tmin, Tmax, Dmzx, Pmax for this fluid/mixture
+        WMOLdll(&x[0], &wmm);                                                     // Get molar mass [kg/kmol or g/mol]
+
+        if (ncomp > 1)                                                            // This is a mixture.  Call SATSPLN
+        {
+            SATSPLNdll(&x[0], &ierr, herr, errormessagelength);
+            // TODO: Maybe create a function that sets a flag to enable/disable this SATSPLN default call
+
+            if (ierr > 0) return SATSPLN_FAILED;
+        }
+        LastFluid = strFluid;
+
     }
-
-    LIMITSdll(htype, &x[0], &Tmin, &Tmax, &Dmax, &Pmax, lengthofreference);   // Get Tmin, Tmax, Dmzx, Pmax for this fluid/mixture
-    WMOLdll(&x[0], &wmm);                                                     // Get molar mass [kg/kmol or g/mol]
-
     return ierr;           // return the error flag from SETUP0
 
 }           

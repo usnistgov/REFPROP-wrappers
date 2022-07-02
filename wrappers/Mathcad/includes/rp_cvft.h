@@ -10,7 +10,7 @@ LRESULT rp_Cvft(
     double Cv, Cp;
 
 	ierr = cSetup(fluid->str);
-	if (ierr != 0 )
+	if (ierr > 0)
 		return MAKELRESULT(ierr,1);
 	
     if( t->imag != 0.0 )
@@ -20,7 +20,7 @@ LRESULT rp_Cvft(
 
     SATTdll(&tsat, &x[0], &kph, &psat, &rhol, &rhov, &xliq[0], &xvap[0], &ierr, herr, errormessagelength);
 
-	if (ierr != 0)
+	if (ierr > 0)
 	{
 		if ((ierr == 1)||(ierr == 9)||(ierr == 121)) 
 			return MAKELRESULT(T_OUT_OF_RANGE,2); // Temperature too low | negative | > Tcrit

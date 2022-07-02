@@ -5,7 +5,7 @@ LRESULT rp_Tmax(
 	int ierr = 0;
 
 	ierr = cSetup(fluid->str);
-	if (ierr != 0 )
+	if (ierr > 0)
 		return MAKELRESULT(ierr,1);
 
     ret->real = Tmax;
