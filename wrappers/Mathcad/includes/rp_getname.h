@@ -18,7 +18,7 @@ LRESULT rp_Getname(
 
     ierr = cSetup(strFluid);
 
-    if (ierr != 0)
+    if (ierr > 0)
         return MAKELRESULT(ierr, 1);
 
     icomp = static_cast<int>(comp->real);

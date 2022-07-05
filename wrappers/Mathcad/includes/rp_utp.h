@@ -4,28 +4,28 @@ LRESULT rp_Utp(
     LPCCOMPLEXSCALAR      t,
     LPCCOMPLEXSCALAR      p   )
 {
-	double tval,pval,Dval;
+    double tval,pval,Dval;
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
     double Dl, Dv, Q, U, H, S, Cv, Cp, W, Pdum, hjt;
     double xl[20], xv[20];
     int ierr = 0, icomp = 1, kph = 1, kguess = 0;
     char herr[255];
 
-	ierr = cSetup(fluid->str);
-	if (ierr != 0 )
-		return MAKELRESULT(ierr,1);
+    ierr = cSetup(fluid->str);
+    if (ierr > 0)
+        return MAKELRESULT(ierr,1);
 
     if( t->imag != 0.0 )
-		return MAKELRESULT(MUST_BE_REAL,2);
-	else
-		tval = t->real;
+        return MAKELRESULT(MUST_BE_REAL,2);
+    else
+        tval = t->real;
 
     if (tval > Tmax*(1 + 0.5*extr)) return MAKELRESULT(T_OUT_OF_RANGE, 2);
 
     if( p->imag != 0.0 )
-		return MAKELRESULT(MUST_BE_REAL,3);
-	else
-		pval = p->real * 1000.0;   // Convert from MPa to kPa for REFPROP inputs
+        return MAKELRESULT(MUST_BE_REAL,3);
+    else
+        pval = p->real * 1000.0;   // Convert from MPa to kPa for REFPROP inputs
 
     if (pval > Pmax*(1 + extr)) return MAKELRESULT(P_OUT_OF_RANGE, 3);
 
@@ -35,8 +35,8 @@ LRESULT rp_Utp(
     // Get critical pressure
     if (ncomp > 1)
     {
-        CRITPdll(x, &tc, &pc, &Dc, &ierr, herr, errormessagelength);
-        if (ierr != 0)
+        CRITPdll(&x[0], &tc, &pc, &Dc, &ierr, herr, errormessagelength);
+        if (ierr > 0)
         {
             return MAKELRESULT(UNCONVERGED, 2);
         }
@@ -86,7 +86,7 @@ LRESULT rp_Utp(
             return MAKELRESULT(UNCONVERGED, 2);     // one of many convergence errors
     }
 
-	ret->real = U/wmm;   // Convert from J/mol to kJ/kg
+    ret->real = U/wmm;   // Convert from J/mol to kJ/kg
 
     return 0;               // return 0 to indicate there was no error
             
@@ -97,14 +97,11 @@ FUNCTIONINFO    rp_utp =
     (char *)("rp_utp"),                 // Name by which Mathcad will recognize the function
     (char *)("fluid,t,p"),              // rp_utp will be called as rp_utp(fluid,t,p)
     (char *)("Returns the internal energy [kJ/kg] given the temperature [K] and pressure [MPa]"),
-										// description of rp_utp(fluid,t,p)
+                                        // description of rp_utp(fluid,t,p)
     (LPCFUNCTION)rp_Utp,                // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
     3,                                  // the function takes on 3 arguments
     { MC_STRING,                        // String argument
-	  COMPLEX_SCALAR,
-	  COMPLEX_SCALAR }                  // arguments are complex scalars
+      COMPLEX_SCALAR,
+      COMPLEX_SCALAR }                  // arguments are complex scalars
 };
-    
-    
-    

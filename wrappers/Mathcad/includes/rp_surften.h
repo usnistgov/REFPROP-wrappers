@@ -9,7 +9,7 @@ LRESULT rp_Surften(
 	double psat,tsat,rhol,rhov,xliq[20],xvap[20],sigma;
 
 	ierr = cSetup(fluid->str);
-	if (ierr != 0 )
+	if (ierr > 0)
 		return MAKELRESULT(ierr,1);
 	
     if( t->imag != 0.0 )
@@ -19,7 +19,7 @@ LRESULT rp_Surften(
 		
 	SATTdll(&tsat,&x[0],&kph,&psat,&rhol,&rhov,xliq,xvap,&ierr,herr,errormessagelength);
 
-    if (ierr != 0)
+    if (ierr > 0)
     {
         if ((ierr == 1) || (ierr == 9) || (ierr == 121))
             return MAKELRESULT(T_OUT_OF_RANGE, 2); // Temperature too low | negative | > Tcrit
@@ -31,7 +31,7 @@ LRESULT rp_Surften(
 
 	SURTENdll(&tsat, &rhol, &rhov, &xliq[0], &xvap[0], &sigma, &ierr, herr, errormessagelength);
 
-	if (ierr != 0)
+	if (ierr > 0)
 	{
 		if ((ierr == 1)||(ierr == 9)||(ierr == 121)) 
 			return MAKELRESULT(T_OUT_OF_RANGE,2); // Temperature too low | negative | > Tcrit

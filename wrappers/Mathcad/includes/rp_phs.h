@@ -12,7 +12,7 @@ LRESULT rp_Phs(
     int kph = 1;
 
     ierr = cSetup(fluid->str);
-    if (ierr != 0)
+    if (ierr > 0)
         return MAKELRESULT(ierr, 1);
 
     if (h->imag != 0.0)
@@ -28,7 +28,7 @@ LRESULT rp_Phs(
                                // Use the full HSFLSH function
 
     HSFLSHdll(&hval, &sval, &x[0], &tval, &pval, &dval, &rhol, &rhov, &xliq[0], &xvap[0], &qual, &eval, &Cv, &Cp, &wval, &ierr, herr, errormessagelength);
-    if (ierr != 0)
+    if (ierr > 0)
     {
         if ((ierr == 4) || (ierr == 12))
             return MAKELRESULT(P_OUT_OF_RANGE, 1);

@@ -12,7 +12,7 @@ LRESULT rp_Hts(
 	int kr = 1;
 
 	ierr = cSetup(fluid->str);
-	if (ierr != 0 )
+	if (ierr > 0)
 		return MAKELRESULT(ierr,1);
 
     if( t->imag != 0.0 )
