@@ -33,6 +33,8 @@
 #else
     #include <vector>
     #include <string>
+    #include <memory>
+    #include <stdarg.h>
 #endif
 
 //    #include "Exceptions.h"

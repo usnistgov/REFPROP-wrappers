@@ -46,6 +46,7 @@ const static RP_SIZE_T casnlength = 12;
 enum { MC_STRING = STRING }; // Substitute enumeration variable MC_STRING for STRING, use MC_STRING below and in the stub headers
 #undef STRING                // STRING conflicts with a variable defined in RPstrings.cpp and is just generally a bad idea
 
+#define NO_CPPFORMAT
 #include <stdlib.h>
 #include <stdio.h>
 #include "RPstrings.h"       // Utility string functions for splitting and joining long strings at delimiters
