@@ -88,8 +88,8 @@
         std::transform(str.begin(), str.end(), str.begin(), ::toupper);
         return str;
     }
-	
-	inline std::string lower(std::string str)
+    
+    inline std::string lower(std::string str)
     {
         std::transform(str.begin(), str.end(), str.begin(), ::tolower);
         return str;

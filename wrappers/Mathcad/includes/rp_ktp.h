@@ -97,7 +97,7 @@ LRESULT rp_Ktp(
 
     TRNPRPdll(&tval,&Dval,x,&mu,&cond,&ierr,herr,errormessagelength);
 
-	// check for errors and return MAKELRESULT(n,1)
+    // check for errors and return MAKELRESULT(n,1)
     if (ierr > 0)
     {
         if ((ierr == 39) || (ierr == 40) || (ierr == 50))
@@ -116,9 +116,9 @@ LRESULT rp_Ktp(
             return MAKELRESULT(UNCONVERGED, 2);     // did not converge
     }
     if (cond < 0)
-		return MAKELRESULT(UNCONVERGED,2);
+        return MAKELRESULT(UNCONVERGED,2);
 
-	ret->real = cond;       // returned in W/m-K
+    ret->real = cond;       // returned in W/m-K
 
     return 0;               // return 0 to indicate there was no error
             

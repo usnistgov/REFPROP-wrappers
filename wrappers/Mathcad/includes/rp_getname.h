@@ -52,16 +52,16 @@ LRESULT rp_Getname(
             nstr = static_cast<int>(strlen(hfull));
     }
 
-	// allocate memory for return string
-	// pdest = MathcadAllocate(nstr+1);
+    // allocate memory for return string
+    // pdest = MathcadAllocate(nstr+1);
     char * pdest = MathcadAllocate(nstr + 1);
-	if (pdest == NULL )
-		return MAKELRESULT(INSUFFICIENT_MEMORY,2);  // insufficient memory
-	else
-	{
-		strncpy(pdest,hfull,nstr);
-		hstr->str = pdest;
-	}
+    if (pdest == NULL )
+        return MAKELRESULT(INSUFFICIENT_MEMORY,2);  // insufficient memory
+    else
+    {
+        strncpy(pdest,hfull,nstr);
+        hstr->str = pdest;
+    }
     return 0;               // return 0 to indicate there was no error            
 }
 

@@ -4,8 +4,8 @@ LRESULT rp_Ptrho(
     LPCCOMPLEXSCALAR      t,
     LPCCOMPLEXSCALAR    rho   )
 {
-	double tval,pval,dval;
-	int ierr;
+    double tval,pval,dval;
+    int ierr;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)
@@ -21,9 +21,9 @@ LRESULT rp_Ptrho(
     else
         dval = rho->real / wmm;  // Convert from kg/m³ to mol/L
 
-	PRESSdll(&tval, &dval, &x[0], &pval);  // [K], [mol/L], [kPa]
+    PRESSdll(&tval, &dval, &x[0], &pval);  // [K], [mol/L], [kPa]
 
-	ret->real = pval / 1000.0;   // Convert from kPa to MPa
+    ret->real = pval / 1000.0;   // Convert from kPa to MPa
 
     return 0;               // return 0 to indicate there was no error
 
@@ -34,13 +34,13 @@ FUNCTIONINFO    rp_ptrho =
     (char *)("rp_ptrho"),               // Name by which mathcad will recognize the function
     (char *)("t,rho"),                  // rp_ptrho will be called as rp_ptrho(t,rho)
     (char *)("Returns the pressure [MPa] given the temperature [K] and density [kg/m³]"),
-										// description of rp_ptrho(t,rho)
+                                        // description of rp_ptrho(t,rho)
     (LPCFUNCTION)rp_Ptrho,              // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
     3,                                  // the function takes 3 arguments
     { MC_STRING,                        // String argument
-	  COMPLEX_SCALAR,
-	  COMPLEX_SCALAR }                  // arguments are complex scalars
+      COMPLEX_SCALAR,
+      COMPLEX_SCALAR }                  // arguments are complex scalars
 };
     
     

@@ -4,7 +4,7 @@ LRESULT rp_Mutp(
     LPCCOMPLEXSCALAR      t,
     LPCCOMPLEXSCALAR      p)
 {
-	double mu,cond;
+    double mu,cond;
     double tval, pval, Dval;
     double TminV, TmaxV, DmaxV, PmaxV;                          // Viscosity Limits
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
@@ -95,16 +95,16 @@ LRESULT rp_Mutp(
             return MAKELRESULT(UNCONVERGED, 2);     // one of many convergence errors
     }
 
-	TRNPRPdll(&tval,&Dval,&x[0],&mu,&cond,&ierr,herr,errormessagelength);
+    TRNPRPdll(&tval,&Dval,&x[0],&mu,&cond,&ierr,herr,errormessagelength);
 
-	// check for errors and return MAKELRESULT(n,p)
-	if ((ierr > 0) && (ierr != 51))
-	{
-		if ((ierr == 40) || (ierr == 49) || (ierr == 50))
-			return MAKELRESULT(NO_TRANSPORT,1);     // viscosity model not defined
-		else 
+    // check for errors and return MAKELRESULT(n,p)
+    if ((ierr > 0) && (ierr != 51))
+    {
+        if ((ierr == 40) || (ierr == 49) || (ierr == 50))
+            return MAKELRESULT(NO_TRANSPORT,1);     // viscosity model not defined
+        else 
             return MAKELRESULT(UNCONVERGED,2);
-	}
+    }
     else if (ierr < 0) {
         if ((ierr == -41) || (ierr == -43) || (ierr == -51) || (ierr == -53))
             return MAKELRESULT(T_OUT_OF_RANGE, 2);  // Temperature out of bounds
@@ -113,10 +113,10 @@ LRESULT rp_Mutp(
         else if (ierr <= -58)
             return MAKELRESULT(UNCONVERGED, 2);     // did not converge
     }
-	if (mu < 0)
-		return MAKELRESULT(UNCONVERGED,2);
+    if (mu < 0)
+        return MAKELRESULT(UNCONVERGED,2);
 
-	ret->real = mu;         // returned in µPa-s
+    ret->real = mu;         // returned in µPa-s
 
     return 0;               // return 0 to indicate there was no error
             
@@ -127,12 +127,12 @@ FUNCTIONINFO    rp_mutp =
     (char *)("rp_mutp"),                // Name by which mathcad will recognize the function
     (char *)("fluid,t,p"),              // rp_mutp will be called as rp_mutp(fluid,t,p)
     (char *)("Returns the viscosity [µPa-s] given the temperature [K] and pressure [MPa]"),
-										// description of rp_mutp(fluid,t,p)
+                                        // description of rp_mutp(fluid,t,p)
     (LPCFUNCTION)rp_Mutp,               // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
     3,                                  // the function takes on 3 arguments
     { MC_STRING,                        // String argument
-	  COMPLEX_SCALAR,
-	  COMPLEX_SCALAR }                  // arguments are complex scalars
+      COMPLEX_SCALAR,
+      COMPLEX_SCALAR }                  // arguments are complex scalars
 };
     

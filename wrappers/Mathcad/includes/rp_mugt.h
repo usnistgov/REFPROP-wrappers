@@ -30,7 +30,7 @@ LRESULT rp_Mugt(
             return MAKELRESULT(UNCONVERGED, 2); // failed to converge
     }
 
-	TRNPRPdll(&tsat,&rhov,&x[0],&mu,&cond,&ierr,herr, errormessagelength);
+    TRNPRPdll(&tsat,&rhov,&x[0],&mu,&cond,&ierr,herr, errormessagelength);
 
     // check for errors and return MAKELRESULT(n,p)
     if ((ierr > 0) && (ierr != 51))
@@ -51,7 +51,7 @@ LRESULT rp_Mugt(
     if (mu < 0)
         return MAKELRESULT(UNCONVERGED, 2);
 
-	ret->real = mu;       // returned in µPa-s
+    ret->real = mu;       // returned in µPa-s
 
     return 0;               // return 0 to indicate there was no error
             
@@ -62,10 +62,10 @@ FUNCTIONINFO    rp_mugt =
     (char *)("rp_mugt"),                // Name by which mathcad will recognize the function
     (char *)("fluid,t"),                // rp_mugt will be called as rp_mugt(fluid,t)
     (char *)("Returns the saturation vapor viscosity [µPa-s] given the saturation temperature [K]"),
-										// description of rp_mugt(fluid,t)
+                                        // description of rp_mugt(fluid,t)
     (LPCFUNCTION)rp_Mugt,               // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
     2,                                  // the function takes 2 arguments
     { MC_STRING,                        // String argument
-	  COMPLEX_SCALAR }                  // argument is a complex scalar
+      COMPLEX_SCALAR }                  // argument is a complex scalar
 };
