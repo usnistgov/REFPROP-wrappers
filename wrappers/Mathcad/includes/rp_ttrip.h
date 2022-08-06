@@ -6,11 +6,10 @@ LRESULT rp_Ttrip(
     char herr[256] = "OK\0";
     char htyp[4] = "EOS";
     unsigned int lhtyp = 3;
-    unsigned int lherr = 255;
     int ierr = 0;
     int icomp = 1;
-    double wmm, ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas; 
-    double tmax,Dmax,pmax;
+    double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas; 
+    double tmax,dmax,pmax;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)
@@ -24,7 +23,7 @@ LRESULT rp_Ttrip(
     if ((icomp > ncomp)||(icomp < 0))
         return MAKELRESULT(BAD_COMPONENT,2);
     else if ((icomp == 0)&&(ncomp > 1))
-        LIMITSdll(htyp,&x[0],&ttrip,&tmax,&Dmax,&pmax,lhtyp);
+        LIMITSdll(htyp,&x[0],&ttrip,&tmax,&dmax,&pmax,lhtyp);
     else 
     {
         if (icomp == 0) icomp = 1;

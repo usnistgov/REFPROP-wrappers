@@ -5,7 +5,6 @@ LRESULT rp_Rhomax(
     char herr[255];
     unsigned int lherr = 255;
     int ierr = 0;
-    int icomp = 0;
     double tc, pc, Dc; 
 
     ierr = cSetup(fluid->str);

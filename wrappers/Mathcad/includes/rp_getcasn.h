@@ -5,7 +5,7 @@ LRESULT rp_GetCAS(
 {
     char *pdest;
     char *pcomment;
-    int nstr;
+    unsigned int nstr;
     int icomp;
     char hname[namelengthshort+1];
     char hfull[namelengthlong+1];
@@ -46,12 +46,12 @@ LRESULT rp_GetCAS(
         nstr = (unsigned int)strlen(hcasn);
 
     // allocate memory for return string
-    pdest = MathcadAllocate(nstr + 1);
+    pdest = MathcadAllocate(nstr + 1u);
     if (pdest == NULL)
         return MAKELRESULT(INSUFFICIENT_MEMORY, 2);  // insufficient memory
     else
     {
-        strncpy(pdest, hcasn, nstr);
+        strncpy(pdest, hcasn, (size_t)nstr);
         hstr->str = pdest;
     }
     return 0;               // return 0 to indicate there was no error

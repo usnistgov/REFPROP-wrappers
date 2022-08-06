@@ -9,7 +9,7 @@ LRESULT rp_Extrap(
 
     iset = static_cast<int>(flag->real);
 
-    if ((iset == 0) || (iset = 1))
+    if ((iset == 0) || (iset == 1))
         extr = iset;
     else
         return MAKELRESULT(BAD_INPUT, 1);

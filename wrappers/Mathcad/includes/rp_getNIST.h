@@ -1,11 +1,13 @@
 LRESULT rp_GetNIST(
     LPMCSTRING        hstr,    // pointer to the results string
-    LPCCOMPLEXSCALAR  dum   )  // pointer to the dummy parameter received from Mathcad
+    LPCCOMPLEXSCALAR  idum  )  // pointer to the dummy parameter received from Mathcad
 {
-    // NOTE: we don't care what gets passed in.
+    // NOTE: we don't care what gets passed in, but this clears the unused variable warning.
+    if (idum->imag != 0.0)
+        return MAKELRESULT(MUST_BE_REAL, 2);
     // Return string should already be stored when REFPROP DLL is loaded...
     std::string NISTVers = "NIST RefProp Library: Version " + RPVersion_loaded;  // Extract the DLL version into string NISTVers
-    char * c = MathcadAllocate(static_cast<int>(NISTVers.size()) + 1);           // Create a c-string (pointer) with same size as s
+    char * c = MathcadAllocate((unsigned int)NISTVers.size() + 1u);           // Create a c-string (pointer) with same size as s
                                                                                  // This process avoids the const-cast type which would result from,
                                                                                  //     instead, converting the string using s.c_str()
     std::copy(NISTVers.begin(), NISTVers.end(), c);                              // Copy s into c.

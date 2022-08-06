@@ -9,7 +9,7 @@ LRESULT rp_Pcrit(
     unsigned int lherr = 255;
     int ierr = 0;
     int icomp = 1;
-    double wmm, ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas; 
+    double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas; 
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)

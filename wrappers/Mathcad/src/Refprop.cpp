@@ -256,7 +256,7 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
             const char* dbvar = getenv( "NIST_PATH" );                    // Get environment variable NIST_PATH if it exists
             if ( dbvar != NULL )                                          // If NIST_PATH was set (string not null)
             {                                                             //    Use extracted user specified path
-                int dblen = static_cast<int>(strlen(dbvar));              //    get length of environment string
+                size_t dblen = strlen(dbvar);                             //    get length of environment string
                 char userPath[255];                                       //    SETPATH wants a char[255]
                 strcpy(userPath, dbvar);                                  //    copy string to userPath[255]
                 SETPATHdll(userPath, dblen);                              //    Set path to user specified library location

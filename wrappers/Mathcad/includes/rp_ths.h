@@ -8,7 +8,6 @@ LRESULT rp_Ths(
     double hval, sval, tval, pval, dval, qual, eval, Cv, Cp, wval;
     double rhol, rhov, xliq[20], xvap[20];
     int ierr;
-    int kph = 1;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)

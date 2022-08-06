@@ -118,7 +118,7 @@
         const char * cs = mys.c_str();
         char* pEnd;
         double val = strtod(cs, &pEnd);
-        if ((pEnd - &(cs[0])) != s.size() ){
+        if ((pEnd - &(cs[0])) != (int)s.size() ){
             // Found a character that is not able to be converted to number
             return 0;
         }
