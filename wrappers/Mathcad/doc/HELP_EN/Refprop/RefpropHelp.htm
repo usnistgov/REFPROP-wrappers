@@ -39,7 +39,7 @@
             <ul type="disc">
                 <li>
                     <p><b class="hmath">"fluid_string"</b> specifies the fluid (or pseudo fluid or mixture) file
-                        to be loaded from the "<b>fluids\</b>" (or "<b>mixtures\</b>") directory. It can (optionally) end with an extension of "<b>.fld</b>".  If the suffix is omitted, RefProp will assume an extension of ".fld" and look for the fluid in the "<b>fluids\</b>" directory. If the fluid is a pseudo-pur fluid, the extension "<b>.ppf</b>" must be supplied.  Predefined mixtures MUST include the <b>"mixtures\"</b> prefix and the "<b>.mix</b>" extension.
+                        to be loaded from the "<b>fluids\</b>" (or "<b>mixtures\</b>") directory.  REFPROP 9.1 calls must include this relative prefix in the "fluid_string"; REFPROP 10 or later can <b><i>not</i></b> include this relative path as it is determined automatically. It can (optionally) end with an extension of "<b>.fld</b>".  If the suffix is omitted, RefProp will assume an extension of ".fld" and look for the fluid in the "<b>fluids\</b>" directory. If the fluid is a pseudo-pur fluid, the extension "<b>.ppf</b>" must be supplied.  Predefined mixtures MUST include the <b>"mixtures\"</b> prefix (<i>REFPROP 9.1 only</i>) and the "<b>.mix</b>" extension.
                         <br>
                         <br>
                         <i>e.g. to load the properties for HELIUM, define a variable such as: </i><br>
@@ -50,7 +50,7 @@
                         <br>
                         <b class="hmath">fluid := "HELIUM"</b>.</center><br>
                         <br>
-                        As of NIST RefProp 9.1, the valid pure fluid files shown below in Table 1, pseudo-pure fluid files are shown in Table 2, and predefined mixture files in Table 3.<BR>
+                        As of NIST RefProp 9.1, the valid pure fluid files shown below in Table 1, pseudo-pure fluid files are shown in Table 2, and predefined mixture files in Table 3.  Current REFPROP documentation should be referenced for the complete list.<BR>
                     </p>
                 </li>
                 <ul>
@@ -59,7 +59,7 @@
                             <h2><big>Table 1 : RefProp Pure Fluid Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="./PureFluids.PNG" align="middle" border="1"> <a name="Pure"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PureFluids.PNG" align="middle" border="1"> <a name="Pure"></a>
                 </ul>
                 <ul>
                     <ul>
@@ -67,7 +67,7 @@
                             <h2><big>Table 2 : RefProp Pseudo-Pure Fluid Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="./PseudoPureFluids.PNG" align="middle" border="1"> <a name="PseudoPure"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PseudoPureFluids.PNG" align="middle" border="1"> <a name="PseudoPure"></a>
                 </ul>
                 <ul>
                     <ul>
@@ -75,7 +75,7 @@
                             <h2><big>Table 3 : RefProp Predefined Mixture Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="./Mixtures.PNG" align="middle" border="1"> <a name="Mixture"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/Mixtures.PNG" align="middle" border="1"> <a name="Mixture"></a>
                 </ul>
             </ul>
             <br><br>
@@ -328,7 +328,7 @@
             functions with the units of the returned quantity and the required input
             variables. <br><b><i>Please note that each function requires a fluid string (see above) as
                     the first parameter, in addition to the parameters listed in the table.</i></b></p>
-        <h2 align="center"><big>Table 2 : Property Function Summary</big></h2>
+        <h2 align="center"><big>Table 4 : Property Function Summary</big></h2>
         <TABLE id="Table1" cellSpacing="1" cellPadding="3" width="520" align="center" border="3">
             <TR>
                 <TD align="center" width="130">Phase</TD>
