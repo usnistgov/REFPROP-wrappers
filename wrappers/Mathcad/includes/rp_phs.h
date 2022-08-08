@@ -9,7 +9,6 @@ LRESULT rp_Phs(
     double hval, sval, tval, pval, dval, qual, eval, Cv, Cp, wval;
     double rhol, rhov, xliq[20], xvap[20];
     int ierr;
-    int kph = 1;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)
@@ -38,7 +37,7 @@ LRESULT rp_Phs(
             return MAKELRESULT(UNCONVERGED, 3);
     }
 
-	ret->real = pval / 1000.0;       // Convert from kPa to MPa
+    ret->real = pval / 1000.0;       // Convert from kPa to MPa
 
     return 0;                        // return 0 to indicate there was no error
 
@@ -49,11 +48,11 @@ FUNCTIONINFO    rp_phs =
     (char *)("rp_phs"),                 // Name by which mathcad will recognize the function
     (char *)("fluid,h,s"),              // rp_phs will be called as rp_phs(fluid,h,s)
     (char *)("Returns the pressure [MPa] given the enthalpy [kJ/kg] and entropy [kJ/kg-K]"),
-										// description of rp_phs(fluid,h,s)
+                                        // description of rp_phs(fluid,h,s)
     (LPCFUNCTION)rp_Phs,                // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
     3,                                  // the function takes on 2 arguments
     { MC_STRING,                        // String argument
-	  COMPLEX_SCALAR,
-	  COMPLEX_SCALAR }                  // arguments are complex scalars
+      COMPLEX_SCALAR,
+      COMPLEX_SCALAR }                  // arguments are complex scalars
 };

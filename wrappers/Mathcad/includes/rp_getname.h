@@ -4,7 +4,7 @@ LRESULT rp_Getname(
     LPCCOMPLEXSCALAR    comp)
 {
     char *pcomment;
-    int nstr;
+    unsigned int nstr;
     int icomp;
     char hname[namelengthshort + 1];
     char hfull[namelengthlong + 1];
@@ -26,7 +26,7 @@ LRESULT rp_Getname(
     if ((icomp == 0) && (upper(strFluid).find(".MIX") != strFluid.npos)) //     if this is a mixture file (*.mix),
     {
             strcpy(hfull, MixName);   //         just get the Mixture Name from the .mix file
-            nstr = static_cast<int>(strlen(MixName));
+            nstr = (unsigned int)strlen(MixName);
     }
     else
     {
@@ -47,21 +47,20 @@ LRESULT rp_Getname(
         // strip any spaces off end of fluid name
         pcomment = strstr(hfull, "  ");
         if (pcomment != NULL)
-            nstr = static_cast<int>(pcomment - hfull);
+            nstr = (unsigned int)(pcomment - hfull);
         else
-            nstr = static_cast<int>(strlen(hfull));
+            nstr = (unsigned int)strlen(hfull);
     }
 
-	// allocate memory for return string
-	// pdest = MathcadAllocate(nstr+1);
-    char * pdest = MathcadAllocate(nstr + 1);
-	if (pdest == NULL )
-		return MAKELRESULT(INSUFFICIENT_MEMORY,2);  // insufficient memory
-	else
-	{
-		strncpy(pdest,hfull,nstr);
-		hstr->str = pdest;
-	}
+    // allocate memory for return string
+    char * pdest = MathcadAllocate(nstr + 1u);
+    if (pdest == NULL )
+        return MAKELRESULT(INSUFFICIENT_MEMORY,2);  // insufficient memory
+    else
+    {
+        strncpy(pdest,hfull,(size_t)nstr);
+        hstr->str = pdest;
+    }
     return 0;               // return 0 to indicate there was no error            
 }
 

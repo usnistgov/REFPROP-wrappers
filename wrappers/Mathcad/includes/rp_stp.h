@@ -6,7 +6,7 @@ LRESULT rp_Stp(
 {
     double tval,pval,Dval;
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
-    double Dl, Dv, Q, U, H, S, Cv, Cp, W, Pdum, hjt;
+    double Dl, Dv, Q, U, H, S = 0.0, Cv, Cp, W, Pdum, hjt;
     double xl[20], xv[20];
     int ierr = 0, icomp = 1, kph = 1, kguess = 0;
     char herr[255];

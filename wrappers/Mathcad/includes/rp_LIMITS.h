@@ -40,7 +40,7 @@ LRESULT rp_LIMITS(
     }
 
     // Assign return array elements
-	ret->hReal[0][0] = Tminx;         // Returned in K
+    ret->hReal[0][0] = Tminx;         // Returned in K
     ret->hReal[0][1] = Tmaxx;         // Returned in K
     ret->hReal[0][2] = Dmaxx * wmm;   // Convert from mol/L to kg/m³
     ret->hReal[0][3] = Pmaxx / 1000;  // Convert from kPa to MPa
@@ -54,11 +54,11 @@ FUNCTIONINFO    rp_limits =
     (char *)("rp_limits"),              // Name by which mathcad will recognize the function
     (char *)("fluid,htype"),            // rp_limits will be called as rp_limits(fluid,htype)
     (char *)("Returns limits Tmin [K], Tmax [K], Dmax [kg/m°], Pmax [MPa] of the fluid model in htype as an array."),
-										// description of rp_limits(fluid,htype)
+                                        // description of rp_limits(fluid,htype)
     (LPCFUNCTION)rp_LIMITS,             // pointer to the executable code
     COMPLEX_ARRAY,                      // the return type is a 1x4 complex array
     2,                                  // the function takes 2 arguments
     { MC_STRING,                        // String argument
-	  MC_STRING }                       // String argument
+      MC_STRING }                       // String argument
 };
     

@@ -33,6 +33,8 @@
 #else
     #include <vector>
     #include <string>
+    #include <memory>
+    #include <stdarg.h>
 #endif
 
 //    #include "Exceptions.h"
@@ -86,8 +88,8 @@
         std::transform(str.begin(), str.end(), str.begin(), ::toupper);
         return str;
     }
-	
-	inline std::string lower(std::string str)
+    
+    inline std::string lower(std::string str)
     {
         std::transform(str.begin(), str.end(), str.begin(), ::tolower);
         return str;
@@ -116,7 +118,7 @@
         const char * cs = mys.c_str();
         char* pEnd;
         double val = strtod(cs, &pEnd);
-        if ((pEnd - &(cs[0])) != s.size() ){
+        if ((pEnd - &(cs[0])) != (int)s.size() ){
             // Found a character that is not able to be converted to number
             return 0;
         }

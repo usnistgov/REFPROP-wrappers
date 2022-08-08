@@ -103,11 +103,11 @@ FUNCTIONINFO    rp_rhoph =
     (char *)("rp_rhoph"),                          // Name by which mathcad will recognize the function
     (char *)("fluid,p,h"),                                // rp_rhoph will be called as rp_rhoph(fluid,p,h)
     (char *)("Returns the density [kg/m³] given the pressure [MPa] and enthalpy [kJ/kg]"),
-										// description of rp_rhoph(fluid,p,h)
+                                        // description of rp_rhoph(fluid,p,h)
     (LPCFUNCTION)rp_Rhoph,               // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
     3,                                  // the function takes on 3 arguments
     { MC_STRING,                        // String argument
-	  COMPLEX_SCALAR,
-	  COMPLEX_SCALAR }                  // arguments are complex scalars
+      COMPLEX_SCALAR,
+      COMPLEX_SCALAR }                  // arguments are complex scalars
 };

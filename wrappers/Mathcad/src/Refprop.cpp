@@ -46,6 +46,7 @@ const static RP_SIZE_T casnlength = 12;
 enum { MC_STRING = STRING }; // Substitute enumeration variable MC_STRING for STRING, use MC_STRING below and in the stub headers
 #undef STRING                // STRING conflicts with a variable defined in RPstrings.cpp and is just generally a bad idea
 
+#define NO_CPPFORMAT
 #include <stdlib.h>
 #include <stdio.h>
 #include "RPstrings.h"       // Utility string functions for splitting and joining long strings at delimiters
@@ -255,7 +256,7 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
             const char* dbvar = getenv( "NIST_PATH" );                    // Get environment variable NIST_PATH if it exists
             if ( dbvar != NULL )                                          // If NIST_PATH was set (string not null)
             {                                                             //    Use extracted user specified path
-                int dblen = static_cast<int>(strlen(dbvar));              //    get length of environment string
+                size_t dblen = strlen(dbvar);                             //    get length of environment string
                 char userPath[255];                                       //    SETPATH wants a char[255]
                 strcpy(userPath, dbvar);                                  //    copy string to userPath[255]
                 SETPATHdll(userPath, dblen);                              //    Set path to user specified library location
