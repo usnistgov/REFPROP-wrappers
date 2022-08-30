@@ -1,4 +1,4 @@
-# Welcome to the information about the wrappers of NIST REFPROP
+# Wrappers of NIST REFPROP
 
 ## Why do we need wrappers?
 
