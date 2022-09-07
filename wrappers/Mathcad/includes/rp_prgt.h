@@ -1,46 +1,48 @@
-LRESULT rp_Muft(
+LRESULT rp_PRgt(
     LPCOMPLEXSCALAR     ret,
     LPCMCSTRING       fluid,
-    LPCCOMPLEXSCALAR      t)
+    LPCCOMPLEXSCALAR      t   )
 {
     char herr[255];
-    int kph = 1;   // looking for saturated liquid (bubble point)
+    int kph = 2;       //  kph = 1 (saturated liquid conc.); kph = 2 (saturated vapor conc.)
     int ierr;
     double psat, tsat, rhol, rhov, xliq[20], xvap[20];
-    double mu, cond;
+    double Cv, Cp, mu, cond;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)
-        return MAKELRESULT(ierr, 1);
-
-    if (t->imag != 0.0)
-        return MAKELRESULT(MUST_BE_REAL, 2);
+        return MAKELRESULT(ierr,1);
+    
+    if( t->imag != 0.0 )
+        return MAKELRESULT(MUST_BE_REAL,2);
     else
-        tsat = t->real;            // T in [K]
+        tsat = t->real;
 
     SATTdll(&tsat, &x[0], &kph, &psat, &rhol, &rhov, &xliq[0], &xvap[0], &ierr, herr, errormessagelength);
 
     if (ierr > 0)
     {
-        if ((ierr == 1) || (ierr == 9) || (ierr == 121))
-            return MAKELRESULT(T_OUT_OF_RANGE, 2); // Temperature too low | negative | > Tcrit
-        else if (ierr == 8)
-            return MAKELRESULT(BAD_COMPONENT, 1); // x out of range
+        if ((ierr == 1) || (ierr == 9) || (ierr == 121) || (ierr == 125))
+            return MAKELRESULT(T_OUT_OF_RANGE,2); // Temperature too low | negative | > Tcrit
         else
-            return MAKELRESULT(UNCONVERGED, 2); // failed to converge
+            return MAKELRESULT(UNCONVERGED,2); // failed to converge
     }
 
-    TRNPRPdll(&tsat, &rhol, &x[0], &mu, &cond, &ierr, herr, errormessagelength);
+    CVCPdll(&tsat, &rhov, &x[0], &Cv, &Cp);
+
+    TRNPRPdll(&tsat, &rhov, &x[0], &mu, &cond, &ierr, herr, errormessagelength);
 
     // check for errors and handle by returning MAKELRESULT(n,p)
     // Error codes for TRNPRPdll changed radically in REFPROP 10
     if (vMajor < 10)  // Can only be REFPROP 9.1.1 or 10+ if we are here
     {
         // REFPROP 9.1.1 Error Flags
-        if ((ierr > 0) && (ierr != 51))
+        if (ierr > 0)
         {
             if ((ierr == 40) || (ierr == 49) || (ierr == 50))
                 return MAKELRESULT(NO_TRANSPORT, 1);     // viscosity model not defined
+            else if (ierr == 51)
+                return MAKELRESULT(INFINITE_K, 3);
             else
                 return MAKELRESULT(UNCONVERGED, 2);
         }
@@ -69,24 +71,30 @@ LRESULT rp_Muft(
         }
         else if (ierr < 0) return MAKELRESULT(UNCONVERGED, 2);  // Either ETA or TCX did not converge
     }
-    if (mu < 0)
+    if ((mu < 0) || (cond < 0))
         return MAKELRESULT(UNCONVERGED, 2);
 
-    ret->real = mu;       // returned in µPa-s
+    // µ returned in [µPa-s] = [mg / m-s]
+    // k returned in [W/m-K] = [J/m-s-K]
+    // Cp returned in [J/mol-K]
+    // wmm returned in [g/mol]
+    ret->real = mu * Cp / wmm / cond / 1000;   // Conversion: (µPa-s) * (J/mol-K) / (g/mol) / (W/m*K) / (mg/g) = 
+                                               //          (mg/m-s) * (J/mol-K) * (mol/g) * (m-s-K/J) * (g/mg) =
+                                               //          [dimensionless]
 
     return 0;               // return 0 to indicate there was no error
-
+            
 }
 
-FUNCTIONINFO    rp_muft =
-{
-    (char *)("rp_muft"),                // Name by which mathcad will recognize the function
-    (char *)("fluid,t"),                // rp_muft will be called as rp_muft(fluid,t)
-    (char *)("Returns the saturation liquid viscosity [µPa-s] given the saturation temperature [K]"),
-                                        // description of rp_muft(fluid,t)
-    (LPCFUNCTION)rp_Muft,               // pointer to the executable code
+FUNCTIONINFO    rp_prgt = 
+{ 
+    (char *)("rp_prgt"),                // Name by which mathcad will recognize the function
+    (char *)("fluid,t"),                // rp_prgt will be called as rp_prgt(fluid,t)
+    (char *)("Returns the saturated vapor Prandtl Number [-] given the temperature [K]"),
+                                        // description of rp_prgt(fluid,t)
+    (LPCFUNCTION)rp_PRgt,               // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
-    2,                                  // the function takes 2 arguments
-    { MC_STRING,                        // String argument
-    COMPLEX_SCALAR }                    // argument is a complex scalar
+    2,                                  // the function takes on 1 argument
+    { MC_STRING,                        // argument is a MC_STRING
+      COMPLEX_SCALAR }                  // argument is a complex scalar
 };

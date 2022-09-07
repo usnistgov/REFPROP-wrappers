@@ -6,7 +6,7 @@ LRESULT rp_Cvtp(
 {
     double tval,pval,Dval;
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
-    double Dl, Dv, Q, U, H, S, Cv = 0.0, Cp, W, Pdum, hjt;
+    double Dl, Dv, Q, U, H, S, Cv = 0.0, Cp, W;
     double xl[20], xv[20];
     int ierr = 0, icomp = 1, kph = 1, kguess = 0;
     char herr[255];
@@ -47,9 +47,6 @@ LRESULT rp_Cvtp(
     }
 
     // If above critical pressure (Liquid) use TPRHO instead of TPFLSH
-    // TODO: Not sure what happens if above Tcrit.  Is this vapor or liquid?  Which flag to set?
-    //       May need to adjust initial guess depending on location.
-    //       Extend this logic to all other functions of TP once it is working.
     if (tval > tc) kph = 2;
     if (pval > pc) kph = 1;
     if ((pval > pc) || (tval > tc))
@@ -57,7 +54,7 @@ LRESULT rp_Cvtp(
         // Get single-phase density
         TPRHOdll(&tval, &pval, &x[0], &kph, &kguess, &Dval, &ierr, herr, errormessagelength);
         // Have density, now call THERM to get Enthalpy
-        if (ierr <=0) THERMdll(&tval, &Dval, &x[0], &Pdum, &U, &H, &S, &Cv, &Cp, &W, &hjt);
+        if (ierr <=0) CVCPdll(&tval, &Dval, &x[0], &Cv, &Cp);   // Calling CVCPdll should be faster than THERMdll
     }
     else
     {

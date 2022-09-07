@@ -18,6 +18,20 @@
 //                       support version 10.0 when it is made available
 //                    4) Version 2.0 is implemented in both Mathcad 15 and Mathcad Prime 4.0
 //                    5) Version 2.0 is verified on Windows 10.
+//   6/27/22    JPH   Function Updates
+//                    1) Fix all TP functions for efficiency and full range w/o failing
+//                    2) Fix Dual-valued rood for T-H reverse function.
+//                    3) Add functions rp_tmin (typically the triple point temp.) and rp_limit (calls LIMITSdll)
+//                    4) Update VS with Configurations for Mathcad Prime 7 and Prime 8
+//   7/05/22    JPH   Patch CRITPdll calls; poor check of returned error code.
+//                    Additionally:
+//                    1) Allow full path specification of fluid/mixture files
+//                    2) Check user's VirtualStore space if custom mixture not found in /mixtures
+//   8/08/22    JPH   Code Maintenance
+//                    1) Remove dependence on FMTLIB sub-module
+//                    2) Code maintenance (replace tabs with spaces - all files)
+//                    2) Update README and function documentation HTML file
+//                    3) Resolve all Level 4 Errors
 //
 
 #ifdef _MSC_VER
@@ -54,7 +68,10 @@ enum { MC_STRING = STRING }; // Substitute enumeration variable MC_STRING for ST
 #include <fstream>
 
 // RefProp Mathcad Add-in Version
-std::string rpVersion = "2.0.2";       // Mathcad Add-in version number
+std::string rpVersion = "2.0.3";       // Mathcad Add-in version number
+
+// REFPROP major/minor/patch version numbers needed for function limitations and error codes
+int vMajor, vMinor, vPatch;            // Will get assigned when REFPROP loads
 
 // Setup Dialog Window for debugging
 HWND hwndDlg;  // Dialog handle for pop-up message boxes
@@ -126,6 +143,7 @@ char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
 #include "setup.h"
 #include "rp_getpath.h"
 #include "rp_getNIST.h"
+#include "rp_getRPnum.h"
 #include "rp_getvers.h"
 #include "rp_getname.h"
 #include "rp_getcasn.h"
@@ -142,6 +160,7 @@ char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
 #include "rp_rhocrit.h"
 #include "rp_ptrip.h"
 #include "rp_pcrit.h"
+#include "rp_zcrit.h"
 #include "rp_LIMITS.h"
 // Saturation Curve Function headers
 #include "rp_tsatp.h"
@@ -194,7 +213,27 @@ char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
 #include "rp_mugt.h"
 #include "rp_mutp.h"
 #include "rp_surften.h"
-
+// Derived Quantity Function headers
+#include "rp_betatp.h"
+#include "rp_betafp.h"
+#include "rp_betagp.h"
+#include "rp_betaft.h"
+#include "rp_betagt.h"
+#include "rp_gammatp.h"
+#include "rp_gammafp.h"
+#include "rp_gammagp.h"
+#include "rp_gammaft.h"
+#include "rp_gammagt.h"
+#include "rp_prtp.h"
+#include "rp_prfp.h"
+#include "rp_prgp.h"
+#include "rp_prft.h"
+#include "rp_prgt.h"
+#include "rp_ztp.h"
+#include "rp_zfp.h"
+#include "rp_zgp.h"
+#include "rp_zft.h"
+#include "rp_zgt.h"
 // Reverse Function headers
 #include "rp_tph.h"
 #include "rp_tps.h"
@@ -266,11 +305,11 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
             char hmsg[errormessagelength], hfmix[filepathlength], hrf[lengthofreference], hfld[componentstringlength];
             int icompn = -1, ivers;
             SETUPdll(&icompn, hfld, hfmix, hrf, &ivers, hmsg, componentstringlength, filepathlength, lengthofreference, errormessagelength);
-            int vMajor = ivers/10000;
+            vMajor = ivers/10000;
             ivers = ivers - vMajor*10000;
-            int vMinor = ivers/1000;
+            vMinor = ivers/1000;
             ivers = ivers - vMinor*1000;
-            int vPatch = ivers/100;
+            vPatch = ivers/100;
             int vRev = ivers - vPatch*100;
             RPVersion_loaded = std::to_string(vMajor) + "." + std::to_string(vMinor) + "." + std::to_string(vPatch) + "." + std::to_string(vRev);
 
@@ -281,6 +320,13 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
             // msg.append("\n\nPath = ");
             // msg.append(RPPath_loaded);
             // MessageBox(hwndDlg, msg.c_str(), "NIST RefProp Add-In", 0);
+
+            // Check that at least REFPROP 9.1.1 is installed before loading the DLL
+            if ((vMajor < 9) || ((vMajor == 9) && (vMinor != 1) && (vPatch != 1)))
+            {
+                MessageBox(hwndDlg, "Add-in requires later version of REFPROP.\n\nMake sure that NIST RefProp 9.1.1 or later is installed.", "NIST RefProp Add-In", 0);
+                break;
+            }
         }
         else
         {
@@ -303,7 +349,10 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
         if ( CreateUserFunction( hDLL, &rp_getvers ) == NULL )
             break;
 
-        if ( CreateUserFunction( hDLL, &rp_getNIST ) == NULL )
+        if (CreateUserFunction(hDLL, &rp_getNIST) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_getRPnum) == NULL)
             break;
 
         if ( CreateUserFunction( hDLL, &rp_getpath ) == NULL )
@@ -336,6 +385,9 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
             break;
 
         if ( CreateUserFunction( hDLL, &rp_rhocrit ) == NULL )
+            break;
+
+        if ( CreateUserFunction( hDLL, &rp_zcrit ) == NULL)
             break;
 
         if ( CreateUserFunction( hDLL, &rp_ptrip ) == NULL )
@@ -504,6 +556,68 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
             break;
 
         if ( CreateUserFunction( hDLL, &rp_surften ) == NULL )
+            break;
+
+        // Derived Quantities
+        // ===============================
+        if (CreateUserFunction(hDLL, &rp_betatp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_betafp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_betagp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_betaft) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_betagt) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_gammatp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_gammafp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_gammagp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_gammaft) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_gammagt) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_prtp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_prfp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_prgp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_prft) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_prgt) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_zfp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_zft) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_zgp) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_zgt) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_ztp) == NULL)
             break;
 
         // Reverse Functions
