@@ -32,21 +32,42 @@ LRESULT rp_Mufp(
 
     TRNPRPdll(&tsat, &rhol, &x[0], &mu, &cond, &ierr, herr, errormessagelength);
 
-    // check for errors and return MAKELRESULT(n,p)
-    if ((ierr > 0) && (ierr != 51))
+    // check for errors and handle by returning MAKELRESULT(n,p)
+    // Error codes for TRNPRPdll changed radically in REFPROP 10
+    if (vMajor < 10)  // Can only be REFPROP 9.1.1 or 10+ if we are here
     {
-        if ((ierr == 40) || (ierr == 49) || (ierr == 50))
-            return MAKELRESULT(NO_TRANSPORT, 1);     // viscosity model not defined
-        else
-            return MAKELRESULT(UNCONVERGED, 2);
+        // REFPROP 9.1.1 Error Flags
+        if ((ierr > 0) && (ierr != 51))
+        {
+            if ((ierr == 40) || (ierr == 49) || (ierr == 50))
+                return MAKELRESULT(NO_TRANSPORT, 1);     // viscosity model not defined
+            else
+                return MAKELRESULT(UNCONVERGED, 2);
+        }
+        else if (ierr < 0) {
+            if ((ierr == -41) || (ierr == -43) || (ierr == -51) || (ierr == -53))
+                return MAKELRESULT(T_OUT_OF_RANGE, 2);  // Temperature out of bounds
+            else if ((ierr == -42) || (ierr == -52))
+                return MAKELRESULT(D_OUT_OF_RANGE, 3);  // Pressure (density) out of bounds
+            else if (ierr <= -58)
+                return MAKELRESULT(UNCONVERGED, 2);     // did not converge
+        }
     }
-    else if (ierr < 0) {
-        if ((ierr == -41) || (ierr == -43) || (ierr == -51) || (ierr == -53))
-            return MAKELRESULT(T_OUT_OF_RANGE, 2);  // Temperature out of bounds
-        else if ((ierr == -42) || (ierr == -52))
-            return MAKELRESULT(D_OUT_OF_RANGE, 3);  // Pressure (density) out of bounds
-        else if (ierr <= -58)
-            return MAKELRESULT(UNCONVERGED, 2);     // did not converge
+    else // Assume REFPROP 10 or greater
+    {
+        // REFPROP 10 error flags here
+        if (ierr > 0)
+        {
+            if ((ierr == 502) || (ierr == 540) || (ierr == 541) || (ierr == 542) || (ierr == 543))
+                return MAKELRESULT(NO_TRANSPORT, 1);     // viscosity model not defined
+            else if ((ierr == 73) || (ierr == 74))
+                return MAKELRESULT(T_OUT_OF_RANGE, 2);  // Temperature out of bounds
+            else if (ierr == 561)
+                return MAKELRESULT(UNCONVERGED, 2);     // Erroneous value returned for ETA or TCX
+            else
+                return MAKELRESULT(T_OUT_OF_RANGE, 2);  // One or more inputs to ETA or TCX out of bounds
+        }
+        else if (ierr < 0) return MAKELRESULT(UNCONVERGED, 2);  // Either ETA or TCX did not converge
     }
     if (mu < 0)
         return MAKELRESULT(UNCONVERGED, 2);

@@ -1,4 +1,4 @@
-LRESULT rp_Cptp(
+LRESULT rp_Gtp(
     LPCOMPLEXSCALAR     ret,
     LPCMCSTRING       fluid,
     LPCCOMPLEXSCALAR      t,
@@ -6,7 +6,7 @@ LRESULT rp_Cptp(
 {
     double tval,pval,Dval;
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
-    double Dl, Dv, Q, U, H, S, Cv, Cp = 0.0, W;
+    double Dl, Dv, Q, U, H, S, Cv = 0.0, Cp = 0.0, W, Pdum, hjt;
     double xl[20], xv[20];
     int ierr = 0, icomp = 1, kph = 1, kguess = 0;
     char herr[255];
@@ -30,7 +30,7 @@ LRESULT rp_Cptp(
     if (pval > Pmax*(1 + extr)) return MAKELRESULT(P_OUT_OF_RANGE, 3);
 
     //===============================================================================
-    // Mod 6/2/2022 to get all the way up to Pmax
+    // Check state to get all the way up to Pmax
     //===============================================================================
     // Get critical pressure
     if (ncomp > 1)
@@ -53,8 +53,8 @@ LRESULT rp_Cptp(
     {
         // Get single-phase density
         TPRHOdll(&tval, &pval, &x[0], &kph, &kguess, &Dval, &ierr, herr, errormessagelength);
-        // Have density, now call CVCP to get Cv and Cp
-        if (ierr <= 0) CVCPdll(&tval, &Dval, &x[0], &Cv, &Cp);   // Calling CVCPdll should be faster than THERMdll
+        // Have density, now call THERM to get Enthalpy
+        if (ierr <=0) THERMdll(&tval, &Dval, &x[0], &Pdum, &U, &H, &S, &Cv, &Cp, &W, &hjt);
     }
     else
     {
@@ -63,9 +63,6 @@ LRESULT rp_Cptp(
             &Q, &U, &H, &S, &Cv, &Cp, &W,       // Thermo properties
             &ierr, herr, errormessagelength);   // error code and string
     }
-    //===============================================================================
-    // End Mod 6/2/2022 to get all the way up to Pmax
-    //===============================================================================
 
     if (ierr > 0) {
         if ((ierr == 1) || (ierr == 5) || (ierr == 9) || (ierr == 13))
@@ -78,24 +75,24 @@ LRESULT rp_Cptp(
             return MAKELRESULT(UNCONVERGED, 2);     // one of many convergence errors
     }
 
-    ret->real = Cp / wmm;   // Convert from J/mol-K to kJ/kg-K
+    ret->real = Cp / Cv;    // return gamma [dimensionless]
 
     return 0;               // return 0 to indicate there was no error
             
 }
 
-FUNCTIONINFO    rp_cptp = 
+FUNCTIONINFO    rp_gammatp = 
 { 
-    (char *)("rp_cptp"),                 // Name by which Mathcad will recognize the function
-    (char *)("fluid,t,p"),              // rp_cptp will be called as rp_cptp(fluid,t,p)
-    (char *)("Returns the specific heat [kJ/kg-K] given the temperature [K] and pressure [MPa]"),
-                                        // description of rp_cptp(fluid,t,p)
-    (LPCFUNCTION)rp_Cptp,                // pointer to the executable code
+    (char *)("rp_gammatp"),             // Name by which Mathcad will recognize the function
+    (char *)("fluid,t,p"),              // rp_gammatp will be called as rp_gammatp(fluid,t,p)
+    (char *)("Returns the heat capacity ratio, Gamma [-] given the temperature [K] and pressure [MPa]"),
+                                        // description of rp_gammatp(fluid,t,p)
+    (LPCFUNCTION)rp_Gtp,                // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
-    3,                                  // the function takes on 3 arguments
+    3,                                  // the function takes 3 arguments
     { MC_STRING,                        // String argument
-      COMPLEX_SCALAR,
-      COMPLEX_SCALAR }                  // arguments are complex scalars
+      COMPLEX_SCALAR,                   // argument is a complex scalar
+      COMPLEX_SCALAR }                  // argument is a complex scalar
 };
     
     

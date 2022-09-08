@@ -1,4 +1,4 @@
-LRESULT rp_Cptp(
+LRESULT rp_Ztp(
     LPCOMPLEXSCALAR     ret,
     LPCMCSTRING       fluid,
     LPCCOMPLEXSCALAR      t,
@@ -6,7 +6,7 @@ LRESULT rp_Cptp(
 {
     double tval,pval,Dval;
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
-    double Dl, Dv, Q, U, H, S, Cv, Cp = 0.0, W;
+    double Dl, Dv, Q, U, H = 0.0, S, Cv, Cp, W, Pdum, hjt;
     double xl[20], xv[20];
     int ierr = 0, icomp = 1, kph = 1, kguess = 0;
     char herr[255];
@@ -29,17 +29,23 @@ LRESULT rp_Cptp(
 
     if (pval > Pmax*(1 + extr)) return MAKELRESULT(P_OUT_OF_RANGE, 3);
 
-    //===============================================================================
-    // Mod 6/2/2022 to get all the way up to Pmax
-    //===============================================================================
     // Get critical pressure
     if (ncomp > 1)
     {
         CRITPdll(&x[0], &tc, &pc, &Dc, &ierr, herr, errormessagelength);
         if (ierr > 0)
-        {
-            return MAKELRESULT(UNCONVERGED, 2);
+        {      // REFPROP 9 ||-> REFPROP 10+
+            if ((ierr == 1) || (ierr == 314) || (ierr == 315) || (ierr == 317))
+                return MAKELRESULT(UNCONVERGED, 1);
+            else if ((ierr == 312) || (ierr == 805))
+                return MAKELRESULT(X_SUM_NONUNITY, 1);
+            else
+                return MAKELRESULT(UNKNOWN, 2);
         }
+        else if ((ierr == -131) || (ierr == -132))    // REFPROP 9 codes
+            return MAKELRESULT(UNKNOWN, 1);
+
+        RMIX2dll(&x[0], &Rgas);              // mixture gas constant [J/mol-K]
     }
     else
     {
@@ -53,8 +59,8 @@ LRESULT rp_Cptp(
     {
         // Get single-phase density
         TPRHOdll(&tval, &pval, &x[0], &kph, &kguess, &Dval, &ierr, herr, errormessagelength);
-        // Have density, now call CVCP to get Cv and Cp
-        if (ierr <= 0) CVCPdll(&tval, &Dval, &x[0], &Cv, &Cp);   // Calling CVCPdll should be faster than THERMdll
+        // Have density, now call THERM to get Enthalpy
+        if (ierr <=0) THERMdll(&tval, &Dval, &x[0], &Pdum, &U, &H, &S, &Cv, &Cp, &W, &hjt);
     }
     else
     {
@@ -63,11 +69,13 @@ LRESULT rp_Cptp(
             &Q, &U, &H, &S, &Cv, &Cp, &W,       // Thermo properties
             &ierr, herr, errormessagelength);   // error code and string
     }
-    //===============================================================================
-    // End Mod 6/2/2022 to get all the way up to Pmax
-    //===============================================================================
 
     if (ierr > 0) {
+        // Use this pop-up window for debugging if needed
+        //===============================================================================
+        //msg = format("\n  ierr: %d",ierr);
+        //MessageBox(hwndDlg, msg.c_str(), "NIST RefProp Add-In", 0);
+        //===============================================================================
         if ((ierr == 1) || (ierr == 5) || (ierr == 9) || (ierr == 13))
             return MAKELRESULT(T_OUT_OF_RANGE, 2);  // Temperature out of bounds
         else if ((ierr == 4) || (ierr == 12))
@@ -78,25 +86,22 @@ LRESULT rp_Cptp(
             return MAKELRESULT(UNCONVERGED, 2);     // one of many convergence errors
     }
 
-    ret->real = Cp / wmm;   // Convert from J/mol-K to kJ/kg-K
+    // Could call THERM2 to get compressibility, but we have all the values and it's just as easy to calculate it.
+    ret->real = pval / (Rgas * tval * Dval);   // Calculate Compressibility factor
 
     return 0;               // return 0 to indicate there was no error
-            
 }
 
-FUNCTIONINFO    rp_cptp = 
+FUNCTIONINFO    rp_ztp = 
 { 
-    (char *)("rp_cptp"),                 // Name by which Mathcad will recognize the function
-    (char *)("fluid,t,p"),              // rp_cptp will be called as rp_cptp(fluid,t,p)
-    (char *)("Returns the specific heat [kJ/kg-K] given the temperature [K] and pressure [MPa]"),
-                                        // description of rp_cptp(fluid,t,p)
-    (LPCFUNCTION)rp_Cptp,                // pointer to the executable code
+    (char *)("rp_ztp"),                 // Name by which Mathcad will recognize the function
+    (char *)("fluid,t,p"),              // rp_ztp will be called as rp_ztp(fluid,t,p)
+    (char *)("Returns the enthalpy [kJ/kg] given the temperature [K] and pressure [MPa]"),
+                                        // description of rp_ztp(fluid,t,p)
+    (LPCFUNCTION)rp_Ztp,                // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
     3,                                  // the function takes on 3 arguments
     { MC_STRING,                        // String argument
       COMPLEX_SCALAR,
       COMPLEX_SCALAR }                  // arguments are complex scalars
 };
-    
-    
-    

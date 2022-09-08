@@ -24,9 +24,17 @@ LRESULT rp_Rhocrit(
     {
         CRITPdll(&x[0], &tc, &pc, &Dc, &ierr, herr, lherr);
         if (ierr > 0)
-        {
-            return MAKELRESULT(9,2);
+        {      // REFPROP 9 ||-> REFPROP 10+
+            if ((ierr == 1) || (ierr == 314) || (ierr == 315) || (ierr == 317))
+                return MAKELRESULT(UNCONVERGED, 1);
+            else if ((ierr == 312) || (ierr == 805))
+                return MAKELRESULT(X_SUM_NONUNITY, 1);
+            else
+                return MAKELRESULT(UNKNOWN, 2);
         }
+        else if ((ierr == -131) || (ierr == -132))    // REFPROP 9 codes
+            return MAKELRESULT(UNKNOWN, 1);
+
         wmm0 = wmm;
     }
     else 
@@ -45,7 +53,7 @@ FUNCTIONINFO    rp_rhocrit =
 { 
     (char *)("rp_rhocrit"),             // Name by which Mathcad will recognize the function
     (char *)("fluid,comp"),             // rp_rhocrit will be called as rp_rhocrit(fluid,comp)
-    (char *)("Returns the critical point density [kg/m^3] of the component number specified"),
+    (char *)("Returns the critical point density [kg/m^3] of the mixture or component number specified"),
                                         // description of rp_rhocrit(fluid,comp)
     (LPCFUNCTION)rp_Rhocrit,            // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar

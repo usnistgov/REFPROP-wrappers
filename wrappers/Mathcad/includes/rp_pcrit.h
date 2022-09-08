@@ -1,5 +1,3 @@
-    
-    
 LRESULT rp_Pcrit(
     LPCOMPLEXSCALAR      ret,
     LPCMCSTRING        fluid,
@@ -27,9 +25,16 @@ LRESULT rp_Pcrit(
     {
         CRITPdll(&x[0], &tc, &pc, &Dc, &ierr, herr, lherr);
         if (ierr > 0)
-        {
-            return MAKELRESULT(UNKNOWN, 2);
-        }        
+        {      // REFPROP 9 ||-> REFPROP 10+
+            if ((ierr == 1) || (ierr == 314) || (ierr == 315) || (ierr == 317))
+                return MAKELRESULT(UNCONVERGED, 1);
+            else if ((ierr == 312) || (ierr == 805))
+                return MAKELRESULT(X_SUM_NONUNITY, 1);
+            else
+                return MAKELRESULT(UNKNOWN, 2);
+        }
+        else if ((ierr == -131) || (ierr == -132))    // REFPROP 9 codes
+            return MAKELRESULT(UNKNOWN, 1);
     }
     else
     {
@@ -45,9 +50,9 @@ LRESULT rp_Pcrit(
 
 FUNCTIONINFO    rp_pcrit = 
 { 
-    (char *)("rp_pcrit"),                          // Name by which mathcad will recognize the function
-    (char *)("fluid,comp"),                        // rp_pcrit will be called as rp_pcrit(fluid,comp)
-    (char *)("Returns critical pressure [MPa] of the component number specified"),
+    (char *)("rp_pcrit"),               // Name by which mathcad will recognize the function
+    (char *)("fluid,comp"),             // rp_pcrit will be called as rp_pcrit(fluid,comp)
+    (char *)("Returns critical pressure [MPa] of the mixture or component number specified"),
                                         // description of rp_pcrit(fluid,comp)
     (LPCFUNCTION)rp_Pcrit,              // pointer to the executable code
     COMPLEX_SCALAR,                     // the return type is a complex scalar
