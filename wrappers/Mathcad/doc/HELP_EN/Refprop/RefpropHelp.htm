@@ -59,7 +59,7 @@
                             <h2><big>Table 1 : RefProp Pure Fluid Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PureFluids.PNG" align="middle" border="1"> <a name="Pure"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/tree/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PureFluids.PNG" align="middle" border="1"> <a name="Pure"></a>
                 </ul>
                 <ul>
                     <ul>
@@ -67,7 +67,7 @@
                             <h2><big>Table 2 : RefProp Pseudo-Pure Fluid Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PseudoPureFluids.PNG" align="middle" border="1"> <a name="PseudoPure"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/tree/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PseudoPureFluids.PNG" align="middle" border="1"> <a name="PseudoPure"></a>
                 </ul>
                 <ul>
                     <ul>
@@ -75,7 +75,7 @@
                             <h2><big>Table 3 : RefProp Predefined Mixture Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/Mixtures.PNG" align="middle" border="1"> <a name="Mixture"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/tree/master/wrappers/Mathcad/doc/HELP_EN/Refprop/Mixtures.PNG" align="middle" border="1"> <a name="Mixture"></a>
                 </ul>
             </ul>
             <br><br>
@@ -119,20 +119,21 @@
                 </li>
             </ul>
             <a name="getname"></a>
-            <p><b class="hmath">rp_getname(flstr,icomp)</b> returns the full name of the fluid
-                previously loaded by the <b class="hmath">rp_setup</b> function.</p>
+            <p><b class="hmath">rp_getname(flstr,icomp)</b> returns the full name of the fluid or mixture
+                previously loaded by <b class="hmath">rp_<i>function</i></b> calls.</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
                     <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
                         fluid file name as defined above.</p>
                 <li>
-                    <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid.</p>
+                    <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid. For mixtures,
+                    supply the individual component number or 0 for the mixture name stored in the .mix file.</p>
                 </li>
             </ul>
             <a name="getcasn"></a>
             <p><b class="hmath">rp_getname(flstr,icomp)</b> returns the CAS number of the fluid
-                previously loaded by the <b class="hmath">rp_setup</b> function.</p>
+                previously loaded by <b class="hmath">rp_<i>function</i></b> calls.</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -152,8 +153,17 @@
                 </li>
             </ul>
             <a name="getNIST"></a>
-            <p><b class="hmath">rp_getNIST(idum)</b> returns the version of the NIST RefProp
-                library and materials properties being used.</p>
+            <p><b class="hmath">rp_getNIST(idum)</b> returns the full version of the NIST REFPROP
+                library as a string.</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">idum</b> is an arbitrary number (i.e. 0).</p>
+                </li>
+            </ul>
+            <a name="getRPnum"></a>
+            <p><b class="hmath">rp_getRPnum(idum)</b> returns the version of the loaded NIST REFPROP
+                library as a numeric value for easy comparison calculations.</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -161,9 +171,9 @@
                 </li>
             </ul>
             <a name="getpath"></a>
-            <p><b class="hmath">rp_getpath(idum)</b> returns the path to the NIST RefProp
-                DLL in use.  This will be either RefProp.DLL (32-bit, used by Mathcad 15) or
-                RefProp64.DLL (64-bit, used by Mathcad Prime).</p>
+            <p><b class="hmath">rp_getpath(idum)</b> returns the path to the NIST REFPROP
+                DLL in use.  This will be either the path to REFPROP.DLL (32-bit, used by Mathcad 15) or
+                REFPRP64.DLL (64-bit, used by Mathcad Prime).</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -178,8 +188,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -191,8 +201,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -204,8 +214,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -217,8 +227,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -230,8 +240,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -243,8 +253,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -256,8 +266,21 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
+                <li>
+                    <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
+                        0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
+                </li>
+            </ul>
+            <a name="zcrit"></a>
+            <p><b class="hmath">rp_zcrit(flstr,icomp)</b> returns the current fluid critical
+                point compressibility [dimensionless].</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -427,6 +450,42 @@
                 <TD noWrap align="center" width="80"><b class="hmath">rp_mugt</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_mugp</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">tp_mutp</b></TD>
+            </TR>
+            <TR>
+                <TD noWrap width="130"><b>Prandtl Number</b>, Pr<br>
+                    [-]</TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_prft</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_prfp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_prgt</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_prgp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">tp_prtp</b></TD>
+            </TR>
+            <TR>
+                <TD noWrap width="130"><b>Compressibility</b>, Z<br>
+                    [-]</TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_zft</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_zfp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_zgt</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_zgp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">tp_ztp</b></TD>
+            </TR>
+            <TR>
+                <TD noWrap width="130"><b>Thermal Expansion Coef.</b>, Beta<br>
+                    [1/K]</TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_betaft</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_betafp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_betagt</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_betagp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">tp_betatp</b></TD>
+            </TR>
+            <TR>
+                <TD noWrap width="130"><b>Cp/Cv Ratio</b>, Gamma<br>
+                    [-]</TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_gammaft</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_gammafp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_gammagt</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_gammagp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">tp_gammatp</b></TD>
             </TR>
             <TR>
                 <TD noWrap width="130"><b>surface tension</b>, <font face="symbol" size="3">s</font><br>
