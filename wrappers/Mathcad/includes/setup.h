@@ -106,7 +106,7 @@ int cSetup(std::string strFluid)
 
         if (fluid_string.find("|") != fluid_string.npos)                  // *** Ad-Hoc mixture String ***
         {
-            // *** strcpy(MixName, "N/A");
+            strcpy(MixName, "Ad-Hoc Mixture");
             // convert std::string to c-style string for DLL call
             std::copy(fluid_string.begin(), fluid_string.end(), hfld);    // Copy string fluid_string into c_str hfld. 
             // Pad the fluid string all the way to 10k characters with spaces to deal with string parsing bug in older REFPROP in SETUPdll
@@ -148,15 +148,20 @@ int cSetup(std::string strFluid)
                                                                    //     tack on full path sans "C:"
                     vStore.append(MixFileFull.begin() + 2, MixFileFull.end());
                     mFile.open(vStore);                            //     Open vStore file if it exists
-                    if (mFile.fail())
-                        return FLUID_NOT_FOUND;                    //     Not found in either location
-                    else
+                    if (mFile.fail())                              //     if vStore file won't open
+                        return FLUID_NOT_FOUND;                    //       Not found in either location
+                    else                                           //     otherwise, if vStore opens
                     {
-                        fluid_string = vStore;
-                        mFile.close();                               //     Found in Virtual Store, close it.
+                        fluid_string = vStore;                     //       save vStore file path
+                        mFile.getline(MixName, namelengthlong);    //       Grab mixture name from first line
+                        mFile.close();                             //       close it.
                     }
                 }
-                else mFile.close();                                //   Found in MIXTURES directory, close it.
+                else                                               //   Found in MIXTURES directory
+                {
+                    mFile.getline(MixName, namelengthlong);        //     Grab mixture name from first line
+                    mFile.close();                                 //     close it.
+                }
             }                                                      // Otherwise, full path was given. Use it.
 
             // convert std::string to c-style string for DLL call
@@ -187,7 +192,7 @@ int cSetup(std::string strFluid)
                 // msg2 = "Could not open file: " + strFluid;
                 // MessageBox(hwndDlg, msg2.c_str(), "NIST RefProp Add-In", 0);
             }
-            else if (ierr == -103)
+            else if ((ierr == -103)||(ierr == 805))    //   REFPROP 9.1 Code || New REFPROP 10 Code
                 return X_SUM_NONUNITY;
             else 
                 ierr = 0;
