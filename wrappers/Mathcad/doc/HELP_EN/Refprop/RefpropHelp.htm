@@ -59,7 +59,7 @@
                             <h2><big>Table 1 : RefProp Pure Fluid Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PureFluids.PNG" align="middle" border="1"> <a name="Pure"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PureFluids.png?raw=true" alt="pure-fluids" align="middle" border="1"> <a name="Pure"></a>
                 </ul>
                 <ul>
                     <ul>
@@ -67,7 +67,7 @@
                             <h2><big>Table 2 : RefProp Pseudo-Pure Fluid Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PseudoPureFluids.PNG" align="middle" border="1"> <a name="PseudoPure"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PseudoPureFluids.png?raw=true" alt="pseudo-pure" align="middle" border="1"> <a name="PseudoPure"></a>
                 </ul>
                 <ul>
                     <ul>
@@ -75,7 +75,7 @@
                             <h2><big>Table 3 : RefProp Predefined Mixture Files</big></h2>
                         </ul>
                     </ul>
-                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/Mixtures.PNG" align="middle" border="1"> <a name="Mixture"></a>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/Mixtures.png?raw=true" alt="mixtures" align="middle" border="1"> <a name="Mixture"></a>
                 </ul>
             </ul>
             <br><br>
@@ -119,20 +119,21 @@
                 </li>
             </ul>
             <a name="getname"></a>
-            <p><b class="hmath">rp_getname(flstr,icomp)</b> returns the full name of the fluid
-                previously loaded by the <b class="hmath">rp_setup</b> function.</p>
+            <p><b class="hmath">rp_getname(flstr,icomp)</b> returns the full name of the fluid or mixture
+                previously loaded by <b class="hmath">rp_<i>function</i></b> calls.</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
                     <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
                         fluid file name as defined above.</p>
                 <li>
-                    <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid.</p>
+                    <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid. For mixtures,
+                    supply the individual component number or 0 for the mixture name stored in the .mix file.</p>
                 </li>
             </ul>
             <a name="getcasn"></a>
             <p><b class="hmath">rp_getname(flstr,icomp)</b> returns the CAS number of the fluid
-                previously loaded by the <b class="hmath">rp_setup</b> function.</p>
+                previously loaded by <b class="hmath">rp_<i>function</i></b> calls.</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -152,8 +153,17 @@
                 </li>
             </ul>
             <a name="getNIST"></a>
-            <p><b class="hmath">rp_getNIST(idum)</b> returns the version of the NIST RefProp
-                library and materials properties being used.</p>
+            <p><b class="hmath">rp_getNIST(idum)</b> returns the full version of the NIST REFPROP
+                library as a string.</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">idum</b> is an arbitrary number (i.e. 0).</p>
+                </li>
+            </ul>
+            <a name="getRPnum"></a>
+            <p><b class="hmath">rp_getRPnum(idum)</b> returns the version of the loaded NIST REFPROP
+                library as a numeric value for easy comparison calculations.</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
@@ -161,13 +171,41 @@
                 </li>
             </ul>
             <a name="getpath"></a>
-            <p><b class="hmath">rp_getpath(idum)</b> returns the path to the NIST RefProp
-                DLL in use.  This will be either RefProp.DLL (32-bit, used by Mathcad 15) or
-                RefProp64.DLL (64-bit, used by Mathcad Prime).</p>
+            <p><b class="hmath">rp_getpath(idum)</b> returns the path to the NIST REFPROP
+                DLL in use.  This will be either the path to REFPROP.DLL (32-bit, used by Mathcad 15) or
+                REFPRP64.DLL (64-bit, used by Mathcad Prime).</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
                     <p><b class="hmath">idum</b> is an arbitrary number (i.e. 0).</p>
+                </li>
+            </ul>
+            <a name="getx"></a>
+            <p><b class="hmath">rp_getx(fluid)</b> returns the composition of a loaded mixture in a
+                vector of mole fractions, one for each component in the mixture.</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">fluid</b> is string with the mixture file (.mix extension required) or 
+                        the ad-hoc mixture in use.  To leave the mixture component fluids unchanged, this 
+                        parameter can contain and empty string (\"\") or a space (\"\").  If a mixture file 
+                        is provided and it is unchanged from the previously loaded mixture, then the files 
+                        is not loaded again.  If a new mixture file is specified, then the new mixture will 
+                        be loaded and the mole fraction array from the new mixture will be returned.</p>
+                </li>
+            </ul>
+            <a name="setx"></a>
+            <p><b class="hmath">rp_setx(mfrac)</b> sets a new composition for the currently loaded mixture 
+                without changing the loaded mixture component fluids.  Returns a text message indicating 
+                that the new composition has been set.  SATSPLN will be called automatically for the new 
+                mixture composition.<br><br><i>If a changing the component fluids, do not call this function. 
+                Simply call another low-level function with the new mixture file or ad-hoc mixture string.</i></p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">mfrac</b> is an array of the <i>mole fractions</i> to be set as 
+                        the new composition.  The number of elements in the array <b><i>must</i></b> match 
+                        the number of components in the already loaded mixture.</p>
                 </li>
             </ul>
         </blockquote>
@@ -178,8 +216,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -191,8 +229,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -204,8 +242,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -213,12 +251,12 @@
             </ul>
             <a name="rhotrip"></a>
             <p><b class="hmath">rp_rhotrip(flstr,icomp)</b> returns the current fluid triple
-                point density [kg/m³].</p>
+                point density [kg/m&#179;].</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -230,8 +268,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -243,8 +281,8 @@
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -252,12 +290,25 @@
             </ul>
             <a name="rhocrit"></a>
             <p><b class="hmath">rp_rhocrit(flstr,icomp)</b> returns the current fluid critical
-                point density [kg/m³].</p>
+                point density [kg/m&#179;].</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
-                    <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
+                <li>
+                    <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
+                        0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
+                </li>
+            </ul>
+            <a name="zcrit"></a>
+            <p><b class="hmath">rp_zcrit(flstr,icomp)</b> returns the current fluid critical
+                point compressibility [dimensionless].</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">flstr</b> is a string containing the pure fluid, pseudo-pure
+                        fluid, or mixture file name as defined above.</p>
                 <li>
                     <p><b class="hmath">icomp</b> is the mixture component number; 1 for a pure fluid;
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
@@ -279,16 +330,65 @@
                         0 for the mixture property. For pure fluids, 0 defaults to 1.</p>
                 </li>
             </ul>
+            <a name="maxX"></a>
+            <p><b class="hmath">rp_maxX(flstr,X)</b> Returns an array containing the temperature [K],
+                pressure [MPa], and density [kg/m&#179;] at the point of maximum saturation pressure (Cricondenbar) or
+                maximum saturation temperature (Cricondentherm), depending on the character passed in <b class="hmath">X</b>.</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">flstr</b> is a string containing the mixture file name or ad-hoc 
+                        mixture string as defined above.  If a pure fluid (or pseudo-pure fluid) is passed,
+                        this function just returns the values at the critical point.</p>
+                <li>
+                    <p><b class="hmath">X</b> is a single character string passed in double quotes. If 
+                        <b class="hmath">X = "P"</b>, the values at maximum saturation pressure (Cricondenbar)
+                        are returned.  If <b class="hmath">X = "T"</b>, the values at maximum saturation temperature 
+                        (Cricondentherm) are returned.</p>
+                </li>
+            </ul>
         </blockquote>
         <h5><big>Saturation Curve Functions</big></h5>
-        <blockquote><a name="tsatp"></a>
+        <blockquote>
+            <a name="tsatp"></a>
             <p><b class="hmath">rp_tsatp(flstr,p)</b> returns the saturation temperature [K] of
-                the fluid or mixture, as a function of the saturation pressure, p.</p>
+                the pure fluid, as a function of the saturation pressure, p.</p>
             <h4>Argument:</h4>
             <ul type="disc">
                 <li>
                     <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                        fluid file name as defined above.  If a mixture name is passed, will returned
+                        the saturated liquid value.</p>
+                <li>
+                    <p><b class="hmath">p</b> is the input saturation pressure [MPa]. Must be between
+                        the triple point and critical point values or the function returns an error.</p>
+                </li>
+            </ul>
+            <a name="tsatpf"></a>
+            <p><b class="hmath">rp_tsatpf(flstr,p)</b> returns the <i>liquid</i> saturation temperature [K] of
+                the mixture, as a function of the saturation pressure, p.</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">flstr</b> is a string containing the mixture file (.mix)
+                        or ad-hoc mixture string as defined above.  If a pure fluid is passed, there is
+                        no difference between the saturation values returned by <b class="hmath">rp_tsatp(flstr,p)</b>
+                        or <b class="hmath">rp_tsatpg(flstr,p)</b>.</p>
+                <li>
+                    <p><b class="hmath">p</b> is the input saturation pressure [MPa]. Must be between
+                        the triple point and critical point values or the function returns an error.</p>
+                </li>
+            </ul>
+            <a name="tsatpg"></a>
+            <p><b class="hmath">rp_tsatpg(flstr,p)</b> returns the <i>vapor</i> saturation temperature [K] of
+                the fluid or mixture, as a function of the saturation pressure, p.</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">flstr</b> is a string containing the mixture file (.mix)
+                        or ad-hoc mixture string as defined above.  If a pure fluid is passed, there is
+                        no difference between the saturation values returned by <b class="hmath">rp_tsatp</b>
+                        or <b class="hmath">rp_tsatpf</b>.</p>
                 <li>
                     <p><b class="hmath">p</b> is the input saturation pressure [MPa]. Must be between
                         the triple point and critical point values or the function returns an error.</p>
@@ -301,9 +401,40 @@
             <ul type="disc">
                 <li>
                     <p><b class="hmath">flstr</b> is a string containing the pure fluid or pseudo-pure
-                        fluid file name as defined above.</p>
+                        fluid file name as defined above.  If a mixture name is passed, will returned
+                        the saturated liquid value.</p>
                 <li>
                     <p><b class="hmath">t</b> is the input saturation temperature [K]. Must be between
+                        the triple point and critical point values or the function returns an error.</p>
+                </li>
+            </ul>
+            <a name="psattf"></a>
+            <p><b class="hmath">rp_psattf(flstr,p)</b> returns the <i>liquid</i> saturation temperature [K] of
+                the mixture, as a function of the saturation pressure, p.</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">flstr</b> is a string containing the mixture file (.mix)
+                        or ad-hoc mixture string as defined above.  If a pure fluid is passed, there is
+                        no difference between the saturation values returned by <b class="hmath">rp_psatt(flstr,p)</b>
+                        or <b class="hmath">rp_psattg(flstr,p)</b>.</p>
+                <li>
+                    <p><b class="hmath">p</b> is the input saturation pressure [MPa]. Must be between
+                        the triple point and critical point values or the function returns an error.</p>
+                </li>
+            </ul>
+            <a name="psattg"></a>
+            <p><b class="hmath">rp_psattg(flstr,p)</b> returns the <i>vapor</i> saturation temperature [K] of
+                the fluid or mixture, as a function of the saturation pressure, p.</p>
+            <h4>Argument:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">flstr</b> is a string containing the mixture file (.mix)
+                        or ad-hoc mixture string as defined above.  If a pure fluid is passed, there is
+                        no difference between the saturation values returned by <b class="hmath">rp_psatt</b>
+                        or <b class="hmath">rp_psattf</b>.</p>
+                <li>
+                    <p><b class="hmath">p</b> is the input saturation pressure [MPa]. Must be between
                         the triple point and critical point values or the function returns an error.</p>
                 </li>
             </ul>
@@ -349,7 +480,7 @@
             </TR>
             <TR>
                 <TD noWrap width="130"><b>Density</b>, rho<br>
-                    [kg/m³]</TD>
+                    [kg/m&#179;]</TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_rhoft</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_rhofp</b></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_rhogt</b></TD>
@@ -429,8 +560,44 @@
                 <TD noWrap align="center" width="80"><b class="hmath">tp_mutp</b></TD>
             </TR>
             <TR>
+                <TD noWrap width="130"><b>Prandtl Number</b>, Pr<br>
+                    [-]</TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_prft</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_prfp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_prgt</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_prgp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">tp_prtp</b></TD>
+            </TR>
+            <TR>
+                <TD noWrap width="130"><b>Compressibility</b>, Z<br>
+                    [-]</TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_zft</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_zfp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_zgt</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_zgp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">tp_ztp</b></TD>
+            </TR>
+            <TR>
+                <TD noWrap width="130"><b>Thermal Expansion Coef.</b>, Beta<br>
+                    [1/K]</TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_betaft</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_betafp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_betagt</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_betagp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">tp_betatp</b></TD>
+            </TR>
+            <TR>
+                <TD noWrap width="130"><b>Cp/Cv Ratio</b>, Gamma<br>
+                    [-]</TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_gammaft</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_gammafp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_gammagt</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">rp_gammagp</b></TD>
+                <TD noWrap align="center" width="80"><b class="hmath">tp_gammatp</b></TD>
+            </TR>
+            <TR>
                 <TD noWrap width="130"><b>surface tension</b>, <font face="symbol" size="3">s</font><br>
-                    [kg/s²]</TD>
+                    [kg/s&#178;]</TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_surften</b></TD>
                 <TD noWrap align="center" width="80">n/a<sup>*</sup></TD>
                 <TD noWrap align="center" width="80"><b class="hmath">rp_surften</b></TD>
@@ -550,7 +717,7 @@
                 </li>
             </ul>
             <a name="rhoth"></a>
-            <p><b class="hmath">rp_rhoth(flstr,t,h,r)</b> Returns the fluid density [kg/m³] in
+            <p><b class="hmath">rp_rhoth(flstr,t,h,r)</b> Returns the fluid density [kg/m&#179;] in
                 any phase, as a function of the temperature and enthalpy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region.</p>
@@ -569,7 +736,7 @@
                 </li>
             </ul>
             <a name="rhots"></a>
-            <p><b class="hmath">rp_rhots(flstr,t,s,r)</b> Returns the fluid density [kg/m³] in
+            <p><b class="hmath">rp_rhots(flstr,t,s,r)</b> Returns the fluid density [kg/m&#179;] in
                 any phase, as a function of the temperature and entropy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region.</p>
@@ -588,7 +755,7 @@
                 </li>
             </ul>
             <a name="rhoph"></a>
-            <p><b class="hmath">rp_rhoph(flstr,p,h)</b> Returns the fluid density [kg/m³] in
+            <p><b class="hmath">rp_rhoph(flstr,p,h)</b> Returns the fluid density [kg/m&#179;] in
                 any phase, as a function of the pressure and enthalpy. The state point
                 specified may be in any single phase vapor or liquid region, or in the two
                 phase vapor/liquid region.</p>
@@ -604,7 +771,7 @@
                 </li>
             </ul>
             <a name="rhops"></a>
-            <p><b class="hmath">rp_rhops(flstr,p,s)</b> Returns the fluid density [kg/m³] in
+            <p><b class="hmath">rp_rhops(flstr,p,s)</b> Returns the fluid density [kg/m&#179;] in
                 any phase, as a function of the pressure and entropy. The state point specified
                 may be in any single phase vapor or liquid region, or in the two phase
                 vapor/liquid region.</p>

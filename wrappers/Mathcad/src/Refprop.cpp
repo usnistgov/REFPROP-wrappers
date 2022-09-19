@@ -68,7 +68,7 @@ enum { MC_STRING = STRING }; // Substitute enumeration variable MC_STRING for ST
 #include <fstream>
 
 // RefProp Mathcad Add-in Version
-std::string rpVersion = "2.0.3";       // Mathcad Add-in version number
+std::string rpVersion = "2.0.4";       // Mathcad Add-in version number
 
 // REFPROP major/minor/patch version numbers needed for function limitations and error codes
 int vMajor, vMinor, vPatch;            // Will get assigned when REFPROP loads
@@ -78,12 +78,14 @@ HWND hwndDlg;  // Dialog handle for pop-up message boxes
 
 enum EC {MUST_BE_REAL = 1, INSUFFICIENT_MEMORY, INTERRUPTED,                  // Mathcad Error Codes
          T_OUT_OF_RANGE, P_OUT_OF_RANGE, SATURATED,                           // Refprop Error Codes
-         FLUID_NOT_FOUND, NO_MIX, UNCONVERGED,INVALID_MODEL,
+         FLUID_NOT_FOUND, NO_MIX, ONLY_MIX, UNCONVERGED,INVALID_MODEL,
          BAD_COMPONENT, NO_TRANSPORT, INFINITE_K,
          NO_SURFTEN, H_OUT_OF_RANGE, S_OUT_OF_RANGE,
          D_OUT_OF_RANGE, BAD_INPUT, INVALID_FLAG, X_SUM_NONUNITY,
-         NO_UPPER_ROOT, TOO_MANY_COMPONENTS, BAD_MIX_STRING,
-         BAD_MOLE_FRACTION, INDIV_COMPONENT, SATSPLN_FAILED, UNKNOWN,
+         NO_UPPER_ROOT, TOO_MANY_COMPONENTS, COMPONENT_COUNT, BAD_MIX_STRING,
+         BAD_MOLE_FRACTION, INDIV_COMPONENT, SATSPLN_FAILED, 
+         NO_SPLINES, MAX_T_UNKNOWN, MAX_P_UNKNOWN,
+         INVALID_CCTYPE, UNKNOWN,
          NUMBER_OF_ERRORS};                                                   // Dummy code for Error Count
 
 // This is the list of errors that can be output if any of the functions fails.
@@ -98,6 +100,7 @@ char * RPErrorMessageTable[NUMBER_OF_ERRORS] =
     (char *)("Saturated Conditions"),                       //  SATURATED
     (char *)("Fluid/Mixture not found"),                    //  FLUID_NOT_FOUND
     (char *)("Pure Fluids or Predefined Mixtures Only!"),   //  NO_MIX
+    (char *)("Mixture must be loaded."),                    //  ONLY_MIX
     (char *)("Algorithm did not converge"),                 //  UNCONVERGED
     (char *)("Invalid model; must be \"EOS\". \"ETA\", or \"TCX\""),  //  INVALID_MODEL
     (char *)("Undefined Component Number"),                 //  BAD_COMPONENT
@@ -112,10 +115,14 @@ char * RPErrorMessageTable[NUMBER_OF_ERRORS] =
     (char *)("Mixture fractions don't sum to unity"),       //  X_SUM_NONUNITY
     (char *)("Upper root not supported when T < Tc"),       //  NO_UPPER_ROOT - no longer used
     (char *)("Too many components. Max is 20."),            //  TOO_MANY_COMPONENTS
+    (char *)("Input array must match number of components."),            // COMPONENT_COUNT
     (char *)("Bad mixture string format: c1[mf1]&c2[mf2]...&cX[mfX]"),   // BAD_MIX_STRING
     (char *)("Mole fraction can't be converted"),           //  BAD_MOLE_FRACTION
     (char *)("Must specify individual component number"),   //  INDIV_COMPONENT
     (char *)("Saturation routine failed for mixture"),      //  SATSPLN_FAILED
+    (char *)("Maximum temperature point not known"),        //  MAX_T_UNKNOWN
+    (char *)("Maximum pressure point not known"),           //  MAX_P_UNKNOWN
+    (char *)("X must be \"T\" (Cricondentherm) or \"P\" (Cricondenbar)"),      //  INVALID_CCTYPE
     (char *)("Unknown Error"),                              //  UNKNOWN
     (char *)("Error Count - Not Used")                      //  NUMBER_OF_ERRORS
 };
@@ -133,7 +140,8 @@ std::string err;                      // error string from REFPROP load DLL
 std::string MixFileName;              // Mixture File Name Storage
 std::string LastFluid = "";           // Mixture File Name Storage
 std::string fluidPath;
-char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
+char MixName[namelengthlong];         // Mixture Name from 1st line of loaded mixture file.
+                                      // REFPROP 10 retrieves this, but earlier versions did not.
 
 
 // Include function stubs here.
@@ -148,6 +156,8 @@ char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
 #include "rp_getname.h"
 #include "rp_getcasn.h"
 #include "rp_extrapolate.h"
+#include "rp_getx.h"
+#include "rp_setx.h"
 // Fluid Constant Function headers
 #include "rp_wmol.h"
 #include "rp_rgas.h"
@@ -165,6 +175,7 @@ char MixName[namelengthlong+1];       // Mixture Name from loaded mixture file.
 // Saturation Curve Function headers
 #include "rp_tsatp.h"
 #include "rp_psatt.h"
+#include "rp_maxX.h"
 // Thermodynamic Property Function headers
 #include "rp_rhofp.h"
 #include "rp_rhoft.h"
@@ -367,6 +378,12 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
         if ( CreateUserFunction( hDLL, &rp_extrap ) == NULL )
             break;
 
+        if (CreateUserFunction(hDLL, &rp_getx) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_setx) == NULL)
+            break;
+
         // Gas and Fluid Constants
         // ===============================
         if ( CreateUserFunction( hDLL, &rp_wmol ) == NULL )
@@ -410,10 +427,25 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
 
         // Saturation Curve Definition
         // ===============================
-        if ( CreateUserFunction( hDLL, &rp_tsatp ) == NULL )
+        if (CreateUserFunction(hDLL, &rp_tsatp) == NULL)
             break;
 
-        if ( CreateUserFunction( hDLL, &rp_psatt ) == NULL )
+        if (CreateUserFunction(hDLL, &rp_tsatpf) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_tsatpg) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_psatt) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_psattf) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_psattg) == NULL)
+            break;
+
+        if (CreateUserFunction(hDLL, &rp_maxX) == NULL)
             break;
 
         // Thermodynamic Properties
