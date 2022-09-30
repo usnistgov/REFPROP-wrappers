@@ -14,6 +14,7 @@ Hint: click on the name to be taken to the appropriate wrapper code
 * [Python](wrappers/python)
 * [MATLAB](wrappers/MATLAB)
 * [Excel](wrappers/Excel)
+* [Fortran](wrappers/Fortran)
 * [Labview](wrappers/Labview)
 * [LabWindows](wrappers/LabWindows)
 * [C/C++](wrappers/C_CPP)
