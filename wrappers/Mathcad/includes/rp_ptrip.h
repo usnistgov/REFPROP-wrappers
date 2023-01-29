@@ -6,7 +6,7 @@ LRESULT rp_Ptrip(
     char herr[256] = "OK\0";
     char htyp[4] = "EOS";
     unsigned int lhtyp = 3;
-    int ierr = 0;
+    ierr = 0;
     int icomp = 1;
     int kph = 1;
     double D,Dl,Dv,xl[20],xv[20],Umol,Hmol,Smol,Cv,Cp,w;

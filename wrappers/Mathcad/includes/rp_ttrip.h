@@ -6,7 +6,7 @@ LRESULT rp_Ttrip(
     char herr[256] = "OK\0";
     char htyp[4] = "EOS";
     unsigned int lhtyp = 3;
-    int ierr = 0;
+    ierr = 0;
     int icomp = 1;
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas; 
     double tmax,dmax,pmax;

@@ -1,22 +1,26 @@
 # Mathcad REFPROP Wrapper
 
-The initial Mathcad wrapper was created by Jeff Henning of the Naval Nuclear Laboratory (NNL) and provided to the RefProp community here with agreement from NNL.  Patrick Fourspring (NNL) facilitated the agreement, which also included release of a Mathematica (Wolfram Language) wrapper package.
+The initial Mathcad wrapper was created by Jeff Henning of the Naval Nuclear Laboratory (NNL) and provided to the REFPROP community here with agreement from NNL.  Patrick Fourspring (NNL) facilitated the agreement, which also included release of a Mathematica (Wolfram Language) wrapper package, also located in this repository.
 
 ## Overview
 
-The Mathcad wrapper provides a diverse range of add-in functions (all beginning with *rp_*) that make subsequent calls to the NIST RefProp DLL.  These wrapper functions will retrieve the requested fluid properties (based on the function name) for a specific fluid material and state point (based on the input parameters).  Utility functions are also provided for retrieving and setting specific NIST RefProp parameters and version information.
+The Mathcad wrapper provides a diverse range of add-in functions (all beginning with *rp_*) that make subsequent calls to the NIST REFPROP DLL.  These wrapper functions will retrieve the requested fluid properties for a specific fluid material and state point (based on the input parameters).  Utility functions are also provided for retrieving and setting specific NIST REFPROP parameters and version information.
 
-This repository contains the source for building the Mathcad 15 and/or Mathcad Prime wrappers for the NIST RefProp materials library using a community or professional version of Microsoft Visual Studio with Visual C++.   This wrapper code, starting with version 2.0, uses [REFPROP-headers](https://github.com/CoolProp/REFPROP-headers) to make call directly to the REFPROP.dll (or REFPROP64.dll) when NIST RefProp 9.1 or later is installed.  PTC Mathcad only runs on the MS Windows platform. 
+This repository contains the source for building the Mathcad Prime and/or Legacy Mathcad wrappers for the NIST REFPROP materials library using a community or professional version of Microsoft Visual Studio with Visual C++.   This wrapper code, starting with version 2.0, uses [REFPROP-headers](https://github.com/CoolProp/REFPROP-headers) to make calls directly to the Legacy API functions in REFPROP.dll (or REFPRP64.dll) when NIST REFPROP 9.1 or later is installed.  Version 2.1 contains significant enhancements to implement the High-Level API when NIST REFPROP 10.0 or later is installed.  PTC Mathcad only runs on the MS Windows platform. 
 
 ------
 
 ## Prerequisites
 
-    - Mathcad Prime (version 3.0 or later; tested up to version 8.0.0.0) (see NOTE)
-    - MS Visual Studio 2015 or later
-    - NIST REFPROP 9.1 or later (available from NIST)  
+The prerequisites for building and running the REFPROP add-in for Mathcad are:  
   
-    NOTE: While Legacy Mathcad 15 is no longer supported or distributed by PTC, 32-bit versions of this library can still be built for those who still have perpetual licenses of Mathcad 15.  However, compilation for Mathcad 15 is no longer being tested here.
+1. Mathcad Prime (tested up to version 8.0.0.0) (_see NOTE_)
+2. MS Visual Studio 2015 or later (_Professional or Community editions_)
+3. NIST REFPROP 9.1 or later ( _available from [NIST](https://www.nist.gov/srd/refprop)_ ), but REFPROP 10 is preferred  
+
+The ability to download a pre-compiled windows DLL is being investigated, eliminating the second requirement above.
+
+    NOTE: While Legacy Mathcad 15 is no longer supported or distributed by PTC, 32-bit versions of this library can still be built for those who still have perpetual licenses of Mathcad 15.  However, compilation for Mathcad 15 is no longer being tested nor supported or developed.
 ------
 
 ## Building the Mathcad Prime Custom Function DLL
@@ -26,56 +30,44 @@ To build the Mathcad Prime DLL,
 1. Make sure that Mathcad Prime is not running
 2. Go to the /buildPrime directory
 3. Use the `RefPropPrimeWrapper.sln` file to open the solution in VisualStudio 2015 or later.  This will open the PrimeREFPROPwrapper project. 
-4. Make sure that the **build** is set to "**Prime7**" or "**Prime8**" and target is "x64" for a 64-bit build.  This will ensure that the correct Mathcad libraries are used and the compiled DLL is placed in the appropriate Mathad folders. (_There is also a Prime6 configuration, but Mathcad Prime 6.0 is now obsolete._)
+4. Make sure that the **build** is set to "**Prime7**" or "**Prime8**" and target is "x64" for a 64-bit build.  This will ensure that the correct Mathcad libraries are used and the compiled DLL is placed in the appropriate Mathcad folders. (_There is also a Prime6 configuration, but Mathcad Prime 6.0 is now obsolete._)
 5. Select **Build | Rebuild PrimeREFPROPwrapper**
 6. This will build the add-in DLL and it will be placed in the Mathcad Prime installation directory under **/Custom Functions**
 7. There is no interface file facility for Custom Functions in Prime at this time.
 
-If you have a newer version than **Mathcad Prime 8.0.0.0**, you will need to modify the VS project settings under:
-    - C++ > General > Additional Include Directories
-    - Linker > General > Additional Library Directories
-    - Build Events > Post-Build Events
+If you have a newer version than **Mathcad Prime 8.0.0.0**, you will need to modify the VS project settings under: 
+- C++ > General > Additional Include Directories
+- Linker > General > Additional Library Directories
+- Build Events > Post-Build Events  
+
 to change the applicable `PTC\Mathcad Prime 8.0.0.0` path strings to the appropriate version for your system.
 
 ## Building the Legacy Mathcad 15 (unsupported) add-in DLL
 
-To build the Mathcad 15 add-in DLL, 
-
-1. Make sure that Mathcad is not running
-2. Go to the /build15 directory
-3. Use the `MathcadREFPROPwrapper.sln` file to open the solution in VisualStudio 2015 or later.  This will open the MathcadREFPROPwrapper project. 
-4. Make sure that the **build** is set to "**Release**" and target is "**Win32**" (Mathcad 15 is 32-bit) 
-5. Select **Build | Rebuild MathcadREFPROPwrapper**
-6. This will build the add-in DLL and it will be placed in the Mathcad 15 installation directory under **/userfi**
-7. The function interface doc (RefProp_EN.xml) will be copied to the Mathcad 15 installation directory under **/doc/funcdoc**
-8. The context sensitive help files will also be copied to the Mathcad 15 installation directory under **/doc/HELP_EN/Refprop**
-9. The RefProp Handbook (eBook) files will be copied to the Mathcad 15 installation directory under **/Handbook/Refprop**
+One can also use the same code to [build a 32-bit add-in for Legacy Mathcad](BuildLegacyMathcadDLL.md), however, that functionality is no longer tested or supported.  Use at your own risk.
 
 ------
 
-## Using the RefProp Add-in in either Mathcad Prime or Legacy Mathcad 15
+## Using the RefProp Add-in in Mathcad Prime
 
-With the Mathcad wrapper DLL compiled and copied to the appropriate Mathcad directories, the RefProp functions, which all begin with the prefix "rp_", will be directly available for use in Mathcad.  In Legacy Mathcad 15, the functions and usage descriptions will be available in the Insert Function panel under the category **NIST RefProp**. Unfortunately, Mathcad Prime does not yet have the facility to list custom functions as of Mathcad Prime 6.0.  A User's Guide
-for Mathcad Prime can be found in PDF format in the PrimeDocs folder of this repository.  
+With the Mathcad wrapper DLL compiled and copied to the appropriate Mathcad directories, the RefProp functions, which all begin with the prefix "rp_", will be directly available for use in Mathcad.  Unfortunately, Mathcad Prime does not yet have the facility to list custom functions as of Mathcad Prime 8.0.  A User's Guide for Mathcad Prime can be found in PDF format in the PrimeDocs folder of this repository.
   
-In addition, the file **Units\RefProp_Units** is available for both Mathcad 15 and Mathcad Prime.  By including this reference worksheet in your own worksheets, all of the RefProp functions will be available through pre-defined user functions that provide:
-- Functions in standard mathematical, thermodynamic notation, including Greek symbols and
-- Unit handling to put any parameters in the correct units and return values with units already applied.
+In addition, the file `Units\RefProp_Units.mcdx` is available in Mathcad Prime format.  By including this reference worksheet in your own worksheets, all of the RefProp functions will be available through pre-defined user functions that provide:
+- Function names in standard mathematical, thermodynamic notation, including Greek symbols,
+- Unit handling to convert any parameters to the correct units and return values with units already applied, and
+- Automatic handling of the Output array, single value returns, and string results from the High-Level API functions available with REFPROP 10.
 
-See the documentation (Mathcad 15 Handbook and Mathcad Prime PDF User's Guide) for instructions on using these functions.
+See the add-in documentation ([Mathcad Prime PDF User's Guide](./PrimeDocs/PrimeManual.pdf)) as well as the [NIST REFPROP DLL documentation](https://refprop-docs.readthedocs.io/en/latest/DLL/index.html) for instructions on using these functions.  As of version 2.1 of this add-in, functions are provided for both the
 
-![Example Screenshot](img/Screenshot-Units.png "Units Screenshot") 
- 
-## Electronic Handbook for the RefProp Add-in for Legacy Mathcad 15
+* [High-Level API](High-LevelAPI.md) function calls from REFPROP 10 or later, and  
 
-The files in the /Handbook directory can be copied into the /Handbook subdirectory in the Mathcad 15 installation path.  This copy procedure happens automatically when you compile and link the Mathcad Add-in DLL.  These files will allow the electronic handbook for RefProp to be available from the Mathcad **Help | e-Books** menu under **NIST RefProp**.  This electronic handbook will provide usage instruction and Mathcad usage examples that can be copied and pasted into your own worksheets.
-  
-For more information on how to use the RefProp functions in either flavor of Mathcad, see [RefProp Help](https://raw.githack.com/usnistgov/REFPROP-wrappers/master/wrappers/Mathcad/doc/HELP_EN/Refprop/RefpropHelp.htm)  
+* [Legacy API](LegacyAPI.md) function calls available with REFPROP 9.1.1 and later.
 
+------
 ## Possible Future Enhancements
 
-1. Add new interface functions from RefProp 10 (if loaded) in addition to the legacy functions initially provided in version 2.0.
-2. Add a CMake build system to dynamically create the \build15 and \buildPrime directories, taking Mathcad and VS versions as parameters for a simpler build.
+1. Add a CMake build system to dynamically create the \build15 and \buildPrime directories, taking Mathcad and VS versions as parameters for a simpler build.
+2. Use CMake `find_package()` functionality to automatically find the latest version of Mathcad on the user's machine, simplifying path setting to includes/libraries and the target Custom Functions directory.
 
 ------
 

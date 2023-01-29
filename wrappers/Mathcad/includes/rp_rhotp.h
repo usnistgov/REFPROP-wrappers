@@ -8,12 +8,13 @@ LRESULT rp_Rhotp(
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
     double Dl, Dv, Q, U, H, S, Cv, Cp, W, Pdum, hjt;
     double xl[20], xv[20];
-    int ierr = 0, icomp = 1, kph = 1, kguess = 0;
+    ierr = 0;
+    int icomp = 1, kph = 1, kguess = 0;
     char herr[255];
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)
-        return MAKELRESULT(ierr,1);
+        return MAKELRESULT(UNKNOWN,1);
 
     if( t->imag != 0.0 )
         return MAKELRESULT(MUST_BE_REAL,2);
@@ -47,10 +48,9 @@ LRESULT rp_Rhotp(
     }
 
     // If above critical pressure (Liquid) use TPRHO instead of TPFLSH
-    // TODO: Not sure what happens if above Tcrit.  Is this vapor or liquid?  Which flag to set?
-    //       May need to adjust initial guess depending on location.
-    //       Extend this logic to all other functions of TP once it is working.
-    if (pval > pc)
+    if (tval > tc) kph = 2;
+    if (pval > pc) kph = 1;
+    if ((pval > pc) || (tval > tc))
     {
         // Get single-phase density
         TPRHOdll(&tval, &pval, &x[0], &kph, &kguess, &Dval, &ierr, herr, errormessagelength);

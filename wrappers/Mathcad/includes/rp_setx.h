@@ -2,7 +2,7 @@ LRESULT rp_SETX(
     LPMCSTRING           ret,
     LPCCOMPLEXARRAY      mfrac  )
 {
-    int ierr = 0;
+    ierr = 0;
     double sum = 0.0, xtol = 1.0E-4;
     char htype[] = "EOS";
     char herr[errormessagelength];
@@ -36,13 +36,20 @@ LRESULT rp_SETX(
     if (ierr > 0) return SATSPLN_FAILED;
 
     // allocate memory for return string
-    pdest = MathcadAllocate(16);
+    size_t mlen = strlen(hset);
+    pdest = MathcadAllocate((int)mlen + 1u);
     if (pdest == NULL)
         return MAKELRESULT(INSUFFICIENT_MEMORY, 1);  // insufficient memory
     else
     {
-        strncpy(pdest, hset, 16);
+        strncpy(pdest, hset, mlen); pdest[mlen] = '\0';
         ret->str = pdest;
+    }
+
+    if (isUserInterrupted())
+    {
+        MathcadFree(pdest);
+        return MAKELRESULT(INTERRUPTED, 1);  // Interrupted
     }
                                                     // No need to check for interrupt, we're here.
     return 0;                                       // return 0 to indicate there was no error

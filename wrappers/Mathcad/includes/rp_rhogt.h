@@ -5,7 +5,7 @@ LRESULT rp_Rhogt(
 {
     char herr[255];
     int kph = 2;   // looking for saturated vapor (dew point)
-    int ierr;
+    ierr = 0;
     double psat,tsat,rhol,rhov,xliq[20],xvap[20];
 
     ierr = cSetup(fluid->str);

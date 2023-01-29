@@ -4,7 +4,7 @@ LRESULT rp_LIMITS(
     LPCMCSTRING       htype)
 {
     double Tminx, Tmaxx, Dmaxx, Pmaxx;                          // Limits variables
-    int ierr = 0;
+    ierr = 0;
     unsigned int rows = 4, cols = 1;
 
     ierr = cSetup(fluid->str);

@@ -5,7 +5,7 @@ LRESULT rp_Strho(
     LPCCOMPLEXSCALAR    rho   )
 {
     double tval, dval, S;
-    int ierr;
+    ierr = 0;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)

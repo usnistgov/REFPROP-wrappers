@@ -3,7 +3,8 @@ LRESULT rp_Wmol(
     LPCMCSTRING       fluid,
     LPCCOMPLEXSCALAR   comp   )
 {
-    int icomp,ierr;
+    int icomp;
+    ierr = 0;
     double wmm0, ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
 
     std::string strFluid = fluid->str;

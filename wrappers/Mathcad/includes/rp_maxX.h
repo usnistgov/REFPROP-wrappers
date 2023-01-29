@@ -5,7 +5,7 @@ LRESULT rp_Criconden(
 {
     char herr[255];
     unsigned int lherr = 255;
-    int ierr = 0;
+    ierr = 0;
     unsigned int rows = 3, cols = 1;
     double ttrip, tnbpt, tc = 0.0, pc = 0.0, Dc = 0.0, Zc, acf, dip, Rgas, wmm0;
 

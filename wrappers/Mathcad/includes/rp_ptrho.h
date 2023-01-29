@@ -5,7 +5,7 @@ LRESULT rp_Ptrho(
     LPCCOMPLEXSCALAR    rho   )
 {
     double tval,pval,dval;
-    int ierr;
+    ierr = 0;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)

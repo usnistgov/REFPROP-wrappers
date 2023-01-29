@@ -2,7 +2,7 @@ LRESULT rp_Tmin(
     LPCOMPLEXSCALAR     ret,
     LPCMCSTRING       fluid   )
 {
-    int ierr = 0;
+    ierr = 0;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)

@@ -5,7 +5,7 @@ LRESULT rp_Rhocrit(
 {
     char herr[256] = "Ok\0";
     unsigned int lherr = 255;
-    int ierr = 0;
+    ierr = 0;
     int icomp = 1;
     double wmm0, ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas; 
 

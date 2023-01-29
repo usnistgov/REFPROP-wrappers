@@ -8,7 +8,7 @@ LRESULT rp_Tph(
     double pval,hval,dval,tval;
     double pc,tc,Dc,hc;
     double tsat,rhol,rhov,xliq[20],xvap[20],hliq,hvap;
-    int ierr;
+    ierr = 0;
     int kph = 1;             // initialize to Liquid
 
     ierr = cSetup(fluid->str);

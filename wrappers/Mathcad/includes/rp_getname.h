@@ -9,7 +9,7 @@ LRESULT rp_Getname(
     char hname[namelengthshort + 1];
     char hfull[namelengthlong + 1];
     char hcasn[casnlength + 1];
-    int ierr = 0;
+    ierr = 0;
     std::string strFluid = fluid->str;
     std::string Ad_Hoc = "Ad-Hoc Mixture";
 

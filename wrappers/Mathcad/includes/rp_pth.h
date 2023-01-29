@@ -11,7 +11,7 @@ LRESULT rp_Pth(
     double rhol,rhov,xliq[20],xvap[20];
     double U, S, Cv, Cp, W;
     double tc, pc, Dc;        //  , hvap, psat;    // no longer needed
-    int ierr;
+    ierr = 0;
     int kr;
 
     ierr = cSetup(fluid->str);

@@ -5,7 +5,7 @@ LRESULT rp_TsatL(
 {
     char herr[256] = "OK\0";
     int kph = 1;                   // Get liquid phase pressure if mixture
-    int ierr;
+    ierr = 0;
     double psat,tsat,rhol,rhov,xliq[20],xvap[20];
 
     ierr = cSetup(fluid->str);
@@ -38,7 +38,7 @@ LRESULT rp_TsatV(
 {
     char herr[256] = "OK\0";
     int kph = 2;                   // Get vapor phase pressure if mixture
-    int ierr;
+    ierr = 0;
     double psat, tsat, rhol, rhov, xliq[20], xvap[20];
 
     ierr = cSetup(fluid->str);

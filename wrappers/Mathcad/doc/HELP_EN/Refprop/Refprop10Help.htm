@@ -1,0 +1,308 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+    <head>
+        <title>NIST REFPROP 10 High-Level API Function Help</title>
+        <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+        <LINK href="../Help/Main_topic_ns.css" rel="stylesheet"></head>
+    <body>
+        <table>
+            <tr style="HEIGHT: 94px">
+                <td vAlign="top">
+                    <h1><big>NIST REFPROP 10 High-Level API Functions</big></h1>
+                </td>
+            </tr>
+        </table>
+        <p>
+            The High-Level API provided in NIST REFPROP 10, greatly simplifies property and information
+            retrieval through just a handful of functions.  The NIST Refprop Add-in implements most of these, 
+            including REFPROPdll for property and information retrieval and the remaining utility functions
+            for loading fluids and mixtures and controlling NIST REFPROP behavior.
+            <br><br>
+            The NIST RefProp Add-in Custom Functions make calls to the NIST REFPROP fluid properties
+            DLL. All wrapper functions are prefixed with <b>rp_</b> followed by the function
+            name. A description of the High-Level API functions available after REFPROP 10 follows.
+        </p>
+        <h2><big>Fluid Setup</big></h2>
+        <blockquote> <a name="setup"></a>
+            <p><b class="hmath">"hFld"</b> - The general purpose property function, rp_REFPROP() and its variations, is typically called with this 
+                fluid string, as the first parameter, representing the fluids or mixtures file to be used.
+            </p>
+            <blockquote>
+                <p>The fluids file must be loaded from the NIST RefProp installation directory.  Typically,</p>
+                <blockquote>
+                    <p><code><b>C:\Program Files (x86)\RefProp</b></code></p>
+                </blockquote>
+                <p>
+                    or from another path identified by the user's environment variable, <b class="math">NIST_PATH</b>.<br>
+                </p>
+                <p><i>NOTE: Each function call makes a call internally to the REFPROP SETUP
+                        routine which loads the fluid file from the database location. However, if the
+                        requested fluid string is empty, or already loaded, no action is taken; dramatically cutting
+                        down on overhead.</i></p>
+            </blockquote>
+            <h4>Details:</h4>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">"hFld"</b> specifies the fluid (or pseudo fluid or mixture) file
+                        to be loaded from the "<b>fluids\</b>" (or "<b>mixtures\</b>") directory.  This string can (optionally) end with an extension of "<b>.fld</b>".  
+                        If the suffix is omitted, REFPROP will assume an extension of ".fld" and look for the fluid in the "<b>fluids\</b>" directory. 
+                        If the fluid is a pseudo-pure fluid, the extension "<b>.ppf</b>" must be supplied.  
+                        Predefined mixtures MUST include the "<b>.mix</b>" extension.
+                        <br>
+                        <br>
+                        <i>e.g. to load the properties for HELIUM, define a variable such as: </i><br>
+                        <br>
+                        <center><b class="hmath">fluid := "HELIUM.fld"</b>.<br>
+                        <br>
+                        - or -<br>
+                        <br>
+                        <b class="hmath">fluid := "HELIUM"</b>.</center><br>
+                        <br>
+                        As of NIST RefProp 9.1, the valid pure fluid files shown below in Table 1, pseudo-pure fluid files are shown in Table 2, and predefined mixture files in Table 3.  
+                        Current REFPROP documentation should be referenced for the complete list.<BR>
+                    </p>
+                </li>
+                <ul>
+                    <ul>
+                        <ul>
+                            <h3><big>Table 1 : RefProp Pure Fluid Files</big></h3>
+                        </ul>
+                    </ul>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PureFluids.png?raw=true" alt="pure-fluids" align="middle" border="1"> <a name="Pure"></a>
+                </ul>
+                <ul>
+                    <ul>
+                        <ul>
+                            <h3><big>Table 2 : RefProp Pseudo-Pure Fluid Files</big></h3>
+                        </ul>
+                    </ul>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/PseudoPureFluids.png?raw=true" alt="pseudo-pure" align="middle" border="1"> <a name="PseudoPure"></a>
+                </ul>
+                <ul>
+                    <ul>
+                        <ul>
+                            <h3><big>Table 3 : RefProp Predefined Mixture Files</big></h3>
+                        </ul>
+                    </ul>
+                    <img src="https://github.com/usnistgov/REFPROP-wrappers/blob/master/wrappers/Mathcad/doc/HELP_EN/Refprop/Mixtures.png?raw=true" alt="mixtures" align="middle" border="1"> <a name="Mixture"></a>
+                </ul>
+            </ul>
+            <br><br>
+        </blockquote>
+        <h2><big>Ad-Hoc Mixtures Setup</big></h2>
+        <blockquote>
+            <a name="Mixtures"></a>
+            <p>
+                In addition to loading one of the pre-defined mixture (.mix) files, the REFPROP High-Level API provides facility for embedding multiple mixture components and molar compositions 
+                right in the fluid string passed to the interface functions.  The format for ad-hoc mixture strings varies slightly from the Legacy API calls and is as follows.  Within the fluid string,<br />
+                <ul>
+                    <li>Separate each component with an semi-colon ";" character,</li>
+                    <li>Follow each component with its mole fraction, also delimited with a semi-colon ";",</li>
+                    <li>Limit number of components to 20, although more components makes the flash calculations harder and they may fail in the RefProp solver,</li>
+                    <li>Zero mole fraction components will be ignored,</li>
+                    <li>Total of mole fractions must sum exactly to one (1.0).</li>
+                </ul>
+                For example, a binary representation for Air could be input with the following fluid string:<br />
+                <br />
+                <b class="hmath">"Oxygen;0.21;Nitrogen;0.79"</b><br />
+                <br />
+                A more accurate representation for Air could be input with the following quaternary mixture string:<br />
+                <br />
+                <b class="hmath">"Oxygen;0.20948;Nitrogen;0.78084;Argon;0.00934;CO2;0.00034;"</b><br />
+                <br />
+            </p>
+        </blockquote>
+        <h2><big>The REFPROP Functions</big></h2>
+        <blockquote> <a name="setup"></a>
+
+            <p>The High-Level REFPROP function (and its variations) accept numeric input parameters and output numeric results in modified Mass-based SI units.
+                This modified units system is REFPROP's "MASS SI" system with Thermal Conductivity in units of [W/m-K] and Surface Tension in units of [N/m].  This unit system is consistent
+                with the units returned by the Legacy API functions.  Since Mathcad has excellent unit handling facility, it is very easy to scale to this unit system when making
+                calls to the functions. No Mathcad units can be applied (<i>they must be stripped off</i>), but numeric values should be scaled to this unit system
+                before being passed as parameters.
+
+                Composition arrays and vapor quality will, however, always be specified as mole fractions.  Mathcad can easily convert these to mass fractions if needed.
+            </p>
+            <br>
+
+            <a name="rp_REFPROP"></a>
+            <p><b class="hmath">rp_REFPROP(hFld, hIn, hOut, a, b)</b> Calls REFPROPdll with a fluid string, <i>hFld</i>, and state-point specified in the <i>hIn</i> string and 
+                returns multiple numeric properties in an <b><i>array</i></b> as requested in the <i>hOut</i>.</p>
+            <p>Arguments:</p>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">hFld</b> Fluid string as described above.</p>
+                </li>
+                <li>
+                    <p><b class="hmath">hIn</b> The input State-point specification. Valid codes are T, P, D, E, H, S, and Q (temperature, pressure, density, energy, 
+                        enthalpy, entropy, and quality).  Two of these should be sent together to identify the contents of the <i>a</i> and <i>b</i> parameters.
+                        The numeric inputs should be in the order specified in <i>hIn</i>. Other special codes are also available 
+                        (See <a href="https://refprop-docs.readthedocs.io/en/latest/DLL/high_level.html#f/_/REFPROPdll" target="_blank">NIST REFPROP DLL Documentation for REFPROPdll</a>)</p>
+                </li>
+                <li>
+                    <p><b class="hmath">hOut</b> The output code string for requested values.  Multiple outputs can be requested and must be separated by spaces, 
+                        commas, semicolons, or bars (pipe character).  Mixed delimiters should not be used.  
+                        (See <a href="https://refprop-docs.readthedocs.io/en/latest/DLL/high_level.html#f/_/ALLPROPSdll" target="_blank">NIST REFPROP DLL Documentation for ALLPROPSdll</a> for 
+                        valid output codes and <a href="https://refprop-docs.readthedocs.io/en/latest/DLL/high_level.html#f/_/REFPROPdll" target="_blank">REFPROPdll</a> for other special output codes)</p>
+                </li>
+                <li>
+                    <p><b class="hmath">a</b> First numeric input, as specified in <i>hIn</i>.  May be zero or
+                        arbitrary when retrieving non-state-dependent values.  No Mathcad units applied, but scaled to the modified SI units.</p>
+                </li>
+                <li>
+                    <p><b class="hmath">b</b> Second numeric input, as specified in <i>hIn</i>.  May be zero or
+                        arbitrary when retrieving non-state-dependent values.  No Mathcad units applied, but scaled to the modified SI units.</p>
+                </li>
+            </ul>
+            <br><br>
+
+            <a name="rp_REFPROP1"></a>
+            <p><b class="hmath">rp_REFPROP1(hIn, hOut, a, b)</b> The same as <b class="hmath">rp_REFPROP</b> except that the fluid string, <i>hFld</i>, is omitted and 
+                only one output value can be requested in <i>hOut</i>.  This output value is returned as a single <b><i>scalar</i></b> value, instead of an <b><i>array</i></b>.</p>
+            <br><br>
+
+            <a name="rp_REFPROPc"></a>
+            <p><b class="hmath">rp_REFPROPc(hFld, hIn, hOut, a, b)</b> The same as <b class="hmath">rp_REFPROP</b> except that only one output can be requested in <i>hOut</i>.  
+                This output value is returned as a single information <b><i>string</i></b>, instead of a numeric value.  It is used for special <i>hOut</i> codes that
+                only return character strings.
+            </p>
+            <br><br>
+        </blockquote>
+            
+
+        <h2><big>Manually Loading Pure Fluids and Pre-defined Mixtures</big></h2>
+        <blockquote>
+
+            <p>
+                In addition to passing a fluid or mixture string through the <b class="hmath">rp_REFPROP</b> functions, pure fluids and pre-defined mixtures can be loaded with
+                the specialized functions below.  After that, subsequent calls to the <b class="hmath">rp_REFPROP</b> functions can be called with an empty <i>hFld</i> string ("") to
+                automatically use the pre-loaded fluid or mixture.
+            </p>
+            <br>
+
+            <a name="SETFLUIDS"></a>
+            <p><b class="hmath">rp_SETFLUIDS(hFld)</b> Loads one or more pure or pseudo-pure fluids from the REFPROP fluids library.  Function returns zero if successful.</p>
+            <p>Arguments:</p>
+            <ul type="disc">
+                <li>
+                    <p><b class="hmath">hFld</b> is a string containing the pure fluid or pseudo-pure
+                        fluid as defined above.  Multiple pure fluid components can be specified, separated
+                        by a pipe character (|), a semicolon (;), or an asterisk (*).  However, when loading
+                        multiple components, a molar composition must also be specified through a call to <b class="hmath">rp_setx(x)</b>
+                    </p>
+                </li>
+            </ul>
+            <br><br>
+
+            <a name="SETMIXTURE"></a>
+            <p><b class="hmath">rp_SETMIXTURE(hFld)</b> Loads one pre-defined mixture file from the REFPROP mixtures library.  While composition is
+                maintained internally by the REFPROP add-in, this function returns the mixture composition, <i>z</i>, as an <b><i>array</i></b> for
+                user information and computation.</p>
+            <p>Arguments:</p>
+            <ul type="disc">
+                <li>
+                    <p>
+                        <b class="hmath">hFld</b> is a string containing the pre-defined mixture file (.mix) as defined above.
+                    </p>
+                </li>
+            </ul>
+            <br><br>
+        </blockquote>
+
+        <h2><big>Utility Functions</big></h2>
+        <blockquote>
+
+            <a name="ERRMSG"></a>
+            <p><b class="hmath">rp_ERRMSG(ierr)</b> Returns REFPROP's error string for a given error code.  While the Mathcad wrapper tries to
+                trap most errors, the error message table is static an cannot be modified to reflect the actual errors coming from REFPROP.  It
+                is inefficient and cumbersome to try and capture all of the errors possibly coming from REFPROP.
+            </p>
+            <p>Argument:</p>
+            <ul type="disc">
+                <li>
+                    <p>
+                        <b class="hmath">ierr</b> Is an error code being returned from the last REFPROP function call.  Since These
+                        codes cannot be returned to the user, passing a value of zero (0) will return the error string for the last
+                        error generated by REFPROP.
+                    </p>
+                </li>
+            </ul>
+            <br><br>
+
+            <a name="FLAGS"></a>
+            <p><b class="hmath">rp_FLAGS(hFlag,iFlag)</b> Sets an internal REFPROP flag that modifies its behavior through the public 
+                function <b class="hmath">FLAGSdll</b> and exactly mirrors the DLL function's behavior.  However, some flags are not allowed
+                to be modified as it would cause unexpected behavior within the Mathcad front end.  In these cases, the user is warned
+                through a pop-up Message Box and the default value is returned unchanged. <br>
+                (See the <a href="https://refprop-docs.readthedocs.io/en/latest/DLL/high_level.html#f/_/FLAGSdll" target="_blank">NIST REFPROP DLL Documentation for FLAGSdll</a> for 
+                a complete list of valid Flags and values.)</p>
+            <p>Argument:</p>
+            <ul type="disc">
+                <li>
+                    <p>
+                        <b class="hmath">hFlag</b> is a string containing the flag to be modified.  Please see the 
+                        NIST REFPROP DLL documentation for <b class="hmath">FLAGSdll</b> for a complete list of valid
+                        flags.  One additional flag, "No Warnings", is maintained by the Mathcad wrapper.  When set,
+                        pop-up Message Box <b><i>Warnings</i></b> will be suppressed.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b class="hmath">iFlag</b> is the integer Flag value to be set for the flag string passed in <i>hFlag</i>.  
+                        The current Flag value set will always be returned, even if an invalid iFlag value is attempted. 
+                        Passing iFlag = -999 will retrieve the current value set for the Flag string passed in <i>hFlag</i>.
+                    </p>
+                </li>
+            </ul>
+            <br><br>
+
+            <a name="GETENUM"></a>
+            <p><b class="hmath">rp_GETENUM(iFlag,hEnum)</b> returns the internal enumeration for the property codes required by 
+                some functions instead of their property code string.  This function is of limited value since <b class="hmath">ALLPROPS0dll</b> is not 
+                being implemented. (See the <a href="https://refprop-docs.readthedocs.io/en/latest/DLL/high_level.html" target="_blank">NIST REFPROP DLL Documentation</a> for 
+                more information.)</p>
+            <p>Argument:</p>
+            <ul type="disc">
+                <li>
+                    <p>
+                        <b class="hmath">iFlag</b> is a Flag indicating the enumeration range to check.  Valid values are 
+                        <ol start="0">
+                            <li>Check all strings possible.</li>
+                            <li>Check strings for property <b><i>units</i></b>> only (e.g. SI, English, etc.).</li>
+                            <li>Check property strings and those in #3 only.</li>
+                            <li>Check property strings only that are not functions of <i>T</i> and <i>D</i><br>
+                                (e.g. the critical point values, acentric factor, limits of EOS, etc.) </li>
+                        </ol>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b class="hmath">hEnum</b> is the property code string for which to return the enumerated value (e.g. "T","P","D","XMASS","BETA","Q","SI", etc.).
+                    </p>
+                </li>
+            </ul>
+            <br><br>
+
+            <a name="SETPATH"></a>
+            <p><b class="hmath">rp_SETPATH(hPth)</b> sets an alternate location for the /FLUIDS and /MIXTURES folder if looking for fluids/mixtures 
+                in a location other than just below the REFPROP installation directory.  
+            </p>
+            <p>Argument:</p>
+            <ul type="disc">
+                <li>
+                    <p>
+                        <b class="hmath">hPth</b> is a string containing the full path to the parent directory just above the desired 
+                        /FLUIDS and /MIXTURES directories.  If an actual fluid or mixture file is selected, the path will be truncated
+                        to just the parent directory and set internally as the location to search for fluids and mixtures.  One may use 
+                        Mathcad's Data Filename picker to browse to and select an actual fluid file (.fld) in this case.
+                    </p>
+                </li>
+            </ul>
+            <br><br>
+
+        </blockquote>
+        
+        <hr align="center" width="100%" SIZE="2">
+    </body>
+</html>

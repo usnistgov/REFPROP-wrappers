@@ -6,7 +6,7 @@ LRESULT rp_Wtrho(
 {
     double tval, dval;
     double P, U, H, S, Cv, Cp, W, hjt;
-    int ierr;
+    ierr = 0;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)

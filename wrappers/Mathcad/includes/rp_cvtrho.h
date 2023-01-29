@@ -5,7 +5,7 @@ LRESULT rp_Cvtrho(
     LPCCOMPLEXSCALAR    rho   )
 {
     double tval,dval,cvval,cpval;
-    int ierr;
+    ierr = 0;
 
     ierr = cSetup(fluid->str);
     if (ierr > 0)

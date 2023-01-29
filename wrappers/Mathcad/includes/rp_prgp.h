@@ -5,7 +5,7 @@ LRESULT rp_PRgp(
 {
     char herr[255];
     int kph = 2;       //  kph = 1 (saturated liquid conc.); kph = 2 (saturated vapor conc.)
-    int ierr;
+    ierr = 0;
     double psat, tsat, rhol, rhov, xliq[20], xvap[20];
     double Cv, Cp, mu, cond;
 

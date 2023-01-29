@@ -2,23 +2,23 @@
         "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
     <head>
-        <title>NIST RefProp Function Help</title>
+        <title>NIST RefProp Legacy API Function Help</title>
         <meta http-equiv="content-type" content="text/html; charset=windows-1252">
         <LINK href="../Help/Main_topic_ns.css" rel="stylesheet"></head>
     <body>
         <table>
             <tr style="HEIGHT: 94px">
                 <td vAlign="top">
-                    <h1><big>NIST RefProp Functions</big></h1>
+                    <h1><big>NIST RefProp Legacy API Functions</big></h1>
                 </td>
             </tr>
         </table>
-        <p>The NIST RefProp Add-in functions make calls to th NIST RefProp fluid properties
+        <p>The NIST RefProp Add-in Custom Functions make calls to th NIST RefProp fluid properties
             DLL. All RefProp functions are prefixed with <b>rp_</b> followed by the function
             name. Please note that a <b class="hmath">fluid string</b> must be passed as
-            the first parameter to any fluid property functions. A Description of the
+            the first parameter to any fluid property functions. A description of the
             functions follows below.</p>
-        <h5><big>Fluid Setup</big></h5>
+        <h2><big>Fluid Setup</big></h2>
         <blockquote> <a name="setup"></a>
             <p><b class="hmath">"fluid_string"</b> - All property functions are called with a
                 fluid string as the first parameter.
@@ -39,7 +39,7 @@
             <ul type="disc">
                 <li>
                     <p><b class="hmath">"fluid_string"</b> specifies the fluid (or pseudo fluid or mixture) file
-                        to be loaded from the "<b>fluids\</b>" (or "<b>mixtures\</b>") directory.  REFPROP 9.1 calls must include this relative prefix in the "fluid_string"; REFPROP 10 or later can <b><i>not</i></b> include this relative path as it is determined automatically. It can (optionally) end with an extension of "<b>.fld</b>".  If the suffix is omitted, RefProp will assume an extension of ".fld" and look for the fluid in the "<b>fluids\</b>" directory. If the fluid is a pseudo-pur fluid, the extension "<b>.ppf</b>" must be supplied.  Predefined mixtures MUST include the <b>"mixtures\"</b> prefix (<i>REFPROP 9.1 only</i>) and the "<b>.mix</b>" extension.
+                        to be loaded from the "<b>fluids\</b>" (or "<b>mixtures\</b>") directory.  REFPROP 9.1 calls must include this relative prefix in the "fluid_string"; REFPROP 10 or later can <b><i>not</i></b> include this relative path as it is determined automatically. It can (optionally) end with an extension of "<b>.fld</b>".  If the suffix is omitted, RefProp will assume an extension of ".fld" and look for the fluid in the "<b>fluids\</b>" directory. If the fluid is a pseudo-pure fluid, the extension "<b>.ppf</b>" must be supplied.  Predefined mixtures MUST include the <b>"mixtures\"</b> prefix (<i>REFPROP 9.1 only</i>) and the "<b>.mix</b>" extension.
                         <br>
                         <br>
                         <i>e.g. to load the properties for HELIUM, define a variable such as: </i><br>
@@ -80,7 +80,7 @@
             </ul>
             <br><br>
         </blockquote>
-        <h5><big>Ad-Hoc Mixtures Setup</big></h5>
+        <h2><big>Ad-Hoc Mixtures Setup</big></h2>
         <blockquote>
             <a name="Mixtures"></a>
             <p>
@@ -104,7 +104,7 @@
                 <br />
             </p>
         </blockquote>
-        <h5><big>Information Functions</big></h5>
+        <h2><big>Information Functions</big></h2>
         <blockquote> <a name="setup"></a>
 
             <a name="extrapolate"></a>
@@ -209,7 +209,7 @@
                 </li>
             </ul>
         </blockquote>
-        <h5><big>Fluid Constant Functions</big></h5>
+        <h2><big>Fluid Constant Functions</big></h2>
         <blockquote><a name="wmol"></a>
             <p><b class="hmath">rp_wmol(flstr,icomp)</b> returns the current fluid molecular
                 weight [gm/mol] or [kg/kmol].</p>
@@ -348,7 +348,7 @@
                 </li>
             </ul>
         </blockquote>
-        <h5><big>Saturation Curve Functions</big></h5>
+        <h2><big>Saturation Curve Functions</big></h2>
         <blockquote>
             <a name="tsatp"></a>
             <p><b class="hmath">rp_tsatp(flstr,p)</b> returns the saturation temperature [K] of
@@ -439,7 +439,7 @@
                 </li>
             </ul>
         </blockquote><a name="fluid_props"></a>
-        <h5><big>Fluid Property Functions</big></h5>
+        <h2><big>Fluid Property Functions</big></h2>
         <p>The fluid property functions all follow a standard naming convention.</p>
         <P>All functions begin with <b class="hmath">rp_</b> followed by the property
             symbol (<b class="hmath">rho, h, u, s, Cp, Cv, w, k, mu</b>).</P>
@@ -608,7 +608,7 @@
         <p><sup>*</sup>Surface Tension is only a function of temperature, and only valid at
             the liquid/vapor interface along the saturation curve (ie. Ttrip &lt; T &lt;
             Tcrit)</p>
-        <h5><big>Reverse Functions</big></h5>
+        <h2><big>Reverse Functions</big></h2>
         <p>Standard engineering calculations sometimes require the reverse calculation of
             temperature or pressure in terms of other thermodynamic properties. Only the
             two most common functions are implemented here. These functions perform an

@@ -5,7 +5,7 @@ LRESULT rp_Tcrit(
 {
     char herr[255];
     unsigned int lherr = 255;
-    int ierr = 0;
+    ierr = 0;
     int icomp = 1;
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas; 
 

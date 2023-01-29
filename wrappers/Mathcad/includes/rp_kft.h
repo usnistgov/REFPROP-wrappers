@@ -5,7 +5,7 @@ LRESULT rp_Kft(
 {
     char herr[255];
     int kph = 1;   // looking for saturated liquid (bubble point)
-    int ierr;
+    ierr = 0;
     double psat, tsat, rhol, rhov, xliq[20], xvap[20];
     double mu, cond;
 
