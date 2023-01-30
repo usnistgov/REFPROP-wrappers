@@ -1,5 +1,8 @@
+(* ::Package:: *)
+
 (* ::Section:: *)
 (* Wolfram Language Package *)
+
 
 BeginPackage["RefpropLink`",{"NETLink`", "RefpropLink`RefpropUnits`"}]
 Unprotect @@ Names["RepropLink`*"];
@@ -188,8 +191,11 @@ Begin["`Private`"]
 
 InstallNET[];
 
+
+
 (* ::Section:: *)
 (* Initialization *)
+
 
 (***************************************************************************************)
 (*                            Package initialization                                   *)
@@ -307,18 +313,37 @@ If[ $VersionNumber == 12.2,                     (* ONLY if Mathematica version 1
 ];                                              (*   for all calls of ValueQ           *)
 
 (***************************************************************************************)
+(*               Mathematica 13.2 fix for R ("DegreesRankine") Units                   *)
+(* This is a workaround provided by Wolfram.  It appears that a change in the delta    *)
+(* temperature units causes "DegreesRankine" to be handled as a non-absolute quantity. *)
+(* For version 13.2, the legacy behavior in the code can be activated by with the      *)
+(* command below that sets R as an absolute temperature type.                          *)
+(* A permanent fix should be available in 13.3 and this workaround won't be necessary. *)
+(***************************************************************************************)
+If[ $VersionNumber == 13.2,                     (* ONLY if Mathematica version 12.2     *)
+    QuantityUnits`Private`hasNonZeroTempUnitQ["DegreesRankine"]=True;  (*  Workaround  *)
+];                                              (* Set R as absolute quantity          *)
+
+
+(***************************************************************************************)
 (*                            Package initialization Complete                          *)
 (***************************************************************************************)
 
+
+
 (* ::Section:: *)
 (* Legacy API *)
+
 
 (***************************************************************************************)
 (*                   Define Legacy (Pre-RefProp 10) API Functions                      *)
 (***************************************************************************************)
 
+
+
 (* ::SubSection:: *)
 (* Setup Functions *)
+
 
 $hExts = {"*.FLD", "*.PPF"};
 chkFLD[a_String] := Module[{},
@@ -494,6 +519,7 @@ setref[hRef_String:"???",x0_List:{1.0},h0_:0,s0_:0,T0_:0,P0_:0]:=
 (* ::SubSection:: *)
 (* Utility Functions *)
 
+
 (*************************************************************************************************************************)
 (* Utility Functions                                                                                                     *)
 (*************************************************************************************************************************)
@@ -641,8 +667,11 @@ purefld[icomp_Integer:0]:=
     ]
 
     
+
+
 (* ::SubSection:: *)
 (* Information *)
+
 
 (*************************************************************************************************************************)
 (* Fluid Information Functions                                                                                           *)
@@ -776,8 +805,11 @@ limits[htype_String:"EOS",                        (* Overloaded limits function:
 
 SetAttributes[{info, wmoli, name, longname, casn}, {Listable}];  (* Can be made Listable since don't take a z List.      *)
 
+
+
 (* ::SubSection:: *)
 (* Single Phase *)
+
 
 (*************************************************************************************************************************)
 (* Single Phase Property Functions                                                                                       *)
@@ -903,8 +935,11 @@ cvcp[t_,d_,z_List:{1.0}]:=
         ]
     ]
 
+
+
 (* ::SubSection:: *)
 (* Saturation *)
+
 
 (*************************************************************************************************************************)
 (* Saturation State Functions                                                                                            *)
@@ -1162,8 +1197,11 @@ sath[h_,z_List:{1.0},kph_Integer:0]:=
         ]
     ]
 
+
+
 (* ::Subsection:: *)
 (* 2-Phase *)
+
 
 (*************************************************************************************************************************)
 (* General Flash Calculations                                                                                            *)
@@ -1569,6 +1607,7 @@ psflsh[P_,S_,z_List:{1.0}]:=
 (* ::SubSection:: *)
 (* Transport Props *)
 
+
 (****************************************************************************)
 (* Transport Properties                                                     *)
 (****************************************************************************)
@@ -1683,8 +1722,11 @@ fugacity[t_,d_,z_List:{1.0}]:=
         ]
     ]
 
+
+
 (* ::SubSection:: *)
 (* MELT/SUBLIMATION *)
+
 
 (****************************************************************************)
 (* MELTING and SUBLIMATION curves                                           *)
@@ -1768,8 +1810,11 @@ sublt[t_,z_List:{1.0}]:=                                                 (* Calc
         ]
    ]
 
+
+
 (* ::SubSection:: *)
 (* Compressibility *)
+
 
 (****************************************************************************)
 (* Calculate the virial coefficients as a function of temperature and comp. *)
@@ -1809,8 +1854,11 @@ virial[t_,z_List:{1.0}]:=
     ]
     
 
+
+
 (* ::Section:: *)
 (* REFPROP10 API *)
+
 
 (* Get REFPROP Version Information                                                                               *)
 (*                                                                                                               *)
@@ -2102,8 +2150,11 @@ RefProp[ hFld_String:" ", hIn_String, hOut_String, a_, b_, z_List:{1.0}, Options
 (*                                   End REFPROP 10 API Function Definitions                                     *)
 (*****************************************************************************************************************)
 
+
+
 (* ::Section:: *)
 (* Package Postscript *)
+
 
 End[]           (* END Private Definitions *)
 
