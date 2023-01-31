@@ -8,7 +8,7 @@ LRESULT rp_Sph(
     double pval, hval, sval, dval, tval;
     double pc, tc, Dc, hc;
     double tsat, rhol, rhov, xliq[20], xvap[20], hliq, hvap, sliq, svap;
-    int ierr;
+    ierr = 0;
     int kph = 1;
 
     ierr = cSetup(fluid->str);

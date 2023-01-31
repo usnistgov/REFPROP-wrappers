@@ -3,7 +3,7 @@ LRESULT rp_Rgas(
     LPCMCSTRING       fluid,
     LPCCOMPLEXSCALAR   comp   )
 {
-    int ierr = 0;
+    ierr = 0;
     int icomp = 1;
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas; 
 

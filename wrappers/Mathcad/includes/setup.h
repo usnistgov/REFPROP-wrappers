@@ -74,12 +74,12 @@ std::string extract_fractions(const std::string &fluid_string, std::vector<doubl
 
 int cSetup(std::string strFluid)
 {
-    int ierr = 0;
+    ierr = 0;
     double comp_sum = 0;
     char herr[errormessagelength], hhmx[] = "HMX.BNC", href[] = "DEF", hfld[componentstringlength];
     char htype[] = "EOS";
 
-    if (strFluid != LastFluid)
+    if ((upper(strFluid) != LastFluid) && (strFluid != ""))
     {
 
         x[0] = 1.0;
@@ -227,7 +227,7 @@ int cSetup(std::string strFluid)
 
             if (ierr > 0) return SATSPLN_FAILED;
         }
-        LastFluid = strFluid;
+        LastFluid = upper(strFluid);
 
     }
     return ierr;           // return the error flag from SETUP0

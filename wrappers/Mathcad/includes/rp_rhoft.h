@@ -6,7 +6,7 @@ LRESULT rp_Rhoft(
     char herr[256] = "OK\0";
     unsigned int lenherr = 3;
     int kph = 1;   // looking for saturated liquid (bubble point)
-    int ierr;
+    ierr = 0;
     double psat,tsat,rhol,rhov,xliq[20],xvap[20];
 
     ierr = cSetup(fluid->str);

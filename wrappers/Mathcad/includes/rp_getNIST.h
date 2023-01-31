@@ -7,7 +7,7 @@ LRESULT rp_GetNIST(
         return MAKELRESULT(MUST_BE_REAL, 2);
     // Return string should already be stored when REFPROP DLL is loaded...
     std::string NISTVers = "NIST RefProp Library: Version " + RPVersion_loaded;  // Extract the DLL version into string NISTVers
-    char * c = MathcadAllocate((unsigned int)NISTVers.size() + 1u);           // Create a c-string (pointer) with same size as s
+    char * c = MathcadAllocate((unsigned int)NISTVers.size() + 1u);              // Create a c-string (pointer) with same size as s
                                                                                  // This process avoids the const-cast type which would result from,
                                                                                  //     instead, converting the string using s.c_str()
     std::copy(NISTVers.begin(), NISTVers.end(), c);                              // Copy s into c.

@@ -5,7 +5,7 @@ LRESULT rp_Zft(
 {
     char herr[255];
     int kph = 1;       //  kph = 1 (saturated liquid conc.); kph = 2 (saturated vapor conc.)  
-    int ierr;
+    ierr = 0;
     int icomp = 1;
     double psat,tsat,rhol,rhov,xliq[20],xvap[20];
     double tc, pc, Dc, Rgas, ttrip, tnbpt, Zc, acf, dip;

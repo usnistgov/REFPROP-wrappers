@@ -10,7 +10,8 @@ LRESULT rp_Ktp(
     double Dl, Dv, Q, U, H, S, Cv, Cp, W, Pdum, hjt;
     double mu, cond;
     double xl[20], xv[20];
-    int ierr = 0, icomp = 1, kph = 1, kguess = 0;
+    ierr = 0;
+    int icomp = 1, kph = 1, kguess = 0;
     char herr[255];
     char htype[] = "TCX";
 
@@ -56,9 +57,6 @@ LRESULT rp_Ktp(
     }
 
     // If above critical pressure (Liquid) use TPRHO instead of TPFLSH
-    // TODO: Not sure what happens if above Tcrit.  Is this vapor or liquid?  Which flag to set?
-    //       May need to adjust initial guess depending on location.
-    //       Extend this logic to all other functions of TP once it is working.
     if (tval > tc) kph = 2;
     if (pval > pc) kph = 1;
     if ((pval > pc) || (tval > tc))

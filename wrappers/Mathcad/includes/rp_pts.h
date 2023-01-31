@@ -8,7 +8,7 @@ LRESULT rp_Pts(
     double pval,sval,Dval,tval,qval;
     double rhol, rhov, xliq[20], xvap[20];
     double U, H, Cv, Cp, W;
-    int ierr;
+    ierr = 0;
     int kr = 1;   // No dual roots for entropy functions
 
     ierr = cSetup(fluid->str);

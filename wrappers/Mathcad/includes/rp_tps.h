@@ -8,7 +8,7 @@ LRESULT rp_Tps(
     double pval,sval,dval,tval;
     double pc,tc,Dc,sc;
     double tsat,rhol,rhov,xliq[20],xvap[20],sliq,svap;
-    int ierr;
+    ierr = 0;
     int kph = 1;               // initialize to liquid
 
     ierr = cSetup(fluid->str);

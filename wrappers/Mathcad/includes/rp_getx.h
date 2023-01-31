@@ -2,7 +2,7 @@ LRESULT rp_GETX(
     LPCOMPLEXARRAY     ret,
     LPCMCSTRING       fluid  )
 {
-    int ierr = 0;
+    ierr = 0;
     int cols = 1;
 
     std::string fl = fluid->str;
@@ -14,7 +14,7 @@ LRESULT rp_GETX(
             return MAKELRESULT(ierr,1);
     }
 
-    // allocate memory for T, P, and D values
+    // allocate memory for x component values
     if (!MathcadArrayAllocate(ret,                 // allocate memory for ret array
         ncomp,                                     // number of rows, one for each component
         cols,                                      // number of columns (1)

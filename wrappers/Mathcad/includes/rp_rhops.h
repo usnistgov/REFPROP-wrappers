@@ -8,7 +8,7 @@ LRESULT rp_Rhops(
     double pval, sval, dval, tval;
     double tc, pc, Dc, sc;
     double tsat, rhol, rhov, xliq[20], xvap[20], sliq, svap, vliq, vvap;
-    int ierr;
+    ierr = 0;
     int kph = 1;
 
     ierr = cSetup(fluid->str);

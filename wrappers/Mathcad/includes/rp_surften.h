@@ -5,7 +5,7 @@ LRESULT rp_Surften(
 {
     char herr[255];
     int kph = 1;
-    int ierr;
+    ierr = 0;
     double psat,tsat,rhol,rhov,xliq[20],xvap[20],sigma;
 
     ierr = cSetup(fluid->str);

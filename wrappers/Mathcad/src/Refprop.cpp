@@ -32,6 +32,25 @@
 //                    2) Code maintenance (replace tabs with spaces - all files)
 //                    2) Update README and function documentation HTML file
 //                    3) Resolve all Level 4 Errors
+//   9/08/22    JPH   Added derived quantity functions to Legacy API calls (v2.0.3)
+//                    1) Added Prandtl Number (rp_prxx), Cp/Cv ratio (rp_gammaxx), 
+//                       Thermal Expansion Coeff. (rp_betaxx), and compressibility (rp_zxx)
+//   9/19/22    JPH   Mixture enhancements added to Legacy API calls (2.0.4)
+//                    1) Added saturated liquid & vapor temperature functions (rp_tsatpf, rp_tsatpg)
+//                    2) Added saturated liquid & vapor pressure functions (rp_psattf, rp_psattg)
+//                    3) Added Cricondentherm & Cricondenbar functions (rp_maxX(hFld,X = "T"|"P")
+//                    4) Return composition (only), with new function, rp_getx(hFld)
+//                    5) Set composition (only), with new function, rp_setx(z[20])
+//                    6) Update Refprop_Units include sheet to handle above functions
+//  10/XX/22    JPH   REFPROP 10 Enhancements (2.1.0)
+//                    1) ADD all REFPROP 10 High-Level API Calls
+//                    2) Update Refprop_Units include sheet to include:
+//                       - Single REFPROP user function that returns values, arrays, and strings as needed
+//                         and applies units to return values/arrays
+//                       - Ancillary string handling functions
+//                    3) Update Mathcad Prime documentation PDF
+//                    4) Update README.md for REFPROP10 High-Level API
+//                    5) Update Refprop.htm web page with new function listings
 //
 
 #ifdef _MSC_VER
@@ -68,7 +87,7 @@ enum { MC_STRING = STRING }; // Substitute enumeration variable MC_STRING for ST
 #include <fstream>
 
 // RefProp Mathcad Add-in Version
-std::string rpVersion = "2.0.4";       // Mathcad Add-in version number
+std::string rpVersion = "2.1.0";       // Mathcad Add-in version number
 
 // REFPROP major/minor/patch version numbers needed for function limitations and error codes
 int vMajor, vMinor, vPatch;            // Will get assigned when REFPROP loads
@@ -84,52 +103,86 @@ enum EC {MUST_BE_REAL = 1, INSUFFICIENT_MEMORY, INTERRUPTED,                  //
          D_OUT_OF_RANGE, BAD_INPUT, INVALID_FLAG, X_SUM_NONUNITY,
          NO_UPPER_ROOT, TOO_MANY_COMPONENTS, COMPONENT_COUNT, BAD_MIX_STRING,
          BAD_MOLE_FRACTION, INDIV_COMPONENT, SATSPLN_FAILED, 
-         NO_SPLINES, MAX_T_UNKNOWN, MAX_P_UNKNOWN,
-         INVALID_CCTYPE, UNKNOWN,
+         NO_SPLINES, MAX_T_UNKNOWN, MAX_P_UNKNOWN, INVALID_CCTYPE, 
+         // HIGH-LEVEL API Errors
+         NOT_IMPLEMENTED, BAD_FLAG, BAD_ENUM, BAD_FILE, ONLY_SINGLE, NO_CHARS,
+         ONLY_CHARS, MIXED_DELS, BAD_HIN, BAD_HOUT, BAD_HOUT_X, DLL_REQ, 
+         UNITNUMB_REQ, VECTOR_REQ,
+         UNKNOWN10,                                                           // Unknown REFPROP10 error for anything not trapped
+         // General fall through
+         UNKNOWN,                                                             // Unknown error for anything not trapped
          NUMBER_OF_ERRORS};                                                   // Dummy code for Error Count
 
 // This is the list of errors that can be output if any of the functions fails.
 // This table is registered below through the DLLEntryPoint
+//       NOTE that this is the correct casting format for C++11, in which the automatic
+//       type casting of a string literal (const char) to a character array (char*) is not only
+//       deprecated, but removed (VS 2019 and forward).
+//
 char * RPErrorMessageTable[NUMBER_OF_ERRORS] =
 {
-    (char *)("Argument must be real"),                      //  MUST_BE_REAL
-    (char *)("Insufficient memory"),                        //  INSUFFICIENT_MEMORY
-    (char *)("Interrupted"),                                //  INTERRUPTED
-    (char *)("Temperature out of Range"),                   //  T_OUT_OF_RANGE
-    (char *)("Pressure out of Range"),                      //  P_OUT_OF_RANGE
-    (char *)("Saturated Conditions"),                       //  SATURATED
-    (char *)("Fluid/Mixture not found"),                    //  FLUID_NOT_FOUND
-    (char *)("Pure Fluids or Predefined Mixtures Only!"),   //  NO_MIX
-    (char *)("Mixture must be loaded."),                    //  ONLY_MIX
-    (char *)("Algorithm did not converge"),                 //  UNCONVERGED
-    (char *)("Invalid model; must be \"EOS\". \"ETA\", or \"TCX\""),  //  INVALID_MODEL
-    (char *)("Undefined Component Number"),                 //  BAD_COMPONENT
-    (char *)("No transport equations for this fluid"),      //  NO_TRANSPORTPORT
-    (char *)("At critical point; k is infinite"),           //  INFINITE_K
-    (char *)("Unknown Surface Tension model"),              //  NO_SURFTEN
-    (char *)("Enthalpy out of range"),                      //  H_OUT_OF_RANGE
-    (char *)("Entropy out of range"),                       //  S_OUT_OF_RANGE
-    (char *)("Density out of range"),                       //  D_OUT_OF_RANGE
-    (char *)("Invalid Input; Must be 0 or 1"),              //  BAD_INPUT
-    (char *)("Invalid Phase Flag; Must be 1 or 2"),         //  INVALID_FLAG
-    (char *)("Mixture fractions don't sum to unity"),       //  X_SUM_NONUNITY
-    (char *)("Upper root not supported when T < Tc"),       //  NO_UPPER_ROOT - no longer used
-    (char *)("Too many components. Max is 20."),            //  TOO_MANY_COMPONENTS
-    (char *)("Input array must match number of components."),            // COMPONENT_COUNT
-    (char *)("Bad mixture string format: c1[mf1]&c2[mf2]...&cX[mfX]"),   // BAD_MIX_STRING
-    (char *)("Mole fraction can't be converted"),           //  BAD_MOLE_FRACTION
-    (char *)("Must specify individual component number"),   //  INDIV_COMPONENT
-    (char *)("Saturation routine failed for mixture"),      //  SATSPLN_FAILED
-    (char *)("Maximum temperature point not known"),        //  MAX_T_UNKNOWN
-    (char *)("Maximum pressure point not known"),           //  MAX_P_UNKNOWN
-    (char *)("X must be \"T\" (Cricondentherm) or \"P\" (Cricondenbar)"),      //  INVALID_CCTYPE
-    (char *)("Unknown Error"),                              //  UNKNOWN
-    (char *)("Error Count - Not Used")                      //  NUMBER_OF_ERRORS
+    (char *)("Argument must be real"),                                            //  MUST_BE_REAL
+    (char *)("Insufficient memory"),                                              //  INSUFFICIENT_MEMORY
+    (char *)("Interrupted"),                                                      //  INTERRUPTED
+    (char *)("Temperature out of Range"),                                         //  T_OUT_OF_RANGE
+    (char *)("Pressure out of Range"),                                            //  P_OUT_OF_RANGE
+    (char *)("Saturated Conditions"),                                             //  SATURATED
+    (char *)("Fluid/Mixture not found"),                                          //  FLUID_NOT_FOUND
+    (char *)("Pure Fluids or Predefined Mixtures Only!"),                         //  NO_MIX
+    (char *)("Mixture must be loaded"),                                           //  ONLY_MIX
+    (char *)("Algorithm did not converge"),                                       //  UNCONVERGED
+    (char *)("Invalid model; must be \"EOS\". \"ETA\"),or \"TCX\""),              //  INVALID_MODEL
+    (char *)("Undefined Component Number"),                                       //  BAD_COMPONENT
+    (char *)("No transport equations for this fluid"),                            //  NO_TRANSPORT
+    (char *)("At critical point; k is infinite"),                                 //  INFINITE_K
+    (char *)("Unknown Surface Tension model"),                                    //  NO_SURFTEN
+    (char *)("Enthalpy out of range"),                                            //  H_OUT_OF_RANGE
+    (char *)("Entropy out of range"),                                             //  S_OUT_OF_RANGE
+    (char *)("Density out of range"),                                             //  D_OUT_OF_RANGE
+    (char *)("Invalid Input; Must be 0 or 1"),                                    //  BAD_INPUT
+    (char *)("Invalid Phase Flag; Must be 1 or 2"),                               //  INVALID_FLAG
+    (char *)("Mixture fractions don't sum to unity"),                             //  X_SUM_NONUNITY
+    (char *)("Upper root not supported when T < Tc"),                             //  NO_UPPER_ROOT - no longer used
+    (char *)("Too many components. Max is 20"),                                   //  TOO_MANY_COMPONENTS
+    (char *)("Input array must match number of components"),                      //  COMPONENT_COUNT
+    (char *)("Bad mixture string format: c1[mf1]&c2[mf2]...&cX[mfX]"),            //  BAD_MIX_STRING
+    (char *)("Mole fraction can't be converted"),                                 //  BAD_MOLE_FRACTION
+    (char *)("Must specify individual component number"),                         //  INDIV_COMPONENT
+    (char *)("Saturation routine failed for mixture"),                            //  SATSPLN_FAILED
+    (char *)("No saturation splines exist"),                                      //  NO_SPLINES
+    (char *)("Maximum temperature point not known"),                              //  MAX_T_UNKNOWN
+    (char *)("Maximum pressure point not known"),                                 //  MAX_P_UNKNOWN
+    (char *)("X must be \"T\" (Cricondentherm) or \"P\" (Cricondenbar)"),         //  INVALID_CCTYPE
+    (char *)("Function not implemented before REFPROP 10"),                       //  NOT_IMPLEMENTED   (REFPROP 10 not loaded)
+    (char *)("Flag string not valid"),                                            //  BAD_FLAG          (REFPROP 10 FLAGdll Error)
+    (char *)("Unrecognized Enumeration string"),                                  //  BAD_ENUM          (REFPROP 10 GETENUMdll Error)
+    (char *)("File string not valid"),                                            //  BAD_FILE          (REFPROP 10 SETPATHdll Error)
+    (char *)("Only single outputs from rp REFPROP1. Call rp REFPROP"),            //  ONLY_SINGLE       (REFPROP 10 REFPROP1dll Error)
+    (char *)("Character strings cannot be returned; use rp REFPROPc"),            //  NO_CHARS          (REFPROP 10 REFPROP1dll Error)
+    (char *)("Only single Character strings can be returned"),                    //  ONLY_CHARS        (REFPROP 10 Error)
+    (char *)("Can't use mixed delimiters"),                                       //  MIXED_DELS        (REFPROP 10 Error)
+    (char *)("Invalid hIn, state-point string"),                                  //  BAD_HIN           (REFPROP 10 REFPROPdll Error)
+    (char *)("Invalid hOut property request"),                                    //  BAD_HOUT          (REFPROP 10 REFPROPdll Error)
+    (char *)("Invalid hOut property X; use XMOLE or XMASS"),                      //  BAD_HOUT_X        (REFPROP 10 REFPROPdll Error)
+    (char *)("Request DLL# alone with rp REFPROP, or as string with rp REFPROPc"),//  DLL_REQ           (REFPROP 10 Error)
+    (char *)("Must be a one column or one row vector"),                           //  VECTOR_REQ        (REFPROP 10 Error for ALLPROPS0)
+    (char *)("Request UNITNUMB alone with rp REFPROP"),                           //  UNITNUMB_REQ      (REFPROP 10 Error)
+    (char *)("Error - Call rp ERRMSG to retrieve"),                               //  UNKNOWN10         (REFPROP 10 Error)
+    (char *)("Unknown Error"),                                                    //  UNKNOWN
+    (char *)("Error Count - Not Used")                                            //  NUMBER_OF_ERRORS
 };
 
+// Global definitions maintained by the DLL while it is running
 double x[20] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  // initialize x[] for pure fluid
 int ncomp = 1;                        // initialize ncomp to 1 for pure fluid
 int extr  = 0;                        // initially disallow extrapolation to higher temps
+// REFPROP 10 global parameters
+int iUnits =12;                       // Units code - to be set below on REFPROP 10 initialization
+int iMass = 0;                        // Initialize iMass = 0 for mole fractions (default)
+int iFlag = 1;                        // Always call SATSPLN for mixtures
+int ierr = 0;                         // make ierr global to the DLL for retrieval of last error
+int NO_WARNINGS = 0;                  // Always pop up warnings in Message Box (Can be suppressed with "No Warnings" FLAG)
+
 // These parameters are set with a call to LIMITS when calling SETUP and can be used in any other calls
 double Tmin;                          // Triple point temperature
 double Tmax;                          // Max Temperature
@@ -137,12 +190,24 @@ double Dmax;                          // Max Density
 double Pmax;                          // Max Pressure
 double wmm;                           // Molar Mass
 std::string err;                      // error string from REFPROP load DLL
+std::string msg;                      // Message string for Debugging Pop-Ups
 std::string MixFileName;              // Mixture File Name Storage
 std::string LastFluid = "";           // Mixture File Name Storage
 std::string fluidPath;
 char MixName[namelengthlong];         // Mixture Name from 1st line of loaded mixture file.
                                       // REFPROP 10 retrieves this, but earlier versions did not.
 
+// Multi-output hOut strings for REFPROP 10 calls.
+// This definition is used over and over again and so is made global to the DLL for efficiency
+std::string multiOut = "F FC CPOT FIJMIX TCRIT PCRIT DCRIT TCTRUE DCTRUE TTRP PTRP DTRP TNBP REOS MM ACF DIPOLE TREF DREF HREF SREF ETA0 ETAB2 ETAR ETAC TCX0 TCXR TCXC X XMOLE XMASS XLIQ XVAP XMOLELIQ XMOLEVAP XMASSLIQ XMASSVAP";
+std::vector<std::string> mOutVec = strsplit(multiOut, ' ');               // Split multiOut string in to vector of individual strings
+// End of multiOut and mOutVec definition
+
+// Char-output hOut strings for REFPROP 10 calls.
+// This definition is used several times and so is made global to the DLL for efficiency
+std::string charOut = "ALTID CAS# CHEMFORM SYNONYM FAMILY FLDNAME HASH INCHI INCHIKEY LONGNAME SAFETY NAME UNNUMBER DOI_EOS DOI_VIS DOI_TCX DOI_STN DOI_DIE DOI_MLT DOI_SBL WEB_EOS WEB_VIS WEB_TCX WEB_STN WEB_DIE WEB_MLT WEB_SBL REFSTATE GWP ODP FDIR UNITSTRING UNITUSER UNITUSER2 PHASE FULLCHEMFORM LIQUIDFLUIDSTRING VAPORFLUIDSTRING";
+std::vector<std::string> cOutVec = strsplit(charOut, ' ');                // Split charOut string in to vector of individual strings
+// End of charOut and cOutVec definition
 
 // Include function stubs here.
 // Each function is in its own file (ie. rp_setup.h)
@@ -265,6 +330,14 @@ char MixName[namelengthlong];         // Mixture Name from 1st line of loaded mi
 #include "rp_cvtrho.h"
 #include "rp_wtrho.h"
 #include "rp_strho.h"
+// REFPROP 10 Functions
+#include "rp_FLAGS.h"
+#include "rp_ERRMSG.h"
+#include "rp_GETENUM.h"
+#include "rp_SETFLUIDS.h"
+#include "rp_REFPROP.h"      // Contains all three call variations
+#include "RPMassUnits.h"     // Sets mass-based units for REFPROP 10 in "USER2" to modified "MASS SI"
+
 
 #ifdef _WIN32
 extern "C" BOOL WINAPI _CRT_INIT(HINSTANCE hinstDLL, DWORD dwReason, LPVOID lpReserved);
@@ -326,17 +399,32 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
 
             // Use this pop-up window for debugging if needed
             //===============================================================================
-            //std::string msg;
             // msg = "The NIST RefProp DLL was found.\n\nVersion: " + RPVersion_loaded;
             // msg.append("\n\nPath = ");
             // msg.append(RPPath_loaded);
             // MessageBox(hwndDlg, msg.c_str(), "NIST RefProp Add-In", 0);
 
             // Check that at least REFPROP 9.1.1 is installed before loading the DLL
-            if ((vMajor < 9) || ((vMajor == 9) && (vMinor != 1) && (vPatch != 1)))
+            // There are some version out there >9.1.1 but <10.0.0
+            if ((vMajor < 9) || ((vMajor == 9) && (vMinor < 1)) || ((vMajor == 9) && (vMinor && 1) && (vPatch < 1)))
             {
+                msg = "Add-in requires later version of REFPROP.\n\nMake sure that NIST RefProp 9.1.1 or later is installed.";
+                msg.append("\n\nNIST RefProp DLL version found: " + RPVersion_loaded);
                 MessageBox(hwndDlg, "Add-in requires later version of REFPROP.\n\nMake sure that NIST RefProp 9.1.1 or later is installed.", "NIST RefProp Add-In", 0);
                 break;
+            }
+
+            if (vMajor >= 10)
+            {
+                // MessageBox(hwndDlg, "REFPROP version 10 found.\nSetting USER2 to modified MASS SI Units.", "NIST RefProp Add-In", 0);
+
+                RPMassUnits();
+
+                if (ierr != 0)
+                {
+                    MessageBox(hwndDlg, "Failed to Set USER2 to modified MASS SI Units.", "NIST RefProp Add-In", 0);
+                    break;
+                }
             }
         }
         else
@@ -360,13 +448,16 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
         if ( CreateUserFunction( hDLL, &rp_getvers ) == NULL )
             break;
 
-        if (CreateUserFunction(hDLL, &rp_getNIST) == NULL)
+        if ( CreateUserFunction( hDLL, &rp_getNIST ) == NULL )
             break;
 
-        if (CreateUserFunction(hDLL, &rp_getRPnum) == NULL)
+        if ( CreateUserFunction( hDLL, &rp_getRPnum ) == NULL )
             break;
 
         if ( CreateUserFunction( hDLL, &rp_getpath ) == NULL )
+            break;
+
+        if ( CreateUserFunction( hDLL, &rp_getDLL ) == NULL )
             break;
 
         if ( CreateUserFunction( hDLL, &rp_getname ) == NULL )
@@ -378,10 +469,10 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
         if ( CreateUserFunction( hDLL, &rp_extrap ) == NULL )
             break;
 
-        if (CreateUserFunction(hDLL, &rp_getx) == NULL)
+        if ( CreateUserFunction(hDLL, &rp_getx ) == NULL )
             break;
 
-        if (CreateUserFunction(hDLL, &rp_setx) == NULL)
+        if ( CreateUserFunction(hDLL, &rp_setx ) == NULL )
             break;
 
         // Gas and Fluid Constants
@@ -710,7 +801,55 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
         if ( CreateUserFunction( hDLL, &rp_strho ) == NULL )
             break;
 
+        // REFPROP 10 Functions
+        // =============================================================================
+        if (vMajor >= 10)        // Only register the functions below if REFPROP 10+ is found
+        {
+            if ( CreateUserFunction( hDLL, &rp_ERRMSG ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_FLAGS ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_GETENUM ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_SETPATH ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_REFPROP1 ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_REFPROP ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_REFPROPc ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_SETFLUIDS ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, & rp_SETMIXTURE ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_UNITS ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_GetDel ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_IsChar ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_IsMulti ) == NULL )
+                break;
+
+            if ( CreateUserFunction( hDLL, &rp_ALLPROPS0 ) == NULL )
+                break;
+        }
+
         break;
+
     }
 
     case DLL_THREAD_ATTACH:        // A new thread is being created in the current process.
@@ -720,11 +859,14 @@ extern "C" BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpR
         if (!_CRT_INIT(hDLL, dwReason, lpReserved))
         {
             unload_REFPROP(err);
-            Sleep(1000);     // Attempt to keep CRT_INIT from detaching before all threads are closed;
-                             // otherwise, the Mathcad process can hang and have to be closed manually.
+            Sleep(1000);           // Attempt to keep CRT_INIT from detaching before all threads are closed;
+                                   // otherwise, the Mathcad process can hang and have to be closed manually.
+                                   // NOTE: This was a problem with Legacy Mathcad.  Might not be needed with
+                                   //       Mathcad Prime, but it doesn't hurt.
             return FALSE;
         }
         break;
     }
+
     return TRUE;
 }

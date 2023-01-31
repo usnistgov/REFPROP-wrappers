@@ -8,7 +8,8 @@ LRESULT rp_Cptp(
     double ttrip, tnbpt, tc, pc, Dc, Zc, acf, dip, Rgas;
     double Dl, Dv, Q, U, H, S, Cv, Cp = 0.0, W;
     double xl[20], xv[20];
-    int ierr = 0, icomp = 1, kph = 1, kguess = 0;
+    ierr = 0;
+    int icomp = 1, kph = 1, kguess = 0;
     char herr[255];
 
     ierr = cSetup(fluid->str);
