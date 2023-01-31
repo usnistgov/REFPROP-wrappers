@@ -67,19 +67,73 @@ This command loads the **_RefpropLink_** context if it has not already been load
 Fluid properties can be calculated using the **_RefProp_[ ]** function (which calls `REFPRRP64dll` in the REFPROP library).  This is a Swiss army knife function that will return one or multiple fluid properties for any of the library fluids at a specified reference state.  The simple example below returns the molar density [D] and enthalpy [H] of carbon dioxide (CO2) at room temperature and pressure (after **_RefpropLink_** is loaded as shown above).
 
    ```Mathematica
-   T = 72 °F;
+   T = Quantity(72.0,"DegreesFahrenheit");  (* Must use Quantity function for affine temps*)
    P = 1 atm;
    RefProp["CO2", "TP", "D H", T, P]
 
    {D -> 0.0414741 mol/L, H -> 22158.1 J/mol}
    ```
 Note the following:
-   - A set of unit symbols is provided for easy unit conversions and function inputs and outputs
+   - A set of unit symbols is provided for easy unit conversions and function inputs and outputs. However, affine temperature units [°F and °C] must be set with the Quantity function as of Mathematica 13.2 .
    - Outputs are provided as a `List` of Mathematica `Quantities` with units applied.  Individual return values can be extracted using standard `List` indexing.
    - For subsequent calls with the same fluid, the first parameter containing the fluid string can be omitted entirely.
 
 The installed documentation contains extensive tutorials and examples on the usage of the full list of REFPROP functions for pure fluids and mixtures.  The [**NIST REFPROP Online DLL Documentation**](https://refprop-docs.readthedocs.io/en/latest/DLL/index.html) should also be consulted for proper usage of the functions and the many function parameters.
 
+------
+
+# Temperature Units
+
+As of Mathematica 13.2, there has been a fundamental change (correctly so) in the way that affine temperature units are handled.  Values represented in °F or °C can no longer be multiplied by a scalar value.  For example, prior to 13.2:
+
+```WL
+In[1]  T = Quantity[20,"DegreesFahrenheit"]
+Out[1] 20 °F
+
+In[2]  T2 = 2*T //N                             (*Evaluate numerically*)
+Out[2] 40 °F
+```
+
+Now, however, after version 13.2:
+
+```WL
+In[1]  T = Quantity[20,"DegreesFahrenheit"]
+Out[1] 20 °F
+
+In[2]  T2 = 2*T //N                             (*Evaluate numerically*)
+Out[2] 532.967 K
+
+In[3]  UnitConvert[ T2, "DegreesFahrenheit"]    (* Convert to °F)
+Out[3] 499.67 °F
+```
+
+This is actually the correct behavior, since the assigned temperature quantity of 20 °F should immediately be converted to an absolute temperature of 266.483 K.  Multiplying this number by 2 yields 532.967 K (or 499.67 °F).
+
+RefpropLink took advantage of the earlier behavior and defined two unit variables, °F and °C, that could be used to set units more simply, like:
+
+```WL
+In[1]  T1 = 72 °F;    (* where °F = Quantity[1.0,"DegreesFahrenheit] *)
+       T2 = 22 °C;    (* where °C = Quantity[1.0,"DegreesCelsius *)
+```
+Because of the change in affine unit handling in 13.2, this no longer works.  The first assignment is multiplying (1 °F = 255.928 K) by 72.0.  The second is multiplying (1 °C = 274.15 K) by 22.0.  This gives very unintended results.
+
+```WL
+In[1]  T1 = 72 °F
+Out[1] 5118.56 K
+
+In[2]  T2 = 22 °C
+Out[2] 6031.3 K
+```
+This is "correct" behavior for unit multiplication, even if unexpected.  So, following Mathematica 13.2, affine units should be set only using the `Quantity[]` function.
+
+```WL
+In[1]  T1 = Quantity[72,"DegreesFahrenheit"]
+Out[1] 72 °F
+
+In[1]  T2 = Quantity[22,"DegreesCelsius"]
+Out[1] 22 °C
+```
+The RefpropLink defined unit variables for all other multiplicative units can still be used as before.
 
 ------
 

@@ -307,6 +307,18 @@ If[ $VersionNumber == 12.2,                     (* ONLY if Mathematica version 1
 ];                                              (*   for all calls of ValueQ           *)
 
 (***************************************************************************************)
+(*               Mathematica 13.2 fix for R ("DegreesRankine") Units                   *)
+(* This is a workaround provided by Wolfram.  It appears that a change in the delta    *)
+(* temperature units causes "DegreesRankine" to be handled as a non-absolute quantity. *)
+(* For version 13.2, the legacy behavior in the code can be activated by with the      *)
+(* command below that sets R as an absolute temperature type.                          *)
+(* A permanent fix should be available in 13.3 and this workaround won't be necessary. *)
+(***************************************************************************************)
+If[ $VersionNumber == 13.2,                     (* ONLY if Mathematica version 13.2    *)
+    QuantityUnits`Private`hasNonZeroTempUnitQ["DegreesRankine"]=True;  (*  Workaround  *)
+];                                              (* Set R as absolute quantity          *)
+
+(***************************************************************************************)
 (*                            Package initialization Complete                          *)
 (***************************************************************************************)
 

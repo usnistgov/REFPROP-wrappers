@@ -58,10 +58,10 @@ mmHg::usage = "millimeters of mercury"
 inHg::usage = "inches of mercury"
 inH2O::usage = "inches of water"
 (*** Temperature ***)
-\[Degree]F::usage = "degrees Fahrenheit"
+\[Degree]F::usage = "degrees Fahrenheit - Obsolete as of Mathematica 13.2"
 \[Degree]R::usage = "degrees Rankin"
 \[Degree]K::usage = "degree Kelvin"
-\[Degree]C::usage = "degrees Celsius"
+\[Degree]C::usage = "degrees Celsius - Obsolete as of Mathematica 13.2"
 (*** Molar Quantities ***)
 mol::usage = "moles"
 kmol::usage = "kilomoles"
@@ -128,7 +128,7 @@ lb = Quantity[1., "Pounds"];
 
 (*** Force Units ***)
 Newton = Quantity[1., "Newtons"];
-mN = Quantity[0.001, Newton];
+mN = Quantity[1., "Millinewtons"];   (* Fixes functionality in MM v13.2 *)
 lbf = Quantity[1., "PoundsForce"];
 
 (*** Pressure  ***)
@@ -147,10 +147,12 @@ inHg = Quantity[1., "InchesOfMercury"];
 inH2O = Quantity[1., "InchesOfWaterColumn"];
 
 (*** Temperature ***)
-\[Degree]F = Quantity[1., "DegreesFahrenheit"];
+(* °F and °C removed due to fundamental change in unit handling as of Mathematica *)
+(* version 13.2; Affine temperatures must be set by user using the Quantity[] function. *)                    
+If [ $VersionNumber < 13.2, \[Degree]F = Quantity[1., "DegreesFahrenheit"]];
 R = Quantity[1., "DegreesRankine"];
 K = Quantity[1., "Kelvins"];
-\[Degree]C = Quantity[1., "DegreesCelsius"];
+If [ $VersionNumber < 13.2, \[Degree]C = Quantity[1., "DegreesCelsius"]];
 
 (*** Molar Quantities ***)
 mol = Quantity[1., "Moles"];
