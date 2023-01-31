@@ -1,5 +1,3 @@
-(* ::Package:: *)
-
 (* Wolfram Language Package *)
 
 BeginPackage["RefpropLink`RefpropUnits`"]
@@ -149,12 +147,12 @@ inHg = Quantity[1., "InchesOfMercury"];
 inH2O = Quantity[1., "InchesOfWaterColumn"];
 
 (*** Temperature ***)
-(* \[Degree]F and \[Degree]C removed due to fundamental change in unit handling as of Mathematica *)
+(* °F and °C removed due to fundamental change in unit handling as of Mathematica *)
 (* version 13.2; Affine temperatures must be set by user using the Quantity[] function. *)                    
-If[ $VersionNumber < 13.2, \[Degree]F = Quantity[1., "DegreesFahrenheit"]];
+If [ $VersionNumber < 13.2, \[Degree]F = Quantity[1., "DegreesFahrenheit"]];
 R = Quantity[1., "DegreesRankine"];
 K = Quantity[1., "Kelvins"];
-If[ $VersionNumber < 13.2, \[Degree]C = Quantity[1., "DegreesCelsius"]];
+If [ $VersionNumber < 13.2, \[Degree]C = Quantity[1., "DegreesCelsius"]];
 
 (*** Molar Quantities ***)
 mol = Quantity[1., "Moles"];

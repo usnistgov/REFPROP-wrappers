@@ -1,5 +1,3 @@
-(* ::Package:: *)
-
 (* Paclet Info File *)
 
 (* created 2021/10/10*)
@@ -30,3 +28,5 @@ Paclet[
                 }}
         }
 ]
+
+
