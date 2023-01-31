@@ -128,7 +128,7 @@ lb = Quantity[1., "Pounds"];
 
 (*** Force Units ***)
 Newton = Quantity[1., "Newtons"];
-mN = Quantity[0.001, "Millinewtons"];   (* Fixes functionality in MM v13.2 *)
+mN = Quantity[1., "Millinewtons"];   (* Fixes functionality in MM v13.2 *)
 lbf = Quantity[1., "PoundsForce"];
 
 (*** Pressure  ***)
