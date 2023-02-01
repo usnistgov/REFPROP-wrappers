@@ -104,6 +104,10 @@ class REFPROPLibraryManager(object):
         
     def free_instance(self, instance):
         free_handle = getattr(self.manager, "free_handle")
+        c_errcode = ct.c_int(0)
+        c_errstr = ct.create_string_buffer(255)
+
+        free_handle(instance.managed_handle, ct.byref(c_errcode), c_errstr, 255)
         pass
 
 def REFPROPFunctionLibrary(name, shared_extension = None):
