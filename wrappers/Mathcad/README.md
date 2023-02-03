@@ -8,6 +8,8 @@ The Mathcad wrapper provides a diverse range of add-in functions (all beginning 
 
 This repository contains the source for building the Mathcad Prime and/or Legacy Mathcad wrappers for the NIST REFPROP materials library using a community or professional version of Microsoft Visual Studio with Visual C++.   This wrapper code, starting with version 2.0, uses [REFPROP-headers](https://github.com/CoolProp/REFPROP-headers) to make calls directly to the Legacy API functions in REFPROP.dll (or REFPRP64.dll) when NIST REFPROP 9.1 or later is installed.  Version 2.1 contains significant enhancements to implement the High-Level API when NIST REFPROP 10.0 or later is installed.  PTC Mathcad only runs on the MS Windows platform. 
 
+> **NOTE:** _The precompiled Custom Function DLL is now available [below](#installing-the-pre-compiled-dll-for-mathcad-prime)_!
+
 ------
 
 ## Prerequisites
@@ -15,17 +17,31 @@ This repository contains the source for building the Mathcad Prime and/or Legacy
 The prerequisites for building and running the REFPROP add-in for Mathcad are:  
   
 1. Mathcad Prime (tested up to version 8.0.0.0) (_see NOTE_)
-2. MS Visual Studio 2015 or later (_Professional or Community editions_)
-3. NIST REFPROP 9.1 or later ( _available from [NIST](https://www.nist.gov/srd/refprop)_ ), but REFPROP 10 is preferred  
+2. NIST REFPROP 9.1 or later ( _available from [NIST](https://www.nist.gov/srd/refprop)_ ), but REFPROP 10 is preferred
+3. MS Visual Studio 2015 or later (_Professional or Community editions_)  
+    **_<u>Only needed if Compiling (Buiding) the Add-In DLL</u>_**
 
-The ability to download a pre-compiled windows DLL is being investigated, eliminating the second requirement above.
+If downloading the pre-compiled windows DLL, the third requirement above is not needed.
 
-    NOTE: While Legacy Mathcad 15 is no longer supported or distributed by PTC, 32-bit versions of this library can still be built for those who still have perpetual licenses of Mathcad 15.  However, compilation for Mathcad 15 is no longer being tested nor supported or developed.
+> NOTE: While Legacy Mathcad 15 is no longer supported or distributed by PTC, 32-bit versions of this library can still be built for those who still have perpetual licenses of Legacy Mathcad (15 or earlier). However, compilation for Mathcad 15 is no longer being tested nor supported or  developed.  
+
 ------
 
-## Building the Mathcad Prime Custom Function DLL
+# Installing the Pre-compiled DLL for Mathcad Prime
 
-To build the Mathcad Prime DLL,
+If you just want to download and run the latest wrapper version in Mathcad Prime:
+
+1. Download the latest DLL file by clicking on the file name here [PrimeREFPROPWrapper.dll](https://nist-srd.s3.amazonaws.com/SRD23/MathCAD/PrimeREFPROPWrapper.dll).
+2. Once you have [PrimeREFPROPWrapper.DLL](https://nist-srd.s3.amazonaws.com/SRD23/MathCAD/PrimeREFPROPWrapper.dll) on your computer, copy it to the Mathcad Prime Custom Functions folder, usually located at: `C:\Program Files\PTC\Mathcad Prime 8.0.0.0\Custom Functions`  
+    - Modify `8.0.0.0` if you have a different version, say `7.0.0.0`.  
+    - This may require admin access to your C:\ drive on hardened Windows systems.
+3. Download the the add-in documentation ([Mathcad Prime PDF User's Guide](./PrimeDocs/PrimeManual.pdf)) for reference; as well as referring to the on-line [NIST REFPROP DLL documentation](https://refprop-docs.readthedocs.io/en/latest/DLL/index.html) or your local PDF version installed with **NIST REFPROP**.
+
+------
+
+# Building the Mathcad Custom Function DLL
+
+## Building the **Mathcad Prime** DLL
 
 1. Make sure that Mathcad Prime is not running
 2. Go to the /buildPrime directory
@@ -42,13 +58,13 @@ If you have a newer version than **Mathcad Prime 8.0.0.0**, you will need to mod
 
 to change the applicable `PTC\Mathcad Prime 8.0.0.0` path strings to the appropriate version for your system.
 
-## Building the Legacy Mathcad 15 (unsupported) add-in DLL
+## Building the **Legacy Mathcad 15** (unsupported) add-in DLL
 
 One can also use the same code to [build a 32-bit add-in for Legacy Mathcad](BuildLegacyMathcadDLL.md), however, that functionality is no longer tested or supported.  Use at your own risk.
 
 ------
 
-## Using the RefProp Add-in in Mathcad Prime
+# Using the RefProp Add-in in Mathcad Prime
 
 With the Mathcad wrapper DLL compiled and copied to the appropriate Mathcad directories, the RefProp functions, which all begin with the prefix "rp_", will be directly available for use in Mathcad.  Unfortunately, Mathcad Prime does not yet have the facility to list custom functions as of Mathcad Prime 8.0.  A User's Guide for Mathcad Prime can be found in PDF format in the PrimeDocs folder of this repository.
   
