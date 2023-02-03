@@ -35,7 +35,10 @@ If you just want to download and run the latest wrapper version in Mathcad Prime
 2. Once you have [PrimeREFPROPWrapper.DLL](https://nist-srd.s3.amazonaws.com/SRD23/MathCAD/PrimeREFPROPWrapper.dll) on your computer, copy it to the Mathcad Prime Custom Functions folder, usually located at: `C:\Program Files\PTC\Mathcad Prime 8.0.0.0\Custom Functions`  
     - Modify `8.0.0.0` if you have a different version, say `7.0.0.0`.  
     - This may require admin access to your C:\ drive on hardened Windows systems.
-3. Download the the add-in documentation ([Mathcad Prime PDF User's Guide](./PrimeDocs/PrimeManual.pdf)) for reference; as well as referring to the on-line [NIST REFPROP DLL documentation](https://refprop-docs.readthedocs.io/en/latest/DLL/index.html) or your local PDF version installed with **NIST REFPROP**.
+3. Download the Mathcad Prime **_include_** file [Refprop_Units.mcdx](https://github.com/usnistgov/REFPROP-wrappers/raw/master/wrappers/Mathcad/Units/RefProp_units.mcdx), which will provide unit handling functions and simplifications for easier access to the REFPROP High-Level API and Legacy API functions.
+4. Download the the add-in documentation ([Mathcad Prime PDF User's Guide](https://github.com/usnistgov/REFPROP-wrappers/raw/master/wrappers/Mathcad/PrimeDocs/PrimeManual.pdf)) for reference.  
+5. Refer to the on-line [NIST REFPROP DLL documentation](https://refprop-docs.readthedocs.io/en/latest/DLL/index.html) or your local PDF version installed with **NIST REFPROP** for more detailed guidance on input/output parameters of the REFPROP API functions.
+
 
 ------
 
@@ -73,7 +76,7 @@ In addition, the file `Units\RefProp_Units.mcdx` is available in Mathcad Prime f
 - Unit handling to convert any parameters to the correct units and return values with units already applied, and
 - Automatic handling of the Output array, single value returns, and string results from the High-Level API functions available with REFPROP 10.
 
-See the add-in documentation ([Mathcad Prime PDF User's Guide](./PrimeDocs/PrimeManual.pdf)) as well as the [NIST REFPROP DLL documentation](https://refprop-docs.readthedocs.io/en/latest/DLL/index.html) for instructions on using these functions.  As of version 2.1 of this add-in, functions are provided for both the
+See the add-in documentation ([Mathcad Prime PDF User's Guide](https://github.com/usnistgov/REFPROP-wrappers/raw/master/wrappers/Mathcad/PrimeDocs/PrimeManual.pdf)) as well as the [NIST REFPROP DLL documentation](https://refprop-docs.readthedocs.io/en/latest/DLL/index.html) for instructions on using these functions.  As of version 2.1 of this add-in, functions are provided for both the
 
 * [High-Level API](High-LevelAPI.md) function calls from REFPROP 10 or later, and  
 
@@ -82,7 +85,8 @@ See the add-in documentation ([Mathcad Prime PDF User's Guide](./PrimeDocs/Prime
 ------
 ## Possible Future Enhancements
 
-1. Add a CMake build system to dynamically create the \build15 and \buildPrime directories, taking Mathcad and VS versions as parameters for a simpler build.
+1. Add a CMake build system to dynamically create the \build15 and \buildPrime directories, taking Mathcad and VS versions as parameters for a simpler build.  
+
 2. Use CMake `find_package()` functionality to automatically find the latest version of Mathcad on the user's machine, simplifying path setting to includes/libraries and the target Custom Functions directory.
 
 ------
