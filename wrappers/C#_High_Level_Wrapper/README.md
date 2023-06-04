@@ -37,7 +37,7 @@ These files fall under a MIT-style license.
                       
                         string phase = refrpop.Phase(prop_1, prop_1_value, prop_2, prop_2_value, refri); // this method gives the phase satae pf the fluid.
                         // phase : Superheated gas   
-                        double dll = refrpop.DLL_VERSION(prop_1, prop_1_value, prop_2, prop_2_value, refri); // this method gives DLL version. (version*10000)
+                        double dll = refrpop.DLL_VERSION(); // this method gives DLL version. (version*10000)
                         dll = dll / 10000;
                         // dll : 10
                         
