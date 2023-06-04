@@ -25,24 +25,22 @@ These files fall under a MIT-style license.
              {
                         Refprop refrpop = new Refprop(); // creating object
 
-                        string prop_1 = property_1.SelectedItem.ToString(); // property 1
-                        ouble prop_1_value = Convert.ToDouble(property_1_value.Text); // property 1 value
-                        string prop_2 = property_2.SelectedItem.ToString(); // property 2
-                        double prop_2_value = Convert.ToDouble(property_2_value.Text); // property 2 value
-                        string output_prop = output_property.Text.ToString(); // output property
-                        string refri = refrigerant.SelectedItem.ToString(); // fluid
-
-                       output_property_value.Text = output_val.ToString("0.##");
+                        string prop_1 = "T"; // property 1, T Ç Temperature
+                        double prop_1_value = "300"; // property 1 value, for temperature in K
+                        string prop_2 = "p"; // property 2, P : Pressure
+                        double prop_2_value = "200000; // property 2 value, for pressure in Pa
+                        string output_prop = "H"; // output property, H : Enthalpy (kJ/kg)
+                        string refri = "R134A"; // fluid
 
                         double output_val = refrpop.Calculate(output_prop, prop_1, prop_1_value, prop_2, prop_2_value, refri); 
-                        // this method calculates desired property.
-
+                        // this method calculates desired property.   output : 424.410 J/kg
+                      
                         string phase = refrpop.Phase(prop_1, prop_1_value, prop_2, prop_2_value, refri); // this method gives the phase satae pf the fluid.
-                        phase_textbox.Text = phase;
+                        // phase : Superheated gas   
                         double dll = refrpop.DLL_VERSION(prop_1, prop_1_value, prop_2, prop_2_value, refri); // this method gives DLL version. (version*10000)
                         dll = dll / 10000;
-                        dll_version_label.Text = dll.ToString("0.#"); 
-
+                        // dll : 10
+                        
              }
 
 * You must already have REFPROP installed in the default location
