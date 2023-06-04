@@ -32,7 +32,7 @@ These files fall under a MIT-style license.
             output_property_value.Text = output_val.ToString("0.##");
 
 
-
+             /// </summary>
             This method calculates propety depends on given two properties like T,P,Q,etc.
             /// </summary>
             /// <param name="hOuti"> Output Property 1, Ex. : "H" (Enthalpy) </param>
