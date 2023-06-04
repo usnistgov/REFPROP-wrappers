@@ -20,20 +20,20 @@ These files fall under a MIT-style license.
 4. Create an object.
 5. Here is an example :
 
-     Refprop refrpop = new Refprop(); // creating object
+Refprop refrpop = new Refprop(); // creating object
 
-      string prop_1 = property_1.SelectedItem.ToString(); // property 1
-      ouble prop_1_value = Convert.ToDouble(property_1_value.Text); // property 1 value
-      string prop_2 = property_2.SelectedItem.ToString(); // property 2
-      double prop_2_value = Convert.ToDouble(property_2_value.Text); // property 2 value
-      string output_prop = output_property.Text.ToString(); // output property
-      string refri = refrigerant.SelectedItem.ToString(); // fluid
+string prop_1 = property_1.SelectedItem.ToString(); // property 1
+ouble prop_1_value = Convert.ToDouble(property_1_value.Text); // property 1 value
+string prop_2 = property_2.SelectedItem.ToString(); // property 2
+double prop_2_value = Convert.ToDouble(property_2_value.Text); // property 2 value
+string output_prop = output_property.Text.ToString(); // output property
+string refri = refrigerant.SelectedItem.ToString(); // fluid
 
       output_property_value.Text = output_val.ToString("0.##");
       
       
-      /// <summary>
-      /// This method calculates propety depends on given two properties like T,P,Q,etc.
+      
+      This method calculates propety depends on given two properties like T,P,Q,etc.
       /// </summary>
       /// <param name="hOuti"> Output Property 1, Ex. : "H" (Enthalpy) </param>
       /// <param name="a_p">  Input Property 1, Ex.: "T" (K) </param>
