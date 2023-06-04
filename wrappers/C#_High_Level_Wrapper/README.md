@@ -29,7 +29,7 @@ These files fall under a MIT-style license.
                         double prop_1_value = "300"; // property 1 value, for temperature in K
                         string prop_2 = "p"; // property 2, P : Pressure
                         double prop_2_value = "200000; // property 2 value, for pressure in Pa
-                        string output_prop = "H"; // output property, H : Enthalpy (kJ/kg)
+                        string output_prop = "H"; // output property, H : Enthalpy (J/kg)
                         string refri = "R134A"; // fluid
 
                         double output_val = refrpop.Calculate(output_prop, prop_1, prop_1_value, prop_2, prop_2_value, refri); 
