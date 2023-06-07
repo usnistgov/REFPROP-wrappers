@@ -39,7 +39,7 @@ These files fall under a MIT-style license.
                         // this method gives the phase state of the fluid.
                         // phase : Superheated gas 
                         
-                        double dll = refrpop.DLL_VERSION(); // this method gives DLL version. (version*10000)
+                        double dll = refprop.DLL_VERSION(); // this method gives DLL version. (version*10000)
                         dll = dll / 10000;
                         // dll : 10
                         
