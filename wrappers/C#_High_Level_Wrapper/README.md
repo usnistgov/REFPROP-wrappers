@@ -14,8 +14,8 @@ These files fall under a MIT-style license.
 
 ## To Use Wraper
 
-1. Donwload the DLL wrapper : [wrappers/C#_High_Level_Wrapper/RefpropDLL/bin/Debug](https://github.com/meyinyil/REFPROP-wrappers/tree/master/wrappers/C%23_High_Level_Wrapper/RefpropDLL/bin/Debug)
-2. Insert your project. (Bin/Debug)
+1. Clone the repository.
+2. Insert your project.
 3. Add references the DLL
 4. Create an object.
 5. Here is an example :
