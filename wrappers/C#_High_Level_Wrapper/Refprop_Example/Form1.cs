@@ -23,7 +23,7 @@ namespace Refprop_Deneme
 
         private void calculate_Click(object sender, EventArgs e)
         {
-            Refprop refrpop = new Refprop(); // creating object 
+            Refprop refprop = new Refprop(); // creating object 
 
             string prop_1 = property_1.SelectedItem.ToString();
             double prop_1_value = Convert.ToDouble(property_1_value.Text);
