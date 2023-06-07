@@ -23,7 +23,7 @@ These files fall under a MIT-style license.
              using RefpropDLL;
              public partial class Refrpop
              {
-                        Refprop refrpop = new Refprop(); // creating object
+                        Refprop refprop = new Refprop(); // creating object
 
                         string prop_1 = "T"; // property 1, T Ç Temperature
                         double prop_1_value = "300"; // property 1 value, for temperature in K
