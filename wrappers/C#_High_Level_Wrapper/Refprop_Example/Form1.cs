@@ -71,7 +71,7 @@ namespace Refprop_Deneme
             // refri : Refrigerant name ("R134A" , "R450A" etc.)
             // output_prop : Output Property
 
-            double output_val = refrpop.Calculate(output_prop, prop_1, prop_1_value, prop_2, prop_2_value, refri);
+            double output_val = refprop.Calculate(output_prop, prop_1, prop_1_value, prop_2, prop_2_value, refri);
          
          
             switch (output_prop)
@@ -92,7 +92,7 @@ namespace Refprop_Deneme
            
             output_property_value.Text = output_val.ToString("0.##");
             
-            string phase = refrpop.Phase(prop_1, prop_1_value, prop_2, prop_2_value, refri);
+            string phase = refprop.Phase(prop_1, prop_1_value, prop_2, prop_2_value, refri);
             phase_textbox.Text = phase;
             double dll = refrpop.DLL_VERSION();
             dll = dll / 10000;
