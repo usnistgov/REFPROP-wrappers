@@ -23,7 +23,7 @@ namespace Refprop_Deneme
 
         private void calculate_Click(object sender, EventArgs e)
         {
-            Refprop refprop = new Refprop(); // creating object 
+            Refprop32 refprop = new Refprop32(); // creating object 
 
             string prop_1 = property_1.SelectedItem.ToString();
             double prop_1_value = Convert.ToDouble(property_1_value.Text);
@@ -94,7 +94,7 @@ namespace Refprop_Deneme
             
             string phase = refprop.Phase(prop_1, prop_1_value, prop_2, prop_2_value, refri);
             phase_textbox.Text = phase;
-            double dll = refrpop.DLL_VERSION();
+            double dll = refprop.DLL_VERSION();
             dll = dll / 10000;
             dll_version_label.Text = dll.ToString("0.#"); 
 

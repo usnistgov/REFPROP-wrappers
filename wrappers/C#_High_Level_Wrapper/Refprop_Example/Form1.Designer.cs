@@ -219,8 +219,7 @@
             "R134a;0.44; R1234yf;0.56;",
             "R227ea;0.089;r1234zee;0.911",
             "WATER",
-            "R515A",
-            "R515B"});
+            "R515A"});
             this.refrigerant.Location = new System.Drawing.Point(214, 24);
             this.refrigerant.Name = "refrigerant";
             this.refrigerant.Size = new System.Drawing.Size(261, 28);
