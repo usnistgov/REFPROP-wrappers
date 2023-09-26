@@ -6,6 +6,7 @@ set(MAKE_CXX_STANDARD_REQUIRED ON)
 
 # ---- Download REFPROP C/C++ wrappers ----------------
 set(REPO_URL "https://github.com/usnistgov/REFPROP-wrappers.git")
+set(REPO_BRANCH "master")
 set(REPO_SUBFOLDER "wrappers/C_CPP/refprop")
 set(LOCAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/refprop")
 if(NOT EXISTS ${LOCAL_DIR})
@@ -15,7 +16,7 @@ if(NOT EXISTS ${LOCAL_DIR})
   execute_process(COMMAND git remote add origin ${REPO_URL} WORKING_DIRECTORY ${LOCAL_DIR})
   execute_process(COMMAND git config core.sparseCheckout true WORKING_DIRECTORY ${LOCAL_DIR})
   file(WRITE "${LOCAL_DIR}/.git/info/sparse-checkout" "${REPO_SUBFOLDER}\n")
-  execute_process(COMMAND git pull origin master WORKING_DIRECTORY ${LOCAL_DIR})
+  execute_process(COMMAND git pull origin ${REPO_BRANCH} WORKING_DIRECTORY ${LOCAL_DIR})
 endif()
 add_subdirectory(${LOCAL_DIR}/${REPO_SUBFOLDER})
 

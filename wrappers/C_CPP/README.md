@@ -15,7 +15,8 @@ Installation
    3. Launch the installer and select the "C++ build tools" workload, ensuring that the MSVC compiler, Windows SDK and C++ Standard Library are included.
    4. Complete the installation.
 7. Download the top-level `CMakeLists.txt` file into a directory that will be used for building the wrapper and associated code.
-8. Run CMake from this directory to generate the build files.
+8. Download the example code from the `/src` and `/include` directories into the same local directories.
+9. Run CMake from this directory to generate the build files.
    1. For Visual Studio on Windows, this can be accomplished by creating and running the following batch file (e.g., `build.bat`).
       ```
       rmdir /Q/S build
@@ -27,7 +28,7 @@ Installation
       pause
       ```
    2. This will download the files in `/refprop` as part of its build process.
-9. Open the `main.cpp` file in the `src` directory for example code on how to call various REFPROP functions.
+10. Open the `main.cpp` file in the `/src` directory for example code on how to call various REFPROP functions.
 
 
 Alternative
