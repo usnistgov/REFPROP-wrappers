@@ -1,0 +1,45 @@
+cmake_minimum_required(VERSION 3.26)
+project(MyProject)
+
+set(CMAKE_CXX_STANDARD 11)
+set(MAKE_CXX_STANDARD_REQUIRED ON)
+
+# ---- Download REFPROP C/C++ wrappers ----------------
+set(REPO_URL "https://github.com/usnistgov/REFPROP-wrappers.git")
+set(REPO_SUBFOLDER "wrappers/C_CPP/refprop")
+set(LOCAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/refprop")
+if(NOT EXISTS ${LOCAL_DIR})
+  message(STATUS "Downloading REFPROP wrappers")
+  file(MAKE_DIRECTORY ${LOCAL_DIR})
+  execute_process(COMMAND git init WORKING_DIRECTORY ${LOCAL_DIR})
+  execute_process(COMMAND git remote add origin ${REPO_URL} WORKING_DIRECTORY ${LOCAL_DIR})
+  execute_process(COMMAND git config core.sparseCheckout true WORKING_DIRECTORY ${LOCAL_DIR})
+  file(WRITE "${LOCAL_DIR}/.git/info/sparse-checkout" "${REPO_SUBFOLDER}\n")
+  execute_process(COMMAND git pull origin master WORKING_DIRECTORY ${LOCAL_DIR})
+endif()
+add_subdirectory(${LOCAL_DIR}/${REPO_SUBFOLDER})
+
+# Add executable
+set(HEADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
+include_directories(${HEADER_DIR}/${PROJECT_NAME})
+file(GLOB_RECURSE HEADER_FILES "${HEADER_DIR}/*.h")
+set(SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
+add_executable(myproject ${HEADER_FILES} ${SOURCE_FILES})
+target_link_libraries(myproject refprop)
+
+# Set output and build directories
+set_target_properties(myproject PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_BINARY_DIR "${CMAKE_SOURCE_DIR}/build")
+
+# ---- Configure Microsoft Visual Studio ----------------
+if(MSVC)
+  # Set configurations
+  set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Debug and Release Builds Configured" FORCE)
+
+  # Choose appropriate version
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+  
+  # Set the startup project for Visual Studio
+  set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT myproject)
+endif()
