@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <limits>
 
 template<typename T>
 constexpr T NaN = std::numeric_limits<T>::quiet_NaN();      // simplify quiet_NaN()
