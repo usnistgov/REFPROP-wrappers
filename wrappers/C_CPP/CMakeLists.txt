@@ -9,15 +9,25 @@ set(REPO_URL "https://github.com/usnistgov/REFPROP-wrappers.git")
 set(REPO_BRANCH "master")
 set(REPO_SUBFOLDER "wrappers/C_CPP/refprop")
 set(LOCAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/refprop")
-if(NOT EXISTS ${LOCAL_DIR})
-  message(STATUS "Downloading REFPROP wrappers")
-  file(MAKE_DIRECTORY ${LOCAL_DIR})
-  execute_process(COMMAND git init WORKING_DIRECTORY ${LOCAL_DIR})
-  execute_process(COMMAND git remote add origin ${REPO_URL} WORKING_DIRECTORY ${LOCAL_DIR})
-  execute_process(COMMAND git config core.sparseCheckout true WORKING_DIRECTORY ${LOCAL_DIR})
-  file(WRITE "${LOCAL_DIR}/.git/info/sparse-checkout" "${REPO_SUBFOLDER}\n")
-  execute_process(COMMAND git pull origin ${REPO_BRANCH} WORKING_DIRECTORY ${LOCAL_DIR})
+include(FetchContent)
+if(EXISTS ${LOCAL_DIR})
+  # Use previously downloaded repo
+  FetchContent_Declare(
+    refprop
+	SOURCE_DIR ${LOCAL_DIR}
+  )
+else()
+  # Download repo
+  message(STATUS "Downloading REFPROP C++ wrapper")
+  FetchContent_Declare(
+    refprop
+    GIT_REPOSITORY ${REPO_URL}
+	GIT_TAG ${REPO_BRANCH}
+    GIT_SHALLOW TRUE                    # TRUE=retrieve only latest commit in tree
+    SOURCE_DIR ${LOCAL_DIR}             # local destination turned source directory
+  )
 endif()
+FetchContent_Populate(refprop)
 add_subdirectory(${LOCAL_DIR}/${REPO_SUBFOLDER})
 
 # Add executable
