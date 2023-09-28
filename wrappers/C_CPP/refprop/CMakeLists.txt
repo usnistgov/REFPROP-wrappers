@@ -50,13 +50,6 @@ message(STATUS "Adding REFPROP v10")
 string(REPLACE "\\" "/" REFPROP10_DIR $ENV{RPprefix})   # get REFPROP path but replace any backslashes with forward slashes
 set(REFPROP10_DLL "REFPRP64.DLL")
 set(REFPROP10_LIB "REFPRP64.LIB")
-add_library(refprop10_lib SHARED IMPORTED GLOBAL)
-set_target_properties(refprop10_lib PROPERTIES
-  IMPORTED_LOCATION_DEBUG ${REFPROP10_DIR}/${REFPROP10_DLL}
-  IMPORTED_LOCATION_RELEASE ${REFPROP10_DIR}/${REFPROP10_DLL}
-  IMPORTED_IMPLIB_DEBUG ${REFPROP10_DIR}/${REFPROP10_LIB}
-  IMPORTED_IMPLIB_RELEASE ${REFPROP10_DIR}/${REFPROP10_LIB}
-)
 add_compile_definitions(REFPROP10_PATH="${REFPROP10_DIR}/${REFPROP10_DLL}")	# pass value to source code
 
 # Specify header and source directories
@@ -82,5 +75,4 @@ add_compile_definitions(PROJECT_DIR="${CMAKE_SOURCE_DIR}")
 
 target_link_libraries(refprop PUBLIC
   MemoryModule
-  refprop10_lib
 )
