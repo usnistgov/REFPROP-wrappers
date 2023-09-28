@@ -1,4 +1,4 @@
-#define REFPROP_IMPLEMENTATION                              // only include in one file and not the header
+#define REFPROP_IMPLEMENTATION                      // only include in one file and not the header
 #include <vector>
 #include <string>
 #include <map>
@@ -6,17 +6,34 @@
 #include "refprop_v10.h"
 #include "utils.h"
 
-const std::string kAbsPathDll = REFPROP10_PATH;             // output from build system
+const char* kRefpropEnv = "RPprefix";               // environment variable holding REFPROP path
+const char* kRefpropLib = "REFPRP64.DLL";           // REFPROP library
 
-RefpropV10::RefpropV10() : RefpropV10(kAbsPathDll) {}
+// Constants for C calls
+const int kHerrLength = 255;                        // length of output error strings
+const int kHunitsLength = 255;                      // length of output units
+const int kHunitsArrayLength = 10000;               // length of output units array
+const int kNumComp = 20;                            // max number of compositions in liquid or vapor phase
+const int kNumOutputs = 200;                        // max number of output property values
+const double kNothingCalculated = -9999990;         // value representing that nothing was calculated
+const double kErrorOccurred = -9999970;             // value representing that an error occurred
 
-RefpropV10::RefpropV10(const std::string &abs_path_dll)
-    : abs_path_dll_(abs_path_dll)
+RefpropV10::RefpropV10()
 {
+    // Get path to REFPROP
+    const char* refprop_path = std::getenv(kRefpropEnv);
+    if (refprop_path) {
+        abs_path_dll_ = std::string(refprop_path) + '/' + std::string(kRefpropLib);
+        std::replace(abs_path_dll_.begin(), abs_path_dll_.end(), '\\', '/');    // include only '/' in file path
+    }
+    else {
+        throw std::runtime_error(std::string("REFPROP path is not in environment variable ") + kRefpropEnv);
+    }
+
+    // Verify path to REFPROP
     if (!file_exists(abs_path_dll_)) {
         throw std::runtime_error("REFPROP version 10 library path does not point to a file.");
     }
-    std::replace(abs_path_dll_.begin(), abs_path_dll_.end(), '\\', '/');    // include only '/' in file path
     
     // Wrap refprop library via manyso to manage memory
     lib_wrap_ = std::make_unique<NativeSharedLibraryWrapper>(abs_path_dll_, kLoadMethod_);

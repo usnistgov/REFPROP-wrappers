@@ -11,20 +11,9 @@
 // Macro to cast a string to a const char*
 #define STR_TO_CHAR(hrf) const_cast<char*>(hrf.c_str())
 
-// Constants for C calls
-const int kHerrLength = 255;                        // length of output error strings
-const int kHunitsLength = 255;                      // length of output units
-const int kHunitsArrayLength = 10000;               // length of output units array
-const int kNumComp = 20;                            // max number of compositions in liquid or vapor phase
-const int kNumOutputs = 200;                        // max number of output property values
-const double kNothingCalculated = -9999990;         // value representing that nothing was calculated
-const double kErrorOccurred = -9999970;             // value representing that an error occurred
-
 class RefpropV10 {
 public:
     RefpropV10();
-
-    RefpropV10(const std::string& abs_path_dll);
 
     // Add many methods via variadic functions, each corresponding to a 1-to-1 wrapper of a function from the shared library (credit: manyso)
     #define X(name) template<class ...Args> void name(Args&&... args){ return lib_wrap_->getAddress<name ## _POINTER>(#name)(std::forward<Args>(args)...); };

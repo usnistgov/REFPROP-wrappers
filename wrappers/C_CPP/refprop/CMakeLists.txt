@@ -46,12 +46,6 @@ target_compile_options(MemoryModule PUBLIC
 )
 
 # ---- Add REFPROP v10 ----------------
-message(STATUS "Adding REFPROP v10")
-string(REPLACE "\\" "/" REFPROP10_DIR $ENV{RPprefix})   # get REFPROP path but replace any backslashes with forward slashes
-set(REFPROP10_DLL "REFPRP64.DLL")
-set(REFPROP10_LIB "REFPRP64.LIB")
-add_compile_definitions(REFPROP10_PATH="${REFPROP10_DIR}/${REFPROP10_DLL}")	# pass value to source code
-
 # Specify header and source directories
 set(HEADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -70,9 +64,7 @@ target_include_directories(refprop PUBLIC
   ${HEADER_DIR}/${PROJECT_NAME}
 )
 
-# Pass root directory to C++ source code
-add_compile_definitions(PROJECT_DIR="${CMAKE_SOURCE_DIR}")
-
+# Link libraries
 target_link_libraries(refprop PUBLIC
   MemoryModule
 )
