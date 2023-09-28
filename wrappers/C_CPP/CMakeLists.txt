@@ -30,6 +30,10 @@ endif()
 FetchContent_Populate(refprop)
 add_subdirectory(${LOCAL_DIR}/${REPO_SUBFOLDER})
 
+# Copy example include and source directories to top-level
+file(COPY "${LOCAL_DIR}/${REPO_SUBFOLDER}/../include" DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+file(COPY "${LOCAL_DIR}/${REPO_SUBFOLDER}/../src" DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+
 # Add executable
 set(HEADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 include_directories(${HEADER_DIR}/${PROJECT_NAME})
