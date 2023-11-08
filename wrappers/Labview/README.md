@@ -1,10 +1,10 @@
-# Labview Wrapper
+# LabVIEW Wrapper
 
 Thank you for downloading the REFPROP 10 LabVIEW wrapper 1.0! Here are a few tips to get you started.
 
 ## Getting Help
 
-For assistance with the Labview wrapper, please open an issue on github: https://github.com/usnistgov/REFPROP-wrappers/issues/new
+For assistance with the LabVIEW wrapper, please open an issue on github: https://github.com/usnistgov/REFPROP-wrappers/issues/new
 
 ## Installation
 
@@ -14,7 +14,7 @@ Before this wrapper will work, you will need to add a copy of the REFPROP.dll fo
 
 ## Testing
 
-You will find a small test project called "“"REFPROP High Level API Tester" that can be used to validate the new high-level API functions. That project includes several tests that are designed to work independently and that demonstrate a few different ways to initialize the various components of the new API.
+You will find a small test project called "REFPROP High Level API Tester" that can be used to validate the new high-level API functions. That project includes several tests that are designed to work independently and that demonstrate a few different ways to initialize the various components of the new API.
 
 You will also find a complete list of the lower level REFPROP functions along with a test program called "Refprop_Example_main.vi" that demonstrates much of the functionality of the low-level API.
     
