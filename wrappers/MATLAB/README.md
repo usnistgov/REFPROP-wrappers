@@ -3,6 +3,8 @@
 
 Note: As of REFPPROP 10, the only interface between REFPROP and MATLAB that is officially supported is via Python.  The previous interface, which still works in version 10, can be found in the legacy folder relative to this file.  No official support is provided for the legacy interface due to the challenges of maintaining the interface with various versions of MATLAB.  If you still want to use the old wrapper and you run into troubles, please open an issue here and hopefully another MATLAB user can help you: [New Issue](https://github.com/usnistgov/REFPROP-wrappers/issues/new).  Pull requests updating and fixing the legacy interface will be considered and are welcomed.
 
+A wrapper of the python interface in a manner similar to (but not identical to) the deprecated ``refpropm`` interface was provided by Harrison Skye @ NIST, and John Dyreby @ Isentropic Development (john@isentropic.dev). It can be found in the ``refmatpy`` folder relative to this file.
+
 The Python wrapper is written and maintained by Ian Bell.  For questions, bugs, or issues, please open an issue in this repository on github: https://github.com/usnistgov/REFPROP-wrappers/issues/new
 
 ## Setup
