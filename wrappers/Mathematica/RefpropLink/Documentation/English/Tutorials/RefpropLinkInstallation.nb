@@ -3,311 +3,716 @@
 (*** Wolfram Notebook File ***)
 (* http://www.wolfram.com/nb *)
 
-(* CreatedBy='Mathematica 12.1' *)
+(* CreatedBy='Mathematica 13.2' *)
 
 (*CacheID: 234*)
 (* Internal cache information:
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     17250,        417]
-NotebookOptionsPosition[     11855,        304]
-NotebookOutlinePosition[     12332,        321]
-CellTagsIndexPosition[     12289,        318]
+NotebookDataLength[     37831,        917]
+NotebookOptionsPosition[     27657,        700]
+NotebookOutlinePosition[     28576,        726]
+CellTagsIndexPosition[     28533,        723]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+
+Cell[CellGroupData[{
+Cell["RefpropLink Installation", "Title",
+ CellID->21507785,ExpressionUUID->"4a8d10c4-affd-49ed-b2c5-a08c38b5233f"],
+
+Cell["\<\
+If you are reading this in the Wolfram Documentation Center, then you already \
+have RefpropLink installed.  However, this Tech Note is provided here for \
+completeness of documentation and so that the commands below can be used in \
+other notebooks.\
+\>", "Text",
+ CellChangeTimes->{{3.8856370688537383`*^9, 3.8856371539182825`*^9}, {
+  3.885768444034345*^9, 3.8857684899290953`*^9}},
+ CellID->411374971,ExpressionUUID->"d66b4e46-a6dc-4945-9891-d313b932b8d7"],
+
+Cell[CellGroupData[{
+
+Cell["Prerequisites", "Section",
+ CellChangeTimes->{{3.8856372856892085`*^9, 3.8856372895371404`*^9}},
+ CellID->87861,ExpressionUUID->"7443aa81-a7ce-4971-88f1-35b3eadf43ea"],
+
+Cell["\<\
+RefpropLink previously required a third-party program called Eclipse IDE from \
+Eclipse Foundation (eclipse.org) and the Wolfram Workbench extension to \
+Eclipse IDE to build paclets.  This extension enabled creation of \
+documentation that integrates into the Wolfram Documentation Center.\
+\>", "Text",
+ CellChangeTimes->{{3.885637606797846*^9, 3.88563787888593*^9}, {
+  3.8856526979979887`*^9, 3.8856527023108764`*^9}, {3.8860578740769997`*^9, 
+  3.886057877597709*^9}, {3.8860579180337553`*^9, 3.886057943330084*^9}, {
+  3.886057987386846*^9, 3.8860580000741653`*^9}, {3.886058046050105*^9, 
+  3.8860580827458735`*^9}},
+ CellID->370723392,ExpressionUUID->"72a0b1e3-a94a-4b89-96c5-9b8972493907"],
+
+Cell[TextData[{
+ StyleBox["No more!",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "  Mathematica 13 now includes Paclet Tools and Documentation Tools that \
+allow paclet/documentation builds and installations using just Mathematica.  \
+In addition, the   Here is what you will need to install and run the \
+RefpropLink wrapper for NIST REFPROP."
+}], "Text",
+ CellChangeTimes->{{3.885637606797846*^9, 3.88563787888593*^9}, {
+  3.8856526979979887`*^9, 3.8856527023108764`*^9}, {3.8860578740769997`*^9, 
+  3.88605788075504*^9}, {3.8860581006750712`*^9, 3.88605810569125*^9}},
+ CellID->276814643,ExpressionUUID->"2d64a8cc-28fc-4471-8b6c-f379e79b5a9c"],
+
+Cell[TextData[{
+ StyleBox["NIST REFPROP",
+  FontWeight->"Bold"],
+ " (version 9.1 or 10+) must be installed on the machine.  RefpropLink only \
+provides wrapper functions that make direct calls to the NIST REFPROP DLLs.  \
+For greater functionality, REFPROP 10 or higher is recommended."
+}], "Text",
+ CellDingbat->"\\[FilledSquare]",
+ CellMargins->{{45, 27}, {4, 4}},
+ CellChangeTimes->{{3.885637606797846*^9, 3.8856379699848757`*^9}},
+ CellID->309714428,ExpressionUUID->"f30e73dd-7aa7-4806-8e81-e509179f64f9"],
+
+Cell[TextData[{
+ StyleBox["Mathematica 13.x",
+  FontWeight->"Bold"],
+ " is required to ",
+ StyleBox["build",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " and install using the new Paclet and Documentation Tools.  Due to some \
+early release issues, ",
+ StyleBox["Mathematica 13.2",
+  FontWeight->"Bold"],
+ " is recommended for the most complete formatting of the documentation to \
+the Wolfram Documentation Center standards."
+}], "Text",
+ CellDingbat->"\\[FilledSquare]",
+ CellMargins->{{45, 27}, {4, 4}},
+ CellChangeTimes->{{3.885637606797846*^9, 3.8856381058246164`*^9}, {
+  3.8857685193212457`*^9, 3.8857685193861313`*^9}},
+ CellID->14947450,ExpressionUUID->"029ad3da-981a-4078-bb21-d5135f44d135"],
+
+Cell[TextData[{
+ StyleBox["Mathematica 12.1",
+  FontWeight->"Bold"],
+ " or greater can likely be used to install the paclet from a Paclet server; \
+either the Wolfram Paclet Repository (",
+ StyleBox["coming soon",
+  FontSlant->"Italic"],
+ ") or a private, local paclet repository.  The commands and procedure to \
+actually build the paclet and its associated documentation have changed in \
+version 13 and will not be available in earlier versions of Mathematica."
+}], "Text",
+ CellDingbat->"\\[FilledSquare]",
+ CellMargins->{{45, 27}, {4, 4}},
+ CellChangeTimes->{{3.885637606797846*^9, 3.8856381058246164`*^9}, {
+  3.885649448789832*^9, 3.885649546229453*^9}, {3.885649693342385*^9, 
+  3.8856497096972413`*^9}, {3.8857685880421815`*^9, 3.885768644306222*^9}},
+ CellID->196003392,ExpressionUUID->"a3511682-abb9-4e15-bfb7-7106463cf6f0"],
+
+Cell["\<\
+There are two ways to install the RefpropLink packet into your local \
+Mathematica installation.  The first is building the files in Mathematica \
+13.x or later, directly from a downloaded GitHub repository. \
+\>", "Text",
+ CellChangeTimes->{{3.885649584377914*^9, 3.8856496296013923`*^9}, {
+  3.8857366714200425`*^9, 3.8857367225641856`*^9}},
+ CellID->335940601,ExpressionUUID->"fe13999e-150f-431b-b5be-43c8e601f4de"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Build From GitHub Files", "Section",
+ CellFrame->{{0, 0}, {0, 3}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8856499816830187`*^9, 3.8856499844957848`*^9}, {
+  3.8856502353619647`*^9, 3.8856502584583993`*^9}, {3.8856503071763887`*^9, 
+  3.8856503177940755`*^9}, {3.8856504124425097`*^9, 3.8856504142138658`*^9}},
+ CellID->19529436,ExpressionUUID->"a0ed58ea-3875-4a6f-97a3-4693d02c5ec3"],
+
+Cell["\<\
+Follow through the scripts below to build the RefpropLink paclet directly \
+form the GitHub repository files.  Once this procedure is complete, you will \
+have a build directory containing\
+\>", "Text",
+ CellChangeTimes->{{3.8856502676110115`*^9, 3.885650286313549*^9}, {
+  3.885650326564878*^9, 3.8856503918512497`*^9}, {3.885736760124552*^9, 
+  3.885736799564296*^9}, {3.885766497496147*^9, 3.88576652554506*^9}},
+ CellID->30415973,ExpressionUUID->"7605449f-8ea4-40f8-863a-4c0fbaaa6960"],
+
+Cell["\<\
+Copies of in-use paclet files and documentation files converted for use in \
+the Documentation Center \
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.885741517242681*^9, 3.885741522152186*^9}, {
+  3.8857664394801617`*^9, 3.8857664910155077`*^9}, {3.885766539936263*^9, 
+  3.8857665442882147`*^9}, {3.8857666378396435`*^9, 3.8857667049843817`*^9}},
+ FontSize->12,
+ CellID->342434010,ExpressionUUID->"c3f6ff58-47b0-4372-bc74-a2b89cc6d028"],
+
+Cell["\<\
+A paclet file (RefpropLink-x.x.x.paclet) that can be used to:\
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.8857415277134075`*^9, 3.885741530008906*^9}, {
+   3.8857415633207474`*^9, 3.8857415656645813`*^9}, 3.8857665315128074`*^9, {
+   3.8857667163603153`*^9, 3.885766795615613*^9}, {3.8857671653204517`*^9, 
+   3.8857671753292174`*^9}},
+ FontSize->12,
+ CellID->253188192,ExpressionUUID->"08a95ce1-c5a4-4dc3-8714-7cc9d5885678"],
+
+Cell["Install the paclet on the local system,", "Item",
+ CellDingbat->"\[FilledSquare]",
+ CellMargins->{{65, Inherited}, {Inherited, Inherited}},
+ CellFrameMargins->8,
+ CellFrameLabelMargins->6,
+ CellChangeTimes->{{3.8857668074893646`*^9, 3.885766824592492*^9}, {
+  3.8857669095835495`*^9, 3.8857669488476715`*^9}},
+ FontSize->12,
+ CellID->333587227,ExpressionUUID->"6f3be817-2138-4a2f-8c6d-4bdffb4aa3e8"],
+
+Cell["Install the paclet on a local paclet repository,", "Item",
+ CellDingbat->"\[FilledSquare]",
+ CellMargins->{{65, Inherited}, {Inherited, Inherited}},
+ CellFrameMargins->8,
+ CellFrameLabelMargins->6,
+ CellChangeTimes->{{3.8857668074893646`*^9, 3.885766824592492*^9}, {
+  3.8857669095835495`*^9, 3.8857669488476715`*^9}, {3.8857671262336693`*^9, 
+  3.8857671357448053`*^9}},
+ FontSize->12,
+ CellID->800960609,ExpressionUUID->"0d79ce8f-47c9-4746-91b7-a90af64a6be2"],
+
+Cell["Install the paclet on the Wolfram Paclet Repository,", "Item",
+ CellDingbat->"\[FilledSquare]",
+ CellMargins->{{65, Inherited}, {Inherited, Inherited}},
+ CellFrameMargins->8,
+ CellFrameLabelMargins->6,
+ CellChangeTimes->{{3.8857668074893646`*^9, 3.885766824592492*^9}, {
+  3.8857669095835495`*^9, 3.8857669488476715`*^9}, {3.8857671473690853`*^9, 
+  3.8857671543282013`*^9}},
+ FontSize->12,
+ CellID->2483592,ExpressionUUID->"2da18625-0618-4a86-ba05-dc05e0e0e5d6"],
+
+Cell[CellGroupData[{
+
+Cell["Getting the Files from GitHub ", "Subsection",
+ CellChangeTimes->{{3.885652091190073*^9, 3.8856521082809153`*^9}},
+ CellID->209726609,ExpressionUUID->"fbe1ed0e-d6b4-46fa-b3b6-e5930178f5c6"],
+
+Cell[TextData[{
+ "To clone the repository from ",
+ StyleBox["github.com/usnistgov/REFPROP-wrappers",
+  FontFamily->"Courier New",
+  FontWeight->"Bold"],
+ ", select the Code  page and then select the ",
+ StyleBox["< > Code",
+  FontWeight->"Bold"],
+ " dropdown button and select ",
+ StyleBox["Download ZIP",
+  FontWeight->"Bold"],
+ ".  Once the .zip file is downloaded, extract it to a convenient location \
+where the paclet and documentation can be built."
+}], "Text",
+ CellChangeTimes->{{3.8857673461628537`*^9, 3.8857674782888174`*^9}, {
+  3.885767618057556*^9, 3.885767635413966*^9}},
+ CellID->381043997,ExpressionUUID->"d0b584ed-9414-444c-bbfd-c801ab75ad11"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Alternatively, especially for developers, use git to clone the repository to \
+the local hard drive.  If doing other development, the repository can be \
+cloned recursively to get the external modules as well, but the Mathematica \
+wrapper does not require them.  Get the Clone path from the < > Code dropdown \
+button, making a copy of the HTTPS path.  The use git clone as follows:\
+\>", "Text",
+ CellChangeTimes->{{3.8857673461628537`*^9, 3.8857674782888174`*^9}, {
+  3.885767618057556*^9, 3.8857678535373926`*^9}},
+ CellID->262896202,ExpressionUUID->"2c7d6282-4134-4296-96b7-a7d253243974"],
+
+Cell[BoxData[
+ RowBox[{"git", " ", "clone", " ", 
+  "\"\<https://github.com/usnistgov/REFPROP-wrappers.git\>\""}]], "Code",
+ Evaluatable->False,
+ InitializationCell->False,
+ CellChangeTimes->{{3.88576790521096*^9, 3.8857679250486717`*^9}},
+ CellID->77419262,ExpressionUUID->"bd751bf6-8dfd-40ce-81b7-6e6a50558601"]
+}, Open  ]],
+
+Cell[TextData[{
+ "This will create a ",
+ StyleBox["REFPROP-wrappers",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"],
+ " directory at the current location.  Navigate down to"
+}], "Text",
+ CellChangeTimes->{{3.8857679822993393`*^9, 3.8857680442864456`*^9}},
+ CellID->244754231,ExpressionUUID->"fc8da1ec-85b2-42dd-9621-35012c0eabab"],
+
+Cell[TextData[{
+ "\t",
+ StyleBox["REFPROP-wrappers\\wrappers\\Mathematica\\RefpropLink",
+  FontFamily->"Courier New",
+  FontWeight->"Normal"]
+}], "Text",
+ CellChangeTimes->{{3.8857679822993393`*^9, 3.885768041937501*^9}, {
+   3.885768078161369*^9, 3.885768100369235*^9}, {3.885768181897463*^9, 
+   3.885768185009964*^9}, 3.8857682602972207`*^9},
+ CellID->50221343,ExpressionUUID->"8d0aec21-d8fd-4211-8467-590f132fb327"],
+
+Cell[TextData[{
+ "and open ",
+ StyleBox["PacletBuild.nb",
+  FontWeight->"Bold"],
+ " in Mathematica.   Follow the instructions in this file, evaluating the \
+necessary steps, which are outlined below."
+}], "Text",
+ CellChangeTimes->{{3.8857682656665573`*^9, 3.8857682819777927`*^9}, {
+  3.885768348977965*^9, 3.8857683995058146`*^9}},
+ CellID->695350250,ExpressionUUID->"238acb32-2793-4272-ac3f-ebbb07f39620"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Set Up the Environment", "Subsection",
+ CellChangeTimes->{{3.885768673586271*^9, 3.885768682642411*^9}},
+ CellID->437052280,ExpressionUUID->"8bfd03c2-ae83-414b-b7f3-4d4d3369af7c"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Clear the environment with Quit[] and load Paclet Tools (evaluate one at a \
+time).\
+\>", "MathCaption",
+ CellChangeTimes->{{3.8857715647893677`*^9, 3.8857716164289093`*^9}, {
+  3.885771659116816*^9, 3.885771666205085*^9}},
+ CellID->117239214,ExpressionUUID->"57de9371-1a8a-474a-8dce-0a3baf2ecc6f"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.8857715800693583`*^9, 3.8857715833733835`*^9}},
+ CellID->248889915,ExpressionUUID->"62d18349-ff84-4337-8634-e481bdb13e14"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<PacletTools`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.885771641248881*^9, 3.8857716551820793`*^9}},
+ CellID->396347447,ExpressionUUID->"495dc7af-d537-44e5-93d2-8eef3331429d"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Uninstall Existing Versions of RefpropLink", "Subsection",
+ CellChangeTimes->{{3.8857201646938486`*^9, 3.8857201684689617`*^9}, {
+  3.885771875605647*^9, 3.8857718983252487`*^9}},
+ CellID->36980612,ExpressionUUID->"cc4e8347-4384-4c61-9f09-99054f63f433"],
+
+Cell[CellGroupData[{
+
+Cell["Is the \"RefpropLink\" paclet found locally?", "MathCaption",
+ CellChangeTimes->{{3.88577172881318*^9, 3.8857717445573273`*^9}},
+ CellID->116431477,ExpressionUUID->"293a20df-d2ef-4746-922c-1292dc78f24b"],
+
+Cell[BoxData[
+ RowBox[{"PacletFind", "[", "\"\<RefpropLink\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.8857717487089915`*^9, 3.8857717602854385`*^9}},
+ CellID->474689001,ExpressionUUID->"98d9aeb2-d4f9-45fc-9cde-5233dc67e1d6"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["If it is, uninstall any \"RefpropLink\" paclets", "MathCaption",
+ CellChangeTimes->{{3.885771823076267*^9, 3.8857718345574265`*^9}, {
+  3.8857719141973476`*^9, 3.885771920333706*^9}},
+ CellID->689722793,ExpressionUUID->"5c5c446f-f9c2-4745-8440-3728c53e54cd"],
+
+Cell[BoxData[
+ RowBox[{"PacletUninstall", "[", "\"\<RefpropLink\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.885771841461273*^9, 3.885771849917228*^9}},
+ CellID->38403515,ExpressionUUID->"63537482-3317-46bc-b267-e256fc9e351f"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Building the Documentation", "Subsection",
+ CellChangeTimes->{{3.8857201646938486`*^9, 3.8857201684689617`*^9}},
+ CellID->654739400,ExpressionUUID->"cea2b1eb-146c-47ed-bfb0-ea40e9782cd8"],
+
+Cell["\<\
+Documentation authoring notebooks look different from the finished \
+documentation that is built into the Wolfram System. Authoring notebooks are \
+transformed into so-called \"in-product\" notebooks via a build process. \
+\>", "Text",
+ CellID->361885008,ExpressionUUID->"9058d057-35f1-459b-9314-68960d4ce915"],
+
+Cell[CellGroupData[{
+
+Cell["Paclet documentation can be built using the single command:", \
+"MathCaption",
+ CellChangeTimes->{
+  3.885771969018359*^9, {3.885772124020559*^9, 3.8857721256049004`*^9}},
+ CellID->217735914,ExpressionUUID->"81390224-5b15-4c24-a52b-6afbd54d6023"],
+
+Cell[BoxData[
+ RowBox[{"PacletDocumentationBuild", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.8857720004294086`*^9, 3.885772013958433*^9}},
+ CellID->50041876,ExpressionUUID->"28473a52-0d0c-426e-a5cd-e9b6f2919e0a"]
+}, Open  ]],
+
+Cell["\<\
+Total time to build the documentation for RefpropLink should be a little over \
+2 minutes.\
+\>", "Text",
+ CellChangeTimes->{3.8857720350772643`*^9},
+ CellID->60264828,ExpressionUUID->"257f4005-3267-4bfd-a2ba-55aa05ad8443"],
+
+Cell["\<\
+The documentation files are now converted to \"in-product\" format in the new \
+build subdirectory (RefpropLink\\Build) and ready to be integrated into the \
+RefpropLink paclet file for installation.\
+\>", "Text",
+ CellChangeTimes->{{3.8857720350772643`*^9, 3.885772066525461*^9}},
+ CellID->84014794,ExpressionUUID->"e3b59051-50cf-437c-994a-dbb9d8f18ad5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Building the Paclet (.paclet) File", "Subsection",
+ CellChangeTimes->{{3.8857201761089563`*^9, 3.885720228508751*^9}},
+ CellID->499018586,ExpressionUUID->"80d2b975-d7bb-425c-8afa-9ff35bf95f74"],
+
+Cell["\<\
+Once the documentation is built, the paclet file can be created.\
+\>", "Text",
+ CellChangeTimes->{{3.885772138406972*^9, 3.8857721569095774`*^9}},
+ CellID->35532133,ExpressionUUID->"a14cb0dd-fae4-494f-b2ae-36e318216ea2"],
+
+Cell[CellGroupData[{
+
+Cell["Build the Paclet", "MathCaption",
+ CellChangeTimes->{{3.885772171045339*^9, 3.8857721744219465`*^9}},
+ CellID->114716107,ExpressionUUID->"6dfdf778-3936-4106-bee1-16f71598a406"],
+
+Cell[BoxData[
+ RowBox[{"PacletBuild", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.8857721797574835`*^9, 3.8857721893064585`*^9}},
+ CellID->57257048,ExpressionUUID->"8ef2aa3f-e89e-4e61-b3ca-e9c1edfe14b6"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Installing the Paclet", "Subsection",
+ CellChangeTimes->{{3.885720216333307*^9, 3.8857202342284*^9}},
+ CellID->328456102,ExpressionUUID->"c9fbc6a4-d6d4-402a-b50a-cb91893d7230"],
+
+Cell["\<\
+The paclet file (RefpropLink-x.x.x.paclet) will be located in the build \
+directory.\
+\>", "Text",
+ CellChangeTimes->{{3.885772229672284*^9, 3.8857722578376637`*^9}},
+ CellID->23256081,ExpressionUUID->"d8a31354-dd58-4788-850a-9e68bd4c1c15"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Find the path to the latest (.paclet) file in the build directory and use \
+that file to install the paclet.\
+\>", "MathCaption",
+ CellChangeTimes->{{3.8857723163015804`*^9, 3.8857723508611765`*^9}},
+ CellID->188614314,ExpressionUUID->"ae1fe757-354a-4eb1-81b8-9356a3744551"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pFile", "=", 
+   RowBox[{"Last", "[", 
+    RowBox[{"FileNames", "[", 
+     RowBox[{"\"\<*.paclet\>\"", ",", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<build\>\""}], 
+        "}"}], "]"}]}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"PacletInstall", "[", 
+  RowBox[{"pFile", ",", 
+   RowBox[{"ForceVersionInstall", "->", "True"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.8857723629250154`*^9, 3.8857723789261384`*^9}},
+ CellID->364051165,ExpressionUUID->"6c5706bf-ad15-4ad5-a830-364953b78bc0"]
+}, Open  ]],
+
+Cell["\<\
+The paclet is now installed on the local machine and can be used.  The paclet \
+file remains in the build directory and can be installed on local or remote \
+paclet servers for distribution.\
+\>", "Text",
+ CellChangeTimes->{{3.885772408302746*^9, 3.885772478278169*^9}},
+ CellID->906285485,ExpressionUUID->"62afa12e-3d33-4685-b58f-245962abc8d0"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Install  RefpropLink from a Paclet Repository", "Section",
+ CellFrame->{{0, 0}, {0, 3}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.88564967308683*^9, 3.885649687026778*^9}, {
+  3.8857725389018955`*^9, 3.8857725719249706`*^9}},
+ CellID->18459449,ExpressionUUID->"508177de-db60-45e9-8eb4-367ec5dd7b72"],
+
+Cell[TextData[{
+ "This is by far the easiest way to install ",
+ StyleBox["RefpropLink",
+  FontWeight->"Bold"],
+ " if you have access to a public or private paclet repository.  A Private ",
+ StyleBox[ButtonBox["Paclet Server",
+  BaseStyle->"Link",
+  ButtonData->"paclet:tutorial/Paclets#2037535111"],
+  FontWeight->"Bold"],
+ " (Paclet Site) can be set up simply on a corporate network drive directory \
+or webserver that everyone on your network has access to.  Once the paclet is \
+build manually per the instructions above, the .paclet file generated in the \
+build directory can be placed on the local paclet server for easy access and \
+distribution to others.   See the ",
+ StyleBox[ButtonBox["Paclets Overview",
+  BaseStyle->"Link",
+  ButtonData->"paclet:tutorial/Paclets"],
+  FontWeight->"Bold"],
+ " tech note for setting up such a ",
+ StyleBox[ButtonBox["Paclet Site",
+  BaseStyle->"Link",
+  ButtonData->"paclet:tutorial/Paclets#2037535111"],
+  FontWeight->"Bold"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.885650399433389*^9, 3.8856504699741325`*^9}, {
+   3.885768717746279*^9, 3.885768742314162*^9}, {3.8860585590425067`*^9, 
+   3.886058599235156*^9}, 3.886058675419272*^9, {3.8860587861187267`*^9, 
+   3.8860588670119367`*^9}, {3.8860590068998084`*^9, 
+   3.8860592279356785`*^9}, {3.8860593417323856`*^9, 
+   3.8860593675325108`*^9}, {3.8860593991564884`*^9, 3.8860594894632173`*^9}},
+ CellID->899396101,ExpressionUUID->"f2939c0e-1305-49c1-8bc2-71daabdd319b"],
+
+Cell[TextData[{
+ StyleBox["NOTE:",
+  FontWeight->"Bold"],
+ " Wolfram also now has a public Paclet Repository for placing externally \
+developed paclets.  RefpropLink has not been placed in the ",
+ StyleBox["Wolfram Paclet Repository",
+  FontWeight->"Bold"],
+ " at this time as it requires a single Wolfram ID (which preferably would be \
+\"NIST\") and manual updates to the repository when new code updates are \
+made, by potentially many contributors."
+}], "Text",
+ CellChangeTimes->{{3.885650399433389*^9, 3.8856504699741325`*^9}, {
+   3.885768717746279*^9, 3.885768742314162*^9}, {3.8860585590425067`*^9, 
+   3.886058599235156*^9}, 3.886058675419272*^9, {3.8860587861187267`*^9, 
+   3.8860588670119367`*^9}, {3.8860590068998084`*^9, 
+   3.8860592279356785`*^9}, {3.8860593417323856`*^9, 
+   3.8860593675325108`*^9}, {3.8860593991564884`*^9, 
+   3.8860595607430553`*^9}, {3.8860595971407223`*^9, 3.8860597579487023`*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellID->119575501,ExpressionUUID->"7e6fff63-e314-479f-bb00-810386004c0c"],
+
+Cell["\<\
+Once a Paclet Site is set up, or you have access to a remote Paclet Site \
+containing the RefpropLink paclet, \
+\>", "Text",
+ CellChangeTimes->{{3.885650399433389*^9, 3.8856504699741325`*^9}, {
+   3.885768717746279*^9, 3.885768742314162*^9}, {3.8860585590425067`*^9, 
+   3.886058599235156*^9}, 3.886058675419272*^9, {3.8860587861187267`*^9, 
+   3.8860588670119367`*^9}, {3.8860590068998084`*^9, 3.886059274891367*^9}, {
+   3.886059809404565*^9, 3.8860598228364377`*^9}},
+ CellID->152816613,ExpressionUUID->"e3b9929a-e4bf-4777-be4a-d06017edbcc4"],
+
+Cell["\<\
+Register the paclet site using PacletSiteRegister (just once on each \
+system/user environment)\
+\>", "Item",
+ CellChangeTimes->{{3.8860598954206357`*^9, 3.8860599271960506`*^9}, {
+  3.8860601378441525`*^9, 3.8860601410118904`*^9}, {3.886060195837271*^9, 
+  3.8860602075411444`*^9}},
+ FontSize->12,
+ CellID->258253421,ExpressionUUID->"dd105fa8-d223-4b1f-88c1-0f0f6ff64eea"],
+
+Cell["\<\
+Update paclet availability on the paclet site using PacletSiteUpdate (in case \
+new paclets/versions have been added)\
+\>", "Item",
+ CellChangeTimes->{{3.8860598954206357`*^9, 3.8860599271960506`*^9}, {
+  3.8860601378441525`*^9, 3.886060267972994*^9}},
+ FontSize->12,
+ CellID->80312916,ExpressionUUID->"32e8c2d6-b8cf-491c-ac0d-0c4e4e5af6bb"],
+
+Cell["\<\
+Use PacletFindRemote to view the available paclets on the paclet site.\
+\>", "Item",
+ CellChangeTimes->{{3.8860598954206357`*^9, 3.8860599271960506`*^9}, {
+  3.8860601378441525`*^9, 3.8860601410118904`*^9}, {3.886060281772317*^9, 
+  3.8860603127813845`*^9}},
+ FontSize->12,
+ CellID->240987158,ExpressionUUID->"62ec13d1-4066-4044-a36f-7423fabfad12"],
+
+Cell["\<\
+Install or update the desired paclet version using PacletInstall from the \
+registered paclet site.\
+\>", "Item",
+ CellChangeTimes->{{3.8860598954206357`*^9, 3.8860599271960506`*^9}, {
+  3.8860601378441525`*^9, 3.8860601410118904`*^9}, {3.8860603258282347`*^9, 
+  3.886060392981214*^9}},
+ FontSize->12,
+ CellID->182671851,ExpressionUUID->"d08ca891-535a-4ac4-9c77-92473ec728cd"],
+
+Cell[TextData[{
+ "More information is available in the ",
+ StyleBox[ButtonBox["Paclets",
+  BaseStyle->"Link",
+  ButtonData->"paclet:tutorial/Paclets"],
+  FontWeight->"Bold"],
+ " tech note under ",
+ StyleBox[ButtonBox["Installing and Updating",
+  BaseStyle->"Link",
+  ButtonData->"paclet:tutorial/Paclets#1080196144"],
+  FontWeight->"Bold"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.886060511464193*^9, 3.886060550005167*^9}, 
+   3.8860606642897587`*^9, {3.8860607035589046`*^9, 3.886060703560869*^9}, 
+   3.886060738897913*^9},
+ CellID->953165569,ExpressionUUID->"7f40fdea-fbef-4fc7-a2ec-a7a19f0cd158"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related Guides", "TutorialMoreAboutSection",
+ CellChangeTimes->{{3.843042384656711*^9, 3.843042386024461*^9}},
+ CellID->78867934,ExpressionUUID->"87b5e9d2-9f79-42ad-9836-23038a9bf931"],
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox["RefpropLink",
+  BaseStyle->"Link",
+  ButtonData->
+   "paclet:RefpropLink/guide/RefpropLink"]], \
+"InlineFormula",ExpressionUUID->"fa8c2076-65d5-4957-8d49-89c0fdb5b5d6"]], \
+"TutorialMoreAbout",
+ CellChangeTimes->{{3.88563685755659*^9, 3.8856368678798656`*^9}},
+ CellID->118998663,ExpressionUUID->"1e98ef8b-c8f9-42e2-8b69-7caa1f2ddbae"],
+
+Cell[TextData[ButtonBox["Paclets",
+ BaseStyle->"Link",
+ ButtonData->"paclet:guide/Paclets"]], "TutorialMoreAbout",
+ CellChangeTimes->{{3.886060846363962*^9, 3.8860608906367874`*^9}},
+ CellID->663590259,ExpressionUUID->"40e2c6af-3a93-4f0b-8cbd-fd35f0be435e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related Tech Notes", "RelatedTutorialsSection",
+ CellID->655682118,ExpressionUUID->"5e00bfb5-85a3-4623-b2c5-0271fbe3bdad"],
+
+Cell[TextData[ButtonBox["RefpropLink Implementation",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:RefpropLink/tutorial/RefpropLinkImplementation"]], \
+"RelatedTutorials",
+ CellChangeTimes->{{3.885636949315894*^9, 3.8856369810434947`*^9}},
+ CellID->376025285,ExpressionUUID->"2009d84c-abec-41b0-b5c8-0dde8cc058cc"],
+
+Cell[TextData[ButtonBox["Paclets Overview",
+ BaseStyle->"Link",
+ ButtonData->"paclet:tutorial/Paclets"]], "RelatedTutorials",
+ CellChangeTimes->{{3.8860609618320026`*^9, 3.886060995168315*^9}},
+ CellID->132182847,ExpressionUUID->"c78d4288-a0de-4964-95aa-6fc8ede08dfb"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Metadata", "MetadataSection",
+ CellID->106451810,ExpressionUUID->"823b48af-0826-4b91-81f3-ffb461c8d799"],
+
 Cell[TextData[{
  "New in: ",
- Cell["1.0", "HistoryData",
-  CellTags->"New",ExpressionUUID->"ee9b2ebc-9614-41b2-b8da-0fc8571a4142"],
+ Cell["13.2", "HistoryData",
+  CellTags->"New",ExpressionUUID->"c32cd38d-9001-4b87-abb5-ec5dddaf720d"],
  " | Modified in: ",
  Cell[" ", "HistoryData",
-  CellTags->"Modified",ExpressionUUID->"2aa1a1df-7703-4461-86d9-54211ce45d21"],
+  CellTags->"Modified",ExpressionUUID->"21c57f2d-76ae-4288-9fc7-a86811c15e35"],
  " | Obsolete in: ",
  Cell[" ", "HistoryData",
-  CellTags->"Obsolete",ExpressionUUID->"8f9aaef8-90da-4d15-ace0-9ecd798df8a6"],
- " | Excised in: ",
- Cell[" ", "HistoryData",
-  CellTags->"Excised",ExpressionUUID->"894102f0-b980-41d1-a3e9-40b5900e6ca1"]
+  CellTags->"Obsolete",ExpressionUUID->"265454e9-563a-4284-aa56-0e0bb3c50ba9"]
 }], "History",
- CellID->1247902091,ExpressionUUID->"a44b5208-8cc6-4ea1-83b5-7f9ada9a691d"],
+ CellChangeTimes->{{3.885636875299889*^9, 3.885636880598772*^9}},
+ CellID->365167251,ExpressionUUID->"d8c0fc73-9ca2-4fec-a1d4-f5318e40e00d"],
 
 Cell[CellGroupData[{
 
 Cell["Categorization", "CategorizationSection",
- CellID->1122911449,ExpressionUUID->"781fbb66-999b-421a-81c0-44d9269d554a"],
+ CellID->174385972,ExpressionUUID->"e4e333f1-55fa-46c9-b14a-77c29070dc87"],
 
-Cell["Tutorial", "Categorization",
+Cell["Tech Note", "Categorization",
  CellLabel->"Entity Type",
- CellID->686433507,ExpressionUUID->"9545eac7-779e-4fcd-9385-0575bfaae53e"],
+ CellID->395971078,ExpressionUUID->"fd5a9991-0a7e-4092-82df-7488b41a54dc"],
 
 Cell["RefpropLink", "Categorization",
  CellLabel->"Paclet Name",
- CellID->605800465,ExpressionUUID->"961049f6-72c3-430c-b778-c4f188018568"],
+ CellID->505239157,ExpressionUUID->"04c19b50-9a84-479e-8106-6cd13ebbe458"],
 
 Cell["RefpropLink`", "Categorization",
  CellLabel->"Context",
- CellID->468444828,ExpressionUUID->"27e34b7a-7977-4fed-b262-f4a918d7dfde"],
+ CellID->29117665,ExpressionUUID->"03730a7d-3e4a-4f28-8b68-ea0ed208778c"],
 
 Cell["RefpropLink/tutorial/RefpropLinkInstallation", "Categorization",
- CellChangeTimes->{3.8227635143050528`*^9},
- CellLabel->"URI",ExpressionUUID->"37df2b3e-11cf-4aaf-9d42-0e3723c5753b"]
-}, Closed]],
+ CellLabel->"URI",
+ CellID->389130982,ExpressionUUID->"6d6759ec-dcbd-4256-b7a5-46a079a0cbcb"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Keywords", "KeywordsSection",
- CellID->1427428552,ExpressionUUID->"73f3f005-6772-4ec3-9d2b-df5b11c44e05"],
-
-Cell["REFPROP", "Keywords",
- CellChangeTimes->{{3.822763522155059*^9, 3.822763524117834*^9}},
- CellID->1251852827,ExpressionUUID->"ebbc99fd-bc6f-4519-9df5-80271624e8ad"],
+ CellID->619312300,ExpressionUUID->"88d4e0fc-eb41-45e6-a6d3-d3fb3aca6e86"],
 
 Cell["RefpropLink", "Keywords",
- CellChangeTimes->{{3.822763522155059*^9, 3.8227635278288794`*^9}},
- CellID->128606421,ExpressionUUID->"6ae920e1-ce1c-4fc0-ab84-dd8a45fdc72d"],
+ CellChangeTimes->{{3.8851356717557344`*^9, 3.8851356782091956`*^9}},
+ CellID->268521556,ExpressionUUID->"9611116f-5db2-4140-89ae-a6fea9d5e5da"],
 
-Cell["Insatallation", "Keywords",
- CellChangeTimes->{{3.822763522155059*^9, 3.8227635301935863`*^9}},
- CellID->461262812,ExpressionUUID->"8838a5a5-0d0f-4717-97cd-f1efc6528d80"]
-}, Closed]],
+Cell["REFPROP", "Keywords",
+ CellChangeTimes->{{3.8851356717557344`*^9, 3.8851356842865257`*^9}},
+ CellID->413381409,ExpressionUUID->"86400e27-815d-4e6f-aa3b-bfd079e93e2c"],
 
-Cell[CellGroupData[{
+Cell["NIST REFPROP", "Keywords",
+ CellChangeTimes->{{3.8851356717557344`*^9, 3.885135688575246*^9}},
+ CellID->79312569,ExpressionUUID->"7492f500-db1c-4788-b548-dd6a88372759"],
 
-Cell["Details", "DetailsSection",
- CellID->307771771,ExpressionUUID->"074d05d9-ff7b-4800-b65f-1c24a8c155fd"],
-
-Cell["Patrick Fourspring", "Details",
- CellChangeTimes->{{3.8227635378331504`*^9, 3.822763541666895*^9}},
- CellLabel->"Lead",
- CellID->218895918,ExpressionUUID->"7aa73efe-dd99-49da-abc0-d8f3dd586f8f"],
-
-Cell["Jeff Henning", "Details",
- CellChangeTimes->{{3.8227635450099573`*^9, 3.8227635466336174`*^9}},
- CellLabel->"Developers",
- CellID->350963985,ExpressionUUID->"2dea9aca-7cbb-4f55-a1ba-48902f648037"],
-
-Cell["Jeff Henning", "Details",
- CellChangeTimes->{{3.8227635496255817`*^9, 3.822763551250266*^9}},
- CellLabel->"Authors",
- CellID->795871300,ExpressionUUID->"13bb86c0-3115-4bdc-8288-91ea08e1310d"],
-
-Cell["XXXX", "Details",
- CellLabel->"Feature Name",
- CellID->199739161,ExpressionUUID->"f4356134-3cc2-493b-bb95-85ffaebcf779"],
-
-Cell["XXXX", "Details",
- CellLabel->"QA",
- CellID->40625308,ExpressionUUID->"6fadb7ac-0815-4ddf-a30f-0b86fbef8cf3"],
-
-Cell["XXXX", "Details",
- CellLabel->"DA",
- CellID->357121918,ExpressionUUID->"4d1c6953-42af-4faa-b601-aadbc7aedf78"],
-
-Cell["XXXX", "Details",
- CellLabel->"Docs",
- CellID->35949532,ExpressionUUID->"0f69f965-1c73-4a60-8f35-f24832e8b6c4"],
-
-Cell["XXXX", "Details",
- CellLabel->"Features Page Notes",
- CellID->929432370,ExpressionUUID->"179bddb7-73b3-4bd9-9280-631898e80475"],
-
-Cell["XXXX", "Details",
- CellLabel->"Comments",
- CellID->240026365,ExpressionUUID->"e91e9ef6-3daa-42de-84f3-c1d66f830966"]
-}, Closed]],
-
-Cell[CellGroupData[{
-
-Cell["RefpropLink Installation", "Title",
- CellID->509267359,ExpressionUUID->"fd39b0d8-c671-461a-bbaf-7b139389fea2"],
-
-Cell["\<\
-If you are reading this document in the Mathematica Help documentation \
-system, then you already have RefpropLink or a prior version, installed.  \
-These instructions are placed here for completeness of documentation.\
-\>", "Text",
- CellChangeTimes->{{3.8227635760259943`*^9, 3.8227636971220713`*^9}},
- CellID->1534169418,ExpressionUUID->"4a5fa18b-7465-47b9-bd25-7f3ed2ebf269"],
-
-Cell["\<\
-There are a number of new instructions in Mathematica 12.1 that facilitate \
-the installation of Paclets.  These functions are listed here.  The \
-instructions that follow demonstrate the Paclet Management system and how it \
-is used to install RefpropLink.\
-\>", "Text",
- CellChangeTimes->{{3.8227637150271797`*^9, 3.8227637717305436`*^9}, {
-  3.8227656748954215`*^9, 3.822765680585178*^9}, {3.8227657137115946`*^9, 
-  3.822765773601383*^9}},
- CellID->140646063,ExpressionUUID->"f485c6c2-c798-4fac-bff0-263a9ed6d08d"],
-
-Cell[BoxData[GridBox[{
-   {"PacletSites", Cell[
-    "View registered paclet sites", "TableText",ExpressionUUID->
-     "40f31624-bbf7-4ab8-b8da-1e9798abded2"]},
-   {"PacletSiteRegister", Cell[
-    "Register a new paclet site", "TableText",ExpressionUUID->
-     "e119efe7-d18a-4f6d-a786-457b0375f8e3"]},
-   {"PacletSiteUnregister", Cell[
-    "Unregister a paclet site", "TableText",ExpressionUUID->
-     "26022a8e-d22f-4611-8e33-cd0e6f01b767"]},
-   {"PacletSiteUpdate", Cell[
-    "Update local cache with paclet site information", "TableText",
-     ExpressionUUID->"2dd45621-d2bf-4518-bf17-4f1f87418d8a"]},
-   {"PacletFind", Cell[
-    "Find paclets installed on the machine", "TableText",ExpressionUUID->
-     "aac5a421-78a7-4245-bff5-62d511032103"]},
-   {"PacletFindRemote", Cell[
-    "Find paclets on a remote paclet site", "TableText",ExpressionUUID->
-     "85fae64f-81bf-47b8-a87c-a6889c8435e0"]},
-   {"PacletInstall", Cell[
-    "Install a paclet from a paclet site", "TableText",ExpressionUUID->
-     "eb354442-a1b4-4e4d-975b-def2fd5784db"]},
-   {"PacletUninstall", Cell[
-    "Uninstall a paclet from the local machine", "TableText",ExpressionUUID->
-     "99415836-5d45-4467-812a-d04847f1fe27"]}
-  }]], "DefinitionBox",
- CellChangeTimes->{{3.8241174820080433`*^9, 3.8241175421072965`*^9}, {
-  3.8241175888044233`*^9, 3.8241176388266*^9}, {3.824117711685728*^9, 
-  3.824117719349255*^9}, {3.8241177499823036`*^9, 3.8241177989802375`*^9}, {
-  3.8241178296691537`*^9, 3.8241179354532127`*^9}},
- CellID->2096742444,ExpressionUUID->"005d8d16-6524-4343-9ccc-8f6b756c7eb4"],
-
-Cell["Paclet Management System Functions.", "Caption",
- CellChangeTimes->{{3.822765802144041*^9, 3.822765808551902*^9}, 
-   3.8241172688123083`*^9},
- CellID->1891092685,ExpressionUUID->"97857b06-0b09-441b-acbf-5e5c64f192ce"],
-
-Cell[CellGroupData[{
-
-Cell["Getting RefpropLink from a Paclet Site", "Section",
- CellChangeTimes->{{3.822765938954115*^9, 3.8227659460322104`*^9}, {
-  3.8241259282458467`*^9, 3.82412594174474*^9}},
- CellID->70745489,ExpressionUUID->"5f77a96d-eab8-4bfe-93dc-22c6a7d69968"],
-
-Cell["\<\
-PacletInstall can be used to install any Paclet from the list of known Paclet \
-sites.  Most users have just one such site, the default Wolfram server.  This \
-server is located here:\
-\>", "Text",
- CellChangeTimes->{{3.822575588694438*^9, 3.822575591570767*^9}},
- CellID->548007212,ExpressionUUID->"6d98b517-786c-43ed-bfaf-208f0ece5a60"],
-
-Cell[CellGroupData[{
-
-Cell["View known paclet sites ", "MathCaption",
- CellChangeTimes->{{3.8225756126443996`*^9, 3.8225756546630135`*^9}},
- CellID->611675121,ExpressionUUID->"a84e6f63-8dbb-4ef1-9f03-c067d4733e03"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"PacletSites", "[", "]"}]], "Input",
- CellChangeTimes->{{3.82257566365596*^9, 3.822575668875997*^9}},
- CellLabel->"In[42]:=",
- CellID->15948295,ExpressionUUID->"385c3f4d-7481-4cd0-a976-c2176ed37036"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"PacletSiteObject", "[", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"URL\"\>", 
-      "\[Rule]", "\<\"https://pacletserver.wolfram.com\"\>"}], ",", 
-     RowBox[{"\<\"Name\"\>", 
-      "\[Rule]", "\<\"Wolfram Research Paclet Server\"\>"}], ",", 
-     RowBox[{"\<\"Local\"\>", "\[Rule]", "False"}], ",", 
-     RowBox[{"\<\"Type\"\>", "\[Rule]", "\<\"Server\"\>"}]}], 
-    "\[RightAssociation]"}], "]"}], "}"}]], "Output",
- CellChangeTimes->{3.8225756706482286`*^9},
- CellLabel->"Out[42]=",
- CellID->318583835,ExpressionUUID->"c6e07ccf-f250-41c9-8f31-7e989d9671da"]
-}, Open  ]]
-}, Open  ]],
-
-Cell["\<\
-You can use PacletSiteRegister and PacletSiteUnregisterRe to manage the set \
-of known paclet sites.  The settings are persistent from one session to the \
-next so once you add a site, it remains.\
-\>", "Text",
- CellChangeTimes->{
-  3.822575579743373*^9, {3.8225758264754715`*^9, 3.8225758505590696`*^9}, {
-   3.8241174207239895`*^9, 3.8241174251072454`*^9}, {3.831527306525413*^9, 
-   3.8315273162294846`*^9}, {3.8315294767866983`*^9, 3.831529477147744*^9}},
- CellID->20583076,ExpressionUUID->"5ce60248-7ad4-42bf-a017-314c4d6009ca"],
-
-Cell["\<\
-You would call PacletSiteAdd if you or your organization set up your own \
-site;  This is easy to do.  No logic is required on the server side.  A \
-paclet site can be a simple web server or even a shared directory on a \
-network.  In this case, the RefpropLink paclet is stored on the \
-NIST/REFPROP-wrappers GitHub site.  \
-\>", "Text",
- CellChangeTimes->{
-  3.822575579743373*^9, {3.8225758264754715`*^9, 3.822575878955099*^9}, {
-   3.8225759210911436`*^9, 3.8225760251710916`*^9}},
- CellID->112154,ExpressionUUID->"c8034249-90cd-4df5-80f6-d9eda65bcbc7"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["More About", "TutorialMoreAboutSection",
- CellID->23220180,ExpressionUUID->"72e5cea9-ad26-478e-bceb-976b9502d685"],
-
-Cell[TextData[ButtonBox["RefpropLink Guide",
- BaseStyle->"Link",
- ButtonData->"paclet:RefpropLink/guide/RefpropLink"]], "TutorialMoreAbout",
- CellChangeTimes->{{3.829554477265361*^9, 3.829554507471608*^9}},
- CellID->1567025153,ExpressionUUID->"755f1048-e743-494e-a48c-c04587fc7b53"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Related Tutorials", "RelatedTutorialsSection",
- CellID->415694126,ExpressionUUID->"32e37316-1311-415c-b973-9542e410918d"],
-
-Cell[TextData[ButtonBox["Pure Fluids",
- BaseStyle->"Link",
- ButtonData->"paclet:RefpropLink/tutorial/PureFluids"]], "RelatedTutorials",
- CellChangeTimes->{{3.829554551369272*^9, 3.829554555001528*^9}, {
-  3.8295560590748954`*^9, 3.8295560592125425`*^9}},
- CellID->806871991,ExpressionUUID->"68cfae6f-dab5-4a60-a838-ba19e2e9e881"],
-
-Cell[TextData[ButtonBox["Mixtures",
- BaseStyle->"Link",
- ButtonData->"paclet:RefpropLink/tutorial/Mixtures"]], "RelatedTutorials",
- CellChangeTimes->{{3.829554551369272*^9, 3.829554555001528*^9}, {
-  3.8295546235452986`*^9, 3.8295546252996035`*^9}, {3.8295560700585113`*^9, 
-  3.8295560702480116`*^9}},
- CellID->190022963,ExpressionUUID->"225b92aa-5145-491c-a61d-e75d765edf8d"],
-
-Cell[TextData[ButtonBox["Units Implementation",
- BaseStyle->"Link",
- ButtonData->"paclet:RefpropLink/tutorial/Units"]], "RelatedTutorials",
- CellChangeTimes->{{3.829554551369272*^9, 3.829554555001528*^9}, {
-  3.829554631192824*^9, 3.8295546340571938`*^9}, {3.82955608318342*^9, 
-  3.829556083387905*^9}},
- CellID->127830579,ExpressionUUID->"29984704-a963-4927-8f51-6a02565a4ea2"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Related Wolfram Education Group Courses", "TutorialRelatedLinksSection",
- CellID->415694148,ExpressionUUID->"ad0c9b26-af2c-4808-b773-311c4772b351"],
-
-Cell["XXXX", "TutorialRelatedLinks",
- CellID->415694149,ExpressionUUID->"174f655d-2a03-4324-9433-78568ea7e447"]
+Cell["Properties", "Keywords",
+ CellChangeTimes->{{3.8851356717557344`*^9, 3.885135693460149*^9}, {
+  3.8851364891166363`*^9, 3.8851364912063107`*^9}},
+ CellID->475629817,ExpressionUUID->"3cf0b6d3-c5d8-48e5-b9e8-385e872116f6"]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{700, 770},
-WindowMargins->{{-732, Automatic}, {Automatic, 120}},
-FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
-StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "TutorialPageStyles.nb", 
+WindowSize->{700.5, 765.75},
+WindowMargins->{{107.25, Automatic}, {Automatic, 1.5}},
+TaggingRules->{
+ "DocuToolsSettings" -> {
+   "$ApplicationName" -> "RefpropLink", "$LinkBase" -> "RefpropLink", 
+    "$DocumentationDirectory" -> 
+    "C:\\Users\\jeffp\\eclipse-workspace\\RefpropLink\\RefpropLink\\\
+Documentation\\English\\", "$ApplicationDirectory" -> 
+    "C:\\Users\\jeffp\\eclipse-workspace\\RefpropLink\\RefpropLink"}, 
+  "WelcomeScreenSettings" -> {"FEStarting" -> False}, "Paclet" -> 
+  "RefpropLink"},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "TechNotePageStylesExt.nb", 
   CharacterEncoding -> "UTF-8"],
-ExpressionUUID->"fc1cbb53-e8e0-48fe-8e3b-a03adea96387"
+ExpressionUUID->"7f07ec48-441c-4b61-9ca6-a8b193dd8e8f"
 ]
 (* End of Notebook Content *)
 
@@ -320,103 +725,198 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 600, 14, 22, "History",ExpressionUUID->"a44b5208-8cc6-4ea1-83b5-7f9ada9a691d",
- CellID->1247902091],
 Cell[CellGroupData[{
-Cell[1183, 38, 123, 1, 27, "CategorizationSection",ExpressionUUID->"781fbb66-999b-421a-81c0-44d9269d554a",
- CellID->1122911449],
-Cell[1309, 41, 136, 2, 31, "Categorization",ExpressionUUID->"9545eac7-779e-4fcd-9385-0575bfaae53e",
- CellID->686433507],
-Cell[1448, 45, 139, 2, 31, "Categorization",ExpressionUUID->"961049f6-72c3-430c-b778-c4f188018568",
- CellID->605800465],
-Cell[1590, 49, 136, 2, 31, "Categorization",ExpressionUUID->"27e34b7a-7977-4fed-b262-f4a918d7dfde",
- CellID->468444828],
-Cell[1729, 53, 188, 2, 31, "Categorization",ExpressionUUID->"37df2b3e-11cf-4aaf-9d42-0e3723c5753b"]
-}, Closed]],
+Cell[580, 22, 115, 1, 114, "Title",ExpressionUUID->"4a8d10c4-affd-49ed-b2c5-a08c38b5233f",
+ CellID->21507785],
+Cell[698, 25, 470, 8, 63, "Text",ExpressionUUID->"d66b4e46-a6dc-4945-9891-d313b932b8d7",
+ CellID->411374971],
 Cell[CellGroupData[{
-Cell[1954, 60, 111, 1, 17, "KeywordsSection",ExpressionUUID->"73f3f005-6772-4ec3-9d2b-df5b11c44e05",
- CellID->1427428552],
-Cell[2068, 63, 169, 2, 17, "Keywords",ExpressionUUID->"ebbc99fd-bc6f-4519-9df5-80271624e8ad",
- CellID->1251852827],
-Cell[2240, 67, 174, 2, 17, "Keywords",ExpressionUUID->"6ae920e1-ce1c-4fc0-ab84-dd8a45fdc72d",
- CellID->128606421],
-Cell[2417, 71, 176, 2, 17, "Keywords",ExpressionUUID->"8838a5a5-0d0f-4717-97cd-f1efc6528d80",
- CellID->461262812]
-}, Closed]],
+Cell[1193, 37, 173, 2, 45, "Section",ExpressionUUID->"7443aa81-a7ce-4971-88f1-35b3eadf43ea",
+ CellID->87861],
+Cell[1369, 41, 708, 11, 63, "Text",ExpressionUUID->"72a0b1e3-a94a-4b89-96c5-9b8972493907",
+ CellID->370723392],
+Cell[2080, 54, 650, 12, 63, "Text",ExpressionUUID->"2d64a8cc-28fc-4471-8b6c-f379e79b5a9c",
+ CellID->276814643],
+Cell[2733, 68, 509, 10, 63, "Text",ExpressionUUID->"f30e73dd-7aa7-4806-8e81-e509179f64f9",
+ CellID->309714428],
+Cell[3245, 80, 705, 18, 63, "Text",ExpressionUUID->"029ad3da-981a-4078-bb21-d5135f44d135",
+ CellID->14947450],
+Cell[3953, 100, 835, 16, 82, "Text",ExpressionUUID->"a3511682-abb9-4e15-bfb7-7106463cf6f0",
+ CellID->196003392],
+Cell[4791, 118, 428, 7, 44, "Text",ExpressionUUID->"fe13999e-150f-431b-b5be-43c8e601f4de",
+ CellID->335940601]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[2630, 78, 108, 1, 17, "DetailsSection",ExpressionUUID->"074d05d9-ff7b-4800-b65f-1c24a8c155fd",
- CellID->307771771],
-Cell[2741, 81, 200, 3, 31, "Details",ExpressionUUID->"7aa73efe-dd99-49da-abc0-d8f3dd586f8f",
- CellID->218895918],
-Cell[2944, 86, 202, 3, 31, "Details",ExpressionUUID->"2dea9aca-7cbb-4f55-a1ba-48902f648037",
- CellID->350963985],
-Cell[3149, 91, 197, 3, 31, "Details",ExpressionUUID->"13bb86c0-3115-4bdc-8288-91ea08e1310d",
- CellID->795871300],
-Cell[3349, 96, 126, 2, 31, "Details",ExpressionUUID->"f4356134-3cc2-493b-bb95-85ffaebcf779",
- CellID->199739161],
-Cell[3478, 100, 115, 2, 31, "Details",ExpressionUUID->"6fadb7ac-0815-4ddf-a30f-0b86fbef8cf3",
- CellID->40625308],
-Cell[3596, 104, 116, 2, 31, "Details",ExpressionUUID->"4d1c6953-42af-4faa-b601-aadbc7aedf78",
- CellID->357121918],
-Cell[3715, 108, 117, 2, 31, "Details",ExpressionUUID->"0f69f965-1c73-4a60-8f35-f24832e8b6c4",
- CellID->35949532],
-Cell[3835, 112, 133, 2, 31, "Details",ExpressionUUID->"179bddb7-73b3-4bd9-9280-631898e80475",
- CellID->929432370],
-Cell[3971, 116, 122, 2, 31, "Details",ExpressionUUID->"e91e9ef6-3daa-42de-84f3-c1d66f830966",
- CellID->240026365]
-}, Closed]],
+Cell[5256, 130, 406, 6, 56, "Section",ExpressionUUID->"a0ed58ea-3875-4a6f-97a3-4693d02c5ec3",
+ CellID->19529436],
+Cell[5665, 138, 499, 8, 44, "Text",ExpressionUUID->"7605449f-8ea4-40f8-863a-4c0fbaaa6960",
+ CellID->30415973],
+Cell[6167, 148, 444, 8, 28, "ItemNumbered",ExpressionUUID->"c3f6ff58-47b0-4372-bc74-a2b89cc6d028",
+ CellID->342434010],
+Cell[6614, 158, 435, 8, 28, "ItemNumbered",ExpressionUUID->"08a95ce1-c5a4-4dc3-8714-7cc9d5885678",
+ CellID->253188192],
+Cell[7052, 168, 405, 8, 24, "Item",ExpressionUUID->"6f3be817-2138-4a2f-8c6d-4bdffb4aa3e8",
+ CellID->333587227],
+Cell[7460, 178, 467, 9, 24, "Item",ExpressionUUID->"0d79ce8f-47c9-4746-91b7-a90af64a6be2",
+ CellID->800960609],
+Cell[7930, 189, 469, 9, 24, "Item",ExpressionUUID->"2da18625-0618-4a86-ba05-dc05e0e0e5d6",
+ CellID->2483592],
 Cell[CellGroupData[{
-Cell[4130, 123, 116, 1, 105, "Title",ExpressionUUID->"fd39b0d8-c671-461a-bbaf-7b139389fea2",
- CellID->509267359],
-Cell[4249, 126, 388, 6, 51, "Text",ExpressionUUID->"4a5fa18b-7465-47b9-bd25-7f3ed2ebf269",
- CellID->1534169418],
-Cell[4640, 134, 528, 9, 51, "Text",ExpressionUUID->"f485c6c2-c798-4fac-bff0-263a9ed6d08d",
- CellID->140646063],
-Cell[5171, 145, 1569, 30, 180, "DefinitionBox",ExpressionUUID->"005d8d16-6524-4343-9ccc-8f6b756c7eb4",
- CellID->2096742444],
-Cell[6743, 177, 224, 3, 27, "Caption",ExpressionUUID->"97857b06-0b09-441b-acbf-5e5c64f192ce",
- CellID->1891092685],
+Cell[8424, 202, 195, 2, 42, "Subsection",ExpressionUUID->"fbe1ed0e-d6b4-46fa-b3b6-e5930178f5c6",
+ CellID->209726609],
+Cell[8622, 206, 661, 16, 63, "Text",ExpressionUUID->"d0b584ed-9414-444c-bbfd-c801ab75ad11",
+ CellID->381043997],
 Cell[CellGroupData[{
-Cell[6992, 184, 249, 3, 40, "Section",ExpressionUUID->"5f77a96d-eab8-4bfe-93dc-22c6a7d69968",
- CellID->70745489],
-Cell[7244, 189, 348, 6, 36, "Text",ExpressionUUID->"6d98b517-786c-43ed-bfaf-208f0ece5a60",
- CellID->548007212],
+Cell[9308, 226, 603, 9, 82, "Text",ExpressionUUID->"2c7d6282-4134-4296-96b7-a7d253243974",
+ CellID->262896202],
+Cell[9914, 237, 313, 6, 42, "Code",ExpressionUUID->"bd751bf6-8dfd-40ce-81b7-6e6a50558601",
+ Evaluatable->False,
+ InitializationCell->False,
+ CellID->77419262]
+}, Open  ]],
+Cell[10242, 246, 337, 8, 25, "Text",ExpressionUUID->"fc8da1ec-85b2-42dd-9621-35012c0eabab",
+ CellID->244754231],
+Cell[10582, 256, 419, 9, 25, "Text",ExpressionUUID->"8d0aec21-d8fd-4211-8467-590f132fb327",
+ CellID->50221343],
+Cell[11004, 267, 408, 9, 44, "Text",ExpressionUUID->"238acb32-2793-4272-ac3f-ebbb07f39620",
+ CellID->695350250]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[7617, 199, 192, 2, 38, "MathCaption",ExpressionUUID->"a84e6f63-8dbb-4ef1-9f03-c067d4733e03",
- CellID->611675121],
+Cell[11449, 281, 185, 2, 42, "Subsection",ExpressionUUID->"8bfd03c2-ae83-414b-b7f3-4d4d3369af7c",
+ CellID->437052280],
 Cell[CellGroupData[{
-Cell[7834, 205, 222, 4, 25, "Input",ExpressionUUID->"385c3f4d-7481-4cd0-a976-c2176ed37036",
- CellID->15948295],
-Cell[8059, 211, 624, 14, 43, "Output",ExpressionUUID->"c6e07ccf-f250-41c9-8f31-7e989d9671da",
- CellID->318583835]
+Cell[11659, 287, 308, 6, 40, "MathCaption",ExpressionUUID->"57de9371-1a8a-474a-8dce-0a3baf2ecc6f",
+ CellID->117239214],
+Cell[11970, 295, 197, 3, 25, "Input",ExpressionUUID->"62d18349-ff84-4337-8634-e481bdb13e14",
+ CellID->248889915],
+Cell[12170, 300, 220, 3, 25, "Input",ExpressionUUID->"495dc7af-d537-44e5-93d2-8eef3331429d",
+ CellID->396347447]
 }, Open  ]]
 }, Open  ]],
-Cell[8710, 229, 543, 9, 36, "Text",ExpressionUUID->"5ce60248-7ad4-42bf-a017-314c4d6009ca",
- CellID->20583076],
-Cell[9256, 240, 567, 10, 66, "Text",ExpressionUUID->"c8034249-90cd-4df5-80f6-d9eda65bcbc7",
- CellID->112154]
+Cell[CellGroupData[{
+Cell[12439, 309, 259, 3, 42, "Subsection",ExpressionUUID->"cc4e8347-4384-4c61-9f09-99054f63f433",
+ CellID->36980612],
+Cell[CellGroupData[{
+Cell[12723, 316, 209, 2, 40, "MathCaption",ExpressionUUID->"293a20df-d2ef-4746-922c-1292dc78f24b",
+ CellID->116431477],
+Cell[12935, 320, 226, 3, 25, "Input",ExpressionUUID->"98d9aeb2-d4f9-45fc-9cde-5233dc67e1d6",
+ CellID->474689001]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9860, 255, 120, 1, 70, "TutorialMoreAboutSection",ExpressionUUID->"72e5cea9-ad26-478e-bceb-976b9502d685",
- CellID->23220180],
-Cell[9983, 258, 282, 4, 20, "TutorialMoreAbout",ExpressionUUID->"755f1048-e743-494e-a48c-c04587fc7b53",
- CellID->1567025153]
+Cell[13198, 328, 264, 3, 40, "MathCaption",ExpressionUUID->"5c5c446f-f9c2-4745-8440-3728c53e54cd",
+ CellID->689722793],
+Cell[13465, 333, 226, 3, 25, "Input",ExpressionUUID->"63537482-3317-46bc-b267-e256fc9e351f",
+ CellID->38403515]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[10302, 267, 127, 1, 70, "RelatedTutorialsSection",ExpressionUUID->"32e37316-1311-415c-b973-9542e410918d",
- CellID->415694126],
-Cell[10432, 270, 329, 5, 20, "RelatedTutorials",ExpressionUUID->"68cfae6f-dab5-4a60-a838-ba19e2e9e881",
- CellID->806871991],
-Cell[10764, 277, 377, 6, 20, "RelatedTutorials",ExpressionUUID->"225b92aa-5145-491c-a61d-e75d765edf8d",
- CellID->190022963],
-Cell[11144, 285, 379, 6, 20, "RelatedTutorials",ExpressionUUID->"29984704-a963-4927-8f51-6a02565a4ea2",
- CellID->127830579]
+Cell[13740, 342, 193, 2, 42, "Subsection",ExpressionUUID->"cea2b1eb-146c-47ed-bfb0-ea40e9782cd8",
+ CellID->654739400],
+Cell[13936, 346, 320, 5, 63, "Text",ExpressionUUID->"9058d057-35f1-459b-9314-68960d4ce915",
+ CellID->361885008],
+Cell[CellGroupData[{
+Cell[14281, 355, 252, 4, 40, "MathCaption",ExpressionUUID->"81390224-5b15-4c24-a52b-6afbd54d6023",
+ CellID->217735914],
+Cell[14536, 361, 258, 4, 25, "Input",ExpressionUUID->"28473a52-0d0c-426e-a5cd-e9b6f2919e0a",
+ CellID->50041876]
+}, Open  ]],
+Cell[14809, 368, 232, 5, 25, "Text",ExpressionUUID->"257f4005-3267-4bfd-a2ba-55aa05ad8443",
+ CellID->60264828],
+Cell[15044, 375, 365, 6, 44, "Text",ExpressionUUID->"e3b59051-50cf-437c-994a-dbb9d8f18ad5",
+ CellID->84014794]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11560, 296, 153, 1, 70, "TutorialRelatedLinksSection",ExpressionUUID->"ad0c9b26-af2c-4808-b773-311c4772b351",
- CellID->415694148],
-Cell[11716, 299, 111, 1, 20, "TutorialRelatedLinks",ExpressionUUID->"174f655d-2a03-4324-9433-78568ea7e447",
- CellID->415694149]
+Cell[15446, 386, 199, 2, 42, "Subsection",ExpressionUUID->"80d2b975-d7bb-425c-8afa-9ff35bf95f74",
+ CellID->499018586],
+Cell[15648, 390, 230, 4, 25, "Text",ExpressionUUID->"a14cb0dd-fae4-494f-b2ae-36e318216ea2",
+ CellID->35532133],
+Cell[CellGroupData[{
+Cell[15903, 398, 182, 2, 40, "MathCaption",ExpressionUUID->"6dfdf778-3936-4106-bee1-16f71598a406",
+ CellID->114716107],
+Cell[16088, 402, 247, 4, 25, "Input",ExpressionUUID->"8ef2aa3f-e89e-4e61-b3ca-e9c1edfe14b6",
+ CellID->57257048]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16384, 412, 182, 2, 42, "Subsection",ExpressionUUID->"c9fbc6a4-d6d4-402a-b50a-cb91893d7230",
+ CellID->328456102],
+Cell[16569, 416, 250, 5, 25, "Text",ExpressionUUID->"d8a31354-dd58-4788-850a-9e68bd4c1c15",
+ CellID->23256081],
+Cell[CellGroupData[{
+Cell[16844, 425, 284, 5, 57, "MathCaption",ExpressionUUID->"ae1fe757-354a-4eb1-81b8-9356a3744551",
+ CellID->188614314],
+Cell[17131, 432, 636, 15, 43, "Input",ExpressionUUID->"6c5706bf-ad15-4ad5-a830-364953b78bc0",
+ CellID->364051165]
+}, Open  ]],
+Cell[17782, 450, 355, 6, 44, "Text",ExpressionUUID->"62afa12e-3d33-4685-b58f-245962abc8d0",
+ CellID->906285485]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18186, 462, 320, 5, 56, "Section",ExpressionUUID->"508177de-db60-45e9-8eb4-367ec5dd7b72",
+ CellID->18459449],
+Cell[18509, 469, 1468, 31, 101, "Text",ExpressionUUID->"f2939c0e-1305-49c1-8bc2-71daabdd319b",
+ CellID->899396101],
+Cell[19980, 502, 1036, 19, 98, "Text",ExpressionUUID->"7e6fff63-e314-479f-bb00-810386004c0c",
+ CellID->119575501],
+Cell[21019, 523, 555, 9, 25, "Text",ExpressionUUID->"e3b9929a-e4bf-4777-be4a-d06017edbcc4",
+ CellID->152816613],
+Cell[21577, 534, 383, 8, 24, "Item",ExpressionUUID->"dd105fa8-d223-4b1f-88c1-0f0f6ff64eea",
+ CellID->258253421],
+Cell[21963, 544, 351, 7, 24, "Item",ExpressionUUID->"32e8c2d6-b8cf-491c-ac0d-0c4e4e5af6bb",
+ CellID->80312916],
+Cell[22317, 553, 358, 7, 24, "Item",ExpressionUUID->"62ec13d1-4066-4044-a36f-7423fabfad12",
+ CellID->240987158],
+Cell[22678, 562, 387, 8, 24, "Item",ExpressionUUID->"d08ca891-535a-4ac4-9c77-92473ec728cd",
+ CellID->182671851],
+Cell[23068, 572, 600, 16, 25, "Text",ExpressionUUID->"7f40fdea-fbef-4fc7-a2ec-a7a19f0cd158",
+ CellID->953165569]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23705, 593, 190, 2, 74, "TutorialMoreAboutSection",ExpressionUUID->"87b5e9d2-9f79-42ad-9836-23038a9bf931",
+ CellID->78867934],
+Cell[23898, 597, 375, 8, 27, "TutorialMoreAbout",ExpressionUUID->"1e98ef8b-c8f9-42e2-8b69-7caa1f2ddbae",
+ CellID->118998663],
+Cell[24276, 607, 257, 4, 24, "TutorialMoreAbout",ExpressionUUID->"40e2c6af-3a93-4f0b-8cbd-fd35f0be435e",
+ CellID->663590259]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24570, 616, 128, 1, 74, "RelatedTutorialsSection",ExpressionUUID->"5e00bfb5-85a3-4623-b2c5-0271fbe3bdad",
+ CellID->655682118],
+Cell[24701, 619, 313, 6, 24, "RelatedTutorials",ExpressionUUID->"2009d84c-abec-41b0-b5c8-0dde8cc058cc",
+ CellID->376025285],
+Cell[25017, 627, 268, 4, 24, "RelatedTutorials",ExpressionUUID->"c78d4288-a0de-4964-95aa-6fc8ede08dfb",
+ CellID->132182847]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25334, 637, 110, 1, 72, "MetadataSection",ExpressionUUID->"823b48af-0826-4b91-81f3-ffb461c8d799",
+ CellID->106451810],
+Cell[25447, 640, 541, 12, 26, "History",ExpressionUUID->"d8c0fc73-9ca2-4fec-a1d4-f5318e40e00d",
+ CellID->365167251],
+Cell[CellGroupData[{
+Cell[26013, 656, 122, 1, 21, "CategorizationSection",ExpressionUUID->"e4e333f1-55fa-46c9-b14a-77c29070dc87",
+ CellID->174385972],
+Cell[26138, 659, 137, 2, 34, "Categorization",ExpressionUUID->"fd5a9991-0a7e-4092-82df-7488b41a54dc",
+ CellID->395971078],
+Cell[26278, 663, 139, 2, 34, "Categorization",ExpressionUUID->"04c19b50-9a84-479e-8106-6cd13ebbe458",
+ CellID->505239157],
+Cell[26420, 667, 135, 2, 34, "Categorization",ExpressionUUID->"03730a7d-3e4a-4f28-8b68-ea0ed208778c",
+ CellID->29117665],
+Cell[26558, 671, 164, 2, 34, "Categorization",ExpressionUUID->"6d6759ec-dcbd-4256-b7a5-46a079a0cbcb",
+ CellID->389130982]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26759, 678, 110, 1, 31, "KeywordsSection",ExpressionUUID->"88d4e0fc-eb41-45e6-a6d3-d3fb3aca6e86",
+ CellID->619312300],
+Cell[26872, 681, 176, 2, 20, "Keywords",ExpressionUUID->"9611116f-5db2-4140-89ae-a6fea9d5e5da",
+ CellID->268521556],
+Cell[27051, 685, 172, 2, 20, "Keywords",ExpressionUUID->"86400e27-815d-4e6f-aa3b-bfd079e93e2c",
+ CellID->413381409],
+Cell[27226, 689, 174, 2, 20, "Keywords",ExpressionUUID->"7492f500-db1c-4788-b548-dd6a88372759",
+ CellID->79312569],
+Cell[27403, 693, 226, 3, 20, "Keywords",ExpressionUUID->"3cf0b6d3-c5d8-48e5-b9e8-385e872116f6",
+ CellID->475629817]
 }, Open  ]]
 }, Open  ]]
 }

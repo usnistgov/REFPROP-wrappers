@@ -18,17 +18,17 @@ setmix::usage = "setmix[hMixNme, hRef] loads a mixture file (.mix) specified in 
 getversion::usage = "getversion[] returns a formatted string containing the loaded RefProp version.";
 info::usage = "info[] provides fluid constants for first component (pure fluid)" <> 
               "\ninfo[icomp] returns fluid constants for specified component.";
-wmoli::usage = "wmoli[icomp] returns the molar mass (molecular weight [g/mol]) for component (icomp). The parameter icomp can be ommitted to get the molar mass for the first component.";
+wmoli::usage = "wmoli[icomp] returns the molar mass (molecular weight [g/mol]) for component (icomp). The parameter icomp can be omitted to get the molar mass for the first component.";
 wmol::usage = "wmol[] returns the molar mass (molecular weight [g/mol]) for the first or only component.\nwmol[z] returns the molar mass (molecular weight [g/mol]) for a mixture of a specified composition in parameter z as a list of reals.";
 name::usage = "name[icomp] returns the fluid name from the fluid file loaded in position [icomp]." <>
-              "\nname[] returns the fluid name from the fluid file loaded in the first positon (pure fluid loaded)."
-longname::usage = "longname[icomp] returns the long fluid name from the fluid file loaded in position [icomp]. To return the file name used when setup[] was called (without path), send -icomp." <>
-              "\nlongname[] returns the long fluid name from the fluid file loaded in the first positon (pure fluid loaded)."
+              "\nname[] returns the fluid name from the fluid file loaded in the first position (pure fluid loaded)."
+longname::usage = "longname[icomp] returns the long fluid name from the fluid file loaded in position [icomp]. To return the filename used when setup[] was called (without path), send -icomp." <>
+              "\nlongname[] returns the long fluid name from the fluid file loaded in the first position (pure fluid loaded)."
 casn::usage = "casn[icomp] returns the fluid CASN (Chemical Abstracts Service Number) from the fluid file loaded in position [icomp]." <>
-              "\ncasn[] returns the fluid CASN (Chemical Abstracts Service Number) from the fluid file loaded in the first positon (pure fluid loaded)."
-limits::usage = "limits[htype, z] provides the temperature, density, and pressure limits of the loaded equations. " <>
+              "\ncasn[] returns the fluid CASN (Chemical Abstracts Service Number) from the fluid file loaded in the first position (pure fluid loaded)."
+limits::usage = "limits[htype, z] provides the temperature, density, and pressure validity range of the loaded fluid equations. " <>
                 "Parameter htype is optional and specifies the equation set (\"EOS\" (default), \"ETA\" - Viscosity, \"TCX\" - Thermal Conductivity, or \"STN\" - Surface Tension).  " <>
-                "The molar composition, z, shoud be provided for mixtures, but can be omitted for pure fluids.";
+                "The molar composition, z, should be provided for mixtures, but can be omitted for pure fluids.";
 tprho::usage = "tprho[T,P,kph] iterates for pure fluid density as a function of temperature [K] and pressure [kPa] for a specified phase (kph = 1 [liquid] or 2 [vapor])." <> 
                "\ntprho[T,P,kph,D] iterates for pure fluid density, as above, but D provides an initial guess for molar density [mol/L]." <> 
                "\ntprho[T,P,z,kph] iterates for mixture density as a function of temperature [K], pressure [kPa], and molar composition for a specified phase (kph = 1 [liquid] or 2 [vapor])." <> 
@@ -48,72 +48,72 @@ satp::usage = "satp[P] Calculates pure fluid saturation properties at a given pr
 satt::usage = "satt[T] Calculates pure fluid saturation properties at a given temperature, T [K]." <>
               "\nsatt[T,z,kph] Calculate mixture saturation properties at a given temperature, T [K], and mole fraction list, z, in the liquid (kph=1) or vapor (kph=2) phase.";
 sats::usage = "sats[s,z,kph] Iterate for temperature, pressure, and density given entropy along the saturation boundary and the composition. " <>
-              "kph is set to 0 - Return all VLE roots (defult); 1 - liquid VLE root; 2 - vapor VLE root; 3 - liquid SLE root; 4 - vapor SVE root.";
+              "kph is set to 0 - Return all VLE roots (default); 1 - liquid VLE root; 2 - vapor VLE root; 3 - liquid SLE root; 4 - vapor SVE root.";
 sath::usage = "sath[h,z,kph] Iterate for temperature, pressure, and density given enthalpy along the saturation boundary and the composition. " <>
-              "kph is set to 0 - Return all roots (defult); 1 - liquid VLE root; 2 - vapor VLE root; 3 - liquid SLE root; 4 - vapor SVE root.";
+              "kph is set to 0 - Return all roots (default); 1 - liquid VLE root; 2 - vapor VLE root; 3 - liquid SLE root; 4 - vapor SVE root.";
 tpflsh::usage = "tpflsh[T,P] is a general flash calculation given temperature [K] and pressure [kPa] for pure fluids. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs; for single-phase calculations, the subroutine tprho is much faster." <>
                 "\ntpflsh[T,P,z] is a general flash calculation given temperature [K], pressure [kPa], and bulk (molar) composition. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs; for single-phase calculations, the subroutine tprho is much faster.";
 tdflsh::usage = "tdflsh[T,D] is a general flash calculation given temperature [K] and molar Density [mol/L] for pure fluids. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs." <>
-                "\ntpflsh[T,P,z] is a general flash calculation given temperature [K], molar Density [mol/L], and bulk (molar) composition. " <> 
+                "\ntdflsh[T,P,z] is a general flash calculation given temperature [K], molar Density [mol/L], and bulk (molar) composition. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs.";
-pdflsh::usage = "phflsh[P,D] is a general flash calculation given temperature [K] and molar Density [mol/L] for pure fluids. " <> 
+pdflsh::usage = "pdflsh[P,D] is a general flash calculation given pressure [kPa] and molar Density [mol/L] for pure fluids. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs." <>
-                "\ntpflsh[T,P,z] is a general flash calculation given temperature [K], molar Density [mol/L], and bulk (molar) composition. " <> 
+                "\npdflsh[P,D,z] is a general flash calculation given pressure [kPa], molar Density [mol/L], and bulk (molar) composition. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs.";
-thflsh::usage = "thflsh[t, h, kr] is a general flash calculation given Temperature [K] and Enthalpy [J/mol] for pure fluids. " <> 
+thflsh::usage = "thflsh[T, h, kr] is a general flash calculation given Temperature [K] and Enthalpy [J/mol] for pure fluids. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs." <>
                 "Often, in the liquid, two solutions exist; one in the two phase region. " <>
                 "If this is the case, call thflsh with kr=2 to get the single-phase state.  If omitted, kr=1 (2-phase) is assumed." <> 
-                "\nthflsh[t, h, z, kr] is a general flash calculation given Temperature [K], Enthalpy [J/mol], and bulk (molar) composition. " <> 
+                "\nthflsh[T, h, z, kr] is a general flash calculation given Temperature [K], Enthalpy [J/mol], and bulk (molar) composition. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs." <>
                 "Often, in the liquid, two solutions exist; one in the two phase region. " <>
                 "If this is the case, call thflsh with kr=2 to get the single-phase state.  If omitted, kr=1 (2-phase) is assumed.";
-tsflsh::usage = "tsflsh[t, s] is a general flash calculation given Temperature [K] and Entropy [J/mol-K] for pure fluids. " <>
+tsflsh::usage = "tsflsh[T, s] is a general flash calculation given Temperature [K] and Entropy [J/mol-K] for pure fluids. " <>
                 "This routine accepts bot single-phase and two-phase inputs." <>
-                "\ntsflsh[t, s, kr] same as tsflsh[t, s], but supplies a root flag when multiple roots exist." <>
+                "\ntsflsh[T, s, kr] same as tsflsh[T, s], but supplies a root flag when multiple roots exist." <>
                 "use kr=2 to get the upper (liquid, single phase) root or kr=1 (default) to get the lower (2-phase) root. " <>
                 "This routine accepts bot single-phase and two-phase inputs." <>
-                "\ntsflsh[t, s, z] is a general flash calculation given Temperature [K], Entropy [J/mol-K], and bulk (molar) composition for mixtures. " <> 
+                "\ntsflsh[T, s, z] is a general flash calculation given Temperature [K], Entropy [J/mol-K], and bulk (molar) composition for mixtures. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs." <>
-                "\ntsflsh[t, s, z, kr] same as tsflsh[t, s, z], but supplies a root flag when multiple roots exist. " <>
+                "\ntsflsh[T, s, z, kr] same as tsflsh[T, s, z], but supplies a root flag when multiple roots exist. " <>
                 "Use kr=2 to get the upper (liquid, single phase) root or kr=1 (default) to get the lower (2-phase) root.";
-phflsh::usage = "phflsh[p, h] is a general flash calculation given Pressure [kPa] and Enthalpy [J/mol] for pure fluids. " <> 
+phflsh::usage = "phflsh[P, h] is a general flash calculation given Pressure [kPa] and Enthalpy [J/mol] for pure fluids. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs." <>
-                "\nphflsh[p, h, z] is a general flash calculation given Pressure [kPa], Enthalpy [J/mol], and bulk (molar) composition. " <> 
+                "\nphflsh[P, h, z] is a general flash calculation given Pressure [kPa], Enthalpy [J/mol], and bulk (molar) composition. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs.";
-psflsh::usage = "psflsh[p, s] is a general flash calculation given Pressure [kPa] and Entropy [J/mol-K] for pure fluids. " <>
+psflsh::usage = "psflsh[P, s] is a general flash calculation given Pressure [kPa] and Entropy [J/mol-K] for pure fluids. " <>
                 "This routine accepts bot single-phase and two-phase inputs." <>
-                "\npsflsh[p, s, z] is a general flash calculation given Pressure [kPa], Entropy [J/mol-K], and bulk (molar) composition for mixtures. " <> 
+                "\npsflsh[P, s, z] is a general flash calculation given Pressure [kPa], Entropy [J/mol-K], and bulk (molar) composition for mixtures. " <> 
                 "This routine accepts both single-phase and two-phase states as inputs.";
-trnprp::usage = "trnprp[t, d] Calculates the single-phase viscosity (mu [\[Mu]Pa-s] and thermal conductivity (k [W/m-K]) for pure fluids" <>
+trnprp::usage = "trnprp[T, d] Calculates the single-phase viscosity (mu [\[Mu]Pa-s] and thermal conductivity (k [W/m-K]) for pure fluids" <>
                 " as a function of temperature [K] and density [mol/L]. " <>
-                "\ntrnprp[t, d, z] Calculates the single-phase viscosity (mu [\[Mu]Pa/s] and thermal conductivity (k [W/m-K]) for mixtures" <>
+                "\ntrnprp[T, d, z] Calculates the single-phase viscosity (mu [\[Mu]Pa/s] and thermal conductivity (k [W/m-K]) for mixtures" <>
                 " as a function of temperature [K], density [mol/L], and molar composition.";
-stn::usage = "stn[t,dl,dv] Computes surface tension [N/m] of pure fluids as a function of saturation temperature, t [K], and the" <>
+stn::usage = "stn[T,dl,dv] Computes surface tension [N/m] of pure fluids as a function of saturation temperature, t [K], and the " <>
              "saturated liquid and saturated vapor molar densities, dl and dv [mol/L]." <>
-             "\nstn[t,dl,dv,x,y] Computes surface tension [N/m] for mixtures as a function of saturation temperature, t [K], " <>
-             "saturated liquid and saturated vapor molar densities, dl and dv [mol/L], and saturated liqud and saturated vapor" <>
+             "\nstn[T,dl,dv,x,y] Computes surface tension [N/m] for mixtures as a function of saturation temperature, t [K], " <>
+             "saturated liquid and saturated vapor molar densities, dl and dv [mol/L], and saturated liquid and saturated vapor " <>
              "compositions, x and y."; 
-surft::usage = "surft[t] Computes surface tension [N/m] of pure fluids as a function of saturation temperature, t [K]. " <>
-             "\nsurft[t,z] Computes surface tension [N/m] for mixtures as a function of saturation temperature, t [K] " <>
+surft::usage = "surft[T] Computes surface tension [N/m] of pure fluids as a function of saturation temperature, t [K]. " <>
+             "\nsurft[T,z] Computes surface tension [N/m] for mixtures as a function of saturation temperature, t [K] " <>
              "and the liquid molar composition, z."; 
-meltp::usage = "meltp[p] computes the melting temperature [K] as a function of pressure [kPa] for a pure fluid." <>
-               "\nmeltp[p,z] computes the melting temperature [K] as a function of pressure [kPa] and mixture composition.";
-meltt::usage = "meltt[t] computes the melting pressure [kPa] as a function of temperature [K] for a pure fluid." <>
-               "\nmeltt[t,z] computes the melting pressure [kPa] as a function of temperature [K] and mixture composition.";
-sublp::usage = "sublp[p] computes the sublimation temperature [K] as a function of pressure [kPa] for a pure fluid." <>
-               "\nsublp[p,z] computes the sublimation temperature [K] as a function of pressure [kPa] and mixture composition.";
-sublt::usage = "sublt[t] computes the sublimation pressure [kPa] as a function of temperature [K] for a pure fluid." <>
-               "\nsublt[t,z] computes the sublimation pressure [kPa] as a function of temperature [K] and mixture composition.";
-dielec::usage = "dialec[t, d] Calculate the dimensionless dielectric constant for a pure fluid based on the temperature [K] and molar density [mol/L]." <>
-                "\ndialec[t, d, z] Calculate the dimensionless dielectric constant for a mixture  based on the temperature [K], molar density [mol/L], and molar composition.";
-fugacity::usage = "fugacity[t, d, z] computes fugacity [kPa] for each of the nc components and repots them back in an array.  The molar composition array, z, may" <>
+meltp::usage = "meltp[P] computes the melting temperature [K] as a function of pressure [kPa] for a pure fluid." <>
+               "\nmeltp[P,z] computes the melting temperature [K] as a function of pressure [kPa] and mixture composition.";
+meltt::usage = "meltt[T] computes the melting pressure [kPa] as a function of temperature [K] for a pure fluid." <>
+               "\nmeltt[T,z] computes the melting pressure [kPa] as a function of temperature [K] and mixture composition.";
+sublp::usage = "sublp[P] computes the sublimation temperature [K] as a function of pressure [kPa] for a pure fluid." <>
+               "\nsublp[P,z] computes the sublimation temperature [K] as a function of pressure [kPa] and mixture composition.";
+sublt::usage = "sublt[T] computes the sublimation pressure [kPa] as a function of temperature [K] for a pure fluid." <>
+               "\nsublt[T,z] computes the sublimation pressure [kPa] as a function of temperature [K] and mixture composition.";
+dielec::usage = "dielec[T, d] Calculate the dimensionless dielectric constant for a pure fluid based on the temperature [K] and molar density [mol/L]." <>
+                "\ndielec[T, d, z] Calculate the dimensionless dielectric constant for a mixture  based on the temperature [K], molar density [mol/L], and molar composition.";
+fugacity::usage = "fugacity[T, d, z] computes fugacity [kPa] for each of the nc components and repots them back in an array.  The molar composition array, z, may" <>
                " be omitted for pure fluids.";
-virial::usage = "virial[t] computes the virial coefficients of a pure fluid as a function of temperature [K]." <>
-                "\nvirial[t,z] computes the virial coefficients of a mixture as a function of temperature [K] and molar composition.";
+virial::usage = "virial[T] computes the virial coefficients of a pure fluid as a function of temperature [K]." <>
+                "\nvirial[T,z] computes the virial coefficients of a mixture as a function of temperature [K] and molar composition.";
 
 xmass::usage = "xmass[xMol] converts the mole fraction array (List) to a mass fraction array for the currently loaded mixture. " <>
                "The molar mass [g/mol or kg/kmol] of the mixture is also returned.";
@@ -121,7 +121,7 @@ xmass::usage = "xmass[xMol] converts the mole fraction array (List) to a mass fr
 xmole::usage = "xmole[xMass] converts the mass fraction array (List) to a mole fraction array for the currently loaded mixture. " <>
                "The molar mass [g/mol or kg/kmol] of the mixture is also returned.";
 
-purefld::usage = "purefluid[icomp] tells REFPROP to use component icomp as a Pure Fluid.";
+purefld::usage = "purefld[icomp] tells REFPROP to use component icomp as a Pure Fluid.";
 
 setref::usage = "setref[hRef] Sets the standard reference state for a pure fluids.  " <>
                 "hRef is a 3-character string, either \"DEF\", \"NBP\",\"ASH\", or \"IIR\".  " <>
@@ -162,7 +162,7 @@ SetFluids::usage = "SetFluids[hFld] loads fluid component file(s) specified in t
                    
 SetMixture::usage = "SetMixture[hMixNme] loads a predefined mixture file (.mix) specified in the hMixNme string (setmix replacement).";
 
-Flags::usage = "Flags[hFlag, jFlag] set/get flags for desired behavior from RefProp. Specify the flag to be set in the hFlag string and the flag value " <>
+Flags::usage = "Flags[hFlag, jFlag] Set/Get flags for desired behavior from RefProp. Specify the flag to be set in the hFlag string and the flag value " <>
                "in jFlag. Use jFlag=-999 to get current state. If there are no errors, the current/set value is returned.";
                
 GetEnum::usage = "GetEnum[hEnum] translate a character string, hEnum, into an enumerated integer value. " <>
@@ -1450,7 +1450,6 @@ pdflsh[P_,d_,z_List:{1.0}]:=
             ]
         ,                                                                (*   ELSE                                       *)
             Return[{"T"->rpUnits[t,"T"],                                 (*       Return a quantity with units           *)
-                    "D"->rpUnits[d,"D"],
                     "Dl"->rpUnits[dl,"D"],
                     "Dv"->rpUnits[dv,"D"],
                     "xliq"->xliq,
@@ -1603,7 +1602,7 @@ trnprp[t_,d_,z_List:{1.0}]:=
         If[suFlag,                                                       (*   IF SupressUnits option is true             *)
             Return[{"\[Mu] [\[Mu]Pa-s]"-> mu,"k [W/m-K]"-> k}]           (* Return unitless results     *)
         ,                                                                (*   ELSE                                       *)
-            Return[{"\[Mu]"->rpUnits[mu,"MU"],"k"->rpUnits[k,"K"]}]      (*       Return a quantity with units           *)               
+            Return[{"\[Mu]"->rpUnits[mu,"MU"],"k"->rpUnits[k,"TCX"]}]    (*       Return both Quantities with units      *)               
         ]
     ]
 
@@ -1934,14 +1933,20 @@ SetMixture[hMixNme_String]:=                                             (* Only
 
 (*  Function call to FLAGSdll *************************************************************************************)
 Flags[hFlag_String, jFlag_]:=                                      (* Only needs 2 Inputs                         *)
-    Module[{loadFLAGSdll,kFlag=0.,ierr=0},
+    Module[{loadFLAGSdll,kFlag=0,ierr=0},
         If[$vMajor<10,                                             (* IF REFPROP version < 10.x                   *)
             Message[Flags::notimp];                                (*    Issue Implementation Message             *)
             Return["Not Implemented"]                              (*    Return Error                             *)
         ];                                                         (* END IF                                      *)
-        kFlag1=MakeNETObject[0,"System.Int32"];                    (* Initialize returned kFlag Value             *)
         $herr1@Clear[];                                            (* Clear the return error string               *)
-        loadFLAGSdll=DefineDLLFunction["FLAGSdll",$dllPath,"void",{"char*","long*","long*","long*","System.Text.StringBuilder", "long","long"}];
+        loadFLAGSdll=DefineDLLFunction["FLAGSdll",$dllPath,"void",
+                                        {"char*",                      (* hFld  *)
+                                        "long*",                       (* jFlag *)
+                                        "long*",                       (* kFlag *)
+                                        "long*",                       (* ierr  *)
+                                        "System.Text.StringBuilder",   (* herr  *) 
+                                        "long",                        (* hFlag_length *)
+                                        "long"}];                      (* herr_length  *)
         loadFLAGSdll[hFlag,
                      jFlag,
                      kFlag,
