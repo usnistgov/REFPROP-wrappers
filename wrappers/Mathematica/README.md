@@ -2,6 +2,16 @@
 
 The initial, Mathematica wrapper package was created as an example framework by Wolfram Research under contract to the U.S. Naval Nuclear Laboratory (NNL).  Wolfram Research and NNL agreed to release the wrapper package to the REFPROP community.  Patrick Fourspring facilitated the agreement and the transfer of the package to NIST's wrapper repository. Jeff Henning facilitated the actual transfer of the wrapper package to the `usnistgov/REFPROP-wrappers` repository on GitHub as well as further development to provide compatibility with **REFPROP 10** and conversion to a Mathematica Paclet format that includes full usage documentation through the Mathematica help system.
 
+## What's New
+
+Version 1.1 of RepropLink has been completely restructured for modern Paclet development in Mathematica 13.  While the functionality has not changed (other than some minor bug fixes), there are significant structural changes to this repository from the original version.
+
+1. The finalized directory structure for *Paclets* introduced in Mathematica 13 is used.
+2. The **PacletTools** and **DocumentationTools** are used to build the *Paclet*
+3. The third-party Eclipse program and Wolfram Workbench extension **_are no longer needed_**.  This means that anyone with Mathematica 13+ can build the paclet, including help documentation and tool palette.
+4. Help documentation has been completely reformatted using the v13 documentation templates to provide more consistent look and feel and full with the rest of the Wolfram Documentation Center.
+5. With complete integration of the documentation pages into the Wolfram Documentation Center, the hover buttons for usage and help, as well as the ability to press **F1** on any function to bring up help, are now fully functional.
+
 ## Overview
 
 The Wolfram Language (WL) Paclet, **_RefpropLink_**, provides a diverse range of WL wrapper functions that call the individual public subroutines in REFPROP64.DLL of the local NIST REFPROP installation.  The file `Installation.nb` is a Wolfram Language Notebook that provides the required installation steps.  Opening this file directly in Mathematica, the user can easily follow along with the steps to:
@@ -12,35 +22,35 @@ The Wolfram Language (WL) Paclet, **_RefpropLink_**, provides a diverse range of
 
 This instructions file is extremely useful for initial installation and providing examples of loading and using the RefProp wrapper functions.
 
-## Prerequisites
+## Prerequisites (v1.1)
 
-   - **NIST REFPROP** 9.1 or later **_must_** be installed to make use of the wrapper functions provided here.  However, **NIST REFPROP 10.x** is recommended.  See [NIST.gov](https://www.nist.gov/srd/refprop) for licensing.
-   - **Wolfram Mathematica 12.1** or later (paclet will not install in earlier versions)
+   - **NIST REFPROP** 9.1 or later **_must_** be installed to make use of the wrapper functions provided here.  However, **NIST REFPROP 10.x** is recommended.  See [NIST.gov](https://www.nist.gov/srd/refprop) for licensing.  
 
-      *For **developers**, the following are also required (for now):*
+   - **Mathematica 13.x** is required to build and install using the new Paclet and Documentation Tools introduced in Mathematica 13.0.  Doe to some early release issues, **Mathematica 13.2** or greater is recommended for the most complete formatting and indexing of the RefpropLink documentation pages to the Wolfram Documentation Center standards.  
 
-   - The [Eclipse IDE](https://www.eclipse.org/eclipseide/) (any flavor) from Eclipse Foundation (www.eclipse.org)
-   - The latest Wolfram Workbench plugin for Eclipse ([instructions here](https://support.wolfram.com/27221))
+   - **Wolfram Mathematica 12.x** can likely be used to install the .paclet file directly from a paclet server (although not tested); either the Wolfram Paclet Repository (plans in the works) or a private, local paclet.  **Mathematica 12.x**, however, does not have the full paclet build tools necessary to build the paclet from this repository using solely the Mathematica Paclet Tools.  
+   
+**NOTE:** Previous versions (1.0.x) were built for Mathematica 12.x using the Wolfram Workbench add-in to Eclipse.  However, with the superior build tools in Mathematica 13, this third party method is no longer supported or recommended.
 
-**NOTE:** Development and testing of this wrapper has been entirely on a Microsoft Windows installation.  This wrapper **_may_** work on a Linux installation, but may require significant modification and testing.  Care has been taken to ensure that the paclet code uses Mathematica's OS-independent file manipulation tools.
+**NOTE:** Development and testing of this wrapper has been entirely on a Microsoft Windows installation using Mathematica 13 and REFPROP 10.  This wrapper **_should_** work on a Linux installation, but will require testing and may require some code modification.  Care has been taken to ensure that the paclet code uses Mathematica's OS-independent file manipulation tools.
 
 ------
 
 # Installation from the Git Repository
 
-These installation steps are included in the instructions file, noted above, but are also outlined below for completeness (outside of Mathematica), since the only need to be completed once for each user.
+These installation steps are included in the `Installation.nb` notebook, as noted above, but are also outlined below for completeness (outside of Mathematica), since they only need to be completed once for each user.
 
 ## Steps to install the RefpropLink package
 
 1. Download (and unzip if necessary) this repository. 
  
-2. Open the Mathematica notebook `wrappers\Mathematica\Installation.nb` in a fresh instance of Mathematica directly from the downloaded repository.
+2. Open the Mathematica notebook `wrappers\Mathematica\RefpropLink\Installation.nb` in a fresh instance of Mathematica directly from the downloaded repository.
 
 3. Follow the instructions, evaluating each installation step in the file by pressing `<Shift><Enter>`. 
     
-That's it! The **_RefpropLink_** paclet is now installed and can be used from any Mathematica notebook or script.  In addition, the installation steps automatically create a paclet archive file (`/.archive/RefpropLink-x.x.x.paclet`) that can be used directly by other users to install **_RefpropLink_**, or it can be placed on a local paclet server for remote installation by users in the organization or community.
+That's it! The **_RefpropLink_** paclet will be built and installed on the local user account and can be used from any Mathematica notebook or script.  In addition, the installation steps automatically create a paclet file (`/build/RefpropLink-x.x.x.paclet`) that can be used directly by other users to install **_RefpropLink_**, or it can be placed on a local paclet server for remote installation by users in the organization or community.
 
-Wolfram (both the man and the company) have been hinting of a Public Wolfram Paclet Repository since 2019.  This has not yet come to fruition.  When and if it does, **_RefpropLink_** developers can place a .paclet file there to greatly facilitate User Installation for the entire Wolfram Community.
+Efforts are underway to provide the latest Paclet file on the public Wolfram Paclet Repository.  This will allow users to install **_RefpropLink_** directly from the Wolfram Paclet Repository, without the need to download these files from GitHub and rebuild the repository; greatly facilitating user installation for the entire Wolfram Community.
 
 ------
 
@@ -60,7 +70,7 @@ To call any of the RefProp functions in a Mathematica notebook, **_RefpropLink_*
    ```
 > _Note the back-quote at the end of the context string._
 
-This command loads the **_RefpropLink_** context if it has not already been loaded and returns the version of NIST REFPROP link found on the machine. Note the back-quote at the end of the context string.
+This command loads the **_RefpropLink_** context if it has not already been loaded and returns the version of NIST REFPROP link found on the machine (which may vary from the example above).
 
 ## Fluid Property Calculation Example (High-Level API)
 
@@ -87,24 +97,24 @@ The installed documentation contains extensive tutorials and examples on the usa
 As of Mathematica 13.2, there has been a fundamental change (correctly so) in the way that affine temperature units are handled.  Values represented in °F or °C can no longer be multiplied by a scalar value.  For example, prior to 13.2:
 
 ```WL
-In[1]  T = Quantity[20,"DegreesFahrenheit"]
-Out[1] 20 °F
+In[1]  T = Quantity[20.0,"DegreesFahrenheit"]
+Out[1] 20. °F
 
-In[2]  T2 = 2*T //N                             (*Evaluate numerically*)
-Out[2] 40 °F
+In[2]  T2 = 2.0*T                             (*Evaluate numerically*)
+Out[2] 40. °F
 ```
 
 Now, however, after version 13.2:
 
 ```WL
-In[1]  T = Quantity[20,"DegreesFahrenheit"]
-Out[1] 20 °F
+In[1]  T = Quantity[20.,"DegreesFahrenheit"]
+Out[1] 20. °F
 
-In[2]  T2 = 2*T //N                             (*Evaluate numerically*)
+In[2]  T2 = 2.0*T                             (*Evaluate numerically*)
 Out[2] 532.967 K
 
-In[3]  UnitConvert[ T2, "DegreesFahrenheit"]    (* Convert to °F)
-Out[3] 499.67 °F
+In[3]  UnitConvert[ T2, "DegreesFahrenheit"]  (* Convert to °F)
+Out[3] 499.67 °F                              (* Not 40 °F          *)
 ```
 
 This is actually the correct behavior, since the assigned temperature quantity of 20 °F should immediately be converted to an absolute temperature of 266.483 K.  Multiplying this number by 2 yields 532.967 K (or 499.67 °F).
@@ -118,20 +128,20 @@ In[1]  T1 = 72 °F;    (* where °F = Quantity[1.0,"DegreesFahrenheit] *)
 Because of the change in affine unit handling in 13.2, this no longer works.  The first assignment is multiplying (1 °F = 255.928 K) by 72.0.  The second is multiplying (1 °C = 274.15 K) by 22.0.  This gives very unintended results.
 
 ```WL
-In[1]  T1 = 72 °F
+In[1]  T1 = 72. °F
 Out[1] 5118.56 K
 
-In[2]  T2 = 22 °C
+In[2]  T2 = 22. °C
 Out[2] 6031.3 K
 ```
 This is "correct" behavior for unit multiplication, even if unexpected.  So, following Mathematica 13.2, affine units should be set only using the `Quantity[]` function.
 
 ```WL
-In[1]  T1 = Quantity[72,"DegreesFahrenheit"]
-Out[1] 72 °F
+In[1]  T1 = Quantity[72.,"DegreesFahrenheit"]
+Out[1] 72. °F
 
-In[1]  T2 = Quantity[22,"DegreesCelsius"]
-Out[1] 22 °C
+In[1]  T2 = Quantity[22.,"DegreesCelsius"]
+Out[1] 22. °C
 ```
 The RefpropLink defined unit variables for all other multiplicative units can still be used as before.
 
@@ -139,10 +149,10 @@ The RefpropLink defined unit variables for all other multiplicative units can st
 
 # RefpropLink Development
 
-Development of integrated documentation has been problematic since the release of Mathematica 12.  Wolfram has provided mature paclet management functions, but has not provided native tools for creating Mathematica 12-styled documentation pages and assembling them.  The existing tool, Wolfram Workbench 3, has not kept up with the newer releases of Mathematica, but does still function and generates passable documentation pages that can be indexed into the help system.  Wolfram has been hinting at creating native Documentation Tools right within Mathematica, but these tools have not yet been released as of Mathematica 12.3.  Until they do, we're stuck with Wolfram Workbench, which is a free plug-in for the Eclipse IDE.
+Development of integrated documentation has been problematic since the release of Mathematica 12 and used to require Eclipse and the Wolfram Workbench 3 plug-in. Wolfram has created native Documentation Tools right within Mathematica 13, and updated the Paclet Tools and Documentation Tools in version 13.2.
 
-**_RefpropLink_** and the associated documentation is developed entirely in Wolfram Workbench ( _see [**Prerequisites**](#prerequisites)_ ).  To contribute to **_RefpropLink_** development, one should download the entire [**usnistgov/REFPROP-wrappers**](https://github.com/usnistgov/REFPROP-wrappers) repository from GitHub and import the `wrappers\Mathematica` directory into a project in an installation of Eclipse that includes the Wolfram Workbench 3 plug-in.  **_RefpropLink_** is currently developed in Eclipse 2021-09 with Wolfram Workbench version 10.1.1087 and Mathematica 12.1 for current working compatibility.
+**_RefpropLink_** and the associated documentation is developed now entirely in Mathematica 13.x ( _see [**Prerequisites**](#prerequisites)_ ).  To contribute to **_RefpropLink_** development, one should clone the entire [**usnistgov/REFPROP-wrappers**](https://github.com/usnistgov/REFPROP-wrappers) repository from GitHub and work directly in the `wrappers\Mathematica` directory under a local development branch.  **_RefpropLink_** is currently developed in Mathematica 13.2, and is expected to be compatible with subsequent versions.
 
-Contributions to **_RefpropLink_** are encouraged through pull requests to the [**usnistgov/REFPROP-wrappers**](https://github.com/usnistgov/REFPROP-wrappers) GitHub repository.  Documentation should be rebuilt consistent with any changes to the code as well as updating the version number in the `PacletInfo.m` file.
+Contributions to **_RefpropLink_** are encouraged through pull requests to the [**usnistgov/REFPROP-wrappers**](https://github.com/usnistgov/REFPROP-wrappers) GitHub repository.  Documentation should be rebuilt and tested for consistency with any changes to the code/documentation as well as updating the version number in the `PacletInfo.m` file.
 
 > **Developer Note:** There are some Git warnings regarding LF and CRLF line endings when placing Mathematica notebooks and scripts in git repos and pulling and pushing them from GitHub.  Limited testing demonstrates that Mathematica is impervious to the line endings (see [Wolfram Notebook Technology](https://www.wolfram.com/technologies/nb/)) and these Git warnings can be ignored.  If issues occur in the Eclipse editor when importing the project, this may be the cause and can easily be corrected. 

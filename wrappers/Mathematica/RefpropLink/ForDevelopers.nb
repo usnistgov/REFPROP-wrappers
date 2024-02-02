@@ -1,0 +1,395 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15617,        387]
+NotebookOptionsPosition[     11924,        321]
+NotebookOutlinePosition[     12740,        347]
+CellTagsIndexPosition[     12669,        342]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["RefpropLink Development", "Title",
+ CellChangeTimes->{{3.8856526519360857`*^9, 3.885652671324236*^9}, {
+  3.886940715170824*^9, 
+  3.8869407170742874`*^9}},ExpressionUUID->"cfa6426e-7ede-432a-8d80-\
+68091440f119"],
+
+Cell["\<\
+The following steps are provided for developing and testing updates to the \
+RefpropLink paclet.  It is intended as a guide for helping to develop and \
+test modern (Mathematica 13+) paclets and the commands below should only be \
+used for that purpose.\
+\>", "Text",
+ CellChangeTimes->{{3.88580207816963*^9, 3.8858022242900853`*^9}, {
+  3.88606188833453*^9, 3.88606189718174*^9}, {3.886940728138468*^9, 
+  3.8869407626179914`*^9}, {3.8869408372025967`*^9, 
+  3.886940917747678*^9}},ExpressionUUID->"9a3af4a8-b6ca-460a-8970-\
+1c94381cd000"],
+
+Cell[CellGroupData[{
+
+Cell["Uninstall RefpropLink (if earlier version exists)", "Chapter",
+ CellChangeTimes->{{3.8856530228847055`*^9, 
+  3.8856530349896517`*^9}},ExpressionUUID->"6a25b42f-2e30-430b-b35e-\
+0265af279c0e"],
+
+Cell["\<\
+When making changes and testing a local paclet directory, it can be very \
+confusing if a version of RefpropLink is already installed in the current \
+Mathematica installation.  Any currently installed RefpropLink paclet \
+versions should be uninstalled before proceeding.
+
+See if RefpropLink is installed.\
+\>", "Text",
+ CellChangeTimes->{{3.8856530567327476`*^9, 3.8856530650375223`*^9}, {
+  3.886940974929961*^9, 
+  3.8869410692657547`*^9}},ExpressionUUID->"830eb4a0-d84c-4de3-b7d0-\
+693bb9040477"],
+
+Cell[BoxData[
+ RowBox[{"PacletFind", "[", "\"\<RefpropLink\>\"", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.885653069269213*^9, 3.8856530792724047`*^9}, 
+   3.885726157371123*^9},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[1]:=",ExpressionUUID->"5c51e50d-eb52-44df-b10c-71af943fd7e8"],
+
+Cell["If it is, uninstall it.", "Text",
+ CellChangeTimes->{{3.885653093567325*^9, 
+  3.885653121075324*^9}},ExpressionUUID->"40345b28-fb2b-4703-89d9-\
+0b8d842d2839"],
+
+Cell[BoxData[
+ RowBox[{"PacletUninstall", "[", "\"\<RefpropLink\>\"", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.885653126735382*^9, 3.885653136510646*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[1]:=",ExpressionUUID->"c2109ed3-6b8e-4d6b-a12d-24dd3d5a3936"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Initialize the Environment", "Chapter",
+ CellChangeTimes->{{3.88565273765361*^9, 
+  3.885652742960882*^9}},ExpressionUUID->"34743c6e-1b53-4e3b-9a06-\
+49ff01c2a565"],
+
+Cell["Reset the Mathematica Kernel.", "Text",
+ CellChangeTimes->{{3.886941275218933*^9, 
+  3.8869412838510656`*^9}},ExpressionUUID->"e0bb1030-e228-43df-8f1f-\
+e918260fbe82"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.885652746950348*^9, 3.8856527498568482`*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[7]:=",ExpressionUUID->"8c9d718f-51d4-4ad6-9887-80e0a5a77d9a"],
+
+Cell["\<\
+For info, make sure this notebook is running in the the RefpropLink directory \
+containing the PacletInfo file.\
+\>", "Text",
+ CellChangeTimes->{{3.8858019494728947`*^9, 3.8858020320419765`*^9}, {
+  3.886941178458724*^9, 
+  3.8869412355139303`*^9}},ExpressionUUID->"46c06221-ffbe-479b-b6bf-\
+c004de355f6e"],
+
+Cell[BoxData[
+ RowBox[{"NotebookDirectory", "[", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8856527773467913`*^9, 3.8856527897607117`*^9}, 
+   3.8860652638657217`*^9},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellTags->"Optional",
+ CellLabel->"In[4]:=",ExpressionUUID->"e1f8ce4e-72b0-4b93-8737-39e28d15d101"],
+
+Cell["\<\
+Load the current notebook directory as a temporary paclet directory.\
+\>", "Text",
+ CellChangeTimes->{{3.8869451454786797`*^9, 
+  3.8869451826462574`*^9}},ExpressionUUID->"31d71db8-b511-4ab6-ba57-\
+d50bd97ef2d9"],
+
+Cell[BoxData[
+ RowBox[{"PacletDirectoryLoad", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8856527773467913`*^9, 3.8856527897607117`*^9}, 
+   3.8860652638657217`*^9, {3.8869451956711073`*^9, 3.8869452040871105`*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellTags->"Optional",
+ CellLabel->"In[1]:=",ExpressionUUID->"a233f847-1d3e-4097-8e8c-f7cfe6789124"],
+
+Cell["\<\
+Now the local development directory (in the repository) can be used to \
+develop and test changes and patches to RefpropLink.\
+\>", "Text",
+ CellChangeTimes->{{3.886950562675643*^9, 
+  3.886950630851698*^9}},ExpressionUUID->"0db28e6c-f55c-4681-a990-\
+e46a245030e0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Working Within Your Local Git Repository", "Chapter",
+ CellChangeTimes->{{3.88565273765361*^9, 3.885652742960882*^9}, {
+  3.8869534723275485`*^9, 
+  3.8869534853425026`*^9}},ExpressionUUID->"68fae8ad-7022-4b08-a024-\
+a2faaff57e78"],
+
+Cell["\<\
+By default, your cloned repository is on the master branch.  Development is \
+done on development branches.  So, before making any changes to the \
+RefpropLink repository, open a git command window (git bash window) and \
+create a new development branch.  You can name it anything you want.  For \
+example, in the git bash window, you can issue:\
+\>", "Text",
+ CellChangeTimes->{{3.8869534941502438`*^9, 
+  3.886953653150017*^9}},ExpressionUUID->"6d1ec17a-8cff-4c3d-a663-\
+50c6a8bd1b3f"],
+
+Cell[TextData[StyleBox["git checkout -b my_dev_branch",
+ FontFamily->"Courier New",
+ FontSize->12,
+ FontWeight->"Normal"]], "Text",
+ CellChangeTimes->{{3.8869536601575575`*^9, 3.886953679526597*^9}},
+ TextAlignment->-0.5,ExpressionUUID->"7d6a4420-9ea8-4d15-b956-c1e2ed37a053"],
+
+Cell["\<\
+This will checkout a new branch called \[OpenCurlyDoubleQuote]my_dev_branch\
+\[CloseCurlyDoubleQuote], but you should use a name that represents your \
+development work.  Any file changes you make now will be made on this \
+development branch and will not impact the master branch.  You can make \
+changes to the package script, the documentation, test new functions, build \
+new documentation, or anything you want.  Test and commit file changes along \
+the way with meaningful commit messages.\
+\>", "Text",
+ CellChangeTimes->{{3.886953699918133*^9, 3.886953743382929*^9}, {
+  3.886953785640046*^9, 3.886953859006264*^9}, {3.9150170321121397`*^9, 
+  3.9150171220332932`*^9}, {3.9150171920745864`*^9, 
+  3.9150172449923105`*^9}},ExpressionUUID->"cf75b2f7-80fe-4e78-bf81-\
+f39e4be52314"],
+
+Cell[TextData[{
+ StyleBox["git commit -m \[OpenCurlyDoubleQuote]",
+  FontFamily->"Courier New",
+  FontSize->12],
+ StyleBox["descriptive commit message here",
+  FontFamily->"Courier New",
+  FontSize->12,
+  FontSlant->"Italic"],
+ StyleBox["\[CloseCurlyDoubleQuote]",
+  FontFamily->"Courier New",
+  FontSize->12]
+}], "Text",
+ CellChangeTimes->{{3.8869536601575575`*^9, 3.886953679526597*^9}, {
+  3.9150171494091263`*^9, 3.915017174553707*^9}},
+ TextAlignment->-0.5,ExpressionUUID->"f62d606c-5ea8-414e-97fd-89a2462d7524"],
+
+Cell["\<\
+It is a good idea limit compact, complete code modifications to a single \
+development branch, putting disparate code enhancement ideas in separate \
+development branches the submitting them individually.\
+\>", "Text",
+ CellChangeTimes->{
+  3.915017258458127*^9, {3.915017293378092*^9, 3.915017430665455*^9}, {
+   3.9150174647769747`*^9, 
+   3.9150175324506397`*^9}},ExpressionUUID->"b0ad4e44-7fe1-46ef-95d3-\
+4da6b506d1ec"],
+
+Cell["\<\
+Once your changes are implemented and tested, you can push the development \
+branch to your forked repository on GitHub and make a pull request (PR) to \
+the NIST repository to request the changes be implemented permanently.  If \
+and when the PR is approved and merged into the NIST master, you will \
+typically,\
+\>", "Text",
+ CellChangeTimes->{{3.886953867102913*^9, 3.8869539492868905`*^9}, {
+  3.915016670496707*^9, 
+  3.9150167891288366`*^9}},ExpressionUUID->"567318c0-64f2-44e3-b337-\
+88c615a18745"],
+
+Cell[TextData[{
+ "Update your local master branch (",
+ StyleBox["git pull --rebase master upstream",
+  FontFamily->"Courier New",
+  FontSize->12,
+  FontWeight->"Normal"],
+ ") from the NIST upstream repository,"
+}], "Item",
+ CellChangeTimes->{{3.9150167937288747`*^9, 3.9150168151048985`*^9}, {
+  3.915016860448916*^9, 3.9150169095001335`*^9}, {3.9150175600425816`*^9, 
+  3.915017565089445*^9}, {3.9150402049896483`*^9, 
+  3.915040205061634*^9}},ExpressionUUID->"2a23d4ef-882e-43e7-8379-\
+461822de5730"],
+
+Cell[TextData[{
+ "Delete the local development branch (",
+ StyleBox["git branch -D my_dev_branch",
+  FontFamily->"Courier New",
+  FontSize->12,
+  FontWeight->"Normal"],
+ "),"
+}], "Item",
+ CellChangeTimes->{{3.9150167937288747`*^9, 3.9150168151048985`*^9}, {
+  3.915016860448916*^9, 
+  3.915016963603962*^9}},ExpressionUUID->"4f0e4e22-9bb3-44d7-9fcc-\
+32b3a65a3acd"],
+
+Cell[TextData[{
+ "Push the local master to your forked repository on Github (",
+ StyleBox["git push master origin",
+  FontFamily->"Courier New",
+  FontSize->12,
+  FontWeight->"Normal"],
+ "),"
+}], "Item",
+ CellChangeTimes->{{3.9150167937288747`*^9, 3.9150168151048985`*^9}, {
+  3.915016860448916*^9, 3.915017016304144*^9}, {3.9150175725375247`*^9, 
+  3.9150175780838366`*^9}},ExpressionUUID->"d157159a-753e-47c4-b28e-\
+0c8445de5137"],
+
+Cell["\<\
+Finally, remove the development branch from your forked repository on Github.\
+\>", "Item",
+ CellChangeTimes->{{3.9150167937288747`*^9, 3.9150168151048985`*^9}, {
+  3.915016860448916*^9, 3.915017016304144*^9}, {3.9150175725375247`*^9, 
+  3.9150176082808666`*^9}},ExpressionUUID->"679cc1a4-b939-434b-8451-\
+9a2e9de11264"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Unloading the Local Paclet Directory", "Chapter",
+ CellChangeTimes->{{3.88565273765361*^9, 3.885652742960882*^9}, {
+  3.8869534723275485`*^9, 3.8869534853425026`*^9}, {3.8869539699289*^9, 
+  3.886953995551405*^9}},ExpressionUUID->"49bbb463-9af3-443c-be4b-\
+b223b61c190a"],
+
+Cell["\<\
+Before building the official paclet for installation, unload the local paclet \
+directory so that it does not conflict with the RefpropLink paclet once it is \
+officially installed in Mathematica.\
+\>", "Text",
+ CellChangeTimes->{{3.8869540189430375`*^9, 
+  3.8869540981448684`*^9}},ExpressionUUID->"34d742b2-6d78-4876-ad33-\
+e8e7cf465a9c"],
+
+Cell[BoxData[
+ RowBox[{"PacletDirectoryUnload", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8856527773467913`*^9, 3.8856527897607117`*^9}, 
+   3.8860652638657217`*^9, {3.8869451956711073`*^9, 3.8869452040871105`*^9}, {
+   3.8869541459031253`*^9, 3.88695414714355*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellTags->"Optional",
+ CellLabel->"In[14]:=",ExpressionUUID->"f106edba-88f6-4928-b408-a4a93b22d473"],
+
+Cell[TextData[{
+ "After unloading the local directory, you can build the paclet and any \
+documentation and install it locally by following the directions in ",
+ StyleBox["Installation.nb",
+  FontWeight->"Bold"],
+ " in this same directory."
+}], "Text",
+ CellChangeTimes->{{3.8869541546551714`*^9, 3.8869542178872457`*^9}, {
+  3.9150176523849277`*^9, 
+  3.915017656688908*^9}},ExpressionUUID->"a34b59bc-83c9-4595-af2c-\
+b34df00d254a"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{819., 624.75},
+WindowMargins->{{-947.25, Automatic}, {Automatic, 58.5}},
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"1ddc7389-169b-4e9e-b924-28bd1b32183f"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Optional"->{
+  Cell[3964, 112, 368, 8, 44, "Input",ExpressionUUID->"e1f8ce4e-72b0-4b93-8737-39e28d15d101",
+   CellTags->"Optional"],
+  Cell[4560, 129, 464, 9, 44, "Input",ExpressionUUID->"a233f847-1d3e-4097-8e8c-f7cfe6789124",
+   CellTags->"Optional"],
+  Cell[10942, 295, 518, 10, 44, "Input",ExpressionUUID->"f106edba-88f6-4928-b408-a4a93b22d473",
+   CellTags->"Optional"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Optional", 12283, 332}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 219, 4, 98, "Title",ExpressionUUID->"cfa6426e-7ede-432a-8d80-68091440f119"],
+Cell[802, 28, 550, 10, 81, "Text",ExpressionUUID->"9a3af4a8-b6ca-460a-8970-1c94381cd000"],
+Cell[CellGroupData[{
+Cell[1377, 42, 198, 3, 69, "Chapter",ExpressionUUID->"6a25b42f-2e30-430b-b35e-0265af279c0e"],
+Cell[1578, 47, 511, 11, 127, "Text",ExpressionUUID->"830eb4a0-d84c-4de3-b7d0-693bb9040477"],
+Cell[2092, 60, 357, 7, 44, "Input",ExpressionUUID->"5c51e50d-eb52-44df-b10c-71af943fd7e8"],
+Cell[2452, 69, 165, 3, 35, "Text",ExpressionUUID->"40345b28-fb2b-4703-89d9-0b8d842d2839"],
+Cell[2620, 74, 334, 6, 44, "Input",ExpressionUUID->"c2109ed3-6b8e-4d6b-a12d-24dd3d5a3936"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2991, 85, 170, 3, 69, "Chapter",ExpressionUUID->"34743c6e-1b53-4e3b-9a06-49ff01c2a565"],
+Cell[3164, 90, 173, 3, 35, "Text",ExpressionUUID->"e0bb1030-e228-43df-8f1f-e918260fbe82"],
+Cell[3340, 95, 302, 6, 44, "Input",ExpressionUUID->"8c9d718f-51d4-4ad6-9887-80e0a5a77d9a"],
+Cell[3645, 103, 316, 7, 35, "Text",ExpressionUUID->"46c06221-ffbe-479b-b6bf-c004de355f6e"],
+Cell[3964, 112, 368, 8, 44, "Input",ExpressionUUID->"e1f8ce4e-72b0-4b93-8737-39e28d15d101",
+ CellTags->"Optional"],
+Cell[4335, 122, 222, 5, 35, "Text",ExpressionUUID->"31d71db8-b511-4ab6-ba57-d50bd97ef2d9"],
+Cell[4560, 129, 464, 9, 44, "Input",ExpressionUUID->"a233f847-1d3e-4097-8e8c-f7cfe6789124",
+ CellTags->"Optional"],
+Cell[5027, 140, 275, 6, 58, "Text",ExpressionUUID->"0db28e6c-f55c-4681-a990-e46a245030e0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5339, 151, 237, 4, 69, "Chapter",ExpressionUUID->"68fae8ad-7022-4b08-a024-a2faaff57e78"],
+Cell[5579, 157, 497, 9, 104, "Text",ExpressionUUID->"6d1ec17a-8cff-4c3d-a663-50c6a8bd1b3f"],
+Cell[6079, 168, 276, 5, 29, "Text",ExpressionUUID->"7d6a4420-9ea8-4d15-b956-c1e2ed37a053"],
+Cell[6358, 175, 797, 13, 127, "Text",ExpressionUUID->"cf75b2f7-80fe-4e78-bf81-f39e4be52314"],
+Cell[7158, 190, 517, 14, 29, "Text",ExpressionUUID->"f62d606c-5ea8-414e-97fd-89a2462d7524"],
+Cell[7678, 206, 434, 9, 58, "Text",ExpressionUUID->"b0ad4e44-7fe1-46ef-95d3-4da6b506d1ec"],
+Cell[8115, 217, 516, 10, 81, "Text",ExpressionUUID->"567318c0-64f2-44e3-b337-88c615a18745"],
+Cell[8634, 229, 502, 12, 32, "Item",ExpressionUUID->"2a23d4ef-882e-43e7-8379-461822de5730"],
+Cell[9139, 243, 365, 11, 32, "Item",ExpressionUUID->"4f0e4e22-9bb3-44d7-9fcc-32b3a65a3acd"],
+Cell[9507, 256, 432, 11, 32, "Item",ExpressionUUID->"d157159a-753e-47c4-b28e-0c8445de5137"],
+Cell[9942, 269, 330, 6, 32, "Item",ExpressionUUID->"679cc1a4-b939-434b-8451-9a2e9de11264"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10309, 280, 277, 4, 69, "Chapter",ExpressionUUID->"49bbb463-9af3-443c-be4b-b223b61c190a"],
+Cell[10589, 286, 350, 7, 58, "Text",ExpressionUUID->"34d742b2-6d78-4876-ad33-e8e7cf465a9c"],
+Cell[10942, 295, 518, 10, 44, "Input",ExpressionUUID->"f106edba-88f6-4928-b408-a4a93b22d473",
+ CellTags->"Optional"],
+Cell[11463, 307, 433, 10, 58, "Text",ExpressionUUID->"a34b59bc-83c9-4595-af2c-b34df00d254a"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

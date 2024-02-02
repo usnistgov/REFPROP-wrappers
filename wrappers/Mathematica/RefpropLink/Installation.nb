@@ -1,0 +1,494 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20041,        486]
+NotebookOptionsPosition[     15567,        411]
+NotebookOutlinePosition[     16783,        442]
+CellTagsIndexPosition[     16591,        435]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["RefpropLink Installation", "Title",
+ CellChangeTimes->{{3.8856526519360857`*^9, 
+  3.885652671324236*^9}},ExpressionUUID->"c26028de-9093-4564-8043-\
+0ca8b82432ac"],
+
+Cell["\<\
+Follow the steps below (highlighted in blue) to install the RefpropLink \
+add-in to the local Mathematica environment.  This is performed on a User \
+basis and only needs to be performed once per user.  However, if there are \
+multiple users on the machine, the add-in must be installed by each user.\
+\>", "Text",
+ CellChangeTimes->{{3.88580207816963*^9, 3.8858022242900853`*^9}, {
+  3.88606188833453*^9, 
+  3.88606189718174*^9}},ExpressionUUID->"e020153c-f7a6-4416-bbd5-\
+95541fea4b6a"],
+
+Cell[CellGroupData[{
+
+Cell["Initialize the Environment", "Chapter",
+ CellChangeTimes->{{3.88565273765361*^9, 
+  3.885652742960882*^9}},ExpressionUUID->"1d9373e9-2168-4b02-8718-\
+93fb322527e7"],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.885652746950348*^9, 3.8856527498568482`*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[7]:=",ExpressionUUID->"dfb9c7ed-6949-4d30-bec9-74f2fc9e8fef"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<PacletTools`\>\"", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8856527571902113`*^9, 3.8856527676780777`*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[6]:=",ExpressionUUID->"8f553c55-df55-4559-86ac-d89c553afcab"],
+
+Cell["\<\
+For info, the command below should reveal the RefpropLink directory \
+containing this file and the PacletInfo file.\
+\>", "Text",
+ CellChangeTimes->{{3.8858019494728947`*^9, 
+  3.8858020320419765`*^9}},ExpressionUUID->"9fc72c86-6064-4ff2-9e30-\
+33140f70c552"],
+
+Cell[BoxData[
+ RowBox[{"NotebookDirectory", "[", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8856527773467913`*^9, 3.8856527897607117`*^9}, 
+   3.8860652638657217`*^9},
+ Background->GrayLevel[0.894118],
+ CellTags->"Optional",
+ CellLabel->"In[3]:=",ExpressionUUID->"3f7e2e64-e8cd-4225-89bb-f7b1caef498f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Uninstall RefpropLink (if earlier version exists)", "Chapter",
+ CellChangeTimes->{{3.8856530228847055`*^9, 
+  3.8856530349896517`*^9}},ExpressionUUID->"9175eec6-c420-4ce7-9f0e-\
+d286e303d0c0"],
+
+Cell["See if RefpropLink is installed.", "Text",
+ CellChangeTimes->{{3.8856530567327476`*^9, 
+  3.8856530650375223`*^9}},ExpressionUUID->"efc188cd-518f-4fdc-b798-\
+2bc91b612ae6"],
+
+Cell[BoxData[
+ RowBox[{"PacletFind", "[", "\"\<RefpropLink\>\"", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.885653069269213*^9, 3.8856530792724047`*^9}, 
+   3.885726157371123*^9},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[5]:=",ExpressionUUID->"5c6a1f78-8ba9-4e2a-b502-40d0cdbe797f"],
+
+Cell["If it is, uninstall it.", "Text",
+ CellChangeTimes->{{3.885653093567325*^9, 
+  3.885653121075324*^9}},ExpressionUUID->"41fd206a-be36-4fb9-91e3-\
+eaf79d6cdcdf"],
+
+Cell[BoxData[
+ RowBox[{"PacletUninstall", "[", "\"\<RefpropLink\>\"", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.885653126735382*^9, 3.885653136510646*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[1]:=",ExpressionUUID->"20ecf7a0-bb72-4944-8be0-7f4dd7e23fa8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Building the documentation", "Chapter",
+ CellChangeTimes->{{3.8856531819228783`*^9, 
+  3.88565318597593*^9}},ExpressionUUID->"0dc88b0b-1e86-4588-b999-\
+d43baa7fb05d"],
+
+Cell[TextData[{
+ StyleBox["NOTE:",
+  FontWeight->"Bold"],
+ " This step should only be evaluated independently if updating or making \
+changes to the RefpropLink Documentation.  The documentation build step will \
+be included in the next section that builds the entire paclet."
+}], "Text",
+ CellChangeTimes->{{3.8860627553583975`*^9, 3.8860628473513517`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"7ae9b73c-f102-474b-a0aa-481deff1e241"],
+
+Cell[TextData[{
+ "NOTE: As of Mathematica 13.2, a bug prevents incremental build of \
+new/updated documentation pages from creating complete index files for the \
+Documentation center.  As a final step in documentation development, the \
+build directory should be deleted and recreated using the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell["PacletBuild"], "paclet:PacletTools/ref/PacletDocumentationBuild", 
+    "PacletTools Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "254dc08b-955e-4b5d-978f-93014d9a5a8d"],
+ " step below."
+}], "Text",
+ CellChangeTimes->{{3.8860628719267025`*^9, 3.8860628741109443`*^9}, {
+   3.8860630157989545`*^9, 3.8860631379514103`*^9}, 
+   3.915016272670562*^9},ExpressionUUID->"c3f8ba2c-b5d1-4722-9ab6-\
+374e1ecb4e0f"],
+
+Cell[TextData[{
+ "Documentation authoring notebooks look different from the finished \
+documentation that is built into the Wolfram System. Authoring notebooks are \
+transformed into so-called \[OpenCurlyDoubleQuote]in-product\
+\[CloseCurlyDoubleQuote] notebooks via a build process.  Paclet documentation \
+can be built using the single command ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["PacletDocumentationBuild"]], 
+    "paclet:PacletTools/ref/PacletDocumentationBuild", 
+    "PacletTools Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "60054587-05c0-487c-8198-06be084358b6"],
+ ".  The \[OpenCurlyDoubleQuote]in-product\[CloseCurlyDoubleQuote] documents \
+will be placed in a ",
+ StyleBox["build",
+  FontWeight->"Bold"],
+ " sub-directory of the Notebook Directory containing this Installation \
+notebook. "
+}], "Text",
+ CellChangeTimes->{
+  3.848872297590694*^9, {3.8857198750681915`*^9, 3.8857198878605328`*^9}, {
+   3.886062901566832*^9, 3.8860629640799065`*^9}, {3.9150162049761324`*^9, 
+   3.915016249198978*^9}},ExpressionUUID->"4ede1543-1fbe-4cdd-866e-\
+69b08e243ed3"],
+
+Cell[BoxData[
+ RowBox[{"PacletDocumentationBuild", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8856533137805448`*^9, 3.8856533382373714`*^9}, {
+   3.885653376134306*^9, 3.885653393678105*^9}, 3.8857236606971965`*^9},
+ Background->GrayLevel[0.898039],
+ CellTags->{
+  "Only evaluate if updating/adding documentation;otherwise", 
+   "skip to Building the Paclet"},
+ CellLabel->"In[4]:=",ExpressionUUID->"95585b30-78aa-4756-8e90-87c77138f327"],
+
+Cell["\<\
+Total time to build the documentation for RefpropLink should be a little over \
+2 minutes.  Wait for the Success message before continuing.\
+\>", "Text",
+ CellChangeTimes->{{3.8857199869567947`*^9, 3.885720013244359*^9}, {
+  3.8858018955375566`*^9, 
+  3.885801911281579*^9}},ExpressionUUID->"09c9398f-9ba8-4af5-96e7-\
+09dc33f0c36f"],
+
+Cell["\<\
+The documentation files are now converted to \
+\[OpenCurlyDoubleQuote]in-product\[CloseCurlyDoubleQuote] format in the build \
+subdirectory (RefpropLink\\Build) and ready to be integrated into the \
+RefpropLink paclet file for installation.\
+\>", "Text",
+ CellChangeTimes->{{3.8857209339971075`*^9, 
+  3.8857210321418133`*^9}},ExpressionUUID->"f3c1bad4-035b-44d4-9e1b-\
+0209c1dc2dfa"],
+
+Cell[TextData[{
+ StyleBox["NOTE:",
+  FontWeight->"Bold"],
+ " As of Mathematica 13.2, a known bug prevents incremental build of \
+individual, new/updated documentation pages from indexed properly in the \
+Documentation center (index files are not complete).  As a final step in \
+documentation development, the build directory should be manually deleted and \
+recreated using the PacletBuild step below."
+}], "Text",
+ CellChangeTimes->{{3.8860628719267025`*^9, 3.8860628741109443`*^9}, {
+  3.8860630157989545`*^9, 3.8860631379514103`*^9}, {3.887004331435525*^9, 
+  3.887004332995392*^9}, {3.915015954431822*^9, 3.9150160225757265`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"2ddcf195-0c2b-464c-85f6-fb2c89b31c8e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Building the .paclet File and Installing it", "Chapter",
+ CellChangeTimes->{{3.8857199317241163`*^9, 3.8857199466204467`*^9}, 
+   3.8858013222559586`*^9},ExpressionUUID->"3da7ed32-bdd1-4f01-a7f9-\
+acc6cc0d2a57"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox[".paclet",
+  FontWeight->"Bold"],
+ " file can be created with the ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell["PacletBuild"], "paclet:PacletTools/ref/PacletDocumentationBuild", 
+    "PacletTools Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "45305e30-8e41-4c9f-9531-0664fe2c5640"],
+ " command:"
+}], "Text",
+ CellChangeTimes->{
+  3.848872297590694*^9, {3.8499323559491673`*^9, 3.8499323773975987`*^9}, {
+   3.8499338360396614`*^9, 3.84993383909612*^9}, {3.915016054022946*^9, 
+   3.9150160919359813`*^9}, 3.9150163015272675`*^9, 
+   3.9150163382963037`*^9},ExpressionUUID->"7ba769b6-a0c7-46af-89b6-\
+50b3ab34fa21"],
+
+Cell[BoxData[
+ RowBox[{"PacletBuild", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8857200485961294`*^9, 3.8857200539089274`*^9}, {
+   3.885720263956745*^9, 3.8857202672927437`*^9}, 3.885723668025231*^9},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[7]:=",ExpressionUUID->"d663fa36-b7f0-4b27-b866-d4872f2b774b"],
+
+Cell[TextData[{
+ StyleBox["NOTE:",
+  FontWeight->"Bold"],
+ " This command will call ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["PacletDocumentationBuild"]], 
+    "paclet:PacletTools/ref/PacletDocumentationBuild", 
+    "PacletTools Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "a89873d3-054e-4ca0-af14-fc86a4fc43ab"],
+ " (above) if the documentation build is not up-to-date.  It can, and should, \
+be called alone if not developing changes to the RefpropLink documentation \
+pages.  Users may want to remove/delete an existing ",
+ StyleBox["build",
+  FontWeight->"Bold"],
+ " directory to make sure that the entirety of the documentation is properly \
+indexed."
+}], "Text",
+ CellChangeTimes->{{3.886061730085347*^9, 3.886061786245695*^9}, {
+  3.8860618281094356`*^9, 3.8860618482217817`*^9}, {3.8860631988957434`*^9, 
+  3.8860632682076826`*^9}, {3.9150161393399963`*^9, 3.915016170624068*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"0c8b984d-43ce-4a8d-bb86-cdae28e3dc11"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["RefpropLink-x.x.x.paclet",
+  FontWeight->"Bold"],
+ " file will be created in the ",
+ StyleBox["build",
+  FontWeight->"Bold"],
+ " directory, just below the RefropLink directory, and can be used for direct \
+installation and/or distribution of this paclet through a local or remote ",
+ StyleBox[ButtonBox["Paclet Site",
+  BaseStyle->"Link",
+  ButtonData->"paclet:tutorial/Paclets#2037535111"],
+  FontWeight->"Bold"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.8860633251752157`*^9, 3.8860634212553363`*^9}, {
+   3.886063505844797*^9, 3.8860635058457937`*^9}, {3.8860635543259726`*^9, 
+   3.8860635543269777`*^9}, {3.886063588791518*^9, 3.8860635951279707`*^9}, 
+   3.886065235745719*^9},ExpressionUUID->"069fc7bd-f2b9-491e-a16b-\
+8db8d1aa029d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Locating and Installing the .paclet File", "Chapter",
+ CellChangeTimes->{{3.8857199317241163`*^9, 3.8857199466204467`*^9}, {
+  3.8858013018409586`*^9, 
+  3.885801319296268*^9}},ExpressionUUID->"a7905f51-0554-4f4a-ad81-\
+45ac54aea870"],
+
+Cell["\<\
+Evaluate the expressions below, one at a time.
+Install the Refprop paclet in this user\[CloseCurlyQuote]s Mathematica \
+environment.  If the above build step was run, the paclet should be in the \
+build sub-directory, just below this Notebook\[CloseCurlyQuote]s directory in \
+the RefpropLink folder.  \
+\>", "Text",
+ CellChangeTimes->{{3.885801808896761*^9, 3.8858018221852283`*^9}, {
+  3.8870065704376187`*^9, 
+  3.887006714149684*^9}},ExpressionUUID->"a7f370fb-5bed-454f-af44-\
+6c618ad9165a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pFile", "=", 
+   RowBox[{"Last", "[", 
+    RowBox[{"FileNames", "[", 
+     RowBox[{"\"\<*.paclet\>\"", ",", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<build\>\""}], 
+        "}"}], "]"}]}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"PacletInstall", "[", 
+  RowBox[{"pFile", ",", 
+   RowBox[{"ForceVersionInstall", "->", "True"}]}], "]"}]}], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8857210820584955`*^9, 3.885721110261857*^9}, {
+  3.8857211443414583`*^9, 3.885721164413888*^9}, {3.8857213943095713`*^9, 
+  3.8857214495982695`*^9}, {3.8857215731754255`*^9, 3.8857215838549824`*^9}, {
+  3.8857235477051263`*^9, 3.8857235807766514`*^9}, {3.8857236734488306`*^9, 
+  3.885723696576171*^9}, {3.88572375402529*^9, 3.885723764672188*^9}, {
+  3.8860201543841915`*^9, 3.886020165343517*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[15]:=",ExpressionUUID->"5f456b7b-204d-4768-87d1-cdfe109caec0"],
+
+Cell["\<\
+The paclet should now be installed.  We can get the information on the paclet \
+here:\
+\>", "Text",
+ CellChangeTimes->{{3.8858016605459642`*^9, 
+  3.8858016907692947`*^9}},ExpressionUUID->"8fb06a9c-eaf0-4c57-838a-\
+e087e1ddc426"],
+
+Cell[BoxData[
+ RowBox[{"Information", "[", 
+  RowBox[{"PacletObject", "[", "\"\<RefpropLink\>\"", "]"}], "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8858013437737675`*^9, 3.885801348425923*^9}, {
+   3.8858013825529876`*^9, 3.8858013899302955`*^9}, {3.885801450106185*^9, 
+   3.885801456393408*^9}, 3.885801641954613*^9},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[6]:=",ExpressionUUID->"78efdfcf-4832-44b2-bf45-b69bc76e4462"],
+
+Cell["\<\
+The location of the installed paclet is given in the information above, but \
+can be pulled out separately here:\
+\>", "Text",
+ CellChangeTimes->{{3.885801734361497*^9, 
+  3.885801760105339*^9}},ExpressionUUID->"191651a5-412c-46c2-8377-\
+a0b1d621da57"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PacletObject", "[", "\"\<RefpropLink\>\"", "]"}], "[", 
+  "\"\<Location\>\"", "]"}]], "Input",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->GrayLevel[0.75],
+ CellChangeTimes->{{3.8858015985227876`*^9, 3.8858016150012355`*^9}},
+ Background->RGBColor[0.87, 0.94, 1],
+ CellLabel->"In[8]:=",ExpressionUUID->"7d9810c3-814d-4c18-a601-cda776c4d62e"],
+
+Cell["\<\
+This .paclet file can be placed on a local paclet server for easy \
+installation by other users.\
+\>", "Text",
+ CellChangeTimes->{{3.9150163985113745`*^9, 
+  3.915016451967189*^9}},ExpressionUUID->"8cf3bc61-879c-4d69-9c8c-\
+76638b90b576"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{908.25, 720.},
+WindowMargins->{{-1235.25, Automatic}, {Automatic, 12}},
+ShowCellTags->True,
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2d990488-747f-428d-82f1-e14e1ec41cfb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Optional"->{
+  Cell[2357, 69, 364, 8, 58, "Input",ExpressionUUID->"3f7e2e64-e8cd-4225-89bb-f7b1caef498f",
+   CellTags->"Optional"]},
+ "Only evaluate if updating/adding documentation;otherwise"->{
+  Cell[6693, 182, 549, 11, 58, "Input",ExpressionUUID->"95585b30-78aa-4756-8e90-87c77138f327",
+   CellTags->{"Only evaluate if updating/adding documentation;otherwise", "skip to Building the Paclet"}]},
+ "skip to Building the Paclet"->{
+  Cell[6693, 182, 549, 11, 58, "Input",ExpressionUUID->"95585b30-78aa-4756-8e90-87c77138f327",
+   CellTags->{"Only evaluate if updating/adding documentation;otherwise", "skip to Building the Paclet"}]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Optional", 15945, 423},
+ {"Only evaluate if updating/adding documentation;otherwise", 16128, 426},
+ {"skip to Building the Paclet", 16365, 429}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 169, 3, 98, "Title",ExpressionUUID->"c26028de-9093-4564-8043-0ca8b82432ac"],
+Cell[752, 27, 498, 9, 81, "Text",ExpressionUUID->"e020153c-f7a6-4416-bbd5-95541fea4b6a"],
+Cell[CellGroupData[{
+Cell[1275, 40, 170, 3, 69, "Chapter",ExpressionUUID->"1d9373e9-2168-4b02-8718-93fb322527e7"],
+Cell[1448, 45, 302, 6, 44, "Input",ExpressionUUID->"dfb9c7ed-6949-4d30-bec9-74f2fc9e8fef"],
+Cell[1753, 53, 329, 6, 44, "Input",ExpressionUUID->"8f553c55-df55-4559-86ac-d89c553afcab"],
+Cell[2085, 61, 269, 6, 35, "Text",ExpressionUUID->"9fc72c86-6064-4ff2-9e30-33140f70c552"],
+Cell[2357, 69, 364, 8, 58, "Input",ExpressionUUID->"3f7e2e64-e8cd-4225-89bb-f7b1caef498f",
+ CellTags->"Optional"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2758, 82, 198, 3, 69, "Chapter",ExpressionUUID->"9175eec6-c420-4ce7-9f0e-d286e303d0c0"],
+Cell[2959, 87, 178, 3, 35, "Text",ExpressionUUID->"efc188cd-518f-4fdc-b798-2bc91b612ae6"],
+Cell[3140, 92, 357, 7, 44, "Input",ExpressionUUID->"5c6a1f78-8ba9-4e2a-b502-40d0cdbe797f"],
+Cell[3500, 101, 165, 3, 35, "Text",ExpressionUUID->"41fd206a-be36-4fb9-91e3-eaf79d6cdcdf"],
+Cell[3668, 106, 334, 6, 44, "Input",ExpressionUUID->"20ecf7a0-bb72-4944-8be0-7f4dd7e23fa8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4039, 117, 172, 3, 69, "Chapter",ExpressionUUID->"0dc88b0b-1e86-4588-b999-d43baa7fb05d"],
+Cell[4214, 122, 451, 9, 74, "Text",ExpressionUUID->"7ae9b73c-f102-474b-a0aa-481deff1e241"],
+Cell[4668, 133, 836, 18, 86, "Text",ExpressionUUID->"c3f8ba2c-b5d1-4722-9ab6-374e1ecb4e0f"],
+Cell[5507, 153, 1183, 27, 109, "Text",ExpressionUUID->"4ede1543-1fbe-4cdd-866e-69b08e243ed3"],
+Cell[6693, 182, 549, 11, 58, "Input",ExpressionUUID->"95585b30-78aa-4756-8e90-87c77138f327",
+ CellTags->{"Only evaluate if updating/adding documentation;otherwise", "skip to Building the Paclet"}],
+Cell[7245, 195, 342, 7, 58, "Text",ExpressionUUID->"09c9398f-9ba8-4af5-96e7-09dc33f0c36f"],
+Cell[7590, 204, 394, 8, 58, "Text",ExpressionUUID->"f3c1bad4-035b-44d4-9e1b-0209c1dc2dfa"],
+Cell[7987, 214, 728, 13, 97, "Text",ExpressionUUID->"2ddcf195-0c2b-464c-85f6-fb2c89b31c8e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8752, 232, 217, 3, 69, "Chapter",ExpressionUUID->"3da7ed32-bdd1-4f01-a7f9-acc6cc0d2a57"],
+Cell[8972, 237, 738, 20, 40, "Text",ExpressionUUID->"7ba769b6-a0c7-46af-89b6-50b3ab34fa21"],
+Cell[9713, 259, 429, 8, 44, "Input",ExpressionUUID->"d663fa36-b7f0-4b27-b866-d4872f2b774b"],
+Cell[10145, 269, 1091, 26, 102, "Text",ExpressionUUID->"0c8b984d-43ce-4a8d-bb86-cdae28e3dc11"],
+Cell[11239, 297, 774, 19, 58, "Text",ExpressionUUID->"069fc7bd-f2b9-491e-a16b-8db8d1aa029d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12050, 321, 240, 4, 69, "Chapter",ExpressionUUID->"a7905f51-0554-4f4a-ad81-45ac54aea870"],
+Cell[12293, 327, 505, 10, 81, "Text",ExpressionUUID->"a7f370fb-5bed-454f-af44-6c618ad9165a"],
+Cell[12801, 339, 1096, 23, 64, "Input",ExpressionUUID->"5f456b7b-204d-4768-87d1-cdfe109caec0"],
+Cell[13900, 364, 239, 6, 35, "Text",ExpressionUUID->"8fb06a9c-eaf0-4c57-838a-e087e1ddc426"],
+Cell[14142, 372, 497, 9, 44, "Input",ExpressionUUID->"78efdfcf-4832-44b2-bf45-b69bc76e4462"],
+Cell[14642, 383, 262, 6, 35, "Text",ExpressionUUID->"191651a5-412c-46c2-8377-a0b1d621da57"],
+Cell[14907, 391, 381, 8, 44, "Input",ExpressionUUID->"7d9810c3-814d-4c18-a601-cda776c4d62e"],
+Cell[15291, 401, 248, 6, 35, "Text",ExpressionUUID->"8cf3bc61-879c-4d69-9c8c-76638b90b576"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
