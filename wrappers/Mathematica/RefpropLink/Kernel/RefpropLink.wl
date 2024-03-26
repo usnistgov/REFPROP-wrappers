@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* ::Section:: *)
 (* Wolfram Language Package *)
 
@@ -224,30 +226,34 @@ Clear[$dllPath,$fluidsPath,$mixturesCoeffPath,$fluidmixComponents];
 (*     (default: C:\Program Files (x86)\REFPROP\REFPRP64.dll                           *)
 (*  2. Parent path above \fluids & \mixtrues directory                                 *)
 (*     (default: C:\Program Files (x86)\REFPROP                                        *)
-(* If the text file exists, use it.  If not, set default directory paths.              *)
+(* If the text file exists, use it.  If not, use $RPprefix location for both.          *)
+(* If $RPprefix is not set in environment set default directory paths.                 *)
 (***************************************************************************************)
 $filepath = "";                                              (* Set default file paths *)
 $dllPath = "C:\\Program Files (x86)\\REFPROP\\REFPRP64.dll";
 $NISTPath = "C:\\Program Files (x86)\\REFPROP"
-(* Check for FilePaths Resource, which will overwrite these paths                      *)
-$hPaths = PacletManager`PacletResource["RefpropLink","FilePaths"];
-If[$hPaths === Null,                                            (* Can't find Resource *)
-    hEclPaths = FileNameJoin[{$HomeDirectory, "eclipse-workspace", "RefpropLink", "RefpropLink", "TextResources", "Filepaths.txt"}];
-    If[FileExistsQ[hEclPaths],         (* See if there's an Eclipse workspace resource *)
-        $hPaths = hEclPaths;           (*            IF so, set file paths from there. *)
-        (* Print["Using Eclipse-Working Resources. hPaths = ",$hPaths]; *)
-    ];
+
+(* Check for RPPrefix if REFPROP is installed in a non-standard location               *)
+If[!FailureQ[RPPath =Environment["RPprefix"]],
+    (* Print["RPPrefix is set to ",RPPath]; *)
+    $NISTPath = RPPath;
+    $dllPath = FileNameJoin[{$NISTPath,"REFPRP64.dll"}]
 ];
-If[FileExistsQ[$hPaths],
-    (* Print["Found a Filepaths.txt.  Not using defaults."]; *)
+
+(* Finally, Check for FilePaths Resource, which will overwrite these paths             *)
+$hPaths = First[PacletFind["RefpropLink"]]["AssetLocation","FilePaths"];
+If[!($hPaths == Null),
+    (* Print["Found a Filepaths.txt."]; *)
     $filepath = StringSplit[Import[$hPaths],","];
-    $dllPath = $filepath[[1]];                                           
-    $NISTPath = $filepath[[2]];
-    (* Print["$dllPath = ",$dllPath]; *)
-    (* Print["$NISTPath = ",$NISTPath]; *)
-(*, ELSE  ==> ONLY needed if printing debug line below. *)
+    tmpdllPath = $filepath[[1]];                                           
+    tmpNISTPath = $filepath[[2]];
+    If[!(tmpdllPath == "default"),$dllPath = tmpdllPath];
+    If[!(tmpNISTPath == "default"),$NISTPath = tmpNISTPath];
+, (* ELSE *)
     (* Use the default DLL and Fluids paths set above.                          *)
-    (* Print["Filespaths.txt not found.  Using default DLL and Fluids paths."]; *)
+    (* Create a default FilePaths.txt resource                                  *)
+    $hPaths = FileNameJoin[{First[PacletFind["RefpropLink"]]["Location"],"TextREsources","Filepaths.txt"}];
+    Export[$hPaths,"default,default"];
 ];
 
 
@@ -259,12 +265,13 @@ $mixturesPath=FileNameJoin[{$NISTPath,"mixtures"}];              (* $REFPROP/mix
 $mixturesCoeffPath=FileNameJoin[{$NISTPath,"fluids","HMX.BNC"}]; (* mix coefficients   *)
 
 $DLL = FileExistsQ[$dllPath];
-If[NOT[$DLL],
+If[Not[$DLL],
    Print["REFPRP64.dll not found."];
    Print["Make sure NIST REFPROP is installed on the machine."];
    Print["If installed in other than the default location [C:\\Program Files (x86)\\REFPROP],"];
-   Print["  call SetDLL[1] to locate the REFPRP64.DLL file on the machine and store it in"];
-   Print["  the RefpropLink paclet TextResource for subsequent sessions."];
+   Print["  make sure the RPprefix environment variable is set to the installed location,"]; 
+   Print["  or call SetDLL[1] to locate the REFPRP64.DLL file on the machine and store it in"];
+   Print["  the RefpropLink paclet FilePaths asset for subsequent sessions."];
    ];
    
 (***************************************************************************************)
@@ -534,9 +541,10 @@ SetDLL::badDLL = "Invalid DLL selected [`1`]. \nMust select the 64-bit DLL from 
 
 SetDLL[permSet_Integer:0]:=
     Module[{hInit = $dllPath, hDLL},
+        If[permSet < 0, Return[StringTrim[$dllPath]]];                          (* IF permSet = -1, return $dllPath      *)
         hDLL=SystemDialogInput["FileOpen", hInit, WindowTitle -> "Pick the REFPROP 64-bit DLL to use (REFPRP64.DLL)..."];
         If[(hDLL=!=$Canceled),                                                  (* IF user did NOT hit Cancel            *)
-            If[StringMatchQ[hDLL, {"*REFPRP64.DLL"}, IgnoreCase -> True],       (*   If filename ends with *64.DLL       *)
+            If[StringMatchQ[hDLL, {"*REFPRP64.DLL"}, IgnoreCase -> True],       (*   If path ends with REFPRP64.DLL      *)
                 $dllPath = hDLL;                                                (*     Save file path to global          *)
                 $DLL = FileExistsQ[$dllPath];                                   (*     has to exist since it was picked  *)
                 SetPath[FileNameJoin[Drop[FileNameSplit[$dllPath],-1]],         (*     Set Fluids path as well,          *)
@@ -555,6 +563,7 @@ SetPath::saveDIR = "INFO: Fluids directory saved.";
 
 SetPath[hpth_String:"",permSet_Integer:0]:=
     Module[{loadSETPATHdll,hFldPth, hSplit},
+        If[permSet < 0, Return[StringTrim[$NISTPath]]];                          (* IF permSet = -1, return $NISTPath    *)
         If[StringLength[hpth]==0,                                                (* IF no path, call FileOpen Dialog     *)
             hFldPth=SystemDialogInput["Directory", $NISTPath, WindowTitle -> "Pick the REFPROP fluids folder..."],
         (* ELSE *)
@@ -579,7 +588,7 @@ SetPath[hpth_String:"",permSet_Integer:0]:=
                                          "long"}];                               (*    lenth of Fluid String buffer      *)
         loadSETPATHdll[hFldPth,$refpropcharlength];                              (* Call SETPATHdll                      *)
         ReleaseNETObject[loadSETPATHdll];                                        (* Release the DLL pointer from .NET    *)
-        If[FileExistsQ[$hPaths]&&(permSet>0),                                    (* IF flagged,                          *)
+        If[(permSet>0),                                                          (* IF flagged,                          *)
           Export[$hPaths,{$dllPath<>","<>$NISTPath}];                            (*   update resource w/ current values  *)
           Message[SetPath::saveDIR];                                             (*   provide INFO sucess meessage       *)
         ];                                                                       (* Nothing is returned                  *)
