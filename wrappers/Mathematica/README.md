@@ -24,7 +24,10 @@ This instructions file is extremely useful for initial installation and providin
 
 ## Prerequisites (v1.1)
 
-   - **NIST REFPROP** 9.1 or later **_must_** be installed to make use of the wrapper functions provided here.  However, **NIST REFPROP 10.x** is recommended.  See [NIST.gov](https://www.nist.gov/srd/refprop) for licensing.  
+   - **NIST REFPROP** 9.1 or later **_must_** be installed to make use of the wrapper functions provided here.  However, **NIST REFPROP 10.x** is recommended.  See [NIST.gov](https://www.nist.gov/srd/refprop) for licensing.  REFPROP should be installed either:
+       1. In the default location `C:\Program Files(x86)\REFPROP`,
+       2. In a location specified by the `RPprefix` environment variable, or
+       3. In a location selected using the `SetDLL[]` function.
 
    - **Mathematica 13.x** is required to build and install using the new Paclet and Documentation Tools introduced in Mathematica 13.0.  Doe to some early release issues, **Mathematica 13.2** or greater is recommended for the most complete formatting and indexing of the RefpropLink documentation pages to the Wolfram Documentation Center standards.  
 

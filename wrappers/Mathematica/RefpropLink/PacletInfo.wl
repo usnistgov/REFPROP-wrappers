@@ -3,7 +3,7 @@
 PacletObject[
     <|
         "Name" -> "RefpropLink",
-        "Version" -> "1.1.0",
+        "Version" -> "1.1.1",
         "WolframVersion" -> "13.0+",
         "SystemID" -> {"Windows-x86-64"},
         "Description" -> "Provides wrapper functions for the NIST REFPROP materials library functions.",
