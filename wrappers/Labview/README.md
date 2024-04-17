@@ -21,4 +21,4 @@ You will also find a complete list of the lower level REFPROP functions along wi
  ![alt text](imgs/README.png "screenshot")
 
 If you want to add the REFPROP wrapper to your LabVIEW palettes, you can add the entire REFPROP folder along with the dll to the user.lib folder for your version of LabVIEW.
-This wrapper was written in LabVIEW 2015, and it should be compatible with all newer versions of LabVIEW.
+This wrapper was written in LabVIEW 2021, and it should be compatible with all newer versions of LabVIEW.
