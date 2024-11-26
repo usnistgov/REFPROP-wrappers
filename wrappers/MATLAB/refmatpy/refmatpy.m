@@ -1,6 +1,6 @@
 function [varargout] = refmatpy(hFld,hIn,hOut,a,b,z)
 
-global RP iUnits iMass iFlag error_threshold                %Get the PYTHON library (RP) and the REFPROP configuration parameters: iUnits, iMass, iFlag, error_threshold
+global RP iUnits iMass iFlag error_threshold                %#ok<GVMIS> %Get the PYTHON library (RP) and the REFPROP configuration parameters: iUnits, iMass, iFlag, error_threshold
 
 %% 
 %Call property data

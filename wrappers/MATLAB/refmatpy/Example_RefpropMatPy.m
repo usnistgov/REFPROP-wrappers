@@ -1,7 +1,8 @@
 clear;clc                           % Clear Workspace, Clear command window
 
 % Initialize REFPROP
-setGlobalrefmatpy                         % Assign Python-REPFROP library (RP), and
+REFPROP_Path = 'C:\Program Files (x86)\REFPROP';
+setGlobalRefMatPy(REFPROP_Path)                         % Assign Python-REPFROP library (RP), and
 % REFPROP parameters (iUnits iMass iFlag), as global variables. Needed for calling properties in REFPROP.
 
 % Get properties from REFPROP
