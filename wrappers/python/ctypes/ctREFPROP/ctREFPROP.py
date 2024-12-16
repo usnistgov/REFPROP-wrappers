@@ -108,7 +108,10 @@ class REFPROPLibraryManager(object):
         c_errstr = ct.create_string_buffer(255)
 
         free_handle(instance.managed_handle, ct.byref(c_errcode), c_errstr, 255)
-        pass
+        
+        # Check if it worked properly
+        if c_errcode.value != 0:
+            raise ValueError("Unable to free instance with error message:"+trim(c_errstr.raw))
 
 def REFPROPFunctionLibrary(name, shared_extension = None):
 
