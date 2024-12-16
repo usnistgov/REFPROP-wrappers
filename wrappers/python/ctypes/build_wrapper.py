@@ -493,7 +493,7 @@ if __name__=='__main__':
     fortran_root = r'Q:\PUBLIC\ERIC\INSTALL\BETA\FORTRAN'
     if not os.path.exists(fortran_root):
         raise ValueError("Bad fortran_root: "+ fortran_root)
-    pyf = gen_pyf(fortran_root+r'\DLLFILES')
+    pyf = gen_pyf(fortran_root+'/DLLFILES')
     with open('data.pyf','w') as fp:
         fp.write(pyf)
     with open('data.pyf') as fp:
