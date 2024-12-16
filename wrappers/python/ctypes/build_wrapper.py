@@ -128,7 +128,14 @@ class REFPROPLibraryManager(object):
         
     def free_instance(self, instance):
         free_handle = getattr(self.manager, "free_handle")
-        pass
+        c_errcode = ct.c_int(0)
+        c_errstr = ct.create_string_buffer(255)
+
+        free_handle(instance.managed_handle, ct.byref(c_errcode), c_errstr, 255)
+        
+        # Check if it worked properly
+        if c_errcode.value != 0:
+            raise ValueError("Unable to free instance with error message:"+trim(c_errstr.raw))
 
 def REFPROPFunctionLibrary(name, shared_extension = None):
 
@@ -354,7 +361,7 @@ def gen_ctypes_wrappers(fcninfo, ofname):
     # Also set the enumerated values for the units systems so that they need not be obtained
     # by the user by a call to GETENUMdll for each enumerated value
     enums_string = ' '*8 + 'try:\n'
-    for enum in ['DEFAULT','MOLE_SI','MASS_SI','SI_WITH_C','MOLAR_BASE_SI',
+    for enum in ['DEFAULT','MOLAR_SI','MASS_SI','SI_WITH_C','MOLAR_BASE_SI',
                  'MASS_BASE_SI','ENGLISH','MOLAR_ENGLISH',
                  'MKS','CGS','MIXED','MEUNITS']:
         enums_string += ' '*12  + "self.{key:s} = self.GETENUMdll(0, '{skey:s}').iEnum".format(key=enum, skey = enum.replace('_', ' ')) + '\n'
