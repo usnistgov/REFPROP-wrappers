@@ -29,7 +29,7 @@ The following outlines the procedure for using REFPROP within any spreadsheet in
 
 **REFPROP 10**
 
-1.  Build "librefprop.dylib" following instructions on https://github.com/usnistgov/REFPROP-cmake
+1.  Build "librefprop.dylib" following instructions on https://github.com/usnistgov/REFPROP-cmake. Note that you *must* compile the library with the CMake argument ``-DREFPROP_OSX_STATIC_LINK=ON`` such that ``otool -L librefprop.dylib`` only shows references to ``libSystem.B.dylib`` and the REFPROP shared library we just built (and not to ``gfortran`` or ``quadmath``). If you use a very recent version of ``REFPROP-cmake`` that versions the shared library and ``librefprop.dylib`` being a link to the versioned shared library, it might be safest to rename the versioned file and use that file in the next steps.
 2.  Create a folder named "refprop" in "/Users/$USER/Library/Group Containers/UBF8T346G9.Office/" replacing $USER with your username
 3.  Copy your Refprop FLUIDS and MIXTURES folders into the refprop folder just created
 4.  Copy the "librefprop.dylib" created in Step 1 into the refprop folder
