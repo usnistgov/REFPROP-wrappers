@@ -2,6 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
+    <Prime10InstallDir>C:\Program Files\PTC\Mathcad Prime 10.0.0.0</Prime10InstallDir>
+    <Prime9InstallDir>C:\Program Files\PTC\Mathcad Prime 9.0.0.0</Prime9InstallDir>
     <Prime8InstallDir>C:\Program Files\PTC\Mathcad Prime 8.0.0.0</Prime8InstallDir>
     <Prime7InstallDir>C:\Program Files\PTC\Mathcad Prime 7.0.0.0</Prime7InstallDir>
     <Prime6InstallDir>C:\Program Files\PTC\Mathcad Prime 6.0.0.0</Prime6InstallDir>
@@ -10,6 +12,14 @@
   <PropertyGroup />
   <ItemDefinitionGroup />
   <ItemGroup>
+    <BuildMacro Include="Prime10InstallDir">
+      <Value>$(Prime10InstallDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="Prime9InstallDir">
+      <Value>$(Prime9InstallDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
     <BuildMacro Include="Prime8InstallDir">
       <Value>$(Prime8InstallDir)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
