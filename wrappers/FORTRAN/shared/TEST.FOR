@@ -19,7 +19,7 @@ c       uPa-s, W/m-K, N/m
 
 c...Load in the full mixture setup for R407C, as well as the PPF file.
       nc=4
-      hf='R32.FLD|R125.FLD|R125.FLD|R407C.PPF|'
+      hf='R32.FLD|R125.FLD|R134A.FLD|R407C.PPF|'
       hfmix='hmx.bnc'
       hrf='DEF'
       call SETUPdll(nc,hf,hfmix,hrf,ierr,herr)
