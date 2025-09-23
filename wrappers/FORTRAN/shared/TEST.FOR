@@ -15,14 +15,11 @@ c       uPa-s, W/m-K, N/m
       parameter (ncmax=20)   !max number of components in mixture
       dimension x(ncmax),xliq(ncmax),xvap(ncmax)
       character hrf*3, herr*255
-      character*255 hf(ncmax),hfmix
+      character*255 hf,hfmix
 
 c...Load in the full mixture setup for R407C, as well as the PPF file.
       nc=4
-      hf(1)='R32.FLD'
-      hf(2)='R125.FLD'
-      hf(3)='R134A.FLD'
-      hf(4)='R407C.PPF'
+      hf='R32.FLD|R125.FLD|R134A.FLD|R407C.PPF|'
       hfmix='hmx.bnc'
       hrf='DEF'
       call SETUPdll(nc,hf,hfmix,hrf,ierr,herr)
